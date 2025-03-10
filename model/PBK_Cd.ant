@@ -1,6 +1,6 @@
 ### PBK Model for Cadmium ###
 
-model Cadmium()
+model PBK_Cd()
 
 # Units of the model :
 unit day = 3600*24 seconds;
@@ -99,7 +99,7 @@ VInhalation = FqBreath * (Vtidal - Vds) * 60 * 24 // Volume of inhalation by day
 nbCig = 1 // I don't know what this is. Number of cigarettes?
 
 
-// Kinetic parameters   
+// Kinetic parameters
 C1_cig = 0.1
 C1_dust = 0.7
 C2_cig = 0.4
