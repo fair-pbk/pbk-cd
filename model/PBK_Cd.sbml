@@ -1,0 +1,1532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="PBK_Cd" id="PBK_Cd" substanceUnits="MicroGM" volumeUnits="L" areaUnits="area" extentUnits="MicroGM">
+    <listOfUnitDefinitions>
+      <unitDefinition id="day">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="4" multiplier="8.64"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="substance">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="microg_kg">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+          <unit kind="gram" exponent="-1" scale="3" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="volume">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="kg">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="g">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="area"/>
+      <unitDefinition id="m"/>
+      <unitDefinition id="MicroGM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="L">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="UNITLESS">
+        <listOfUnits>
+          <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="YR">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="31557600"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="PER_DAY">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment metaid="meta_Liver" id="Liver" name="liver" spatialDimensions="3" size="1" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Liver">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00558"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_Kidney" id="Kidney" name="kidney" spatialDimensions="3" size="1" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Kidney">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00557"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment id="Others" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment metaid="meta_Creatinine" id="Creatinine" spatialDimensions="3" size="0.032" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Creatinine">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="-"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_Feces" id="Feces" name="feces" spatialDimensions="3" size="1" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Feces">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00555"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_Urine" id="Urine" name="urine" spatialDimensions="3" size="2" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Urine">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00556"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment id="Intestine" name="intestine" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment metaid="meta_Gut" id="Gut" name="gut" spatialDimensions="3" size="1" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Gut">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00477"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_Lung" id="Lung" name="lung" spatialDimensions="3" size="1" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Lung">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00559"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment id="Expo" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Excretion" name="excreta" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Blood1" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Blood2" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Blood3" spatialDimensions="3" size="1" units="L" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species metaid="meta_QGut" id="QGut" name="Amount in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_QGut">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00496"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_QLiver" id="QLiver" name="Amount in liver" compartment="Liver" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_QLiver">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00497"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_QKidney" id="QKidney" name="Amount in kidney" compartment="Kidney" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_QKidney">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00498"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="QExpo" compartment="Expo" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species metaid="meta_QLung" id="QLung" name="Amount in lungs" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_QLung">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_QUrine" id="QUrine" name="Amount in urine" compartment="Urine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_QUrine">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00272"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_QFeces" id="QFeces" name="Amount in feces" compartment="Feces" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_QFeces">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00273"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="QExcretion" compartment="Excretion" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QIntestine" name="Amount in intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QBlood1" name="Amount in plasma" compartment="Blood1" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QBlood2" name="Amount in red blood cells" compartment="Blood2" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QBlood3" name="Amount in metallothionein" compartment="Blood3" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QOthers" compartment="Others" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="CUrine" compartment="Creatinine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QAir_Cig" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QAir_Dust" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Parameters" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="VCreat" value="0.032" units="g" constant="false"/>
+      <parameter id="QAir" value="0" constant="true"/>
+      <parameter metaid="meta_Sex" id="Sex" name="sex" value="1" units="UNITLESS" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Sex">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00123"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_BW" id="BW" name="body weight" value="3.938425" units="kg" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_BW">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_Age" id="Age" name="age" value="0" units="YR" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Age">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00521"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="DeltaBW" value="1" constant="true"/>
+      <parameter metaid="meta_Age_init" id="Age_init" value="0" units="YR" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Age_init">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="-"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="CIngestion" value="0.3" constant="true"/>
+      <parameter id="QtCig" name="Quantity of Cd in 1 cigarette" value="1" constant="true"/>
+      <parameter id="ExpoCig" value="0" constant="false"/>
+      <parameter id="Age_smoke_begin" value="18" constant="false"/>
+      <parameter id="Age_smoke_end" value="45" constant="false"/>
+      <parameter id="CAir" name="Concentration of Cd in ambient air" value="0.01" constant="false"/>
+      <parameter id="Vtidal_male" value="0.0407" constant="false"/>
+      <parameter id="Vtidal_female" value="0.0392" constant="false"/>
+      <parameter id="Vtidal" name="Tidal volume" value="0.0407" units="L" constant="false"/>
+      <parameter id="FqBreath" name="Respiratory frequency" value="38.9" constant="false"/>
+      <parameter id="Vds_male" value="0.0101" constant="false"/>
+      <parameter id="Vds_female" value="0.0107" constant="false"/>
+      <parameter id="Vds" name="Physiological dead space" value="0.0101" units="L" constant="false"/>
+      <parameter id="VInhalation" name="volume of air inhaled" value="1714.0896" constant="false"/>
+      <parameter id="nbCig" value="1" constant="false"/>
+      <parameter id="C1_cig" value="0.1" constant="true"/>
+      <parameter id="C1_dust" value="0.7" constant="true"/>
+      <parameter id="C2_cig" value="0.4" constant="true"/>
+      <parameter id="C2_dust" value="0.13" constant="true"/>
+      <parameter id="C3" name="Rate of transfer of inhalation intake to uptake pool" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="C4" name="Rate of transfer of air Cd to the GI-tract" value="0.005" units="PER_DAY" constant="true"/>
+      <parameter id="C5" name="Fraction of GI-tract Cd retained in epithelium" value="0.048" constant="true"/>
+      <parameter id="C6" name="Rate of transfer of Cd in the GI-tract to uptake pool" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="C7" name="Fraction of uptake pool transferred to blood" value="0.25" constant="true"/>
+      <parameter id="C8" name="Maximum mass of Cd in uptake pool" value="1000" units="MicroGM" constant="true"/>
+      <parameter id="I2" value="0" constant="false"/>
+      <parameter id="C9" name="Rate of transfer from plasma to other tissues" value="0.44" units="PER_DAY" constant="true"/>
+      <parameter id="C10" name="Rate of transfer of Cd in other tissues to plasma" value="0.00014" units="PER_DAY" constant="true"/>
+      <parameter id="C11" name="Rate of transfer of Cd in plasma to feces" value="0.27" units="PER_DAY" constant="true"/>
+      <parameter id="C12" name="Rate of transfer of Cd in plasma to liver" value="0.25" units="PER_DAY" constant="true"/>
+      <parameter id="C13" name="Rate of transfer of Cd in liver to plasma" value="3e-05" units="PER_DAY" constant="true"/>
+      <parameter id="C14" name="Rate of transfer of Cd in liver to metallothionein" value="0.00016" units="PER_DAY" constant="true"/>
+      <parameter id="C15" name="Rate of transfer of Cd in liver to feces" value="5e-05" units="PER_DAY" constant="true"/>
+      <parameter id="C16" name="Rate of transfer of Cd in blood red blodd cells to metallothionein" value="0.012" units="PER_DAY" constant="true"/>
+      <parameter id="C17" name="Rate of transfer of Cd in metallothionein to kidney" value="0.95" units="PER_DAY" constant="false"/>
+      <parameter id="C18" name="Rate of transfer of Cd in kidney to plasma" value="1e-05" units="PER_DAY" constant="true"/>
+      <parameter id="C19" name="Age-specific rate constant for transfer of Cd in kidney to urine" value="0.00014" units="PER_DAY" constant="false"/>
+      <parameter id="C21" name="Increased transfer of Cd from kidney to urine after age 30" value="1.1e-06" constant="true"/>
+      <parameter id="C20" name="Fraction of Cd in plasma and red blood cells that contribute to cadmium in whole blood" value="0.1" units="UNITLESS" constant="true"/>
+      <parameter id="CX" name="Rate of transfer of Cd in B1 to blood B2" value="0.04" units="PER_DAY" constant="true"/>
+    </listOfParameters>
+    <listOfInitialAssignments/>
+    <listOfRules>
+      <assignmentRule variable="VCreat">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <cn> 0.032 </cn>
+                      <apply>
+                        <times/>
+                        <cn> 0.02098 </cn>
+                        <ci> Age </ci>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn> 0.009104 </cn>
+                        <apply>
+                          <power/>
+                          <ci> Age </ci>
+                          <cn type="integer"> 2 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn> 0.000455 </cn>
+                      <apply>
+                        <power/>
+                        <ci> Age </ci>
+                        <cn type="integer"> 3 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 7.578 <sep/> -6 </cn>
+                    <apply>
+                      <power/>
+                      <ci> Age </ci>
+                      <cn type="integer"> 4 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 4.232 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <ci> Age </ci>
+                    <cn type="integer"> 5 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> Age </ci>
+                <cn type="integer"> 70 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <cn> 0.032 </cn>
+                      <apply>
+                        <times/>
+                        <cn> 0.02098 </cn>
+                        <cn type="integer"> 70 </cn>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn> 0.009104 </cn>
+                        <apply>
+                          <power/>
+                          <cn type="integer"> 70 </cn>
+                          <cn type="integer"> 2 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn> 0.000455 </cn>
+                      <apply>
+                        <power/>
+                        <cn type="integer"> 70 </cn>
+                        <cn type="integer"> 3 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 7.578 <sep/> -6 </cn>
+                    <apply>
+                      <power/>
+                      <cn type="integer"> 70 </cn>
+                      <cn type="integer"> 4 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 4.232 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <cn type="integer"> 70 </cn>
+                    <cn type="integer"> 5 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="BW">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <apply>
+                        <minus/>
+                        <apply>
+                          <plus/>
+                          <apply>
+                            <minus/>
+                            <apply>
+                              <plus/>
+                              <apply>
+                                <minus/>
+                                <apply>
+                                  <plus/>
+                                  <apply>
+                                    <minus/>
+                                    <apply>
+                                      <plus/>
+                                      <cn> 3.938425 </cn>
+                                      <apply>
+                                        <times/>
+                                        <cn> 0.7518199 </cn>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                    </apply>
+                                    <apply>
+                                      <times/>
+                                      <cn> 0.02023793 </cn>
+                                      <apply>
+                                        <power/>
+                                        <apply>
+                                          <times/>
+                                          <ci> Age </ci>
+                                          <cn type="integer"> 12 </cn>
+                                        </apply>
+                                        <cn type="integer"> 2 </cn>
+                                      </apply>
+                                    </apply>
+                                  </apply>
+                                  <apply>
+                                    <times/>
+                                    <cn> 0.0002921682 </cn>
+                                    <apply>
+                                      <power/>
+                                      <apply>
+                                        <times/>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                      <cn type="integer"> 3 </cn>
+                                    </apply>
+                                  </apply>
+                                </apply>
+                                <apply>
+                                  <times/>
+                                  <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
+                                  <apply>
+                                    <power/>
+                                    <apply>
+                                      <times/>
+                                      <ci> Age </ci>
+                                      <cn type="integer"> 12 </cn>
+                                    </apply>
+                                    <cn type="integer"> 4 </cn>
+                                  </apply>
+                                </apply>
+                              </apply>
+                              <apply>
+                                <times/>
+                                <cn type="e-notation"> 8.469 <sep/> -9 </cn>
+                                <apply>
+                                  <power/>
+                                  <apply>
+                                    <times/>
+                                    <ci> Age </ci>
+                                    <cn type="integer"> 12 </cn>
+                                  </apply>
+                                  <cn type="integer"> 5 </cn>
+                                </apply>
+                              </apply>
+                            </apply>
+                            <apply>
+                              <times/>
+                              <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
+                              <apply>
+                                <power/>
+                                <apply>
+                                  <times/>
+                                  <ci> Age </ci>
+                                  <cn type="integer"> 12 </cn>
+                                </apply>
+                                <cn type="integer"> 6 </cn>
+                              </apply>
+                            </apply>
+                          </apply>
+                          <apply>
+                            <times/>
+                            <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
+                            <apply>
+                              <power/>
+                              <apply>
+                                <times/>
+                                <ci> Age </ci>
+                                <cn type="integer"> 12 </cn>
+                              </apply>
+                              <cn type="integer"> 7 </cn>
+                            </apply>
+                          </apply>
+                        </apply>
+                        <apply>
+                          <times/>
+                          <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
+                          <apply>
+                            <power/>
+                            <apply>
+                              <times/>
+                              <ci> Age </ci>
+                              <cn type="integer"> 12 </cn>
+                            </apply>
+                            <cn type="integer"> 8 </cn>
+                          </apply>
+                        </apply>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
+                        <apply>
+                          <power/>
+                          <apply>
+                            <times/>
+                            <ci> Age </ci>
+                            <cn type="integer"> 12 </cn>
+                          </apply>
+                          <cn type="integer"> 9 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
+                      <apply>
+                        <power/>
+                        <apply>
+                          <times/>
+                          <ci> Age </ci>
+                          <cn type="integer"> 12 </cn>
+                        </apply>
+                        <cn type="integer"> 10 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
+                    <apply>
+                      <power/>
+                      <apply>
+                        <times/>
+                        <ci> Age </ci>
+                        <cn type="integer"> 12 </cn>
+                      </apply>
+                      <cn type="integer"> 11 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> DeltaBW </ci>
+              </apply>
+              <apply>
+                <gt/>
+                <ci> Sex </ci>
+                <cn type="integer"> 0 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <apply>
+                        <minus/>
+                        <apply>
+                          <plus/>
+                          <apply>
+                            <minus/>
+                            <apply>
+                              <plus/>
+                              <apply>
+                                <minus/>
+                                <apply>
+                                  <plus/>
+                                  <apply>
+                                    <minus/>
+                                    <apply>
+                                      <plus/>
+                                      <cn> 3.932403 </cn>
+                                      <apply>
+                                        <times/>
+                                        <cn> 0.6866462 </cn>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                    </apply>
+                                    <apply>
+                                      <times/>
+                                      <cn> 0.01949911 </cn>
+                                      <apply>
+                                        <power/>
+                                        <apply>
+                                          <times/>
+                                          <ci> Age </ci>
+                                          <cn type="integer"> 12 </cn>
+                                        </apply>
+                                        <cn type="integer"> 2 </cn>
+                                      </apply>
+                                    </apply>
+                                  </apply>
+                                  <apply>
+                                    <times/>
+                                    <cn> 0.00031311 </cn>
+                                    <apply>
+                                      <power/>
+                                      <apply>
+                                        <times/>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                      <cn type="integer"> 3 </cn>
+                                    </apply>
+                                  </apply>
+                                </apply>
+                                <apply>
+                                  <times/>
+                                  <cn type="e-notation"> 2.466654 <sep/> -6 </cn>
+                                  <apply>
+                                    <power/>
+                                    <apply>
+                                      <times/>
+                                      <ci> Age </ci>
+                                      <cn type="integer"> 12 </cn>
+                                    </apply>
+                                    <cn type="integer"> 4 </cn>
+                                  </apply>
+                                </apply>
+                              </apply>
+                              <apply>
+                                <times/>
+                                <cn type="e-notation"> 1.113217 <sep/> -8 </cn>
+                                <apply>
+                                  <power/>
+                                  <apply>
+                                    <times/>
+                                    <ci> Age </ci>
+                                    <cn type="integer"> 12 </cn>
+                                  </apply>
+                                  <cn type="integer"> 5 </cn>
+                                </apply>
+                              </apply>
+                            </apply>
+                            <apply>
+                              <times/>
+                              <cn type="e-notation"> 3.131402 <sep/> -11 </cn>
+                              <apply>
+                                <power/>
+                                <apply>
+                                  <times/>
+                                  <ci> Age </ci>
+                                  <cn type="integer"> 12 </cn>
+                                </apply>
+                                <cn type="integer"> 6 </cn>
+                              </apply>
+                            </apply>
+                          </apply>
+                          <apply>
+                            <times/>
+                            <cn type="e-notation"> 5.693737 <sep/> -14 </cn>
+                            <apply>
+                              <power/>
+                              <apply>
+                                <times/>
+                                <ci> Age </ci>
+                                <cn type="integer"> 12 </cn>
+                              </apply>
+                              <cn type="integer"> 7 </cn>
+                            </apply>
+                          </apply>
+                        </apply>
+                        <apply>
+                          <times/>
+                          <cn type="e-notation"> 6.706947 <sep/> -17 </cn>
+                          <apply>
+                            <power/>
+                            <apply>
+                              <times/>
+                              <ci> Age </ci>
+                              <cn type="integer"> 12 </cn>
+                            </apply>
+                            <cn type="integer"> 8 </cn>
+                          </apply>
+                        </apply>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn type="e-notation"> 4.947858 <sep/> -20 </cn>
+                        <apply>
+                          <power/>
+                          <apply>
+                            <times/>
+                            <ci> Age </ci>
+                            <cn type="integer"> 12 </cn>
+                          </apply>
+                          <cn type="integer"> 9 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="e-notation"> 2.079251 <sep/> -23 </cn>
+                      <apply>
+                        <power/>
+                        <apply>
+                          <times/>
+                          <ci> Age </ci>
+                          <cn type="integer"> 12 </cn>
+                        </apply>
+                        <cn type="integer"> 10 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 3.800367 <sep/> -27 </cn>
+                    <apply>
+                      <power/>
+                      <apply>
+                        <times/>
+                        <ci> Age </ci>
+                        <cn type="integer"> 12 </cn>
+                      </apply>
+                      <cn type="integer"> 11 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> DeltaBW </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Age">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> Age_init </ci>
+            <apply>
+              <divide/>
+              <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+              <cn type="integer"> 365 </cn>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="ExpoCig">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <and/>
+                <apply>
+                  <geq/>
+                  <ci> Age </ci>
+                  <ci> Age_smoke_begin </ci>
+                </apply>
+                <apply>
+                  <leq/>
+                  <ci> Age </ci>
+                  <ci> Age_smoke_end </ci>
+                </apply>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn type="integer"> 0 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Vtidal_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <cn> 0.0337 </cn>
+                  <ci> Age </ci>
+                </apply>
+                <cn> 0.0407 </cn>
+              </apply>
+              <apply>
+                <lt/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <times/>
+                    <cn> 0.0337 </cn>
+                    <ci> Age </ci>
+                  </apply>
+                  <cn> 0.0407 </cn>
+                </apply>
+                <cn> 0.75 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn> 0.75 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Vds_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <cn> 0.0076 </cn>
+                  <ci> Age </ci>
+                </apply>
+                <cn> 0.0101 </cn>
+              </apply>
+              <apply>
+                <lt/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <times/>
+                    <cn> 0.0076 </cn>
+                    <ci> Age </ci>
+                  </apply>
+                  <cn> 0.0101 </cn>
+                </apply>
+                <cn> 0.15 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn> 0.15 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="I2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <ci> C7 </ci>
+                <ci> QExpo </ci>
+              </apply>
+              <apply>
+                <lt/>
+                <apply>
+                  <times/>
+                  <ci> C7 </ci>
+                  <ci> QExpo </ci>
+                </apply>
+                <ci> C8 </ci>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> C8 </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C17">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn> 0.95 </cn>
+              <apply>
+                <lt/>
+                <ci> Age </ci>
+                <cn type="integer"> 30 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <minus/>
+                <cn> 0.95 </cn>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <divide/>
+                      <cn> 0.95 </cn>
+                      <cn type="integer"> 3 </cn>
+                    </apply>
+                    <apply>
+                      <minus/>
+                      <ci> Age </ci>
+                      <cn type="integer"> 30 </cn>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> 50 </cn>
+                </apply>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C19">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn> 0.00014 </cn>
+              <apply>
+                <lt/>
+                <ci> Age </ci>
+                <cn type="integer"> 30 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <plus/>
+                <cn> 0.00014 </cn>
+                <apply>
+                  <times/>
+                  <ci> C21 </ci>
+                  <apply>
+                    <minus/>
+                    <ci> Age </ci>
+                    <cn type="integer"> 30 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="T1" reversible="true">
+        <listOfProducts>
+          <speciesReference species="QGut" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> CIngestion </ci>
+              <ci> BW </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T2" reversible="true">
+        <listOfProducts>
+          <speciesReference species="QAir_Cig" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ExpoCig </ci>
+              <ci> nbCig </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T3" reversible="true">
+        <listOfProducts>
+          <speciesReference species="QAir_Dust" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> CAir </ci>
+              <ci> VInhalation </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T4" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QAir_Cig" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QLung" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QAir_Cig </ci>
+              <ci> C2_cig </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T5" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QAir_Dust" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QLung" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QAir_Dust </ci>
+              <ci> C2_dust </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T6" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QAir_Cig" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QIntestine" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QAir_Cig </ci>
+              <ci> C1_cig </ci>
+              <ci> C5 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T7" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QAir_Dust" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QIntestine" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QAir_Dust </ci>
+              <ci> C1_dust </ci>
+              <ci> C5 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T8" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QGut" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QIntestine" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="QLung"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <plus/>
+                <ci> QGut </ci>
+                <apply>
+                  <times/>
+                  <ci> QLung </ci>
+                  <ci> C4 </ci>
+                </apply>
+              </apply>
+              <ci> C5 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T9" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QLung" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QLung </ci>
+              <ci> C3 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T10" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QIntestine" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QIntestine </ci>
+              <ci> C6 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T11" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> I2 </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T12" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <ci> QExpo </ci>
+              <ci> I2 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T13" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QOthers" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QBlood1 </ci>
+              <ci> C9 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T14" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QBlood1 </ci>
+              <ci> CX </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T15" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QOthers" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QOthers </ci>
+              <ci> C10 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T16" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QFeces" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QBlood1 </ci>
+              <ci> C11 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T17" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QBlood1 </ci>
+              <ci> C12 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T18" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QLiver </ci>
+              <ci> C13 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T19" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QLiver </ci>
+              <ci> C14 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T20" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QFeces" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QLiver </ci>
+              <ci> C15 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T21" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QBlood2" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QBlood2 </ci>
+              <ci> C16 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T22" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QBlood3 </ci>
+              <ci> C17 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T23" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QKidney </ci>
+              <ci> C18 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T24" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QUrine" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QKidney </ci>
+              <ci> C19 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T25" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QUrine" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QBlood3 </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> C17 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T26" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QFeces" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QExcretion" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> QFeces </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="T27" reversible="true">
+        <listOfReactants>
+          <speciesReference species="QUrine" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="QExcretion" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> QUrine </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="R1" reversible="true">
+        <listOfProducts>
+          <speciesReference species="CUrine" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="QUrine"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <divide/>
+                <ci> QUrine </ci>
+                <ci> VCreat </ci>
+              </apply>
+              <ci> CUrine </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="P1" reversible="true">
+        <listOfProducts>
+          <speciesReference species="Parameters" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <ci> Age_smoke_begin </ci>
+              <ci> Age_smoke_end </ci>
+              <ci> CAir </ci>
+              <ci> nbCig </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
