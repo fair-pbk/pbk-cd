@@ -55,6 +55,12 @@
           <unit kind="second" exponent="1" scale="0" multiplier="31557600"/>
         </listOfUnits>
       </unitDefinition>
+      <unitDefinition id="L_PER_DAY">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
       <unitDefinition id="PER_DAY">
         <listOfUnits>
           <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
@@ -89,7 +95,7 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment id="Others" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Others" name="other tissues" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_Creatinine" id="Creatinine" spatialDimensions="3" size="0.032" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -156,14 +162,14 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment id="Expo" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Expo" name="total systemic exposure" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment id="Excretion" name="excreta" spatialDimensions="3" size="1" units="L" constant="true"/>
-      <compartment id="Blood1" spatialDimensions="3" size="1" units="L" constant="true"/>
-      <compartment id="Blood2" spatialDimensions="3" size="1" units="L" constant="true"/>
-      <compartment id="Blood3" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Blood1" name="blood plasma" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Blood2" name="red blood cells" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="Blood3" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true"/>
     </listOfCompartments>
     <listOfSpecies>
-      <species metaid="meta_QGut" id="QGut" name="Amount in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+      <species metaid="meta_QGut" id="QGut" name="amount in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_QGut">
@@ -176,7 +182,7 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species metaid="meta_QLiver" id="QLiver" name="Amount in liver" compartment="Liver" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+      <species metaid="meta_QLiver" id="QLiver" name="amount in liver" compartment="Liver" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_QLiver">
@@ -189,7 +195,7 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species metaid="meta_QKidney" id="QKidney" name="Amount in kidney" compartment="Kidney" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+      <species metaid="meta_QKidney" id="QKidney" name="amount in kidney" compartment="Kidney" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_QKidney">
@@ -203,7 +209,7 @@
         </annotation>
       </species>
       <species id="QExpo" compartment="Expo" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species metaid="meta_QLung" id="QLung" name="Amount in lungs" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+      <species metaid="meta_QLung" id="QLung" name="amount in lungs" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_QLung">
@@ -216,7 +222,7 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species metaid="meta_QUrine" id="QUrine" name="Amount in urine" compartment="Urine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+      <species metaid="meta_QUrine" id="QUrine" name="amount in urine" compartment="Urine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_QUrine">
@@ -229,7 +235,7 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species metaid="meta_QFeces" id="QFeces" name="Amount in feces" compartment="Feces" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+      <species metaid="meta_QFeces" id="QFeces" name="amount in feces" compartment="Feces" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_QFeces">
@@ -242,12 +248,12 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species id="QExcretion" compartment="Excretion" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QIntestine" name="Amount in intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QBlood1" name="Amount in plasma" compartment="Blood1" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QBlood2" name="Amount in red blood cells" compartment="Blood2" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QBlood3" name="Amount in metallothionein" compartment="Blood3" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QOthers" compartment="Others" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QExcretion" name="total excretion amount (urine+feces)" compartment="Excretion" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QIntestine" name="amount in intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QBlood1" name="amount in plasma" compartment="Blood1" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QBlood2" name="amount in red blood cells" compartment="Blood2" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QBlood3" name="amount in metallothionein" compartment="Blood3" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="QOthers" name="amount in other tissues" compartment="Others" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="CUrine" compartment="Creatinine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="QAir_Cig" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="QAir_Dust" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
@@ -314,41 +320,41 @@
       <parameter id="ExpoCig" value="0" constant="false"/>
       <parameter id="Age_smoke_begin" value="18" constant="false"/>
       <parameter id="Age_smoke_end" value="45" constant="false"/>
-      <parameter id="CAir" name="Concentration of Cd in ambient air" value="0.01" constant="false"/>
+      <parameter id="CAir" name="concentration of Cd in ambient air" value="0.01" constant="false"/>
       <parameter id="Vtidal_male" value="0.0407" constant="false"/>
       <parameter id="Vtidal_female" value="0.0392" constant="false"/>
-      <parameter id="Vtidal" name="Tidal volume" value="0.0407" units="L" constant="false"/>
-      <parameter id="FqBreath" name="Respiratory frequency" value="38.9" constant="false"/>
-      <parameter id="Vds_male" value="0.0101" constant="false"/>
-      <parameter id="Vds_female" value="0.0107" constant="false"/>
-      <parameter id="Vds" name="Physiological dead space" value="0.0101" units="L" constant="false"/>
-      <parameter id="VInhalation" name="volume of air inhaled" value="1714.0896" constant="false"/>
+      <parameter id="Vtidal" name="tidal volume" value="0.0407" units="L" constant="false"/>
+      <parameter id="FqBreath" name="respiratory frequency" value="38.9" constant="false"/>
+      <parameter id="Vds_male" value="0.0101" units="L" constant="false"/>
+      <parameter id="Vds_female" value="0.0107" units="L" constant="false"/>
+      <parameter id="Vds" name="physiological dead space" value="0.0101" units="L" constant="false"/>
+      <parameter id="VInhalation" name="volume of air inhaled" value="1714.0896" units="L_PER_DAY" constant="false"/>
       <parameter id="nbCig" value="1" constant="false"/>
       <parameter id="C1_cig" value="0.1" constant="true"/>
       <parameter id="C1_dust" value="0.7" constant="true"/>
       <parameter id="C2_cig" value="0.4" constant="true"/>
       <parameter id="C2_dust" value="0.13" constant="true"/>
-      <parameter id="C3" name="Rate of transfer of inhalation intake to uptake pool" value="0.05" units="PER_DAY" constant="true"/>
-      <parameter id="C4" name="Rate of transfer of air Cd to the GI-tract" value="0.005" units="PER_DAY" constant="true"/>
-      <parameter id="C5" name="Fraction of GI-tract Cd retained in epithelium" value="0.048" constant="true"/>
-      <parameter id="C6" name="Rate of transfer of Cd in the GI-tract to uptake pool" value="0.05" units="PER_DAY" constant="true"/>
-      <parameter id="C7" name="Fraction of uptake pool transferred to blood" value="0.25" constant="true"/>
-      <parameter id="C8" name="Maximum mass of Cd in uptake pool" value="1000" units="MicroGM" constant="true"/>
+      <parameter id="C3" name="rate of transfer of inhalation intake to uptake pool" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="C4" name="rate of transfer of air Cd to the GI-tract" value="0.005" units="PER_DAY" constant="true"/>
+      <parameter id="C5" name="fraction of GI-tract Cd retained in epithelium" value="0.048" units="UNITLESS" constant="true"/>
+      <parameter id="C6" name="rate of transfer of Cd in the GI-tract to uptake pool" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="C7" name="fraction of uptake pool transferred to blood" value="0.25" units="UNITLESS" constant="true"/>
+      <parameter id="C8" name="maximum mass of Cd in uptake pool" value="1000" units="MicroGM" constant="true"/>
       <parameter id="I2" value="0" constant="false"/>
-      <parameter id="C9" name="Rate of transfer from plasma to other tissues" value="0.44" units="PER_DAY" constant="true"/>
-      <parameter id="C10" name="Rate of transfer of Cd in other tissues to plasma" value="0.00014" units="PER_DAY" constant="true"/>
-      <parameter id="C11" name="Rate of transfer of Cd in plasma to feces" value="0.27" units="PER_DAY" constant="true"/>
-      <parameter id="C12" name="Rate of transfer of Cd in plasma to liver" value="0.25" units="PER_DAY" constant="true"/>
-      <parameter id="C13" name="Rate of transfer of Cd in liver to plasma" value="3e-05" units="PER_DAY" constant="true"/>
-      <parameter id="C14" name="Rate of transfer of Cd in liver to metallothionein" value="0.00016" units="PER_DAY" constant="true"/>
-      <parameter id="C15" name="Rate of transfer of Cd in liver to feces" value="5e-05" units="PER_DAY" constant="true"/>
-      <parameter id="C16" name="Rate of transfer of Cd in blood red blodd cells to metallothionein" value="0.012" units="PER_DAY" constant="true"/>
-      <parameter id="C17" name="Rate of transfer of Cd in metallothionein to kidney" value="0.95" units="PER_DAY" constant="false"/>
-      <parameter id="C18" name="Rate of transfer of Cd in kidney to plasma" value="1e-05" units="PER_DAY" constant="true"/>
-      <parameter id="C19" name="Age-specific rate constant for transfer of Cd in kidney to urine" value="0.00014" units="PER_DAY" constant="false"/>
-      <parameter id="C21" name="Increased transfer of Cd from kidney to urine after age 30" value="1.1e-06" constant="true"/>
-      <parameter id="C20" name="Fraction of Cd in plasma and red blood cells that contribute to cadmium in whole blood" value="0.1" units="UNITLESS" constant="true"/>
-      <parameter id="CX" name="Rate of transfer of Cd in B1 to blood B2" value="0.04" units="PER_DAY" constant="true"/>
+      <parameter id="C9" name="rate of transfer from plasma to other tissues" value="0.44" units="PER_DAY" constant="true"/>
+      <parameter id="C10" name="rate of transfer of Cd in other tissues to plasma" value="0.00014" units="PER_DAY" constant="true"/>
+      <parameter id="C11" name="rate of transfer of Cd in plasma to feces" value="0.27" units="PER_DAY" constant="true"/>
+      <parameter id="C12" name="rate of transfer of Cd in plasma to liver" value="0.25" units="PER_DAY" constant="true"/>
+      <parameter id="C13" name="rate of transfer of Cd in liver to plasma" value="3e-05" units="PER_DAY" constant="true"/>
+      <parameter id="C14" name="rate of transfer of Cd in liver to metallothionein" value="0.00016" units="PER_DAY" constant="true"/>
+      <parameter id="C15" name="rate of transfer of Cd in liver to feces" value="5e-05" units="PER_DAY" constant="true"/>
+      <parameter id="C16" name="rate of transfer of Cd in blood red blodd cells to metallothionein" value="0.012" units="PER_DAY" constant="true"/>
+      <parameter id="C17" name="rate of transfer of Cd in metallothionein to kidney" value="0.95" units="PER_DAY" constant="false"/>
+      <parameter id="C18" name="rate of transfer of Cd in kidney to plasma" value="1e-05" units="PER_DAY" constant="true"/>
+      <parameter id="C19" name="age-specific rate constant for transfer of Cd in kidney to urine" value="0.00014" units="PER_DAY" constant="false"/>
+      <parameter id="C21" name="increased transfer of Cd from kidney to urine after age 30" value="1.1e-06" constant="true"/>
+      <parameter id="C20" name="fraction of Cd in plasma and red blood cells that contribute to cadmium in whole blood" value="0.1" units="UNITLESS" constant="true"/>
+      <parameter id="CX" name="rate of transfer of Cd in B1 to blood B2" value="0.04" units="PER_DAY" constant="true"/>
     </listOfParameters>
     <listOfInitialAssignments/>
     <listOfRules>
