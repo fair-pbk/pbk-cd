@@ -2,167 +2,159 @@
 
 model PBK_Cd()
 
-# Units of the model :
-unit day = 3600*24 seconds;
-unit substance = 1e-6 gram;
-unit microg_kg = 1e-6 gram/1000 grams;
-unit volume = 1 liter;
-unit kg = 1000 grams;
-unit g = 1 gram;
-unit area = m^2;
+    # Units of the model :
+    unit day = 3600*24 seconds;
+    unit substance = 1e-6 gram;
+    unit microg_kg = 1e-6 gram/1000 grams;
+    unit volume = 1 liter;
+    unit kg = 1000 grams;
+    unit g = 1 gram;
+    unit area = m^2;
 
-VCreat has g;
+    # Parameters
 
-# Compartments of model :
-compartment Liver = 1                   // Compartment of liver (only the quantity)
-compartment Kidney = 1                  // Compartment of kidneys (only the quantity)
-compartment Others = 1                  // Compartment of other tissues (only the quantity)
-compartment Creatinine = VCreat         // Compartment of creatinine in urine (evolution of lifetime)
-compartment Feces = 1                   // Compartment of feces (only the quantity)
-compartment Urine = 2                   // Compartment of urine (2L of urine per day)
-compartment Intestine = 1               // Compartment of intestine (only the quantity)
-compartment Gut = 1                     // Compartment of gut (input compartment)
-compartment Lung = 1                    // Compartment of lungs (only the quantity)
-compartment Expo = 1                    // Compartment of daily intake (only the quantity)
-compartment Excretion = 1               // Compartment of the total excretion (only the quantity)
-compartment Blood1 = 1                  // Compartment of Blood1
-compartment Blood2 = 1                  // Compartment of Blood2
-compartment Blood3 = 1                  // Compartment of Blood3
+    ## Exposure parameters (in µg/kg/day)
+    CIngestion = 0.30
 
-# Species :
-var QGut in Gut                         // Quantity of cadmium in gut (µg)
-var QLiver in Liver                     // Quantity of cadmium in liver (µg)
-var QKidney in Kidney                   // Quantity of cadmium in kidneys (µg)
-var QExpo in Expo                       // Total of cadmium intaken in the day (µg)
-var QLung in Lung                       // Quantity of cadmium in lungs (µg)
-var QUrine in Urine                     // Concentration of cadmium in urine considering creatinine excretion
-var QFeces in Feces                     // Quantity of cadmium in feces (µg)
-var QExcretion in Excretion             // Accumulated excretion of cadmium (µg)
-var QIntestine in Intestine             // Quantity of cadmium in intestine (µg)
-var QBlood1 in Blood1
-var QBlood2 in Blood2
-var QBlood3 in Blood3
-var QOthers in Others
-var CUrine in Creatinine
+    CAir = 0.01             # Concentration of Cd in ambient air (in µg/m³)
 
-# Initialisation of Species (beginning at 0) :
-QGut        = 0
-QAir        = 0
-QLiver      = 0
-QKidney     = 0
-QExpo       = 0
-QLung       = 0
-QUrine      = 0
-QFeces      = 0
-QExcretion  = 0
-QIntestine  = 0
-QBlood1     = 0
-QBlood2     = 0
-QBlood3     = 0
-QOthers     = 0
-CUrine      = 0
+    QtCig = 1.0                     # Quantity of Cd in 1 cigarette (in µg)
+    Age_smoke_begin = 18            # Age of beginning to smoke
+    Age_smoke_end   = 45            # Age of ending to smoke
+    nbCig = 1                       # I don't know what this is. Number of cigarettes?
+    ExpoCig := piecewise(1.0, Age >= Age_smoke_begin && Age <= Age_smoke_end, 0) 
 
-# Parameters :
-// Sex (0: Female; 1: Male)
-Sex = 1 
+    # Physiological parameters
+    Sex = 1             # Sex (0: Female; 1: Male)
 
-// Body weight in function of the age and the sex (in kg)
-BW := piecewise((3.938425 + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)*DeltaBW, Sex > 0, (3.932403 + 0.6866462*Age*12 - 0.01949911*(Age*12)^2 + 0.00031311*(Age*12)^3 - 2.466654e-6*(Age*12)^4 + 1.113217e-8*(Age*12)^5 - 3.131402e-11*(Age*12)^6 + 5.693737e-14*(Age*12)^7 - 6.706947e-17*(Age*12)^8 + 4.947858e-20*(Age*12)^9 - 2.079251e-23*(Age*12)^10 + 3.800367e-27*(Age*12)^11)*DeltaBW)
-DeltaBW = 1
+    ### Body weight in function of the age and the sex (in kg)
+    BW := piecewise((3.938425 + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)*DeltaBW, Sex > 0, (3.932403 + 0.6866462*Age*12 - 0.01949911*(Age*12)^2 + 0.00031311*(Age*12)^3 - 2.466654e-6*(Age*12)^4 + 1.113217e-8*(Age*12)^5 - 3.131402e-11*(Age*12)^6 + 5.693737e-14*(Age*12)^7 - 6.706947e-17*(Age*12)^8 + 4.947858e-20*(Age*12)^9 - 2.079251e-23*(Age*12)^10 + 3.800367e-27*(Age*12)^11)*DeltaBW)
+    DeltaBW = 1
 
-// Evolution of the age (in years)
-Age_init = 0 // Age at the beginning of the simulation
-Age := (Age_init + time/365)
+    Age_init = 0                    # Age at the beginning of the simulation
+    Age := (Age_init + time/365)    # Evolution of the age (in years)
 
-// Exposure parameters (in µg/kg/day)
-CIngestion = 0.30
+    FqBreath = 12 + (38.9 - 12) * exp(-0.176 * Age)         # Breath frequency by day
+    VInhalation = FqBreath * (Vtidal - Vds) * 60 * 24       # Volume of inhalation by day
 
-QtCig = 1.0 //Quantity of Cd in 1 cigarette (in µg)
-ExpoCig := piecewise(1.0, Age >= Age_smoke_begin && Age <= Age_smoke_end, 0) 
-Age_smoke_begin = 18 // Age of beginning to smoke
-Age_smoke_end   = 45 // Age of ending to smoke
+    Vtidal_male := piecewise(0.0337*Age + 0.0407, 0.0337*Age + 0.0407 < 0.75, 0.75)
+    Vtidal_female = 0.46 + (0.0392 - 0.46) * exp(-0.127 * Age)
+    Vtidal = Sex*Vtidal_male + (1-Sex)*Vtidal_female
 
-CAir = 0.01 // Concentration of Cd in ambient air (in µg/m³)
+    Vds_male := piecewise(0.0076*Age + 0.0101, 0.0076*Age + 0.0101 < 0.15, 0.15) 
+    Vds_female = 0.12 + (0.0107-0.12) * exp(-0.0986 * Age)
+    Vds = Sex*Vds_male + (1-Sex)*Vds_female
 
-Vtidal_male := piecewise(0.0337*Age + 0.0407, 0.0337*Age + 0.0407 < 0.75, 0.75)
-Vtidal_female = 0.46 + (0.0392 - 0.46) * exp(-0.127 * Age)
-Vtidal = Sex*Vtidal_male + (1-Sex)*Vtidal_female
+    # Kinetic parameters
+    C1_cig = 0.1
+    C1_dust = 0.7
+    C2_cig = 0.4
+    C2_dust = 0.13
+    C3 = 0.05
+    C4 = 0.005
+    C5 = 0.048
+    C6 = 0.05
+    C7 = 0.25
+    C8 = 1000
+    I2 := piecewise(C7*QExpo, C7*QExpo<C8, C8)
+    C9 = 0.44
+    C10 = 0.00014
+    C11 = 0.27
+    C12 = 0.25
+    C13 = 0.00003
+    C14 = 0.00016
+    C15 = 0.00005
+    C16 = 0.012
+    C17 := piecewise(0.95, Age < 30, 0.95-(0.95/3)*(Age-30)/50)
+    C18 = 0.00001
+    C19 := piecewise(0.00014, Age < 30, 0.00014+C21*(Age-30))
+    C20 = 0.1
+    C21 = 0.0000011
+    CX = 0.04
 
-FqBreath = 12 + (38.9 - 12) * exp(-0.176 * Age) // Breath frequency by day
+    # Concentration of creatinine over lifetime
+    VCreat := piecewise((0.032+2.098e-02*Age+9.104e-03*(Age^2)-4.550e-04*(Age^3)+7.578e-06*(Age^4)-4.232e-08*(Age^5)),Age < 70,(0.032+2.098e-02*70+9.104e-03*(70^2)-4.550e-04*(70^3)+7.578e-06*(70^4)-4.232e-08*(70^5)))
 
-Vds_male := piecewise(0.0076*Age + 0.0101, 0.0076*Age + 0.0101 < 0.15, 0.15) 
-Vds_female = 0.12 + (0.0107-0.12) * exp(-0.0986 * Age)
-Vds = Sex*Vds_male + (1-Sex)*Vds_female
+    # Compartments
+    compartment Liver = 1                   # Compartment of liver (only the quantity)
+    compartment Kidney = 1                  # Compartment of kidneys (only the quantity)
+    compartment Others = 1                  # Compartment of other tissues (only the quantity)
+    compartment Creatinine = VCreat         # Compartment of creatinine in urine (evolution of lifetime)
+    compartment Feces = 1                   # Compartment of feces (only the quantity)
+    compartment Urine = 2                   # Compartment of urine (2L of urine per day)
+    compartment Intestine = 1               # Compartment of intestine (only the quantity)
+    compartment Gut = 1                     # Compartment of gut (input compartment)
+    compartment Lung = 1                    # Compartment of lungs (only the quantity)
+    compartment Expo = 1                    # Compartment of daily intake (only the quantity)
+    compartment Excretion = 1               # Compartment of the total excretion (only the quantity)
+    compartment Blood1 = 1                  # Compartment of Blood1
+    compartment Blood2 = 1                  # Compartment of Blood2
+    compartment Blood3 = 1                  # Compartment of Blood3
 
-VInhalation = FqBreath * (Vtidal - Vds) * 60 * 24 // Volume of inhalation by day
+    # Species
+    var QGut in Gut                         # Quantity of cadmium in gut (µg)
+    var QLiver in Liver                     # Quantity of cadmium in liver (µg)
+    var QKidney in Kidney                   # Quantity of cadmium in kidneys (µg)
+    var QExpo in Expo                       # Total of cadmium intaken in the day (µg)
+    var QLung in Lung                       # Quantity of cadmium in lungs (µg)
+    var QUrine in Urine                     # Concentration of cadmium in urine considering creatinine excretion
+    var QFeces in Feces                     # Quantity of cadmium in feces (µg)
+    var QExcretion in Excretion             # Accumulated excretion of cadmium (µg)
+    var QIntestine in Intestine             # Quantity of cadmium in intestine (µg)
+    var QBlood1 in Blood1
+    var QBlood2 in Blood2
+    var QBlood3 in Blood3
+    var QOthers in Others
+    var CUrine in Creatinine
 
-nbCig = 1 // I don't know what this is. Number of cigarettes?
+    # Initial amounts
+    QGut        = 0
+    QAir        = 0
+    QLiver      = 0
+    QKidney     = 0
+    QExpo       = 0
+    QLung       = 0
+    QUrine      = 0
+    QFeces      = 0
+    QExcretion  = 0
+    QIntestine  = 0
+    QBlood1     = 0
+    QBlood2     = 0
+    QBlood3     = 0
+    QOthers     = 0
+    CUrine      = 0
 
+    # Reactions
+                  -> QGut;        CIngestion*BW
+                  -> QAir_Cig;    ExpoCig*nbCig 
+                  -> QAir_Dust;   CAir*VInhalation
+    QAir_Cig      -> QLung;       QAir_Cig*C2_cig
+    QAir_Dust     -> QLung;       QAir_Dust*C2_dust
+    QAir_Cig      -> QIntestine;  QAir_Cig*C1_cig*C5
+    QAir_Dust     -> QIntestine;  QAir_Dust*C1_dust*C5
+    QGut          -> QIntestine;  (QGut + QLung*C4)*C5
+    QLung         -> QExpo;       QLung*C3
+    QIntestine    -> QExpo;       QIntestine*C6
+    QExpo         -> QBlood3;     I2
+    QExpo         -> QBlood1;     QExpo - I2
+    QBlood1       -> QOthers;     QBlood1*C9
+    QBlood1       -> QBlood2;     QBlood1*CX
+    QOthers       -> QBlood1;     QOthers*C10
+    QBlood1       -> QFeces;      QBlood1*C11
+    QBlood1       -> QLiver;      QBlood1*C12
+    QLiver        -> QBlood1;     QLiver*C13
+    QLiver        -> QBlood3;     QLiver*C14
+    QLiver        -> QFeces;      QLiver*C15
+    QBlood2       -> QBlood3;     QBlood2*C16
+    QBlood3       -> QKidney;     QBlood3*C17
+    QKidney       -> QBlood1;     QKidney*C18
+    QKidney       -> QUrine;      QKidney*C19
+    QBlood3       -> QUrine;      QBlood3*(1-C17)
+    QFeces        -> QExcretion;  QFeces 
+    QUrine        -> QExcretion;  QUrine
 
-// Kinetic parameters
-C1_cig = 0.1
-C1_dust = 0.7
-C2_cig = 0.4
-C2_dust = 0.13
-C3 = 0.05
-C4 = 0.005
-C5 = 0.048
-C6 = 0.05
-C7 = 0.25
-C8 = 1000
-I2 := piecewise(C7*QExpo, C7*QExpo<C8, C8)
-C9 = 0.44
-C10 = 0.00014
-C11 = 0.27
-C12 = 0.25
-C13 = 0.00003
-C14 = 0.00016
-C15 = 0.00005
-C16 = 0.012
-C17 := piecewise(0.95, Age < 30, 0.95-(0.95/3)*(Age-30)/50)
-C18 = 0.00001
-C19 := piecewise(0.00014, Age < 30, 0.00014+C21*(Age-30))
-C20 = 0.1
-C21 = 0.0000011
-CX = 0.04
+                  -> CUrine;      QUrine/VCreat - CUrine
 
-// Concentration of creatinine over lifetime
-VCreat := piecewise((0.032+2.098e-02*Age+9.104e-03*(Age^2)-4.550e-04*(Age^3)+7.578e-06*(Age^4)-4.232e-08*(Age^5)),Age < 70,(0.032+2.098e-02*70+9.104e-03*(70^2)-4.550e-04*(70^3)+7.578e-06*(70^4)-4.232e-08*(70^5)))
-
-const Age_init, C1_cig, C1_dust, C2_cig, C2_dust, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15, C16, C18, C20, C21, CX;
-var BW, Age, VCreat, I2, C17, C19, Age_smoke_begin, Age_smoke_end, nbCig, ExpoCig, CAir, VInhalation, Vtidal_male, Vtidal_female, FqBreath, Vds_male, Vds_female, Vds, Vtidal;
-
-# Reactions :
-T1  :               -> QGut;        CIngestion*BW
-T2  :               -> QAir_Cig;    ExpoCig*nbCig 
-T3  :               -> QAir_Dust;   CAir*VInhalation
-T4  : QAir_Cig      -> QLung;       QAir_Cig*C2_cig
-T5  : QAir_Dust     -> QLung;       QAir_Dust*C2_dust
-T6  : QAir_Cig      -> QIntestine;  QAir_Cig*C1_cig*C5
-T7  : QAir_Dust     -> QIntestine;  QAir_Dust*C1_dust*C5
-T8  : QGut          -> QIntestine;  (QGut + QLung*C4)*C5
-T9  : QLung         -> QExpo;       QLung*C3
-T10 : QIntestine    -> QExpo;       QIntestine*C6
-T11 : QExpo         -> QBlood3;     I2
-T12 : QExpo         -> QBlood1;     QExpo - I2
-T13 : QBlood1       -> QOthers;     QBlood1*C9
-T14 : QBlood1       -> QBlood2;     QBlood1*CX
-T15 : QOthers       -> QBlood1;     QOthers*C10
-T16 : QBlood1       -> QFeces;      QBlood1*C11
-T17 : QBlood1       -> QLiver;      QBlood1*C12
-T18 : QLiver        -> QBlood1;     QLiver*C13
-T19 : QLiver        -> QBlood3;     QLiver*C14
-T20 : QLiver        -> QFeces;      QLiver*C15
-T21 : QBlood2       -> QBlood3;     QBlood2*C16
-T22 : QBlood3       -> QKidney;     QBlood3*C17
-T23 : QKidney       -> QBlood1;     QKidney*C18
-T24 : QKidney       -> QUrine;      QKidney*C19
-T25 : QBlood3       -> QUrine;      QBlood3*(1-C17)
-T26 : QFeces        -> QExcretion;  QFeces 
-T27 : QUrine        -> QExcretion;  QUrine
-
-R1  :               -> CUrine;      QUrine/VCreat - CUrine
-
-P1 :                -> Parameters;  Age_smoke_begin + Age_smoke_end + CAir + nbCig
+                  -> Parameters;  Age_smoke_begin + Age_smoke_end + CAir + nbCig
 
 end

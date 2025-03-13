@@ -96,7 +96,7 @@
         </annotation>
       </compartment>
       <compartment id="Others" name="other tissues" spatialDimensions="3" size="1" units="L" constant="true"/>
-      <compartment metaid="meta_Creatinine" id="Creatinine" spatialDimensions="3" size="0.032" units="L" constant="false">
+      <compartment metaid="meta_Creatinine" id="Creatinine" spatialDimensions="3" size="0.032" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_Creatinine">
@@ -169,6 +169,7 @@
       <compartment id="Blood3" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true"/>
     </listOfCompartments>
     <listOfSpecies>
+      <species id="QExpo" compartment="Expo" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species metaid="meta_QGut" id="QGut" name="amount in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -208,7 +209,6 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species id="QExpo" compartment="Expo" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species metaid="meta_QLung" id="QLung" name="amount in lungs" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -260,8 +260,26 @@
       <species id="Parameters" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="VCreat" value="0.032" units="g" constant="false"/>
-      <parameter id="QAir" value="0" constant="true"/>
+      <parameter id="CIngestion" value="0.3" constant="true"/>
+      <parameter id="CAir" name="concentration of Cd in ambient air" value="0.01" constant="true"/>
+      <parameter id="QtCig" name="Quantity of Cd in 1 cigarette" value="1" constant="true"/>
+      <parameter id="Age_smoke_begin" value="18" constant="true"/>
+      <parameter id="Age_smoke_end" value="45" constant="true"/>
+      <parameter id="nbCig" value="1" constant="true"/>
+      <parameter id="ExpoCig" value="0" constant="false"/>
+      <parameter metaid="meta_Age" id="Age" name="age" value="0" units="YR" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Age">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00521"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
       <parameter metaid="meta_Sex" id="Sex" name="sex" value="1" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -288,19 +306,6 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_Age" id="Age" name="age" value="0" units="YR" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Age">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00521"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
       <parameter id="DeltaBW" value="1" constant="true"/>
       <parameter metaid="meta_Age_init" id="Age_init" value="0" units="YR" constant="true">
         <annotation>
@@ -315,21 +320,14 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="CIngestion" value="0.3" constant="true"/>
-      <parameter id="QtCig" name="Quantity of Cd in 1 cigarette" value="1" constant="true"/>
-      <parameter id="ExpoCig" value="0" constant="false"/>
-      <parameter id="Age_smoke_begin" value="18" constant="false"/>
-      <parameter id="Age_smoke_end" value="45" constant="false"/>
-      <parameter id="CAir" name="concentration of Cd in ambient air" value="0.01" constant="false"/>
+      <parameter id="FqBreath" name="respiratory frequency" value="38.9" constant="true"/>
+      <parameter id="VInhalation" name="volume of air inhaled" value="1714.0896" units="L_PER_DAY" constant="true"/>
+      <parameter id="Vtidal" name="tidal volume" value="0.0407" units="L" constant="true"/>
+      <parameter id="Vds" name="physiological dead space" value="0.0101" units="L" constant="true"/>
       <parameter id="Vtidal_male" value="0.0407" constant="false"/>
-      <parameter id="Vtidal_female" value="0.0392" constant="false"/>
-      <parameter id="Vtidal" name="tidal volume" value="0.0407" units="L" constant="false"/>
-      <parameter id="FqBreath" name="respiratory frequency" value="38.9" constant="false"/>
+      <parameter id="Vtidal_female" value="0.0392" constant="true"/>
       <parameter id="Vds_male" value="0.0101" units="L" constant="false"/>
-      <parameter id="Vds_female" value="0.0107" units="L" constant="false"/>
-      <parameter id="Vds" name="physiological dead space" value="0.0101" units="L" constant="false"/>
-      <parameter id="VInhalation" name="volume of air inhaled" value="1714.0896" units="L_PER_DAY" constant="false"/>
-      <parameter id="nbCig" value="1" constant="false"/>
+      <parameter id="Vds_female" value="0.0107" units="L" constant="true"/>
       <parameter id="C1_cig" value="0.1" constant="true"/>
       <parameter id="C1_dust" value="0.7" constant="true"/>
       <parameter id="C2_cig" value="0.4" constant="true"/>
@@ -355,130 +353,47 @@
       <parameter id="C21" name="increased transfer of Cd from kidney to urine after age 30" value="1.1e-06" constant="true"/>
       <parameter id="C20" name="fraction of Cd in plasma and red blood cells that contribute to cadmium in whole blood" value="0.1" units="UNITLESS" constant="true"/>
       <parameter id="CX" name="rate of transfer of Cd in B1 to blood B2" value="0.04" units="PER_DAY" constant="true"/>
+      <parameter id="VCreat" value="0.032" units="g" constant="false"/>
+      <parameter id="QAir" value="0" constant="true"/>
     </listOfParameters>
     <listOfInitialAssignments/>
     <listOfRules>
-      <assignmentRule variable="VCreat">
+      <assignmentRule variable="ExpoCig">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <piecewise>
             <piece>
+              <cn type="integer"> 1 </cn>
               <apply>
-                <minus/>
+                <and/>
                 <apply>
-                  <plus/>
-                  <apply>
-                    <minus/>
-                    <apply>
-                      <plus/>
-                      <cn> 0.032 </cn>
-                      <apply>
-                        <times/>
-                        <cn> 0.02098 </cn>
-                        <ci> Age </ci>
-                      </apply>
-                      <apply>
-                        <times/>
-                        <cn> 0.009104 </cn>
-                        <apply>
-                          <power/>
-                          <ci> Age </ci>
-                          <cn type="integer"> 2 </cn>
-                        </apply>
-                      </apply>
-                    </apply>
-                    <apply>
-                      <times/>
-                      <cn> 0.000455 </cn>
-                      <apply>
-                        <power/>
-                        <ci> Age </ci>
-                        <cn type="integer"> 3 </cn>
-                      </apply>
-                    </apply>
-                  </apply>
-                  <apply>
-                    <times/>
-                    <cn type="e-notation"> 7.578 <sep/> -6 </cn>
-                    <apply>
-                      <power/>
-                      <ci> Age </ci>
-                      <cn type="integer"> 4 </cn>
-                    </apply>
-                  </apply>
+                  <geq/>
+                  <ci> Age </ci>
+                  <ci> Age_smoke_begin </ci>
                 </apply>
                 <apply>
-                  <times/>
-                  <cn type="e-notation"> 4.232 <sep/> -8 </cn>
-                  <apply>
-                    <power/>
-                    <ci> Age </ci>
-                    <cn type="integer"> 5 </cn>
-                  </apply>
+                  <leq/>
+                  <ci> Age </ci>
+                  <ci> Age_smoke_end </ci>
                 </apply>
-              </apply>
-              <apply>
-                <lt/>
-                <ci> Age </ci>
-                <cn type="integer"> 70 </cn>
               </apply>
             </piece>
             <otherwise>
-              <apply>
-                <minus/>
-                <apply>
-                  <plus/>
-                  <apply>
-                    <minus/>
-                    <apply>
-                      <plus/>
-                      <cn> 0.032 </cn>
-                      <apply>
-                        <times/>
-                        <cn> 0.02098 </cn>
-                        <cn type="integer"> 70 </cn>
-                      </apply>
-                      <apply>
-                        <times/>
-                        <cn> 0.009104 </cn>
-                        <apply>
-                          <power/>
-                          <cn type="integer"> 70 </cn>
-                          <cn type="integer"> 2 </cn>
-                        </apply>
-                      </apply>
-                    </apply>
-                    <apply>
-                      <times/>
-                      <cn> 0.000455 </cn>
-                      <apply>
-                        <power/>
-                        <cn type="integer"> 70 </cn>
-                        <cn type="integer"> 3 </cn>
-                      </apply>
-                    </apply>
-                  </apply>
-                  <apply>
-                    <times/>
-                    <cn type="e-notation"> 7.578 <sep/> -6 </cn>
-                    <apply>
-                      <power/>
-                      <cn type="integer"> 70 </cn>
-                      <cn type="integer"> 4 </cn>
-                    </apply>
-                  </apply>
-                </apply>
-                <apply>
-                  <times/>
-                  <cn type="e-notation"> 4.232 <sep/> -8 </cn>
-                  <apply>
-                    <power/>
-                    <cn type="integer"> 70 </cn>
-                    <cn type="integer"> 5 </cn>
-                  </apply>
-                </apply>
-              </apply>
+              <cn type="integer"> 0 </cn>
             </otherwise>
           </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Age">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> Age_init </ci>
+            <apply>
+              <divide/>
+              <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+              <cn type="integer"> 365 </cn>
+            </apply>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="BW">
@@ -844,44 +759,6 @@
           </piecewise>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Age">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <ci> Age_init </ci>
-            <apply>
-              <divide/>
-              <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
-              <cn type="integer"> 365 </cn>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="ExpoCig">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <cn type="integer"> 1 </cn>
-              <apply>
-                <and/>
-                <apply>
-                  <geq/>
-                  <ci> Age </ci>
-                  <ci> Age_smoke_begin </ci>
-                </apply>
-                <apply>
-                  <leq/>
-                  <ci> Age </ci>
-                  <ci> Age_smoke_end </ci>
-                </apply>
-              </apply>
-            </piece>
-            <otherwise>
-              <cn type="integer"> 0 </cn>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
       <assignmentRule variable="Vtidal_male">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <piecewise>
@@ -1039,9 +916,132 @@
           </piecewise>
         </math>
       </assignmentRule>
+      <assignmentRule variable="VCreat">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <cn> 0.032 </cn>
+                      <apply>
+                        <times/>
+                        <cn> 0.02098 </cn>
+                        <ci> Age </ci>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn> 0.009104 </cn>
+                        <apply>
+                          <power/>
+                          <ci> Age </ci>
+                          <cn type="integer"> 2 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn> 0.000455 </cn>
+                      <apply>
+                        <power/>
+                        <ci> Age </ci>
+                        <cn type="integer"> 3 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 7.578 <sep/> -6 </cn>
+                    <apply>
+                      <power/>
+                      <ci> Age </ci>
+                      <cn type="integer"> 4 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 4.232 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <ci> Age </ci>
+                    <cn type="integer"> 5 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> Age </ci>
+                <cn type="integer"> 70 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <cn> 0.032 </cn>
+                      <apply>
+                        <times/>
+                        <cn> 0.02098 </cn>
+                        <cn type="integer"> 70 </cn>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn> 0.009104 </cn>
+                        <apply>
+                          <power/>
+                          <cn type="integer"> 70 </cn>
+                          <cn type="integer"> 2 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn> 0.000455 </cn>
+                      <apply>
+                        <power/>
+                        <cn type="integer"> 70 </cn>
+                        <cn type="integer"> 3 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 7.578 <sep/> -6 </cn>
+                    <apply>
+                      <power/>
+                      <cn type="integer"> 70 </cn>
+                      <cn type="integer"> 4 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 4.232 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <cn type="integer"> 70 </cn>
+                    <cn type="integer"> 5 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
     </listOfRules>
     <listOfReactions>
-      <reaction id="T1" reversible="true">
+      <reaction id="_J0" reversible="true">
         <listOfProducts>
           <speciesReference species="QGut" stoichiometry="1" constant="true"/>
         </listOfProducts>
@@ -1055,7 +1055,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T2" reversible="true">
+      <reaction id="_J1" reversible="true">
         <listOfProducts>
           <speciesReference species="QAir_Cig" stoichiometry="1" constant="true"/>
         </listOfProducts>
@@ -1069,7 +1069,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T3" reversible="true">
+      <reaction id="_J2" reversible="true">
         <listOfProducts>
           <speciesReference species="QAir_Dust" stoichiometry="1" constant="true"/>
         </listOfProducts>
@@ -1083,7 +1083,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T4" reversible="true">
+      <reaction id="_J3" reversible="true">
         <listOfReactants>
           <speciesReference species="QAir_Cig" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1100,7 +1100,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T5" reversible="true">
+      <reaction id="_J4" reversible="true">
         <listOfReactants>
           <speciesReference species="QAir_Dust" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1117,7 +1117,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T6" reversible="true">
+      <reaction id="_J5" reversible="true">
         <listOfReactants>
           <speciesReference species="QAir_Cig" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1135,7 +1135,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T7" reversible="true">
+      <reaction id="_J6" reversible="true">
         <listOfReactants>
           <speciesReference species="QAir_Dust" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1153,7 +1153,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T8" reversible="true">
+      <reaction id="_J7" reversible="true">
         <listOfReactants>
           <speciesReference species="QGut" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1181,7 +1181,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T9" reversible="true">
+      <reaction id="_J8" reversible="true">
         <listOfReactants>
           <speciesReference species="QLung" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1198,7 +1198,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T10" reversible="true">
+      <reaction id="_J9" reversible="true">
         <listOfReactants>
           <speciesReference species="QIntestine" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1215,7 +1215,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T11" reversible="true">
+      <reaction id="_J10" reversible="true">
         <listOfReactants>
           <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1228,7 +1228,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T12" reversible="true">
+      <reaction id="_J11" reversible="true">
         <listOfReactants>
           <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1245,7 +1245,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T13" reversible="true">
+      <reaction id="_J12" reversible="true">
         <listOfReactants>
           <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1262,7 +1262,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T14" reversible="true">
+      <reaction id="_J13" reversible="true">
         <listOfReactants>
           <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1279,7 +1279,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T15" reversible="true">
+      <reaction id="_J14" reversible="true">
         <listOfReactants>
           <speciesReference species="QOthers" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1296,7 +1296,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T16" reversible="true">
+      <reaction id="_J15" reversible="true">
         <listOfReactants>
           <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1313,7 +1313,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T17" reversible="true">
+      <reaction id="_J16" reversible="true">
         <listOfReactants>
           <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1330,7 +1330,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T18" reversible="true">
+      <reaction id="_J17" reversible="true">
         <listOfReactants>
           <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1347,7 +1347,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T19" reversible="true">
+      <reaction id="_J18" reversible="true">
         <listOfReactants>
           <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1364,7 +1364,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T20" reversible="true">
+      <reaction id="_J19" reversible="true">
         <listOfReactants>
           <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1381,7 +1381,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T21" reversible="true">
+      <reaction id="_J20" reversible="true">
         <listOfReactants>
           <speciesReference species="QBlood2" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1398,7 +1398,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T22" reversible="true">
+      <reaction id="_J21" reversible="true">
         <listOfReactants>
           <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1415,7 +1415,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T23" reversible="true">
+      <reaction id="_J22" reversible="true">
         <listOfReactants>
           <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1432,7 +1432,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T24" reversible="true">
+      <reaction id="_J23" reversible="true">
         <listOfReactants>
           <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1449,7 +1449,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T25" reversible="true">
+      <reaction id="_J24" reversible="true">
         <listOfReactants>
           <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1470,7 +1470,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T26" reversible="true">
+      <reaction id="_J25" reversible="true">
         <listOfReactants>
           <speciesReference species="QFeces" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1483,7 +1483,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="T27" reversible="true">
+      <reaction id="_J26" reversible="true">
         <listOfReactants>
           <speciesReference species="QUrine" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1496,7 +1496,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="R1" reversible="true">
+      <reaction id="_J27" reversible="true">
         <listOfProducts>
           <speciesReference species="CUrine" stoichiometry="1" constant="true"/>
         </listOfProducts>
@@ -1517,7 +1517,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="P1" reversible="true">
+      <reaction id="_J28" reversible="true">
         <listOfProducts>
           <speciesReference species="Parameters" stoichiometry="1" constant="true"/>
         </listOfProducts>
