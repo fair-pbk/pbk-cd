@@ -67,6 +67,7 @@
       </unitDefinition>
     </listOfUnitDefinitions>
     <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_Liver" id="Liver" name="liver" spatialDimensions="3" size="1" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -100,19 +101,6 @@
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00450"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </compartment>
-      <compartment metaid="meta_Creatinine" id="Creatinine" spatialDimensions="3" size="0.032" units="L" constant="true">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Creatinine">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="-"/>
                 </rdf:Bag>
               </bqmodel:is>
             </rdf:Description>
@@ -186,131 +174,25 @@
       </compartment>
       <compartment id="Expo" name="total systemic exposure" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment id="Excretion" name="excreta" spatialDimensions="3" size="1" units="L" constant="true"/>
-      <compartment metaid="meta_Blood1" id="Blood1" name="plasma" spatialDimensions="3" size="1" units="L" constant="true">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Blood1">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00488"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </compartment>
-      <compartment metaid="meta_Blood2" id="Blood2" name="red blood cells" spatialDimensions="3" size="1" units="L" constant="true">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Blood2">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="-"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </compartment>
-      <compartment metaid="meta_Blood3" id="Blood3" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Blood3">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="-"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </compartment>
+      <compartment id="Plasma" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="RBC" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="Metallothionein" spatialDimensions="3" size="1" constant="true"/>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="QExpo" compartment="Expo" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species metaid="meta_QGut" id="QGut" name="Amount in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_QGut">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00496"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
-      <species metaid="meta_QLiver" id="QLiver" name="Amount in liver" compartment="Liver" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_QLiver">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00497"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
-      <species metaid="meta_QKidney" id="QKidney" name="Amount in kidney" compartment="Kidney" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_QKidney">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00498"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
-      <species metaid="meta_QLung" id="QLung" name="Amount in lungs" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_QLung">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
-      <species metaid="meta_QUrine" id="QUrine" name="Amount in urine" compartment="Urine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_QUrine">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00272"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
-      <species metaid="meta_QFeces" id="QFeces" name="Amount in feces" compartment="Feces" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_QFeces">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00273"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
-      <species id="QIntestine" name="Amount in intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QBlood1" name="Amount in plasma" compartment="Blood1" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QBlood2" name="Amount in red blood cells" compartment="Blood2" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QBlood3" name="Amount in metallothionein" compartment="Blood3" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="QOthers" name="amount in other tissues" compartment="Others" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AExpo" compartment="Expo" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AGut" compartment="Gut" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALiver" compartment="Liver" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AKidney" compartment="Kidney" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALung" compartment="Lung" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AUrine" compartment="Urine" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AFeces" compartment="Feces" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AIntestine" compartment="Intestine" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="APlasma" compartment="Plasma" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ARBC" compartment="RBC" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ABlood3" compartment="Metallothionein" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AOthers" compartment="Others" initialAmount="0" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AMetallothionein" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ABlood1" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter metaid="meta_BW" id="BW" name="body weight" value="3.938425" units="kg" constant="false">
@@ -391,11 +273,8 @@
       <parameter id="C20" name="Fraction of Cd in plasma and red blood cells that contribute to cadmium in whole blood" value="0.1" units="UNITLESS" constant="true"/>
       <parameter id="CX" name="Rate of transfer of Cd in B1 to blood B2" value="0.04" units="PER_DAY" constant="true"/>
       <parameter id="VCreat" value="0.032" units="g" constant="false"/>
-      <parameter id="CUrine" value="0" units="MicroGM" constant="false"/>
-      <parameter id="QAir" value="0" constant="true"/>
-      <parameter id="QExcretion" name="total excretion amount (urine+feces)" value="0" units="MicroGM" constant="true"/>
+      <parameter id="AExcretion" value="0" constant="true"/>
     </listOfParameters>
-    <listOfInitialAssignments/>
     <listOfRules>
       <assignmentRule variable="BW">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -595,14 +474,14 @@
               <apply>
                 <times/>
                 <ci> C7 </ci>
-                <ci> QExpo </ci>
+                <ci> AExpo </ci>
               </apply>
               <apply>
                 <lt/>
                 <apply>
                   <times/>
                   <ci> C7 </ci>
-                  <ci> QExpo </ci>
+                  <ci> AExpo </ci>
                 </apply>
                 <ci> C8 </ci>
               </apply>
@@ -806,13 +685,13 @@
     <listOfReactions>
       <reaction id="_J0" reversible="true">
         <listOfReactants>
-          <speciesReference species="QGut" stoichiometry="1" constant="true"/>
+          <speciesReference species="AGut" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QIntestine" stoichiometry="1" constant="true"/>
+          <speciesReference species="AIntestine" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
-          <modifierSpeciesReference species="QLung"/>
+          <modifierSpeciesReference species="ALung"/>
         </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -820,10 +699,10 @@
               <times/>
               <apply>
                 <plus/>
-                <ci> QGut </ci>
+                <ci> AGut </ci>
                 <apply>
                   <times/>
-                  <ci> QLung </ci>
+                  <ci> ALung </ci>
                   <ci> C4 </ci>
                 </apply>
               </apply>
@@ -834,16 +713,16 @@
       </reaction>
       <reaction id="_J1" reversible="true">
         <listOfReactants>
-          <speciesReference species="QLung" stoichiometry="1" constant="true"/>
+          <speciesReference species="ALung" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+          <speciesReference species="AExpo" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QLung </ci>
+              <ci> ALung </ci>
               <ci> C3 </ci>
             </apply>
           </math>
@@ -851,16 +730,16 @@
       </reaction>
       <reaction id="_J2" reversible="true">
         <listOfReactants>
-          <speciesReference species="QIntestine" stoichiometry="1" constant="true"/>
+          <speciesReference species="AIntestine" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+          <speciesReference species="AExpo" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QIntestine </ci>
+              <ci> AIntestine </ci>
               <ci> C6 </ci>
             </apply>
           </math>
@@ -868,10 +747,10 @@
       </reaction>
       <reaction id="_J3" reversible="true">
         <listOfReactants>
-          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+          <speciesReference species="AExpo" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+          <speciesReference species="ABlood3" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -881,16 +760,16 @@
       </reaction>
       <reaction id="_J4" reversible="true">
         <listOfReactants>
-          <speciesReference species="QExpo" stoichiometry="1" constant="true"/>
+          <speciesReference species="AExpo" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="ABlood1" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <minus/>
-              <ci> QExpo </ci>
+              <ci> AExpo </ci>
               <ci> I2 </ci>
             </apply>
           </math>
@@ -898,16 +777,16 @@
       </reaction>
       <reaction id="_J5" reversible="true">
         <listOfReactants>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QOthers" stoichiometry="1" constant="true"/>
+          <speciesReference species="AOthers" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QBlood1 </ci>
+              <ci> APlasma </ci>
               <ci> C9 </ci>
             </apply>
           </math>
@@ -915,16 +794,16 @@
       </reaction>
       <reaction id="_J6" reversible="true">
         <listOfReactants>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood2" stoichiometry="1" constant="true"/>
+          <speciesReference species="ARBC" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QBlood1 </ci>
+              <ci> APlasma </ci>
               <ci> CX </ci>
             </apply>
           </math>
@@ -932,16 +811,16 @@
       </reaction>
       <reaction id="_J7" reversible="true">
         <listOfReactants>
-          <speciesReference species="QOthers" stoichiometry="1" constant="true"/>
+          <speciesReference species="AOthers" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QOthers </ci>
+              <ci> AOthers </ci>
               <ci> C10 </ci>
             </apply>
           </math>
@@ -949,16 +828,16 @@
       </reaction>
       <reaction id="_J8" reversible="true">
         <listOfReactants>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QFeces" stoichiometry="1" constant="true"/>
+          <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QBlood1 </ci>
+              <ci> APlasma </ci>
               <ci> C11 </ci>
             </apply>
           </math>
@@ -966,16 +845,16 @@
       </reaction>
       <reaction id="_J9" reversible="true">
         <listOfReactants>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QBlood1 </ci>
+              <ci> APlasma </ci>
               <ci> C12 </ci>
             </apply>
           </math>
@@ -983,16 +862,16 @@
       </reaction>
       <reaction id="_J10" reversible="true">
         <listOfReactants>
-          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QLiver </ci>
+              <ci> ALiver </ci>
               <ci> C13 </ci>
             </apply>
           </math>
@@ -1000,16 +879,16 @@
       </reaction>
       <reaction id="_J11" reversible="true">
         <listOfReactants>
-          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QLiver </ci>
+              <ci> ALiver </ci>
               <ci> C14 </ci>
             </apply>
           </math>
@@ -1017,16 +896,16 @@
       </reaction>
       <reaction id="_J12" reversible="true">
         <listOfReactants>
-          <speciesReference species="QLiver" stoichiometry="1" constant="true"/>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QFeces" stoichiometry="1" constant="true"/>
+          <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QLiver </ci>
+              <ci> ALiver </ci>
               <ci> C15 </ci>
             </apply>
           </math>
@@ -1034,16 +913,16 @@
       </reaction>
       <reaction id="_J13" reversible="true">
         <listOfReactants>
-          <speciesReference species="QBlood2" stoichiometry="1" constant="true"/>
+          <speciesReference species="ARBC" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QBlood2 </ci>
+              <ci> ARBC </ci>
               <ci> C16 </ci>
             </apply>
           </math>
@@ -1051,16 +930,16 @@
       </reaction>
       <reaction id="_J14" reversible="true">
         <listOfReactants>
-          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
+          <speciesReference species="AKidney" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QBlood3 </ci>
+              <ci> AMetallothionein </ci>
               <ci> C17 </ci>
             </apply>
           </math>
@@ -1068,16 +947,16 @@
       </reaction>
       <reaction id="_J15" reversible="true">
         <listOfReactants>
-          <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
+          <speciesReference species="AKidney" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QBlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="ABlood1" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QKidney </ci>
+              <ci> AKidney </ci>
               <ci> C18 </ci>
             </apply>
           </math>
@@ -1085,16 +964,16 @@
       </reaction>
       <reaction id="_J16" reversible="true">
         <listOfReactants>
-          <speciesReference species="QKidney" stoichiometry="1" constant="true"/>
+          <speciesReference species="AKidney" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QUrine" stoichiometry="1" constant="true"/>
+          <speciesReference species="AUrine" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QKidney </ci>
+              <ci> AKidney </ci>
               <ci> C19 </ci>
             </apply>
           </math>
@@ -1102,16 +981,16 @@
       </reaction>
       <reaction id="_J17" reversible="true">
         <listOfReactants>
-          <speciesReference species="QBlood3" stoichiometry="1" constant="true"/>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="QUrine" stoichiometry="1" constant="true"/>
+          <speciesReference species="AUrine" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> QBlood3 </ci>
+              <ci> AMetallothionein </ci>
               <apply>
                 <minus/>
                 <cn type="integer"> 1 </cn>
