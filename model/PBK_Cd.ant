@@ -56,7 +56,6 @@ model PBK_Cd()
     compartment Liver = 1                   # Compartment of liver (only the quantity)
     compartment Kidney = 1                  # Compartment of kidneys (only the quantity)
     compartment Others = 1                  # Compartment of other tissues (only the quantity)
-    compartment Creatinine = VCreat         # Compartment of creatinine in urine (evolution of lifetime)
     compartment Feces = 1                   # Compartment of feces (only the quantity)
     compartment Urine = 2                   # Compartment of urine (2L of urine per day)
     compartment Intestine = 1               # Compartment of intestine (only the quantity)
@@ -64,60 +63,57 @@ model PBK_Cd()
     compartment Lung = 1                    # Compartment of lungs (only the quantity)
     compartment Expo = 1                    # Compartment of daily intake (only the quantity)
     compartment Excretion = 1               # Compartment of the total excretion (only the quantity)
-    compartment Blood1 = 1                  # Compartment of Blood1
-    compartment Blood2 = 1                  # Compartment of Blood2
-    compartment Blood3 = 1                  # Compartment of Blood3
+    compartment Plasma = 1                  # Compartment of Plasma (only the quantity)
+    compartment RBC = 1                     # Compartment of Red Blood Cells (only the quantity)
+    compartment Metallothionein = 1         # Compartment of Metallothionein (only the quantity)
 
     # Species
-    var QGut in Gut                         # Quantity of cadmium in gut (µg)
-    var QLiver in Liver                     # Quantity of cadmium in liver (µg)
-    var QKidney in Kidney                   # Quantity of cadmium in kidneys (µg)
-    var QExpo in Expo                       # Total of cadmium intaken in the day (µg)
-    var QLung in Lung                       # Quantity of cadmium in lungs (µg)
-    var QUrine in Urine                     # Concentration of cadmium in urine considering creatinine excretion
-    var QFeces in Feces                     # Quantity of cadmium in feces (µg)
-    var QIntestine in Intestine             # Quantity of cadmium in intestine (µg)
-    var QBlood1 in Blood1
-    var QBlood2 in Blood2
-    var QBlood3 in Blood3
-    var QOthers in Others
-    var CUrine in Creatinine
+    substanceOnly species AGut in Gut                         # Quantity of cadmium in gut (µg)
+    substanceOnly species ALiver in Liver                     # Quantity of cadmium in liver (µg)
+    substanceOnly species AKidney in Kidney                   # Quantity of cadmium in kidneys (µg)
+    substanceOnly species AExpo in Expo                       # Total of cadmium intaken in the day (µg)
+    substanceOnly species ALung in Lung                       # Quantity of cadmium in lungs (µg)
+    substanceOnly species AUrine in Urine                     # Concentration of cadmium in urine considering creatinine excretion
+    substanceOnly species AFeces in Feces                     # Quantity of cadmium in feces (µg)
+    substanceOnly species AIntestine in Intestine             # Quantity of cadmium in intestine (µg)
+    substanceOnly species APlasma in Plasma                   # Quantity of cadmium in plasma (µg)
+    substanceOnly species ARBC in RBC                         # Quantity of cadmium in red blood cells (µg)
+    substanceOnly species ABlood3 in Metallothionein          # Quantity of cadmium in metallothionein (µg)
+    substanceOnly species AOthers in Others                   # Quantity of cadmium in the rest of the body (µg)
 
     # Initial amounts
-    QGut        = 0
-    QAir        = 0
-    QLiver      = 0
-    QKidney     = 0
-    QExpo       = 0
-    QLung       = 0
-    QUrine      = 0
-    QFeces      = 0
-    QExcretion  = 0
-    QIntestine  = 0
-    QBlood1     = 0
-    QBlood2     = 0
-    QBlood3     = 0
-    QOthers     = 0
-    CUrine      = 0
+    AGut             = 0
+    ALiver           = 0
+    AKidney          = 0
+    AExpo            = 0
+    ALung            = 0
+    AUrine           = 0
+    AFeces           = 0
+    AExcretion       = 0
+    AIntestine       = 0
+    APlasma          = 0
+    ARBC             = 0
+    AMetallothionein = 0
+    AOthers          = 0
 
     # Reactions
-    QGut          -> QIntestine;  (QGut + QLung*C4)*C5
-    QLung         -> QExpo;       QLung*C3
-    QIntestine    -> QExpo;       QIntestine*C6
-    QExpo         -> QBlood3;     I2
-    QExpo         -> QBlood1;     QExpo - I2
-    QBlood1       -> QOthers;     QBlood1*C9
-    QBlood1       -> QBlood2;     QBlood1*CX
-    QOthers       -> QBlood1;     QOthers*C10
-    QBlood1       -> QFeces;      QBlood1*C11
-    QBlood1       -> QLiver;      QBlood1*C12
-    QLiver        -> QBlood1;     QLiver*C13
-    QLiver        -> QBlood3;     QLiver*C14
-    QLiver        -> QFeces;      QLiver*C15
-    QBlood2       -> QBlood3;     QBlood2*C16
-    QBlood3       -> QKidney;     QBlood3*C17
-    QKidney       -> QBlood1;     QKidney*C18
-    QKidney       -> QUrine;      QKidney*C19
-    QBlood3       -> QUrine;      QBlood3*(1-C17)
+    AGut          -> AIntestine;  (AGut + ALung*C4)*C5
+    ALung         -> AExpo;       ALung*C3
+    AIntestine    -> AExpo;       AIntestine*C6
+    AExpo         -> ABlood3;     I2
+    AExpo         -> ABlood1;     AExpo - I2
+    APlasma       -> AOthers;     APlasma*C9
+    APlasma       -> ARBC;        APlasma*CX
+    AOthers       -> APlasma;     AOthers*C10
+    APlasma       -> AFeces;      APlasma*C11
+    APlasma       -> ALiver;      APlasma*C12
+    ALiver        -> APlasma;     ALiver*C13
+    ALiver        -> AMetallothionein;     ALiver*C14
+    ALiver        -> AFeces;      ALiver*C15
+    ARBC          -> AMetallothionein;     ARBC*C16
+    AMetallothionein       -> AKidney;     AMetallothionein*C17
+    AKidney       -> ABlood1;     AKidney*C18
+    AKidney       -> AUrine;      AKidney*C19
+    AMetallothionein       -> AUrine;      AMetallothionein*(1-C17)
 
 end
