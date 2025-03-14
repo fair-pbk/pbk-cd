@@ -33,7 +33,7 @@ model PBK_Cd()
     C6 = 0.05
     C7 = 0.25
     C8 = 1000
-    I2 := piecewise(C7*QExpo, C7*QExpo<C8, C8)
+    I2 := piecewise(C7*AExpo, C7*AExpo<C8, C8)
     C9 = 0.44
     C10 = 0.00014
     C11 = 0.27
