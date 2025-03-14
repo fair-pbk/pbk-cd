@@ -14,18 +14,6 @@ model PBK_Cd()
     # Parameters
 
     ## Exposure parameters (in µg/kg/day)
-    CIngestion = 0.30
-
-    CAir = 0.01             # Concentration of Cd in ambient air (in µg/m³)
-
-    QtCig = 1.0                     # Quantity of Cd in 1 cigarette (in µg)
-    Age_smoke_begin = 18            # Age of beginning to smoke
-    Age_smoke_end   = 45            # Age of ending to smoke
-    nbCig = 1                       # I don't know what this is. Number of cigarettes?
-    ExpoCig := piecewise(1.0, Age >= Age_smoke_begin && Age <= Age_smoke_end, 0) 
-
-    # Physiological parameters
-    Sex = 1             # Sex (0: Female; 1: Male)
 
     ### Body weight in function of the age and the sex (in kg)
     BW := piecewise((3.938425 + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)*DeltaBW, Sex > 0, (3.932403 + 0.6866462*Age*12 - 0.01949911*(Age*12)^2 + 0.00031311*(Age*12)^3 - 2.466654e-6*(Age*12)^4 + 1.113217e-8*(Age*12)^5 - 3.131402e-11*(Age*12)^6 + 5.693737e-14*(Age*12)^7 - 6.706947e-17*(Age*12)^8 + 4.947858e-20*(Age*12)^9 - 2.079251e-23*(Age*12)^10 + 3.800367e-27*(Age*12)^11)*DeltaBW)
@@ -33,17 +21,6 @@ model PBK_Cd()
 
     Age_init = 0                    # Age at the beginning of the simulation
     Age := (Age_init + time/365)    # Evolution of the age (in years)
-
-    FqBreath = 12 + (38.9 - 12) * exp(-0.176 * Age)         # Breath frequency by day
-    VInhalation = FqBreath * (Vtidal - Vds) * 60 * 24       # Volume of inhalation by day
-
-    Vtidal_male := piecewise(0.0337*Age + 0.0407, 0.0337*Age + 0.0407 < 0.75, 0.75)
-    Vtidal_female = 0.46 + (0.0392 - 0.46) * exp(-0.127 * Age)
-    Vtidal = Sex*Vtidal_male + (1-Sex)*Vtidal_female
-
-    Vds_male := piecewise(0.0076*Age + 0.0101, 0.0076*Age + 0.0101 < 0.15, 0.15) 
-    Vds_female = 0.12 + (0.0107-0.12) * exp(-0.0986 * Age)
-    Vds = Sex*Vds_male + (1-Sex)*Vds_female
 
     # Kinetic parameters
     C1_cig = 0.1
@@ -99,7 +76,6 @@ model PBK_Cd()
     var QLung in Lung                       # Quantity of cadmium in lungs (µg)
     var QUrine in Urine                     # Concentration of cadmium in urine considering creatinine excretion
     var QFeces in Feces                     # Quantity of cadmium in feces (µg)
-    var QExcretion in Excretion             # Accumulated excretion of cadmium (µg)
     var QIntestine in Intestine             # Quantity of cadmium in intestine (µg)
     var QBlood1 in Blood1
     var QBlood2 in Blood2
@@ -125,13 +101,6 @@ model PBK_Cd()
     CUrine      = 0
 
     # Reactions
-                  -> QGut;        CIngestion*BW
-                  -> QAir_Cig;    ExpoCig*nbCig 
-                  -> QAir_Dust;   CAir*VInhalation
-    QAir_Cig      -> QLung;       QAir_Cig*C2_cig
-    QAir_Dust     -> QLung;       QAir_Dust*C2_dust
-    QAir_Cig      -> QIntestine;  QAir_Cig*C1_cig*C5
-    QAir_Dust     -> QIntestine;  QAir_Dust*C1_dust*C5
     QGut          -> QIntestine;  (QGut + QLung*C4)*C5
     QLung         -> QExpo;       QLung*C3
     QIntestine    -> QExpo;       QIntestine*C6
@@ -150,11 +119,5 @@ model PBK_Cd()
     QKidney       -> QBlood1;     QKidney*C18
     QKidney       -> QUrine;      QKidney*C19
     QBlood3       -> QUrine;      QBlood3*(1-C17)
-    QFeces        -> QExcretion;  QFeces 
-    QUrine        -> QExcretion;  QUrine
-
-                  -> CUrine;      QUrine/VCreat - CUrine
-
-                  -> Parameters;  Age_smoke_begin + Age_smoke_end + CAir + nbCig
 
 end
