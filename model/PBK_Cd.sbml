@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
-  <model metaid="PBK_Cd" id="PBK_Cd" substanceUnits="MicroGM" timeUnits="DAY" volumeUnits="L" areaUnits="area" extentUnits="MicroGM">
+  <model metaid="PBK_Cd" id="PBK_Cd" substanceUnits="MicroGM" timeUnits="DAY" volumeUnits="L" extentUnits="MicroGM">
     <listOfUnitDefinitions>
-      <unitDefinition id="day">
-        <listOfUnits>
-          <unit kind="second" exponent="1" scale="4" multiplier="8.64"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="substance">
-        <listOfUnits>
-          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="microg_kg">
-        <listOfUnits>
-          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
-          <unit kind="gram" exponent="-1" scale="3" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="volume">
-        <listOfUnits>
-          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="kg">
-        <listOfUnits>
-          <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="g">
-        <listOfUnits>
-          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="area"/>
-      <unitDefinition id="m"/>
       <unitDefinition id="MicroGM">
         <listOfUnits>
           <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
@@ -48,6 +15,16 @@
       <unitDefinition id="L">
         <listOfUnits>
           <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="GM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="KiloGM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
       <unitDefinition id="YR">
@@ -67,7 +44,6 @@
       </unitDefinition>
     </listOfUnitDefinitions>
     <listOfCompartments>
-      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_Liver" id="Liver" name="liver" spatialDimensions="3" size="1" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -94,10 +70,10 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment metaid="meta_Others" id="Others" name="other tissues" spatialDimensions="3" size="1" units="L" constant="true">
+      <compartment metaid="meta_Rest" id="Rest" name="other tissues" spatialDimensions="3" size="1" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Others">
+            <rdf:Description rdf:about="#meta_Rest">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00450"/>
@@ -273,13 +249,11 @@
       <species id="AIntestine" name="Amount in intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
       <species id="APlasma" name="Amount in plasma" compartment="Plasma" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
       <species id="ARBC" name="Amount in red blood cells" compartment="RBC" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
-      <species id="ABlood3" name="Amount in metallothionein" compartment="Metallothionein" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
-      <species id="AOthers" name="amount in other tissues" compartment="Others" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
-      <species id="AMetallothionein" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="ABlood1" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AMetallothionein" name="Amount in metallothionein" compartment="Metallothionein" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ARest" name="amount in other tissues" compartment="Rest" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
-      <parameter metaid="meta_BW" id="BW" name="body weight" value="3.938425" units="kg" constant="false">
+      <parameter metaid="meta_BW" id="BW" name="body weight" value="3.938425" units="KiloGM" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_BW">
@@ -331,10 +305,6 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="C1_cig" value="0.1" constant="true"/>
-      <parameter id="C1_dust" value="0.7" constant="true"/>
-      <parameter id="C2_cig" value="0.4" constant="true"/>
-      <parameter id="C2_dust" value="0.13" constant="true"/>
       <parameter id="C3" name="Rate of transfer of inhalation intake to uptake pool" value="0.05" units="PER_DAY" constant="true"/>
       <parameter id="C4" name="Rate of transfer of air Cd to the GI-tract" value="0.005" units="PER_DAY" constant="true"/>
       <parameter id="C5" name="Fraction of GI-tract Cd retained in epithelium" value="0.048" units="UNITLESS" constant="true"/>
@@ -353,10 +323,10 @@
       <parameter id="C17" name="Rate of transfer of Cd in metallothionein to kidney" value="0.95" units="PER_DAY" constant="false"/>
       <parameter id="C18" name="Rate of transfer of Cd in kidney to plasma" value="1e-05" units="PER_DAY" constant="true"/>
       <parameter id="C19" name="Age-specific rate constant for transfer of Cd in kidney to urine" value="0.00014" units="PER_DAY" constant="false"/>
-      <parameter id="C21" name="Increased transfer of Cd from kidney to urine after age 30" value="1.1e-06" constant="true"/>
+      <parameter id="C21" name="Increased transfer of Cd from kidney to urine after age 30" value="1.1e-06" units="UNITLESS" constant="true"/>
       <parameter id="C20" name="Fraction of Cd in plasma and red blood cells that contribute to cadmium in whole blood" value="0.1" units="UNITLESS" constant="true"/>
       <parameter id="CX" name="Rate of transfer of Cd in B1 to blood B2" value="0.04" units="PER_DAY" constant="true"/>
-      <parameter id="VCreat" value="0.032" units="g" constant="false"/>
+      <parameter id="VCreat" value="0.032" units="GM" constant="false"/>
       <parameter id="AExcretion" name="total excretion amount (urine+feces)" value="0" units="MicroGM" constant="true"/>
     </listOfParameters>
     <listOfRules>
@@ -834,7 +804,7 @@
           <speciesReference species="AExpo" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="ABlood3" stoichiometry="1" constant="true"/>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -847,7 +817,7 @@
           <speciesReference species="AExpo" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="ABlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -864,7 +834,7 @@
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="AOthers" stoichiometry="1" constant="true"/>
+          <speciesReference species="ARest" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -895,7 +865,7 @@
       </reaction>
       <reaction id="_J7" reversible="true">
         <listOfReactants>
-          <speciesReference species="AOthers" stoichiometry="1" constant="true"/>
+          <speciesReference species="ARest" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
@@ -904,7 +874,7 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> AOthers </ci>
+              <ci> ARest </ci>
               <ci> C10 </ci>
             </apply>
           </math>
@@ -1034,7 +1004,7 @@
           <speciesReference species="AKidney" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="ABlood1" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">

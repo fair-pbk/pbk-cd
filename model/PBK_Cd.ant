@@ -2,15 +2,6 @@
 
 model PBK_Cd()
 
-    # Units of the model :
-    unit day = 3600*24 seconds;
-    unit substance = 1e-6 gram;
-    unit microg_kg = 1e-6 gram/1000 grams;
-    unit volume = 1 liter;
-    unit kg = 1000 grams;
-    unit g = 1 gram;
-    unit area = m^2;
-
     # Parameters
 
     ## Exposure parameters (in µg/kg/day)
@@ -23,10 +14,6 @@ model PBK_Cd()
     Age := (Age_init + time/365)    # Evolution of the age (in years)
 
     # Kinetic parameters
-    C1_cig = 0.1
-    C1_dust = 0.7
-    C2_cig = 0.4
-    C2_dust = 0.13
     C3 = 0.05
     C4 = 0.005
     C5 = 0.048
@@ -55,7 +42,7 @@ model PBK_Cd()
     # Compartments
     compartment Liver = 1                   # Compartment of liver (only the quantity)
     compartment Kidney = 1                  # Compartment of kidneys (only the quantity)
-    compartment Others = 1                  # Compartment of other tissues (only the quantity)
+    compartment Rest = 1                    # Compartment of other tissues (only the quantity)
     compartment Feces = 1                   # Compartment of feces (only the quantity)
     compartment Urine = 2                   # Compartment of urine (2L of urine per day)
     compartment Intestine = 1               # Compartment of intestine (only the quantity)
@@ -78,8 +65,8 @@ model PBK_Cd()
     substanceOnly species AIntestine in Intestine             # Quantity of cadmium in intestine (µg)
     substanceOnly species APlasma in Plasma                   # Quantity of cadmium in plasma (µg)
     substanceOnly species ARBC in RBC                         # Quantity of cadmium in red blood cells (µg)
-    substanceOnly species ABlood3 in Metallothionein          # Quantity of cadmium in metallothionein (µg)
-    substanceOnly species AOthers in Others                   # Quantity of cadmium in the rest of the body (µg)
+    substanceOnly species AMetallothionein in Metallothionein # Quantity of cadmium in metallothionein (µg)
+    substanceOnly species ARest in Rest                       # Quantity of cadmium in the rest of the body (µg)
 
     # Initial amounts
     AGut             = 0
@@ -94,26 +81,26 @@ model PBK_Cd()
     APlasma          = 0
     ARBC             = 0
     AMetallothionein = 0
-    AOthers          = 0
+    ARest            = 0
 
     # Reactions
-    AGut          -> AIntestine;  (AGut + ALung*C4)*C5
-    ALung         -> AExpo;       ALung*C3
-    AIntestine    -> AExpo;       AIntestine*C6
-    AExpo         -> ABlood3;     I2
-    AExpo         -> ABlood1;     AExpo - I2
-    APlasma       -> AOthers;     APlasma*C9
-    APlasma       -> ARBC;        APlasma*CX
-    AOthers       -> APlasma;     AOthers*C10
-    APlasma       -> AFeces;      APlasma*C11
-    APlasma       -> ALiver;      APlasma*C12
-    ALiver        -> APlasma;     ALiver*C13
-    ALiver        -> AMetallothionein;     ALiver*C14
-    ALiver        -> AFeces;      ALiver*C15
-    ARBC          -> AMetallothionein;     ARBC*C16
-    AMetallothionein       -> AKidney;     AMetallothionein*C17
-    AKidney       -> ABlood1;     AKidney*C18
-    AKidney       -> AUrine;      AKidney*C19
-    AMetallothionein       -> AUrine;      AMetallothionein*(1-C17)
+    AGut              -> AIntestine;        (AGut + ALung*C4)*C5
+    ALung             -> AExpo;             ALung*C3
+    AIntestine        -> AExpo;             AIntestine*C6
+    AExpo             -> AMetallothionein;  I2
+    AExpo             -> APlasma;           AExpo - I2
+    APlasma           -> ARest;             APlasma*C9
+    APlasma           -> ARBC;              APlasma*CX
+    ARest             -> APlasma;           ARest*C10
+    APlasma           -> AFeces;            APlasma*C11
+    APlasma           -> ALiver;            APlasma*C12
+    ALiver            -> APlasma;           ALiver*C13
+    ALiver            -> AMetallothionein;  ALiver*C14
+    ALiver            -> AFeces;            ALiver*C15
+    ARBC              -> AMetallothionein;  ARBC*C16
+    AMetallothionein  -> AKidney;           AMetallothionein*C17
+    AKidney           -> APlasma;           AKidney*C18
+    AKidney           -> AUrine;            AKidney*C19
+    AMetallothionein  -> AUrine;            AMetallothionein*(1-C17)
 
 end
