@@ -16,6 +16,7 @@ import uuid
 import tellurium as te
 import libsbml as ls
 import logging
+import pandas as pd
 from pathlib import Path
 
 model_path = './model/'
@@ -23,6 +24,7 @@ model_path = './model/'
 from sbmlpbkutils import PbkModelValidator
 from sbmlpbkutils import AnnotationsTemplateGenerator
 from sbmlpbkutils import PbkModelAnnotator
+from sbmlpbkutils import ParametrisationsTemplateGenerator
 
 def create_file_logger(logfile: str) -> logging.Logger:
     logger = logging.getLogger(uuid.uuid4().hex)
@@ -69,3 +71,10 @@ for file in os.listdir(model_path):
         validator = PbkModelValidator()
         logger = create_file_logger(validation_log_file)
         validator.validate(annotated_sbml_file, logger)
+
+        parametrisations_file = f"./parametrisations/{ Path(sbml_file).stem}_default_params.csv"
+        print(f"Creating default parametrisations file [{parametrisations_file}].")
+        params_generator = ParametrisationsTemplateGenerator()
+        default_params = params_generator.generate(document.getModel())[1]
+        default_params.to_csv(parametrisations_file, index=False)
+
