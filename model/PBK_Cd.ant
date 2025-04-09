@@ -15,14 +15,9 @@ function f_Kidney_Urine(Age, Increase_Cd_Urine)
     piecewise(0.00014, Age < 30, 0.00014 + Increase_Cd_Urine * (Age - 30))
 end
 
-function f_VCreat(Age)
-    piecewise((0.032+2.098e-02*Age+9.104e-03*(Age^2)-4.550e-04*(Age^3)+7.578e-06*(Age^4)-4.232e-08*(Age^5)),Age < 70,(0.032+2.098e-02*70+9.104e-03*(70^2)-4.550e-04*(70^3)+7.578e-06*(70^4)-4.232e-08*(70^5)))
-end
-
 model PBK_Cd()
 
     # Parameters
-    time_scale = 1                   # Scale of time in the model (in days)
 
     ## Physiological parameters
     DeltaBW = 1
@@ -32,8 +27,8 @@ model PBK_Cd()
     ## Kinetic parameters
     Inhalation_intake = 0.05         # Rate of transfer of inhalation intake to uptake pool
     Lung_Gut = 0.005                 # Rate of transfer of Cd in lungs to the GI-tract
-    Gut_Intestine = 0.048            # Fraction of GI-tract Cd retained in epithelium
-    Intestine_uptake = 0.05          # Rate of transfer of Cd in the GI-tract to uptake pool
+    Fabs = 0.048                     # Fraction of GI-tract Cd retained in epithelium
+    Ka = 0.05                        # Rate of transfer of Cd in the GI-tract to uptake pool
     Uptake_Metallothionein = 0.25    # Fraction of uptake pool transferred to metallothionein
     Max_Metallothionein = 1          # Maximum mass of Cd in metallothionein
     Uptake_Metallothionein_limited := f_Uptake_Metallothionein_limited(Uptake_Metallothionein, AUptake, Max_Metallothionein)
@@ -51,16 +46,12 @@ model PBK_Cd()
     Increase_Cd_Urine = 0.0000011    # Temporal factor increasing Cd elimination in urine
     Plasma_RBC = 0.04                # Transfer from plasma to red blood cells
 
-    # Concentration of creatinine over lifetime
-    VCreat := f_VCreat(Age)
-
     # Compartments
     compartment Liver = 1                   # Compartment of liver (only the quantity)
     compartment Kidney = 1                  # Compartment of kidneys (only the quantity)
     compartment Others = 1                  # Compartment of other tissues (only the quantity)
     compartment Feces = 1                   # Compartment of feces (only the quantity)
     compartment Urine = 1                   # Compartment of urine (2L of urine per day)
-    compartment Intestine = 1               # Compartment of intestine (only the quantity)
     compartment Gut = 1                     # Compartment of gut (input compartment)
     compartment Lung = 1                    # Compartment of lungs (only the quantity)
     compartment Uptake = 1                  # Compartment of daily intake (only the quantity)
@@ -76,7 +67,6 @@ model PBK_Cd()
     substanceOnly species ALung in Lung                       # Quantity of cadmium in lungs (µg)
     substanceOnly species AUrine in Urine                     # Concentration of cadmium in urine considering creatinine excretion
     substanceOnly species AFeces in Feces                     # Quantity of cadmium in feces (µg)
-    substanceOnly species AIntestine in Intestine             # Quantity of cadmium in intestine (µg)
     substanceOnly species APlasma in Plasma                   # Quantity of cadmium in plasma (µg)
     substanceOnly species ARBC in RBC                         # Quantity of cadmium in red blood cells (µg)
     substanceOnly species AMetallothionein in Metallothionein # Quantity of cadmium in metallothionein (µg)
@@ -90,33 +80,28 @@ model PBK_Cd()
     ALung            = 0
     AUrine           = 0
     AFeces           = 0
-    AIntestine       = 0
     APlasma          = 0
     ARBC             = 0
     AMetallothionein = 0
     AOthers          = 0
 
     # Reactions
-    ALung         -> AIntestine;        ALung * Lung_Gut
-    AGut          -> AIntestine;        AGut * Gut_Intestine/time_scale
-    ALung         -> AUptake;           ALung * Inhalation_intake
-    AIntestine    -> AUptake;           AIntestine * Intestine_uptake
-    AUptake       -> AMetallothionein;  Uptake_Metallothionein_limited / time_scale
-    AUptake       -> APlasma;           (AUptake - Uptake_Metallothionein_limited) / time_scale
+    ALung         -> AUptake;           ALung * (Lung_Gut * Ka + Inhalation_intake)
+    AGut          -> AUptake;           AGut * Fabs * Ka
+    AUptake       -> AMetallothionein;  Uptake_Metallothionein_limited / (time+1 - time)
+    AUptake       -> APlasma;           (AUptake - Uptake_Metallothionein_limited) / (time+1 - time)
     APlasma       -> AOthers;           APlasma * Plasma_Others
-    APlasma       -> ARBC;              APlasma* Plasma_RBC/time_scale
-    AOthers       -> APlasma;           AOthers * Others_Plasma/time_scale
-    APlasma       -> AFeces;            APlasma * Plasma_Feces/time_scale
+    APlasma       -> ARBC;              APlasma* Plasma_RBC
+    AOthers       -> APlasma;           AOthers * Others_Plasma
+    APlasma       -> AFeces;            APlasma * Plasma_Feces
     APlasma       -> ALiver;            APlasma * Plasma_Liver
-    ALiver        -> APlasma;           ALiver * Liver_Plasma/time_scale
+    ALiver        -> APlasma;           ALiver * Liver_Plasma
     ALiver        -> AMetallothionein;  ALiver * Liver_Metallothionein
     ALiver        -> AFeces;            ALiver * Liver_Feces
     ARBC          -> AMetallothionein;  ARBC * RBC_Metallothionein
-    AMetallothionein -> AKidney;        AMetallothionein * Metallothionein_Kidney/time_scale
+    AMetallothionein -> AKidney;        AMetallothionein * Metallothionein_Kidney
     AKidney       -> APlasma;           AKidney * Kidney_Plasma
     AKidney       -> AUrine;            AKidney * Kidney_Urine
-    AMetallothionein -> AUrine;         AMetallothionein * (1 - Metallothionein_Kidney/time_scale)
+    AMetallothionein -> AUrine;         AMetallothionein * (1 - Metallothionein_Kidney)
 
-    # Result
-    Cd_Urine := (AMetallothionein * (1 - Metallothionein_Kidney/time_scale) + AKidney * Kidney_Urine) / f_VCreat(Age)
 end
