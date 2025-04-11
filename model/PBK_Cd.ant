@@ -1,6 +1,6 @@
 ### PBK Model for Cadmium ###
-function f_Uptake_Metallothionein_limited(Uptake_Metallothionein, AUptake, Max_Metallothionein)
-    piecewise(Uptake_Metallothionein * AUptake, Uptake_Metallothionein * AUptake < Max_Metallothionein, Max_Metallothionein)
+function f_Uptake_Metallothionein_limited(Uptake_Metallothionein, AMetallothionein, Max_Metallothionein)
+    piecewise(Uptake_Metallothionein, AMetallothionein < Max_Metallothionein, 0)
 end
 
 function f_BW(Age)
@@ -31,7 +31,7 @@ model PBK_Cd()
     Ka = 0.05                        # Rate of transfer of Cd in the GI-tract to uptake pool
     Uptake_Metallothionein = 0.25    # Fraction of uptake pool transferred to metallothionein
     Max_Metallothionein = 1          # Maximum mass of Cd in metallothionein
-    Uptake_Metallothionein_limited := f_Uptake_Metallothionein_limited(Uptake_Metallothionein, AUptake, Max_Metallothionein)
+    Uptake_Metallothionein_limited := f_Uptake_Metallothionein_limited(Uptake_Metallothionein, AMetallothionein, Max_Metallothionein)
     Plasma_Others = 0.44             # Transfer from plasma to the rest of the body
     Others_Plasma = 0.00014          # Transfer from rest of the body to plasma
     Plasma_Feces = 0.27              # Transfer from plasma to feces
@@ -54,7 +54,6 @@ model PBK_Cd()
     compartment Urine = 1                   # Compartment of urine (2L of urine per day)
     compartment Gut = 1                     # Compartment of gut (input compartment)
     compartment Lung = 1                    # Compartment of lungs (only the quantity)
-    compartment Uptake = 1                  # Compartment of daily intake (only the quantity)
     compartment Plasma = 1                  # Compartment of Plasma (only the quantity)
     compartment RBC = 1                     # Compartment of Red Blood Cells (only the quantity)
     compartment Metallothionein = 1         # Compartment of Metallothionein (only the quantity)
@@ -63,7 +62,6 @@ model PBK_Cd()
     substanceOnly species AGut in Gut                         # Quantity of cadmium in gut (µg)
     substanceOnly species ALiver in Liver                     # Quantity of cadmium in liver (µg)
     substanceOnly species AKidney in Kidney                   # Quantity of cadmium in kidneys (µg)
-    substanceOnly species AUptake in Uptake                   # Total of cadmium intaken in the day (µg)
     substanceOnly species ALung in Lung                       # Quantity of cadmium in lungs (µg)
     substanceOnly species AUrine in Urine                     # Concentration of cadmium in urine considering creatinine excretion
     substanceOnly species AFeces in Feces                     # Quantity of cadmium in feces (µg)
@@ -76,7 +74,6 @@ model PBK_Cd()
     AGut             = 0
     ALiver           = 0
     AKidney          = 0
-    AUptake          = 0
     ALung            = 0
     AUrine           = 0
     AFeces           = 0
@@ -86,10 +83,11 @@ model PBK_Cd()
     AOthers          = 0
 
     # Reactions
-    ALung         -> AUptake;           ALung * (Lung_Gut * Ka + Inhalation_intake)
-    AGut          -> AUptake;           AGut * Fabs * Ka
-    AUptake       -> AMetallothionein;  Uptake_Metallothionein_limited / (time+1 - time)
-    AUptake       -> APlasma;           (AUptake - Uptake_Metallothionein_limited) / (time+1 - time)
+    ALung -> AMetallothionein; ALung * (Lung_Gut * Ka + Inhalation_intake) * Uptake_Metallothionein_limited
+    ALung -> APlasma; ALung * (Lung_Gut * Ka + Inhalation_intake) * (1 - Uptake_Metallothionein_limited)
+    AGut -> AMetallothionein; AGut * Fabs * Ka * Uptake_Metallothionein_limited
+    AGut -> APlasma; AGut * Fabs * Ka * (1 - Uptake_Metallothionein_limited)
+
     APlasma       -> AOthers;           APlasma * Plasma_Others
     APlasma       -> ARBC;              APlasma* Plasma_RBC
     AOthers       -> APlasma;           AOthers * Others_Plasma
