@@ -9,30 +9,22 @@
               <ci> Uptake_Metallothionein </ci>
             </bvar>
             <bvar>
-              <ci> AUptake </ci>
+              <ci> AMetallothionein </ci>
             </bvar>
             <bvar>
               <ci> Max_Metallothionein </ci>
             </bvar>
             <piecewise>
               <piece>
-                <apply>
-                  <times/>
-                  <ci> Uptake_Metallothionein </ci>
-                  <ci> AUptake </ci>
-                </apply>
+                <ci> Uptake_Metallothionein </ci>
                 <apply>
                   <lt/>
-                  <apply>
-                    <times/>
-                    <ci> Uptake_Metallothionein </ci>
-                    <ci> AUptake </ci>
-                  </apply>
+                  <ci> AMetallothionein </ci>
                   <ci> Max_Metallothionein </ci>
                 </apply>
               </piece>
               <otherwise>
-                <ci> Max_Metallothionein </ci>
+                <cn type="integer"> 0 </cn>
               </otherwise>
             </piecewise>
           </lambda>
@@ -426,7 +418,6 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment id="Uptake" name="Total Uptake" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_Plasma" id="Plasma" name="blood plasma" spatialDimensions="3" size="1" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -444,19 +435,7 @@
       <compartment id="Metallothionein" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true"/>
     </listOfCompartments>
     <listOfSpecies>
-      <species metaid="meta_AUptake" id="AUptake" name="Total Uptake" compartment="Uptake" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_AUptake">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00286"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
+      <species id="AMetallothionein" name="Amount in metallothionein" compartment="Metallothionein" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
       <species metaid="meta_AGut" id="AGut" name="amount of chemical in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -549,7 +528,6 @@
         </annotation>
       </species>
       <species id="ARBC" name="Amount in red blood cells" compartment="RBC" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
-      <species id="AMetallothionein" name="Amount in metallothionein" compartment="Metallothionein" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
       <species metaid="meta_AOthers" id="AOthers" name="Rest of the body" compartment="Others" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -634,7 +612,7 @@
       <parameter id="Ka" name="Transfer from intestine to total uptake" value="0.05" units="UNITLESS" constant="true"/>
       <parameter id="Uptake_Metallothionein" name="Transfer from total uptake to metallothionein" value="0.25" units="UNITLESS" constant="true"/>
       <parameter id="Max_Metallothionein" name="Maximal dose in metallothionein" value="1" units="MicroGM" constant="true"/>
-      <parameter id="Uptake_Metallothionein_limited" name="Limited transfer from total uptake to metallothionein" value="0" units="MicroGM" constant="false"/>
+      <parameter id="Uptake_Metallothionein_limited" name="Limited transfer from total uptake to metallothionein" value="0.25" units="UNITLESS" constant="false"/>
       <parameter id="Plasma_Others" name="Transfer from plasma to the rest of the body" value="0.44" units="PER_DAY" constant="true"/>
       <parameter id="Others_Plasma" name="Transfer from rest of the body to plasma" value="0.00014" units="PER_DAY" constant="true"/>
       <parameter metaid="meta_Plasma_Feces" id="Plasma_Feces" name="Transfer from plasma to feces" value="0.27" units="PER_DAY" constant="true">
@@ -748,7 +726,7 @@
           <apply>
             <ci> f_Uptake_Metallothionein_limited </ci>
             <ci> Uptake_Metallothionein </ci>
-            <ci> AUptake </ci>
+            <ci> AMetallothionein </ci>
             <ci> Max_Metallothionein </ci>
           </apply>
         </math>
@@ -777,7 +755,7 @@
           <speciesReference species="ALung" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="AUptake" stoichiometry="1" constant="true"/>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -793,16 +771,47 @@
                 </apply>
                 <ci> Inhalation_intake </ci>
               </apply>
+              <ci> Uptake_Metallothionein_limited </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
       <reaction id="_J1" reversible="true">
         <listOfReactants>
+          <speciesReference species="ALung" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ALung </ci>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <ci> Lung_Gut </ci>
+                  <ci> Ka </ci>
+                </apply>
+                <ci> Inhalation_intake </ci>
+              </apply>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> Uptake_Metallothionein_limited </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J2" reversible="true">
+        <listOfReactants>
           <speciesReference species="AGut" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="AUptake" stoichiometry="1" constant="true"/>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -811,38 +820,14 @@
               <ci> AGut </ci>
               <ci> Fabs </ci>
               <ci> Ka </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="_J2" reversible="true">
-        <listOfReactants>
-          <speciesReference species="AUptake" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <divide/>
               <ci> Uptake_Metallothionein_limited </ci>
-              <apply>
-                <minus/>
-                <apply>
-                  <plus/>
-                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
-                  <cn type="integer"> 1 </cn>
-                </apply>
-                <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
-              </apply>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
       <reaction id="_J3" reversible="true">
         <listOfReactants>
-          <speciesReference species="AUptake" stoichiometry="1" constant="true"/>
+          <speciesReference species="AGut" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
@@ -850,20 +835,14 @@
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
-              <divide/>
+              <times/>
+              <ci> AGut </ci>
+              <ci> Fabs </ci>
+              <ci> Ka </ci>
               <apply>
                 <minus/>
-                <ci> AUptake </ci>
+                <cn type="integer"> 1 </cn>
                 <ci> Uptake_Metallothionein_limited </ci>
-              </apply>
-              <apply>
-                <minus/>
-                <apply>
-                  <plus/>
-                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
-                  <cn type="integer"> 1 </cn>
-                </apply>
-                <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
               </apply>
             </apply>
           </math>
