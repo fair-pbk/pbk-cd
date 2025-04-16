@@ -1,6 +1,15 @@
 ### PBK Model for Cadmium ###
-function f_Uptake_Metallothionein_limited(Uptake_Metallothionein, AMetallothionein, Max_Metallothionein)
-    piecewise(Uptake_Metallothionein, AMetallothionein < Max_Metallothionein, 0)
+#function f_Metallothionein_limited(Uptake_Metallothionein, AMetallothionein, Max_Metallothionein)
+#    piecewise(1- Uptake_Metallothionein, AMetallothionein < Max_Metallothionein, Max_Metallothionein)
+#end
+# Problem: 
+
+function f_Gut_Plasma_limited(Nomax_Plasma_Gut, AMetallothionein, Max_Metallothionein, Max_Plasma_Gut)
+    piecewise(Nomax_Plasma_Gut , AMetallothionein < Max_Metallothionein, Max_Plasma_Gut)
+end
+
+function f_Lung_Plasma_limited(Nomax_Plasma_Lung, AMetallothionein, Max_Metallothionein, Max_Plasma_Lung)
+    piecewise(Nomax_Plasma_Lung, AMetallothionein < Max_Metallothionein, Max_Plasma_Lung)
 end
 
 function f_BW(Age)
@@ -31,7 +40,16 @@ model PBK_Cd()
     Ka = 0.05                        # Rate of transfer of Cd in the GI-tract to uptake pool
     Uptake_Metallothionein = 0.25    # Fraction of uptake pool transferred to metallothionein
     Max_Metallothionein = 1          # Maximum mass of Cd in metallothionein
-    Uptake_Metallothionein_limited := f_Uptake_Metallothionein_limited(Uptake_Metallothionein, AMetallothionein, Max_Metallothionein)
+    
+    Nomax_Plasma_Gut := (1- Uptake_Metallothionein) * AGut * Fabs * Ka
+    Nomax_Plasma_Lung := (1 - Uptake_Metallothionein) * ALung * (Lung_Gut * Ka + Inhalation_intake)
+    
+    Max_Plasma_Gut := AGut * Fabs * Ka * (1 - Uptake_Metallothionein) + (AGut*Fabs*Ka*Uptake_Metallothionein + ALung * (Lung_Gut * Ka + Inhalation_intake)*Uptake_Metallothionein - Max_Metallothionein*(time+1-time))/2
+    Max_Plasma_Lung := ALung * (Lung_Gut * Ka + Inhalation_intake) * (1 - Uptake_Metallothionein) + (AGut*Fabs*Ka*Uptake_Metallothionein + ALung * (Lung_Gut * Ka + Inhalation_intake)*Uptake_Metallothionein - Max_Metallothionein*(time+1-time))/2
+    
+    Gut_Plasma_limited := f_Gut_Plasma_limited(Nomax_Plasma_Gut, AMetallothionein, Max_Metallothionein, Max_Plasma_Gut)
+    Lung_Plasma_limited := f_Lung_Plasma_limited(Nomax_Plasma_Lung, AMetallothionein, Max_Metallothionein, Max_Plasma_Lung)
+    
     Plasma_Others = 0.44             # Transfer from plasma to the rest of the body
     Others_Plasma = 0.00014          # Transfer from rest of the body to plasma
     Plasma_Feces = 0.27              # Transfer from plasma to feces
@@ -51,7 +69,7 @@ model PBK_Cd()
     compartment Kidney = 1                  # Compartment of kidneys (only the quantity)
     compartment Others = 1                  # Compartment of other tissues (only the quantity)
     compartment Feces = 1                   # Compartment of feces (only the quantity)
-    compartment Urine = 1                   # Compartment of urine (2L of urine per day)
+    compartment Urine = 1                   # Compartment of urine (only the quantity)
     compartment Gut = 1                     # Compartment of gut (input compartment)
     compartment Lung = 1                    # Compartment of lungs (only the quantity)
     compartment Plasma = 1                  # Compartment of Plasma (only the quantity)
@@ -83,10 +101,16 @@ model PBK_Cd()
     AOthers          = 0
 
     # Reactions
-    ALung -> AMetallothionein; ALung * (Lung_Gut * Ka + Inhalation_intake) * Uptake_Metallothionein_limited
-    ALung -> APlasma; ALung * (Lung_Gut * Ka + Inhalation_intake) * (1 - Uptake_Metallothionein_limited)
-    AGut -> AMetallothionein; AGut * Fabs * Ka * Uptake_Metallothionein_limited
-    AGut -> APlasma; AGut * Fabs * Ka * (1 - Uptake_Metallothionein_limited)
+    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: ALung -> AMetallothionein; ALung * (Lung_Gut * Ka + Inhalation_intake) * Uptake_Metallothionein_limited
+    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: ALung -> APlasma; ALung * (Lung_Gut * Ka + Inhalation_intake) * (1 - Uptake_Metallothionein_limited)
+    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: AGut -> AMetallothionein; AGut * Fabs * Ka * Uptake_Metallothionein_limited
+    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: AGut -> APlasma; AGut * Fabs * Ka * (1 - Uptake_Metallothionein_limited)
+
+    AGut          -> APlasma;           Gut_Plasma_limited
+    AGut          -> AMetallothionein;  (AGut * Fabs * Ka) - Gut_Plasma_limited
+
+    ALung         -> APlasma;           Lung_Plasma_limited
+    ALung         -> AMetallothionein;  ALung * (Lung_Gut * Ka + Inhalation_intake) - Lung_Plasma_limited
 
     APlasma       -> AOthers;           APlasma * Plasma_Others
     APlasma       -> ARBC;              APlasma* Plasma_RBC
