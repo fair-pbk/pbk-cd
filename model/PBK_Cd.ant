@@ -1,15 +1,15 @@
 ### PBK Model for Cadmium ###
-#function f_Metallothionein_limited(Uptake_Metallothionein, AMetallothionein, Max_Metallothionein)
-#    piecewise(1- Uptake_Metallothionein, AMetallothionein < Max_Metallothionein, Max_Metallothionein)
+#function f_Metallothionein_limited(Uptake_Metallothionein, Uptake, Max_Metallothionein)
+#    piecewise(1- Uptake_Metallothionein, Uptake < Max_Metallothionein, Max_Metallothionein)
 #end
 # Problem: 
 
-function f_Gut_Plasma_limited(Nomax_Plasma_Gut, AMetallothionein, Max_Metallothionein, Max_Plasma_Gut)
-    piecewise(Nomax_Plasma_Gut , AMetallothionein < Max_Metallothionein, Max_Plasma_Gut)
+function f_Gut_Plasma_limited(Nomax_Plasma_Gut, Uptake, Max_Metallothionein, Max_Plasma_Gut)
+    piecewise(Nomax_Plasma_Gut , Uptake < Max_Metallothionein, Max_Plasma_Gut)
 end
 
-function f_Lung_Plasma_limited(Nomax_Plasma_Lung, AMetallothionein, Max_Metallothionein, Max_Plasma_Lung)
-    piecewise(Nomax_Plasma_Lung, AMetallothionein < Max_Metallothionein, Max_Plasma_Lung)
+function f_Lung_Plasma_limited(Nomax_Plasma_Lung, Uptake, Max_Metallothionein, Max_Plasma_Lung)
+    piecewise(Nomax_Plasma_Lung, Uptake < Max_Metallothionein, Max_Plasma_Lung)
 end
 
 function f_BW(Age)
@@ -41,14 +41,16 @@ model PBK_Cd()
     Uptake_Metallothionein = 0.25    # Fraction of uptake pool transferred to metallothionein
     Max_Metallothionein = 1          # Maximum mass of Cd in metallothionein
     
+    Uptake := Uptake_Metallothionein * (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake))
+
     Nomax_Plasma_Gut := (1- Uptake_Metallothionein) * AGut * Fabs * Ka
     Nomax_Plasma_Lung := (1 - Uptake_Metallothionein) * ALung * (Lung_Gut * Ka + Inhalation_intake)
     
-    Max_Plasma_Gut := AGut * Fabs * Ka - Max_Metallothionein /(time + 1- time) * (AGut * Fabs * Ka / (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake)))
-    Max_Plasma_Lung := ALung * (Lung_Gut * Ka + Inhalation_intake) - Max_Metallothionein / (time + 1 - time) * (ALung * (Lung_Gut * Ka + Inhalation_intake) / (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake)))
+    Max_Plasma_Gut := AGut * Fabs * Ka - Max_Metallothionein * (AGut * Fabs * Ka / (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake)))
+    Max_Plasma_Lung := ALung * (Lung_Gut * Ka + Inhalation_intake) - Max_Metallothionein * (ALung * (Lung_Gut * Ka + Inhalation_intake) / (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake)))
     
-    Gut_Plasma_limited := f_Gut_Plasma_limited(Nomax_Plasma_Gut, AMetallothionein, Max_Metallothionein, Max_Plasma_Gut)
-    Lung_Plasma_limited := f_Lung_Plasma_limited(Nomax_Plasma_Lung, AMetallothionein, Max_Metallothionein, Max_Plasma_Lung)
+    Gut_Plasma_limited := f_Gut_Plasma_limited(Nomax_Plasma_Gut, Uptake, Max_Metallothionein, Max_Plasma_Gut)
+    Lung_Plasma_limited := f_Lung_Plasma_limited(Nomax_Plasma_Lung, Uptake, Max_Metallothionein, Max_Plasma_Lung)
     
     Gut_Metallothionein_limited := (AGut * Fabs * Ka) - Gut_Plasma_limited
     Lung_Metallothionein_limited := ALung * (Lung_Gut * Ka + Inhalation_intake) - Lung_Plasma_limited
@@ -66,6 +68,8 @@ model PBK_Cd()
     Kidney_Urine := f_Kidney_Urine(Age, Increase_Cd_Urine) # Transfer from kidney to urine
     Increase_Cd_Urine = 0.0000011    # Temporal factor increasing Cd elimination in urine
     Plasma_RBC = 0.04                # Transfer from plasma to red blood cells
+
+    Gut_Feces := (AGut * Fabs * Ka) - Gut_Plasma_limited - Gut_Metallothionein_limited
 
     # Compartments
     compartment Liver = 1                   # Compartment of liver (only the quantity)
@@ -111,6 +115,8 @@ model PBK_Cd()
 
     AGut          -> APlasma;           Gut_Plasma_limited
     AGut          -> AMetallothionein;  Gut_Metallothionein_limited
+
+    AGut          -> AFeces;            Gut_Feces
 
     ALung         -> APlasma;           Lung_Plasma_limited
     ALung         -> AMetallothionein;  Lung_Metallothionein_limited
