@@ -654,10 +654,12 @@
       <parameter id="Max_Metallothionein" name="Maximal dose in metallothionein" value="1" units="MicroGM" constant="true"/>
       <parameter id="Nomax_Plasma_Gut" name="Dose from gut to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="Nomax_Plasma_Lung" name="Dose from lung to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Max_Plasma_Gut" name="Dose from gut to plasma with saturated metallothionein" value="-0.5" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Max_Plasma_Lung" name="Dose from lung to plasma with saturated metallothionein" value="-0.5" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Max_Plasma_Gut" name="Dose from gut to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Max_Plasma_Lung" name="Dose from lung to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="Gut_Plasma_limited" name="Transfer from gut to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="Lung_Plasma_limited" name="Transfer from lung to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Gut_Metallothionein_limited" name="Transfer from gut to metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Lung_Metallothionein_limited" name="Transfer from lung to metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="Plasma_Others" name="Transfer from plasma to the rest of the body" value="0.44" units="PER_DAY" constant="true"/>
       <parameter id="Others_Plasma" name="Transfer from rest of the body to plasma" value="0.00014" units="PER_DAY" constant="true"/>
       <parameter metaid="meta_Plasma_Feces" id="Plasma_Feces" name="Transfer from plasma to feces" value="0.27" units="PER_DAY" constant="true">
@@ -806,22 +808,36 @@
       <assignmentRule variable="Max_Plasma_Gut">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
-            <plus/>
+            <minus/>
             <apply>
               <times/>
               <ci> AGut </ci>
               <ci> Fabs </ci>
               <ci> Ka </ci>
-              <apply>
-                <minus/>
-                <cn type="integer"> 1 </cn>
-                <ci> Uptake_Metallothionein </ci>
-              </apply>
             </apply>
             <apply>
-              <divide/>
+              <times/>
               <apply>
-                <minus/>
+                <divide/>
+                <ci> Max_Metallothionein </ci>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <plus/>
+                    <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                    <cn type="integer"> 1 </cn>
+                  </apply>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+              </apply>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> AGut </ci>
+                  <ci> Fabs </ci>
+                  <ci> Ka </ci>
+                </apply>
                 <apply>
                   <plus/>
                   <apply>
@@ -829,7 +845,6 @@
                     <ci> AGut </ci>
                     <ci> Fabs </ci>
                     <ci> Ka </ci>
-                    <ci> Uptake_Metallothionein </ci>
                   </apply>
                   <apply>
                     <times/>
@@ -843,24 +858,9 @@
                       </apply>
                       <ci> Inhalation_intake </ci>
                     </apply>
-                    <ci> Uptake_Metallothionein </ci>
-                  </apply>
-                </apply>
-                <apply>
-                  <times/>
-                  <ci> Max_Metallothionein </ci>
-                  <apply>
-                    <minus/>
-                    <apply>
-                      <plus/>
-                      <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
-                      <cn type="integer"> 1 </cn>
-                    </apply>
-                    <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
                   </apply>
                 </apply>
               </apply>
-              <cn type="integer"> 2 </cn>
             </apply>
           </apply>
         </math>
@@ -868,7 +868,7 @@
       <assignmentRule variable="Max_Plasma_Lung">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
-            <plus/>
+            <minus/>
             <apply>
               <times/>
               <ci> ALung </ci>
@@ -881,16 +881,37 @@
                 </apply>
                 <ci> Inhalation_intake </ci>
               </apply>
-              <apply>
-                <minus/>
-                <cn type="integer"> 1 </cn>
-                <ci> Uptake_Metallothionein </ci>
-              </apply>
             </apply>
             <apply>
-              <divide/>
+              <times/>
               <apply>
-                <minus/>
+                <divide/>
+                <ci> Max_Metallothionein </ci>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <plus/>
+                    <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                    <cn type="integer"> 1 </cn>
+                  </apply>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+              </apply>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> ALung </ci>
+                  <apply>
+                    <plus/>
+                    <apply>
+                      <times/>
+                      <ci> Lung_Gut </ci>
+                      <ci> Ka </ci>
+                    </apply>
+                    <ci> Inhalation_intake </ci>
+                  </apply>
+                </apply>
                 <apply>
                   <plus/>
                   <apply>
@@ -898,7 +919,6 @@
                     <ci> AGut </ci>
                     <ci> Fabs </ci>
                     <ci> Ka </ci>
-                    <ci> Uptake_Metallothionein </ci>
                   </apply>
                   <apply>
                     <times/>
@@ -912,24 +932,9 @@
                       </apply>
                       <ci> Inhalation_intake </ci>
                     </apply>
-                    <ci> Uptake_Metallothionein </ci>
-                  </apply>
-                </apply>
-                <apply>
-                  <times/>
-                  <ci> Max_Metallothionein </ci>
-                  <apply>
-                    <minus/>
-                    <apply>
-                      <plus/>
-                      <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
-                      <cn type="integer"> 1 </cn>
-                    </apply>
-                    <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
                   </apply>
                 </apply>
               </apply>
-              <cn type="integer"> 2 </cn>
             </apply>
           </apply>
         </math>
@@ -953,6 +958,41 @@
             <ci> AMetallothionein </ci>
             <ci> Max_Metallothionein </ci>
             <ci> Max_Plasma_Lung </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Gut_Metallothionein_limited">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <times/>
+              <ci> AGut </ci>
+              <ci> Fabs </ci>
+              <ci> Ka </ci>
+            </apply>
+            <ci> Gut_Plasma_limited </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Lung_Metallothionein_limited">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <times/>
+              <ci> ALung </ci>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <ci> Lung_Gut </ci>
+                  <ci> Ka </ci>
+                </apply>
+                <ci> Inhalation_intake </ci>
+              </apply>
+            </apply>
+            <ci> Lung_Plasma_limited </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -997,16 +1037,7 @@
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <minus/>
-              <apply>
-                <times/>
-                <ci> AGut </ci>
-                <ci> Fabs </ci>
-                <ci> Ka </ci>
-              </apply>
-              <ci> Gut_Plasma_limited </ci>
-            </apply>
+            <ci> Gut_Metallothionein_limited </ci>
           </math>
         </kineticLaw>
       </reaction>
@@ -1032,23 +1063,7 @@
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <minus/>
-              <apply>
-                <times/>
-                <ci> ALung </ci>
-                <apply>
-                  <plus/>
-                  <apply>
-                    <times/>
-                    <ci> Lung_Gut </ci>
-                    <ci> Ka </ci>
-                  </apply>
-                  <ci> Inhalation_intake </ci>
-                </apply>
-              </apply>
-              <ci> Lung_Plasma_limited </ci>
-            </apply>
+            <ci> Lung_Metallothionein_limited </ci>
           </math>
         </kineticLaw>
       </reaction>
