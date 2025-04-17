@@ -20,3 +20,6 @@ venv.bak/
 
 # Log files
 *.log
+
+# Folders
+**/__testoutputs__/*
