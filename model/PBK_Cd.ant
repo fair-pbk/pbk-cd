@@ -1,16 +1,4 @@
 ### PBK Model for Cadmium ###
-#function f_Metallothionein_limited(Uptake_Metallothionein, Uptake, Max_Metallothionein)
-#    piecewise(1- Uptake_Metallothionein, Uptake < Max_Metallothionein, Max_Metallothionein)
-#end
-# Problem: 
-
-function f_Gut_Plasma_limited(Nomax_Plasma_Gut, Uptake, Max_Metallothionein, Max_Plasma_Gut)
-    piecewise(Nomax_Plasma_Gut , Uptake < Max_Metallothionein, Max_Plasma_Gut)
-end
-
-function f_Lung_Plasma_limited(Nomax_Plasma_Lung, Uptake, Max_Metallothionein, Max_Plasma_Lung)
-    piecewise(Nomax_Plasma_Lung, Uptake < Max_Metallothionein, Max_Plasma_Lung)
-end
 
 function f_BW(Age)
     (3.938425 + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
@@ -39,22 +27,7 @@ model PBK_Cd()
     Fabs = 0.048                     # Fraction of GI-tract Cd retained in epithelium
     Ka = 0.05                        # Rate of transfer of Cd in the GI-tract to uptake pool
     Uptake_Metallothionein = 0.25    # Fraction of uptake pool transferred to metallothionein
-    Max_Metallothionein = 1          # Maximum mass of Cd in metallothionein
-    
-    Uptake := Uptake_Metallothionein * (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake))
-
-    Nomax_Plasma_Gut := (1- Uptake_Metallothionein) * AGut * Fabs * Ka
-    Nomax_Plasma_Lung := (1 - Uptake_Metallothionein) * ALung * (Lung_Gut * Ka + Inhalation_intake)
-    
-    Max_Plasma_Gut := AGut * Fabs * Ka - Max_Metallothionein * (AGut * Fabs * Ka / (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake)))
-    Max_Plasma_Lung := ALung * (Lung_Gut * Ka + Inhalation_intake) - Max_Metallothionein * (ALung * (Lung_Gut * Ka + Inhalation_intake) / (AGut * Fabs * Ka + ALung * (Lung_Gut * Ka + Inhalation_intake)))
-    
-    Gut_Plasma_limited := f_Gut_Plasma_limited(Nomax_Plasma_Gut, Uptake, Max_Metallothionein, Max_Plasma_Gut)
-    Lung_Plasma_limited := f_Lung_Plasma_limited(Nomax_Plasma_Lung, Uptake, Max_Metallothionein, Max_Plasma_Lung)
-    
-    Gut_Metallothionein_limited := (AGut * Fabs * Ka) - Gut_Plasma_limited
-    Lung_Metallothionein_limited := ALung * (Lung_Gut * Ka + Inhalation_intake) - Lung_Plasma_limited
-
+    Max_Metallothionein = 1          # Maximum mass of Cd that can bind to metallothionein per day
     Plasma_Others = 0.44             # Transfer from plasma to the rest of the body
     Others_Plasma = 0.00014          # Transfer from rest of the body to plasma
     Plasma_Feces = 0.27              # Transfer from plasma to feces
@@ -69,7 +42,25 @@ model PBK_Cd()
     Increase_Cd_Urine = 0.0000011    # Temporal factor increasing Cd elimination in urine
     Plasma_RBC = 0.04                # Transfer from plasma to red blood cells
 
-    Gut_Feces := (AGut * Fabs * Ka) - Gut_Plasma_limited - Gut_Metallothionein_limited
+    # Total uptake [amount per day]
+    Uptake :=  AGut * Fabs * Ka + ALung * Inhalation_intake
+    
+    # Uptake in Metallothionein [amount per day]
+    Uptake_Amount_Metallothionein :=  Uptake_Metallothionein * Uptake
+    
+    # The daily uptake in Metallothionein may not be higher than `Max_Metallothionein`
+    # If the uptake exceeds the maximum allowed, we compute the fraction by which it exceeds, 
+    # such that we can correct the uptake accordingly
+    Uptake_correction_fraction := piecewise(1, Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Metallothionein/Uptake_Amount_Metallothionein)
+    
+    # Calculate uptake [amount per day]
+    Gut_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * AGut * Fabs * Ka 
+    Lung_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * ALung * Inhalation_intake
+    Gut_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * AGut * Fabs * Ka 
+    Lung_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * ALung * Inhalation_intake
+    
+    # Excretion via feces
+    Gut_Feces := AGut * Ka * (1 - Fabs)
 
     # Compartments
     compartment Liver = 1                   # Compartment of liver (only the quantity)
@@ -108,18 +99,13 @@ model PBK_Cd()
     AOthers          = 0
 
     # Reactions
-    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: ALung -> AMetallothionein; ALung * (Lung_Gut * Ka + Inhalation_intake) * Uptake_Metallothionein_limited
-    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: ALung -> APlasma; ALung * (Lung_Gut * Ka + Inhalation_intake) * (1 - Uptake_Metallothionein_limited)
-    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: AGut -> AMetallothionein; AGut * Fabs * Ka * Uptake_Metallothionein_limited
-    ## Problem : Uptake_Metallothionein_limited is a dose per day, it cannot be used a factor: AGut -> APlasma; AGut * Fabs * Ka * (1 - Uptake_Metallothionein_limited)
-
-    AGut          -> APlasma;           Gut_Plasma_limited
-    AGut          -> AMetallothionein;  Gut_Metallothionein_limited
-
+    AGut          -> APlasma;           Gut_Plasma
+    AGut          -> AMetallothionein;  Gut_Metallothionein
     AGut          -> AFeces;            Gut_Feces
 
-    ALung         -> APlasma;           Lung_Plasma_limited
-    ALung         -> AMetallothionein;  Lung_Metallothionein_limited
+    ALung         -> APlasma;           Lung_Plasma
+    ALung         -> AMetallothionein;  Lung_Metallothionein
+    ALung         -> AGut;              ALung * Lung_Gut
 
     APlasma       -> AOthers;           APlasma * Plasma_Others
     APlasma       -> ARBC;              APlasma* Plasma_RBC
