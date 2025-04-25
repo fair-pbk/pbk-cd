@@ -54,13 +54,16 @@ model PBK_Cd()
     Uptake_correction_fraction := piecewise(1, Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Metallothionein/Uptake_Amount_Metallothionein)
     
     # Calculate uptake [amount per day]
-    Gut_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * AGut * Fabs * Ka 
-    Lung_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * ALung * Inhalation_intake
-    Gut_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * AGut * Fabs * Ka 
-    Lung_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * ALung * Inhalation_intake
+    # => Uptake_Amount_Metallothionein is the dose transfered to metallothionein from Gut and Lung
+    #Gut_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * AGut * Fabs * Ka 
+    #Lung_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * ALung * Inhalation_intake
+    #Gut_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * AGut * Fabs * Ka 
+    #Lung_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * ALung * Inhalation_intake
     
-    # Excretion via feces
-    Gut_Feces := AGut * Ka * (1 - Fabs)
+    
+
+    # Excretion via feces (the fraction which is not absorbed in the body)
+    Gut_Feces := AGut * (1 - Fabs)
 
     # Compartments
     compartment Liver = 1                   # Compartment of liver (only the quantity)
