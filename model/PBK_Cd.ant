@@ -75,16 +75,36 @@ model PBK_Cd()
     # Excretion via feces (the fraction which is not absorbed in the body)
     Gut_Feces := AGut * (1 - Fabs)
 
+    # Physiological parameters
+    VLiverc = 0.025     ## Fraction of the volume of liver
+    VKidneyc = 0.004    ## Fraction of the volume of kidney
+    VGutc = 0.0182      ## Fraction of the volume of gut
+    VLungc = 0.0068     ## Fraction of the volume of lung
+    VBloodc = 0.076     ## Fraction of the volume of blood
+    HCT = 0.425         ## Hematocrit
+
+    VLiver  := VLiverc * BW         ## Volume of liver (in L)
+    VKidney := VKidneyc * BW        ## Volume of kidney (in L)
+    VGut    := VGutc * BW           ## Volume of gut (in L)
+    VLung   := VLungc * BW          ## Volume of lung (in L)
+    VBlood  := VBloodc * BW         ## Volume of blood (in L)
+    VPlasma := VBlood * (1 - HCT)   ## Volume of plasma (in L)
+    VRCB    := VBlood * HCT         ## Volume of red blood cells (in L)
+
+    VOther  := BW - (VLiver + VKidney + VGut + VLung + VBlood)  ## Volume of the restbody
+
+
+
     # Compartments
-    compartment Liver = 1                   # Compartment of liver (only the quantity)
-    compartment Kidney = 1                  # Compartment of kidneys (only the quantity)
-    compartment Others = 1                  # Compartment of other tissues (only the quantity)
+    compartment Liver = VLiver              # Compartment of liver (only the quantity)
+    compartment Kidney = VKidney            # Compartment of kidneys (only the quantity)
+    compartment Others = VOther             # Compartment of other tissues (only the quantity)
     compartment Feces = 1                   # Compartment of feces (only the quantity)
     compartment Urine = 1                   # Compartment of urine (only the quantity)
-    compartment Gut = 1                     # Compartment of gut (input compartment)
-    compartment Lung = 1                    # Compartment of lungs (only the quantity)
-    compartment Plasma = 1                  # Compartment of Plasma (only the quantity)
-    compartment RBC = 1                     # Compartment of Red Blood Cells (only the quantity)
+    compartment Gut = VGut                  # Compartment of gut (input compartment)
+    compartment Lung = VLung                # Compartment of lungs (only the quantity)
+    compartment Plasma = VPlasma            # Compartment of Plasma (only the quantity)
+    compartment RBC = VRCB                  # Compartment of Red Blood Cells (only the quantity)
     compartment Metallothionein = 1         # Compartment of Metallothionein (only the quantity)
 
     # Species
