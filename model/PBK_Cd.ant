@@ -59,8 +59,18 @@ model PBK_Cd()
     #Lung_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * ALung * Inhalation_intake
     #Gut_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * AGut * Fabs * Ka 
     #Lung_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * ALung * Inhalation_intake
+
+    Nomax_Plasma_Gut := (1- Uptake_Metallothionein) * AGut * Fabs * Ka
+    Nomax_Plasma_Lung := (1 - Uptake_Metallothionein) * ALung * Inhalation_intake
     
+    Max_Plasma_Gut := AGut * Fabs * Ka - Max_Metallothionein * (AGut * Fabs * Ka / (AGut * Fabs * Ka + ALung * Inhalation_intake))
+    Max_Plasma_Lung := ALung * Inhalation_intake - Max_Metallothionein * (ALung * Inhalation_intake / (AGut * Fabs * Ka + ALung * Inhalation_intake))
     
+    Gut_Plasma_limited := piecewise(Nomax_Plasma_Gut , Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Plasma_Gut)
+    Lung_Plasma_limited := piecewise(Nomax_Plasma_Lung, Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Plasma_Lung)
+    
+    Gut_Metallothionein_limited := (AGut * Fabs * Ka) - Gut_Plasma_limited
+    Lung_Metallothionein_limited := ALung * Inhalation_intake - Lung_Plasma_limited
 
     # Excretion via feces (the fraction which is not absorbed in the body)
     Gut_Feces := AGut * (1 - Fabs)
@@ -102,12 +112,12 @@ model PBK_Cd()
     AOthers          = 0
 
     # Reactions
-    AGut          -> APlasma;           Gut_Plasma
-    AGut          -> AMetallothionein;  Gut_Metallothionein
+    AGut          -> APlasma;           Gut_Plasma_limited
+    AGut          -> AMetallothionein;  Gut_Metallothionein_limited
     AGut          -> AFeces;            Gut_Feces
 
-    ALung         -> APlasma;           Lung_Plasma
-    ALung         -> AMetallothionein;  Lung_Metallothionein
+    ALung         -> APlasma;           Lung_Plasma_limited
+    ALung         -> AMetallothionein;  Lung_Metallothionein_limited
     ALung         -> AGut;              ALung * Lung_Gut
 
     APlasma       -> AOthers;           APlasma * Plasma_Others
