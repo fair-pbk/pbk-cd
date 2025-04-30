@@ -23,7 +23,7 @@ model PBK_Cd()
 
     ## Kinetic parameters
     Inhalation_intake = 0.05         # Rate of transfer of inhalation intake to uptake pool
-    Lung_Gut = 0.005                 # Rate of transfer of Cd in lungs to the GI-tract
+    Lung_Intestine = 0.005           # Rate of transfer of Cd in lungs to the GI-tract
     Fabs = 0.048                     # Fraction of GI-tract Cd retained in epithelium
     Ka = 0.05                        # Rate of transfer of Cd in the GI-tract to uptake pool
     Uptake_Metallothionein = 0.25    # Fraction of uptake pool transferred to metallothionein
@@ -43,7 +43,7 @@ model PBK_Cd()
     Plasma_RBC = 0.04                # Transfer from plasma to red blood cells
 
     # Total uptake [amount per day]
-    Uptake :=  AGut * Fabs * Ka + ALung * Inhalation_intake
+    Uptake :=  AGut * Ka + ALung * Inhalation_intake
     
     # Uptake in Metallothionein [amount per day]
     Uptake_Amount_Metallothionein :=  Uptake_Metallothionein * Uptake
@@ -51,29 +51,29 @@ model PBK_Cd()
     # The daily uptake in Metallothionein may not be higher than `Max_Metallothionein`
     # If the uptake exceeds the maximum allowed, we compute the fraction by which it exceeds, 
     # such that we can correct the uptake accordingly
-    Uptake_correction_fraction := piecewise(1, Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Metallothionein/Uptake_Amount_Metallothionein)
+    #Uptake_correction_fraction := piecewise(1, Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Metallothionein/Uptake_Amount_Metallothionein)
     
     # Calculate uptake [amount per day]
     # => Uptake_Amount_Metallothionein is the dose transfered to metallothionein from Gut and Lung
-    #Gut_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * AGut * Fabs * Ka 
+    #Gut_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * AGut * Ka 
     #Lung_Plasma := (1 - Uptake_Amount_Metallothionein * Uptake_correction_fraction) * ALung * Inhalation_intake
-    #Gut_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * AGut * Fabs * Ka 
+    #Gut_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * AGut * Ka 
     #Lung_Metallothionein := Uptake_Amount_Metallothionein * Uptake_correction_fraction * ALung * Inhalation_intake
 
-    Nomax_Plasma_Gut := (1- Uptake_Metallothionein) * AGut * Fabs * Ka
+    Nomax_Plasma_Gut := (1- Uptake_Metallothionein) * AGut * Ka
     Nomax_Plasma_Lung := (1 - Uptake_Metallothionein) * ALung * Inhalation_intake
     
-    Max_Plasma_Gut := AGut * Fabs * Ka - Max_Metallothionein * (AGut * Fabs * Ka / (AGut * Fabs * Ka + ALung * Inhalation_intake))
-    Max_Plasma_Lung := ALung * Inhalation_intake - Max_Metallothionein * (ALung * Inhalation_intake / (AGut * Fabs * Ka + ALung * Inhalation_intake))
+    Max_Plasma_Gut := AGut * Ka - Max_Metallothionein * (AGut * Ka / (AGut * Ka + ALung * Inhalation_intake))
+    Max_Plasma_Lung := ALung * Inhalation_intake - Max_Metallothionein * (ALung * Inhalation_intake / (AGut * Ka + ALung * Inhalation_intake))
     
     Gut_Plasma_limited := piecewise(Nomax_Plasma_Gut , Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Plasma_Gut)
     Lung_Plasma_limited := piecewise(Nomax_Plasma_Lung, Uptake_Amount_Metallothionein < Max_Metallothionein, Max_Plasma_Lung)
     
-    Gut_Metallothionein_limited := (AGut * Fabs * Ka) - Gut_Plasma_limited
+    Gut_Metallothionein_limited := (AGut * Ka) - Gut_Plasma_limited
     Lung_Metallothionein_limited := ALung * Inhalation_intake - Lung_Plasma_limited
 
     # Excretion via feces (the fraction which is not absorbed in the body)
-    Gut_Feces := AGut * (1 - Fabs)
+    Intestine_Feces := AGut * (1 - Fabs)
 
     # Physiological parameters
     VLiverc = 0.025     ## Fraction of the volume of liver
@@ -93,21 +93,21 @@ model PBK_Cd()
 
     VOther  := BW - (VLiver + VKidney + VGut + VLung + VBlood)  ## Volume of the restbody
 
-
-
     # Compartments
-    compartment Liver = VLiver              # Compartment of liver (only the quantity)
-    compartment Kidney = VKidney            # Compartment of kidneys (only the quantity)
-    compartment Others = VOther             # Compartment of other tissues (only the quantity)
-    compartment Feces = 1                   # Compartment of feces (only the quantity)
-    compartment Urine = 1                   # Compartment of urine (only the quantity)
-    compartment Gut = VGut                  # Compartment of gut (input compartment)
-    compartment Lung = VLung                # Compartment of lungs (only the quantity)
-    compartment Plasma = VPlasma            # Compartment of Plasma (only the quantity)
-    compartment RBC = VRCB                  # Compartment of Red Blood Cells (only the quantity)
-    compartment Metallothionein = 1         # Compartment of Metallothionein (only the quantity)
+    compartment Intestine = 1                # Comportment of intestine (gut lumen) (input compartment)
+    compartment Liver := VLiver              # Compartment of liver (only the quantity)
+    compartment Kidney := VKidney            # Compartment of kidneys (only the quantity)
+    compartment Others := VOther             # Compartment of other tissues (only the quantity)
+    compartment Feces = 1                    # Compartment of feces (only the quantity)
+    compartment Urine = 1                    # Compartment of urine (only the quantity)
+    compartment Gut := VGut                  # Compartment of gut tissues (only quantity)
+    compartment Lung := VLung                # Compartment of lungs (only the quantity)
+    compartment Plasma := VPlasma            # Compartment of Plasma (only the quantity)
+    compartment RBC := VRCB                  # Compartment of Red Blood Cells (only the quantity)
+    compartment Metallothionein = 1          # Compartment of Metallothionein (only the quantity)
 
     # Species
+    substanceOnly species AIntestine in Intestine             # Quantity of cadmium in intestine (µg)
     substanceOnly species AGut in Gut                         # Quantity of cadmium in gut (µg)
     substanceOnly species ALiver in Liver                     # Quantity of cadmium in liver (µg)
     substanceOnly species AKidney in Kidney                   # Quantity of cadmium in kidneys (µg)
@@ -120,6 +120,7 @@ model PBK_Cd()
     substanceOnly species AOthers in Others                   # Quantity of cadmium in the rest of the body (µg)
 
     # Initial amounts
+    AIntestine       = 0
     AGut             = 0
     ALiver           = 0
     AKidney          = 0
@@ -132,13 +133,14 @@ model PBK_Cd()
     AOthers          = 0
 
     # Reactions
+    AIntestine    -> AGut;              AIntestine * Fabs
     AGut          -> APlasma;           Gut_Plasma_limited
     AGut          -> AMetallothionein;  Gut_Metallothionein_limited
-    AGut          -> AFeces;            Gut_Feces
+    AIntestine    -> AFeces;            Intestine_Feces
 
     ALung         -> APlasma;           Lung_Plasma_limited
     ALung         -> AMetallothionein;  Lung_Metallothionein_limited
-    ALung         -> AGut;              ALung * Lung_Gut
+    ALung         -> AIntestine;        ALung * Lung_Intestine
 
     APlasma       -> AOthers;           APlasma * Plasma_Others
     APlasma       -> ARBC;              APlasma* Plasma_RBC
