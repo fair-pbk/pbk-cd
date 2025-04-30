@@ -1092,14 +1092,11 @@
         <listOfProducts>
           <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
         </listOfProducts>
-        <listOfModifiers>
-          <modifierSpeciesReference species="AGut"/>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> AGut </ci>
+              <ci> AIntestine </ci>
               <apply>
                 <minus/>
                 <cn type="integer"> 1 </cn>
