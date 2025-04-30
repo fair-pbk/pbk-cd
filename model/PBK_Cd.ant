@@ -111,7 +111,7 @@ model PBK_Cd()
     AGut          -> APlasma;           Gut_Plasma
     AGut          -> AMetallothionein;  (AGut * Ka) - Gut_Plasma
     AIntestine    -> AGut;              AIntestine * Fabs
-    AIntestine    -> AFeces;            AGut * (1 - Fabs)
+    AIntestine    -> AFeces;            AIntestine * (1 - Fabs)
     ALung         -> APlasma;           Lung_Plasma
     ALung         -> AMetallothionein;  ALung * K_Inhalation_Uptake - Lung_Plasma
     ALung         -> AIntestine;        ALung * K_Lung_Intestine
