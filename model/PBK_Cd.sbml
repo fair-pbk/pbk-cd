@@ -573,7 +573,7 @@
         </annotation>
       </parameter>
       <parameter id="K_Lung_Intestine" name="Rate of absorption from Lung to intestine" value="0.005" units="PER_DAY" constant="true"/>
-      <parameter id="FUptakeMetallothionein" name="Fraction of uptake pool transferred to metallothionein" value="0.25" units="UNITLESS" constant="true"/>
+      <parameter id="F_Uptake_Metallothionein" name="Fraction of uptake pool transferred to metallothionein" value="0.25" units="UNITLESS" constant="true"/>
       <parameter id="Max_Metallothionein" name="Maximal dose in metallothionein added daily" value="1" units="MicroGM_PER_DAY" constant="true"/>
       <parameter id="K_Plasma_Others" name="Transfer from plasma to the rest of the body" value="0.44" units="PER_DAY" constant="true"/>
       <parameter id="K_Others_Plasma" name="Transfer from rest of the body to plasma" value="0.00014" units="PER_DAY" constant="true"/>
@@ -891,7 +891,7 @@
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <times/>
-            <ci> FUptakeMetallothionein </ci>
+            <ci> F_Uptake_Metallothionein </ci>
             <ci> Uptake </ci>
           </apply>
         </math>
@@ -903,7 +903,7 @@
             <apply>
               <minus/>
               <cn type="integer"> 1 </cn>
-              <ci> FUptakeMetallothionein </ci>
+              <ci> F_Uptake_Metallothionein </ci>
             </apply>
             <ci> AGut </ci>
             <ci> Ka </ci>
@@ -971,7 +971,7 @@
             <apply>
               <minus/>
               <cn type="integer"> 1 </cn>
-              <ci> FUptakeMetallothionein </ci>
+              <ci> F_Uptake_Metallothionein </ci>
             </apply>
             <ci> ALung </ci>
             <ci> K_Inhalation_Uptake </ci>
