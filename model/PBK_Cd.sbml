@@ -301,6 +301,7 @@
     </listOfUnitDefinitions>
     <listOfCompartments>
       <compartment id="Intestine" name="intestine" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="Metallothionein" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_Liver" id="Liver" name="liver" spatialDimensions="3" size="0.098460625" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -321,19 +322,6 @@
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00557"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </compartment>
-      <compartment metaid="meta_Others" id="Others" name="Rest of the body" spatialDimensions="3" size="3.42642975" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Others">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00450"/>
                 </rdf:Bag>
               </bqmodel:is>
             </rdf:Description>
@@ -406,9 +394,22 @@
         </annotation>
       </compartment>
       <compartment id="RBC" name="red blood cells" spatialDimensions="3" size="0.1272111275" units="L" constant="false"/>
-      <compartment id="Metallothionein" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment metaid="meta_Others" id="Others" name="Rest of the body" spatialDimensions="3" size="3.42642975" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Others">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00450"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
     </listOfCompartments>
     <listOfSpecies>
+      <species id="AIntestine" name="Amount of intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
       <species metaid="meta_AGut" id="AGut" name="amount of chemical in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -422,20 +423,6 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species metaid="meta_ALung" id="ALung" name="Amount in lungs" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_ALung">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </species>
-      <species id="AIntestine" name="Amount of intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
       <species metaid="meta_ALiver" id="ALiver" name="amount of chemical in liver" compartment="Liver" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -456,6 +443,19 @@
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00498"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_ALung" id="ALung" name="Amount in lungs" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_ALung">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
                 </rdf:Bag>
               </bqmodel:is>
             </rdf:Description>
@@ -545,20 +545,6 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_Inhalation_intake" id="Inhalation_intake" name="Transfer from lung to total intake" value="0.05" units="PER_DAY" constant="true">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Inhalation_intake">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
-      <parameter id="Lung_Intestine" name="Rate of absorption from Lung to intestine" value="0.005" units="PER_DAY" constant="true"/>
       <parameter metaid="meta_Fabs" id="Fabs" name="Fraction absorbed in intestine" value="0.048" units="PER_DAY" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -573,14 +559,28 @@
         </annotation>
       </parameter>
       <parameter id="Ka" name="Transfer from intestine to total uptake" value="0.05" units="PER_DAY" constant="true"/>
-      <parameter id="Uptake_Metallothionein" name="Transfer from total uptake to metallothionein" value="0.25" units="UNITLESS" constant="true"/>
+      <parameter metaid="meta_K_Inhalation_Uptake" id="K_Inhalation_Uptake" name="Transfer from lung to total intake" value="0.05" units="PER_DAY" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_K_Inhalation_Uptake">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="K_Lung_Intestine" name="Rate of absorption from Lung to intestine" value="0.005" units="PER_DAY" constant="true"/>
+      <parameter id="FUptakeMetallothionein" name="Fraction of uptake pool transferred to metallothionein" value="0.25" units="UNITLESS" constant="true"/>
       <parameter id="Max_Metallothionein" name="Maximal dose in metallothionein added daily" value="1" units="MicroGM_PER_DAY" constant="true"/>
-      <parameter id="Plasma_Others" name="Transfer from plasma to the rest of the body" value="0.44" units="PER_DAY" constant="true"/>
-      <parameter id="Others_Plasma" name="Transfer from rest of the body to plasma" value="0.00014" units="PER_DAY" constant="true"/>
-      <parameter metaid="meta_Plasma_Feces" id="Plasma_Feces" name="Transfer from plasma to feces" value="0.27" units="PER_DAY" constant="true">
+      <parameter id="K_Plasma_Others" name="Transfer from plasma to the rest of the body" value="0.44" units="PER_DAY" constant="true"/>
+      <parameter id="K_Others_Plasma" name="Transfer from rest of the body to plasma" value="0.00014" units="PER_DAY" constant="true"/>
+      <parameter metaid="meta_K_Plasma_Feces" id="K_Plasma_Feces" name="Transfer from plasma to feces" value="0.27" units="PER_DAY" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Plasma_Feces">
+            <rdf:Description rdf:about="#meta_K_Plasma_Feces">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00236"/>
@@ -590,11 +590,11 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="Plasma_Liver" name="Transfer from plasma to liver" value="0.25" units="PER_DAY" constant="true"/>
-      <parameter metaid="meta_Liver_Plasma" id="Liver_Plasma" name="Transfer from liver to plasma" value="3e-05" units="PER_DAY" constant="true">
+      <parameter id="K_Plasma_Liver" name="Transfer from plasma to liver" value="0.25" units="PER_DAY" constant="true"/>
+      <parameter metaid="meta_K_Liver_Plasma" id="K_Liver_Plasma" name="Transfer from liver to plasma" value="3e-05" units="PER_DAY" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Liver_Plasma">
+            <rdf:Description rdf:about="#meta_K_Liver_Plasma">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00497"/>
@@ -604,10 +604,10 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_Liver_Metallothionein" id="Liver_Metallothionein" name="Transfer from liver to metallothionein" value="0.00016" units="PER_DAY" constant="true">
+      <parameter metaid="meta_K_Liver_Metallothionein" id="K_Liver_Metallothionein" name="Transfer from liver to metallothionein" value="0.00016" units="PER_DAY" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Liver_Metallothionein">
+            <rdf:Description rdf:about="#meta_K_Liver_Metallothionein">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00497"/>
@@ -617,10 +617,10 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_Liver_Feces" id="Liver_Feces" name="Transfer from liver to feces" value="5e-05" units="PER_DAY" constant="true">
+      <parameter metaid="meta_K_Liver_Feces" id="K_Liver_Feces" name="Transfer from liver to feces" value="5e-05" units="PER_DAY" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Liver_Feces">
+            <rdf:Description rdf:about="#meta_K_Liver_Feces">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00236"/>
@@ -630,12 +630,12 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="RBC_Metallothionein" name="Transfer from reb blood cells to metallothionein" value="0.012" units="PER_DAY" constant="true"/>
-      <parameter id="Metallothionein_Kidney" name="Transfer from metallothionein to kidney" value="0.95" units="PER_DAY" constant="false"/>
-      <parameter metaid="meta_Kidney_Plasma" id="Kidney_Plasma" name="Transfer from kidney to plasma" value="1e-05" units="PER_DAY" constant="true">
+      <parameter id="K_RBC_Metallothionein" name="Transfer from reb blood cells to metallothionein" value="0.012" units="PER_DAY" constant="true"/>
+      <parameter id="K_Metallothionein_Kidney" name="Transfer from metallothionein to kidney" value="0.95" units="PER_DAY" constant="false"/>
+      <parameter metaid="meta_K_Kidney_Plasma" id="K_Kidney_Plasma" name="Transfer from kidney to plasma" value="1e-05" units="PER_DAY" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Kidney_Plasma">
+            <rdf:Description rdf:about="#meta_K_Kidney_Plasma">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00498"/>
@@ -645,10 +645,10 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_Kidney_Urine" id="Kidney_Urine" name="Transfer from kidney to urine" value="0.00014" units="PER_DAY" constant="false">
+      <parameter metaid="meta_K_Kidney_Urine" id="K_Kidney_Urine" name="Transfer from kidney to urine" value="0.00014" units="PER_DAY" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_Kidney_Urine">
+            <rdf:Description rdf:about="#meta_K_Kidney_Urine">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00237"/>
@@ -659,18 +659,7 @@
         </annotation>
       </parameter>
       <parameter id="Increase_Cd_Urine" name="Temporal factor increasing Cd elimination in urine" value="1.1e-06" units="PER_DAY" constant="true"/>
-      <parameter id="Plasma_RBC" name="Transfer from plasma to red blood cells" value="0.04" units="PER_DAY" constant="true"/>
-      <parameter id="Uptake" name="Theorical total dose for metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Uptake_Amount_Metallothionein" name="Theorical total dose for metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Nomax_Plasma_Gut" name="Dose from gut to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Nomax_Plasma_Lung" name="Dose from lung to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Max_Plasma_Gut" name="Dose from gut to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Max_Plasma_Lung" name="Dose from lung to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Gut_Plasma_limited" name="Transfer from gut to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Lung_Plasma_limited" name="Transfer from lung to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Gut_Metallothionein_limited" name="Transfer from gut to metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Lung_Metallothionein_limited" name="Transfer from lung to metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Intestine_Feces" name="Rate of transfer from intestine to feces" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="K_Plasma_RBC" name="Transfer from plasma to red blood cells" value="0.04" units="PER_DAY" constant="true"/>
       <parameter metaid="meta_VLiverc" id="VLiverc" name="Fraction of volume of liver" value="0.025" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -737,58 +726,6 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VLiver" id="VLiver" name="Volume of liver" value="0.098460625" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_VLiver">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00077"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
-      <parameter metaid="meta_VKidney" id="VKidney" name="Volume of kidney" value="0.0157537" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_VKidney">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00079"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
-      <parameter metaid="meta_VGut" id="VGut" name="Volume of gut" value="0.071679335" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_VGut">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00524"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
-      <parameter metaid="meta_VLung" id="VLung" name="Volume of lung" value="0.02678129" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_VLung">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00097"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
       <parameter metaid="meta_VBlood" id="VBlood" name="Volume of blood" value="0.2993203" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -802,68 +739,88 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VPlasma" id="VPlasma" name="Volume of plasma" value="0.1721091725" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_VPlasma">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00103"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
-      <parameter id="VRCB" name="Volume of red blood cells" value="0.1272111275" units="L" constant="false"/>
-      <parameter metaid="meta_VOther" id="VOther" name="Volume of the rest of body" value="3.42642975" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_VOther">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00105"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
+      <parameter id="Uptake" name="Theorical total dose for metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Uptake_Metallothionein" name="Transfer from total uptake to metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Gut_Plasma_NoLimit" name="Dose from gut to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Gut_Plasma_Limit" name="Dose from gut to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Gut_Plasma" name="Transfer from gut to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Lung_Plasma_NoLimit" name="Dose from lung to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Lung_Plasma_Limit" name="Dose from lung to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Lung_Plasma" name="Transfer from lung to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
     </listOfParameters>
     <listOfRules>
       <assignmentRule variable="Liver">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> VLiver </ci>
+          <apply>
+            <times/>
+            <ci> VLiverc </ci>
+            <ci> BW </ci>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="Kidney">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> VKidney </ci>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Others">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> VOther </ci>
+          <apply>
+            <times/>
+            <ci> VKidneyc </ci>
+            <ci> BW </ci>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="Gut">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> VGut </ci>
+          <apply>
+            <times/>
+            <ci> VGutc </ci>
+            <ci> BW </ci>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="Lung">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> VLung </ci>
+          <apply>
+            <times/>
+            <ci> VLungc </ci>
+            <ci> BW </ci>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="Plasma">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> VPlasma </ci>
+          <apply>
+            <times/>
+            <ci> VBlood </ci>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> HCT </ci>
+            </apply>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="RBC">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> VRCB </ci>
+          <apply>
+            <times/>
+            <ci> VBlood </ci>
+            <ci> HCT </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Others">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> BW </ci>
+            <apply>
+              <plus/>
+              <ci> Liver </ci>
+              <ci> Kidney </ci>
+              <ci> Gut </ci>
+              <ci> Lung </ci>
+              <ci> VBlood </ci>
+            </apply>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="BW">
@@ -887,7 +844,7 @@
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Metallothionein_Kidney">
+      <assignmentRule variable="K_Metallothionein_Kidney">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <ci> f_Metallothionein_Kidney </ci>
@@ -895,12 +852,21 @@
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Kidney_Urine">
+      <assignmentRule variable="K_Kidney_Urine">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <ci> f_Kidney_Urine </ci>
             <ci> Age </ci>
             <ci> Increase_Cd_Urine </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VBlood">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> VBloodc </ci>
+            <ci> BW </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -916,49 +882,35 @@
             <apply>
               <times/>
               <ci> ALung </ci>
-              <ci> Inhalation_intake </ci>
+              <ci> K_Inhalation_Uptake </ci>
             </apply>
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Uptake_Amount_Metallothionein">
+      <assignmentRule variable="Uptake_Metallothionein">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <times/>
-            <ci> Uptake_Metallothionein </ci>
+            <ci> FUptakeMetallothionein </ci>
             <ci> Uptake </ci>
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Nomax_Plasma_Gut">
+      <assignmentRule variable="Gut_Plasma_NoLimit">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <times/>
             <apply>
               <minus/>
               <cn type="integer"> 1 </cn>
-              <ci> Uptake_Metallothionein </ci>
+              <ci> FUptakeMetallothionein </ci>
             </apply>
             <ci> AGut </ci>
             <ci> Ka </ci>
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Nomax_Plasma_Lung">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <apply>
-              <minus/>
-              <cn type="integer"> 1 </cn>
-              <ci> Uptake_Metallothionein </ci>
-            </apply>
-            <ci> ALung </ci>
-            <ci> Inhalation_intake </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Max_Plasma_Gut">
+      <assignmentRule variable="Gut_Plasma_Limit">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
@@ -987,7 +939,7 @@
                   <apply>
                     <times/>
                     <ci> ALung </ci>
-                    <ci> Inhalation_intake </ci>
+                    <ci> K_Inhalation_Uptake </ci>
                   </apply>
                 </apply>
               </apply>
@@ -995,14 +947,45 @@
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Max_Plasma_Lung">
+      <assignmentRule variable="Gut_Plasma">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> Gut_Plasma_NoLimit </ci>
+              <apply>
+                <lt/>
+                <ci> Uptake_Metallothionein </ci>
+                <ci> Max_Metallothionein </ci>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> Gut_Plasma_Limit </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Lung_Plasma_NoLimit">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> FUptakeMetallothionein </ci>
+            </apply>
+            <ci> ALung </ci>
+            <ci> K_Inhalation_Uptake </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Lung_Plasma_Limit">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
             <apply>
               <times/>
               <ci> ALung </ci>
-              <ci> Inhalation_intake </ci>
+              <ci> K_Inhalation_Uptake </ci>
             </apply>
             <apply>
               <times/>
@@ -1012,7 +995,7 @@
                 <apply>
                   <times/>
                   <ci> ALung </ci>
-                  <ci> Inhalation_intake </ci>
+                  <ci> K_Inhalation_Uptake </ci>
                 </apply>
                 <apply>
                   <plus/>
@@ -1024,7 +1007,7 @@
                   <apply>
                     <times/>
                     <ci> ALung </ci>
-                    <ci> Inhalation_intake </ci>
+                    <ci> K_Inhalation_Uptake </ci>
                   </apply>
                 </apply>
               </apply>
@@ -1032,165 +1015,60 @@
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="Gut_Plasma_limited">
+      <assignmentRule variable="Lung_Plasma">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <piecewise>
             <piece>
-              <ci> Nomax_Plasma_Gut </ci>
+              <ci> Lung_Plasma_NoLimit </ci>
               <apply>
                 <lt/>
-                <ci> Uptake_Amount_Metallothionein </ci>
+                <ci> Uptake_Metallothionein </ci>
                 <ci> Max_Metallothionein </ci>
               </apply>
             </piece>
             <otherwise>
-              <ci> Max_Plasma_Gut </ci>
+              <ci> Lung_Plasma_Limit </ci>
             </otherwise>
           </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Lung_Plasma_limited">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <ci> Nomax_Plasma_Lung </ci>
-              <apply>
-                <lt/>
-                <ci> Uptake_Amount_Metallothionein </ci>
-                <ci> Max_Metallothionein </ci>
-              </apply>
-            </piece>
-            <otherwise>
-              <ci> Max_Plasma_Lung </ci>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Gut_Metallothionein_limited">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <minus/>
-            <apply>
-              <times/>
-              <ci> AGut </ci>
-              <ci> Ka </ci>
-            </apply>
-            <ci> Gut_Plasma_limited </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Lung_Metallothionein_limited">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <minus/>
-            <apply>
-              <times/>
-              <ci> ALung </ci>
-              <ci> Inhalation_intake </ci>
-            </apply>
-            <ci> Lung_Plasma_limited </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Intestine_Feces">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> AGut </ci>
-            <apply>
-              <minus/>
-              <cn type="integer"> 1 </cn>
-              <ci> Fabs </ci>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VLiver">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> VLiverc </ci>
-            <ci> BW </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VKidney">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> VKidneyc </ci>
-            <ci> BW </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VGut">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> VGutc </ci>
-            <ci> BW </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VLung">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> VLungc </ci>
-            <ci> BW </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VBlood">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> VBloodc </ci>
-            <ci> BW </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VPlasma">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> VBlood </ci>
-            <apply>
-              <minus/>
-              <cn type="integer"> 1 </cn>
-              <ci> HCT </ci>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VRCB">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> VBlood </ci>
-            <ci> HCT </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VOther">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <minus/>
-            <ci> BW </ci>
-            <apply>
-              <plus/>
-              <ci> VLiver </ci>
-              <ci> VKidney </ci>
-              <ci> VGut </ci>
-              <ci> VLung </ci>
-              <ci> VBlood </ci>
-            </apply>
-          </apply>
         </math>
       </assignmentRule>
     </listOfRules>
     <listOfReactions>
       <reaction id="_J0" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AGut" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> Gut_Plasma </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J1" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AGut" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> AGut </ci>
+                <ci> Ka </ci>
+              </apply>
+              <ci> Gut_Plasma </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J2" reversible="true">
         <listOfReactants>
           <speciesReference species="AIntestine" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1207,32 +1085,6 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J1" reversible="true">
-        <listOfReactants>
-          <speciesReference species="AGut" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <ci> Gut_Plasma_limited </ci>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="_J2" reversible="true">
-        <listOfReactants>
-          <speciesReference species="AGut" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <ci> Gut_Metallothionein_limited </ci>
-          </math>
-        </kineticLaw>
-      </reaction>
       <reaction id="_J3" reversible="true">
         <listOfReactants>
           <speciesReference species="AIntestine" stoichiometry="1" constant="true"/>
@@ -1240,9 +1092,20 @@
         <listOfProducts>
           <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
         </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AGut"/>
+        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <ci> Intestine_Feces </ci>
+            <apply>
+              <times/>
+              <ci> AGut </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> Fabs </ci>
+              </apply>
+            </apply>
           </math>
         </kineticLaw>
       </reaction>
@@ -1255,7 +1118,7 @@
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <ci> Lung_Plasma_limited </ci>
+            <ci> Lung_Plasma </ci>
           </math>
         </kineticLaw>
       </reaction>
@@ -1268,7 +1131,15 @@
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <ci> Lung_Metallothionein_limited </ci>
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> ALung </ci>
+                <ci> K_Inhalation_Uptake </ci>
+              </apply>
+              <ci> Lung_Plasma </ci>
+            </apply>
           </math>
         </kineticLaw>
       </reaction>
@@ -1284,7 +1155,7 @@
             <apply>
               <times/>
               <ci> ALung </ci>
-              <ci> Lung_Intestine </ci>
+              <ci> K_Lung_Intestine </ci>
             </apply>
           </math>
         </kineticLaw>
@@ -1301,7 +1172,7 @@
             <apply>
               <times/>
               <ci> APlasma </ci>
-              <ci> Plasma_Others </ci>
+              <ci> K_Plasma_Others </ci>
             </apply>
           </math>
         </kineticLaw>
@@ -1318,24 +1189,24 @@
             <apply>
               <times/>
               <ci> APlasma </ci>
-              <ci> Plasma_RBC </ci>
+              <ci> K_Plasma_RBC </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
       <reaction id="_J9" reversible="true">
         <listOfReactants>
-          <speciesReference species="AOthers" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
+          <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> AOthers </ci>
-              <ci> Others_Plasma </ci>
+              <ci> APlasma </ci>
+              <ci> K_Plasma_Feces </ci>
             </apply>
           </math>
         </kineticLaw>
@@ -1345,87 +1216,19 @@
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
               <ci> APlasma </ci>
-              <ci> Plasma_Feces </ci>
+              <ci> K_Plasma_Liver </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
       <reaction id="_J11" reversible="true">
-        <listOfReactants>
-          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> APlasma </ci>
-              <ci> Plasma_Liver </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="_J12" reversible="true">
-        <listOfReactants>
-          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> ALiver </ci>
-              <ci> Liver_Plasma </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="_J13" reversible="true">
-        <listOfReactants>
-          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> ALiver </ci>
-              <ci> Liver_Metallothionein </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="_J14" reversible="true">
-        <listOfReactants>
-          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> ALiver </ci>
-              <ci> Liver_Feces </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="_J15" reversible="true">
         <listOfReactants>
           <speciesReference species="ARBC" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1437,12 +1240,12 @@
             <apply>
               <times/>
               <ci> ARBC </ci>
-              <ci> RBC_Metallothionein </ci>
+              <ci> K_RBC_Metallothionein </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J16" reversible="true">
+      <reaction id="_J12" reversible="true">
         <listOfReactants>
           <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1454,7 +1257,79 @@
             <apply>
               <times/>
               <ci> AMetallothionein </ci>
-              <ci> Metallothionein_Kidney </ci>
+              <ci> K_Metallothionein_Kidney </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J13" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AUrine" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> AMetallothionein </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> K_Metallothionein_Kidney </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J14" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ALiver </ci>
+              <ci> K_Liver_Plasma </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J15" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ALiver </ci>
+              <ci> K_Liver_Metallothionein </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J16" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ALiver </ci>
+              <ci> K_Liver_Feces </ci>
             </apply>
           </math>
         </kineticLaw>
@@ -1471,7 +1346,7 @@
             <apply>
               <times/>
               <ci> AKidney </ci>
-              <ci> Kidney_Plasma </ci>
+              <ci> K_Kidney_Plasma </ci>
             </apply>
           </math>
         </kineticLaw>
@@ -1488,28 +1363,24 @@
             <apply>
               <times/>
               <ci> AKidney </ci>
-              <ci> Kidney_Urine </ci>
+              <ci> K_Kidney_Urine </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
       <reaction id="_J19" reversible="true">
         <listOfReactants>
-          <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
+          <speciesReference species="AOthers" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="AUrine" stoichiometry="1" constant="true"/>
+          <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> AMetallothionein </ci>
-              <apply>
-                <minus/>
-                <cn type="integer"> 1 </cn>
-                <ci> Metallothionein_Kidney </ci>
-              </apply>
+              <ci> AOthers </ci>
+              <ci> K_Others_Plasma </ci>
             </apply>
           </math>
         </kineticLaw>
