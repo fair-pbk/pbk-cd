@@ -53,7 +53,6 @@ model PBK_Cd()
     VBlood := VBloodc * BW            # Blood volume [L]
 
     # Compartments
-    compartment Intestine = 1                          # Comportment of intestine / gut lumen [L]
     compartment Metallothionein = 1                    # Compartment of Metallothionein [L]
     compartment Liver := VLiverc * BW                  # Compartment of liver [L]
     compartment Kidney := VKidneyc * BW                # Compartment of kidneys [L]
@@ -66,12 +65,11 @@ model PBK_Cd()
     compartment Others := BW - (Liver + Kidney + Gut + Lung + VBlood)  # Compartment of other tissues [L]
 
     # Species
-    substanceOnly species AIntestine in Intestine             # Quantity of cadmium in intestine (µg)
     substanceOnly species AGut in Gut                         # Quantity of cadmium in gut (µg)
     substanceOnly species ALiver in Liver                     # Quantity of cadmium in liver (µg)
     substanceOnly species AKidney in Kidney                   # Quantity of cadmium in kidneys (µg)
     substanceOnly species ALung in Lung                       # Quantity of cadmium in lungs (µg)
-    substanceOnly species AUrine in Urine                     # Concentration of cadmium in urine considering creatinine excretion
+    substanceOnly species AUrine in Urine                     # Cumulative quantity of cadmium in urine (µg)
     substanceOnly species AFeces in Feces                     # Quantity of cadmium in feces (µg)
     substanceOnly species APlasma in Plasma                   # Quantity of cadmium in plasma (µg)
     substanceOnly species ARBC in RBC                         # Quantity of cadmium in red blood cells (µg)
@@ -79,7 +77,6 @@ model PBK_Cd()
     substanceOnly species AOthers in Others                   # Quantity of cadmium in the rest of the body (µg)
 
     # Initial amounts
-    AIntestine       = 0
     AGut             = 0
     ALiver           = 0
     AKidney          = 0
@@ -92,26 +89,25 @@ model PBK_Cd()
     AOthers          = 0
 
     # Total uptake [amount per day]
-    Uptake :=  AGut * Ka + ALung * K_Inhalation_Uptake
+    Uptake :=  AGut * Ka * Fabs + ALung * K_Inhalation_Uptake + ALung * K_Lung_Intestine * Fabs
 
     # Uptake in Metallothionein [amount per day]
     Uptake_Metallothionein := F_Uptake_Metallothionein * Uptake
 
     # Transfer from gut to plasma [amount per day]
-    Gut_Plasma_NoLimit := (1 - F_Uptake_Metallothionein) * AGut * Ka
-    Gut_Plasma_Limit := AGut * Ka - Max_Metallothionein * (AGut * Ka / (AGut * Ka + ALung * K_Inhalation_Uptake))
+    Gut_Plasma_NoLimit := (1 - F_Uptake_Metallothionein) * AGut * Ka * Fabs + ALung * K_Lung_Intestine * Fabs
+    Gut_Plasma_Limit := (AGut * Ka * Fabs + ALung * K_Lung_Intestine * Fabs) - Max_Metallothionein * ((AGut * Ka * Fabs + ALung * K_Lung_Intestine * Fabs) / Uptake)
     Gut_Plasma := piecewise(Gut_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Gut_Plasma_Limit)
 
     # Transfer from lung to plasma [amount per day]
     Lung_Plasma_NoLimit := (1 - F_Uptake_Metallothionein) * ALung * K_Inhalation_Uptake
-    Lung_Plasma_Limit := ALung * K_Inhalation_Uptake - Max_Metallothionein * (ALung * K_Inhalation_Uptake / (AGut * Ka + ALung * K_Inhalation_Uptake))
+    Lung_Plasma_Limit := ALung * K_Inhalation_Uptake - Max_Metallothionein * (ALung * K_Inhalation_Uptake / Uptake)
     Lung_Plasma := piecewise(Lung_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Lung_Plasma_Limit)
 
     # Reactions
     AGut          -> APlasma;           Gut_Plasma
-    AGut          -> AMetallothionein;  (AGut * Ka) - Gut_Plasma
-    AIntestine    -> AGut;              AIntestine * Fabs
-    AIntestine    -> AFeces;            AIntestine * (1 - Fabs)
+    AGut          -> AMetallothionein;  (AGut * Ka * Fabs + ALung * K_Lung_Intestine * Fabs) - Gut_Plasma
+    AGut          -> AFeces;            AGut * (1 - Fabs)
     ALung         -> APlasma;           Lung_Plasma
     ALung         -> AMetallothionein;  ALung * K_Inhalation_Uptake - Lung_Plasma
     ALung         -> AIntestine;        ALung * K_Lung_Intestine
