@@ -300,7 +300,7 @@
       </unitDefinition>
     </listOfUnitDefinitions>
     <listOfCompartments>
-      <compartment id="Intestine" name="intestine" spatialDimensions="3" size="1" constant="true"/>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
       <compartment id="Metallothionein" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_Liver" id="Liver" name="liver" spatialDimensions="3" size="0.098460625" units="L" constant="false">
         <annotation>
@@ -409,7 +409,6 @@
       </compartment>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="AIntestine" name="Amount of intestine" compartment="Intestine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
       <species metaid="meta_AGut" id="AGut" name="amount of chemical in gut" compartment="Gut" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -516,6 +515,7 @@
           </rdf:RDF>
         </annotation>
       </species>
+      <species id="AIntestine" name="Amount of intestine" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="DeltaBW" name="Variability on bodyweight" value="1" units="UNITLESS" constant="true"/>
@@ -878,11 +878,18 @@
               <times/>
               <ci> AGut </ci>
               <ci> Ka </ci>
+              <ci> Fabs </ci>
             </apply>
             <apply>
               <times/>
               <ci> ALung </ci>
               <ci> K_Inhalation_Uptake </ci>
+            </apply>
+            <apply>
+              <times/>
+              <ci> ALung </ci>
+              <ci> K_Lung_Intestine </ci>
+              <ci> Fabs </ci>
             </apply>
           </apply>
         </math>
@@ -899,14 +906,24 @@
       <assignmentRule variable="Gut_Plasma_NoLimit">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
-            <times/>
+            <plus/>
             <apply>
-              <minus/>
-              <cn type="integer"> 1 </cn>
-              <ci> F_Uptake_Metallothionein </ci>
+              <times/>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> F_Uptake_Metallothionein </ci>
+              </apply>
+              <ci> AGut </ci>
+              <ci> Ka </ci>
+              <ci> Fabs </ci>
             </apply>
-            <ci> AGut </ci>
-            <ci> Ka </ci>
+            <apply>
+              <times/>
+              <ci> ALung </ci>
+              <ci> K_Lung_Intestine </ci>
+              <ci> Fabs </ci>
+            </apply>
           </apply>
         </math>
       </assignmentRule>
@@ -915,9 +932,19 @@
           <apply>
             <minus/>
             <apply>
-              <times/>
-              <ci> AGut </ci>
-              <ci> Ka </ci>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> AGut </ci>
+                <ci> Ka </ci>
+                <ci> Fabs </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> ALung </ci>
+                <ci> K_Lung_Intestine </ci>
+                <ci> Fabs </ci>
+              </apply>
             </apply>
             <apply>
               <times/>
@@ -925,23 +952,21 @@
               <apply>
                 <divide/>
                 <apply>
-                  <times/>
-                  <ci> AGut </ci>
-                  <ci> Ka </ci>
-                </apply>
-                <apply>
                   <plus/>
                   <apply>
                     <times/>
                     <ci> AGut </ci>
                     <ci> Ka </ci>
+                    <ci> Fabs </ci>
                   </apply>
                   <apply>
                     <times/>
                     <ci> ALung </ci>
-                    <ci> K_Inhalation_Uptake </ci>
+                    <ci> K_Lung_Intestine </ci>
+                    <ci> Fabs </ci>
                   </apply>
                 </apply>
+                <ci> Uptake </ci>
               </apply>
             </apply>
           </apply>
@@ -997,19 +1022,7 @@
                   <ci> ALung </ci>
                   <ci> K_Inhalation_Uptake </ci>
                 </apply>
-                <apply>
-                  <plus/>
-                  <apply>
-                    <times/>
-                    <ci> AGut </ci>
-                    <ci> Ka </ci>
-                  </apply>
-                  <apply>
-                    <times/>
-                    <ci> ALung </ci>
-                    <ci> K_Inhalation_Uptake </ci>
-                  </apply>
-                </apply>
+                <ci> Uptake </ci>
               </apply>
             </apply>
           </apply>
@@ -1054,14 +1067,27 @@
         <listOfProducts>
           <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="ALung"/>
+        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <minus/>
               <apply>
-                <times/>
-                <ci> AGut </ci>
-                <ci> Ka </ci>
+                <plus/>
+                <apply>
+                  <times/>
+                  <ci> AGut </ci>
+                  <ci> Ka </ci>
+                  <ci> Fabs </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> ALung </ci>
+                  <ci> K_Lung_Intestine </ci>
+                  <ci> Fabs </ci>
+                </apply>
               </apply>
               <ci> Gut_Plasma </ci>
             </apply>
@@ -1070,24 +1096,7 @@
       </reaction>
       <reaction id="_J2" reversible="true">
         <listOfReactants>
-          <speciesReference species="AIntestine" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
           <speciesReference species="AGut" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> AIntestine </ci>
-              <ci> Fabs </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="_J3" reversible="true">
-        <listOfReactants>
-          <speciesReference species="AIntestine" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
           <speciesReference species="AFeces" stoichiometry="1" constant="true"/>
@@ -1096,7 +1105,7 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> AIntestine </ci>
+              <ci> AGut </ci>
               <apply>
                 <minus/>
                 <cn type="integer"> 1 </cn>
@@ -1106,7 +1115,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J4" reversible="true">
+      <reaction id="_J3" reversible="true">
         <listOfReactants>
           <speciesReference species="ALung" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1119,7 +1128,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J5" reversible="true">
+      <reaction id="_J4" reversible="true">
         <listOfReactants>
           <speciesReference species="ALung" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1140,7 +1149,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J6" reversible="true">
+      <reaction id="_J5" reversible="true">
         <listOfReactants>
           <speciesReference species="ALung" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1157,7 +1166,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J7" reversible="true">
+      <reaction id="_J6" reversible="true">
         <listOfReactants>
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1174,7 +1183,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J8" reversible="true">
+      <reaction id="_J7" reversible="true">
         <listOfReactants>
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1191,7 +1200,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J9" reversible="true">
+      <reaction id="_J8" reversible="true">
         <listOfReactants>
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1208,7 +1217,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J10" reversible="true">
+      <reaction id="_J9" reversible="true">
         <listOfReactants>
           <speciesReference species="APlasma" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1225,7 +1234,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J11" reversible="true">
+      <reaction id="_J10" reversible="true">
         <listOfReactants>
           <speciesReference species="ARBC" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1242,7 +1251,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J12" reversible="true">
+      <reaction id="_J11" reversible="true">
         <listOfReactants>
           <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1259,7 +1268,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J13" reversible="true">
+      <reaction id="_J12" reversible="true">
         <listOfReactants>
           <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1280,7 +1289,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J14" reversible="true">
+      <reaction id="_J13" reversible="true">
         <listOfReactants>
           <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1297,7 +1306,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J15" reversible="true">
+      <reaction id="_J14" reversible="true">
         <listOfReactants>
           <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1314,7 +1323,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J16" reversible="true">
+      <reaction id="_J15" reversible="true">
         <listOfReactants>
           <speciesReference species="ALiver" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1331,7 +1340,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J17" reversible="true">
+      <reaction id="_J16" reversible="true">
         <listOfReactants>
           <speciesReference species="AKidney" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1348,7 +1357,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J18" reversible="true">
+      <reaction id="_J17" reversible="true">
         <listOfReactants>
           <speciesReference species="AKidney" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -1365,7 +1374,7 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J19" reversible="true">
+      <reaction id="_J18" reversible="true">
         <listOfReactants>
           <speciesReference species="AOthers" stoichiometry="1" constant="true"/>
         </listOfReactants>
