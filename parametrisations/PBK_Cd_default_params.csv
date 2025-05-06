@@ -1,6 +1,6 @@
 idModelInstance,Parameter,Value,Unit,Description,Reference
 PBK_Cd_PARAM,DeltaBW,1.0,dimensionless,Variability on bodyweight,
-PBK_Cd_PARAM,Fabs,0.048,/d,Fraction absorbed in intestine,
+PBK_Cd_PARAM,Fabs,0.048,dimensionless,Fraction absorbed in intestine,
 PBK_Cd_PARAM,Ka,0.05,/d,Transfer from intestine to total uptake,
 PBK_Cd_PARAM,K_Inhalation_Uptake,0.05,/d,Transfer from lung to total intake,
 PBK_Cd_PARAM,K_Lung_Intestine,0.005,/d,Rate of absorption from Lung to intestine,

@@ -42,7 +42,7 @@ BW,parameter,body weight,L,rdf,BQM_IS,http://purl.obolibrary.org/obo/PBPKO_00008
 BW,parameter,,,rdf,BQB_IS,,
 Age,parameter,age,y,rdf,BQM_IS,http://purl.obolibrary.org/obo/PBPKO_00521,
 Age,parameter,,,rdf,BQB_IS,,
-Fabs,parameter,Fraction absorbed in intestine,/d,rdf,BQM_IS,http://purl.obolibrary.org/obo/PBPKO_00142,
+Fabs,parameter,Fraction absorbed in intestine,UNITLESS,rdf,BQM_IS,http://purl.obolibrary.org/obo/PBPKO_00142,
 Fabs,parameter,,,rdf,BQB_IS,,
 Ka,parameter,Transfer from intestine to total uptake,/d,rdf,BQM_IS,,
 Ka,parameter,,,rdf,BQB_IS,,
