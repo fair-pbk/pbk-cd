@@ -20,38 +20,38 @@ model PBK_Cd()
 
     DeltaBW = 1
     BW := f_BW(Age)*DeltaBW             # Body weight as function age [kg]
-    Age := time/365                     # Evolution of the age (in years)
+    Age := time/365                     # Evolution of the age [y]
 
     ## Kinetic parameters
-    Fabs = 0.048                        # Fraction of GI-tract Cd retained in epithelium
-    Ka = 0.05                           # Rate of transfer of Cd in the GI-tract to uptake pool
-    K_Inhalation_Uptake = 0.05          # Rate of transfer of inhalation intake to uptake pool
-    K_Lung_Intestine = 0.005            # Rate of transfer of Cd in lungs to the GI-tract
-    F_Uptake_Metallothionein = 0.25     # Fraction of uptake pool transferred to metallothionein
-    Max_Metallothionein = 1             # Maximum mass of Cd that can bind to metallothionein per day
-    K_Plasma_Others = 0.44              # Transfer from plasma to the rest of the body
-    K_Others_Plasma = 0.00014           # Transfer from rest of the body to plasma
-    K_Plasma_Feces = 0.27               # Transfer from plasma to feces
-    K_Plasma_Liver = 0.25               # Transfer from plasma to liver
-    K_Liver_Plasma = 0.00003            # Transfer from liver to plasma
-    K_Liver_Metallothionein = 0.00016   # Transfer from liver to metallothionein
-    K_Liver_Feces = 0.00005             # Transfer from liver to feces
-    K_RBC_Metallothionein = 0.012       # Transfer from red blood cells to metallothionein
-    K_Metallothionein_Kidney := f_Metallothionein_Kidney(Age)
-    K_Kidney_Plasma = 0.00001           # Transfer from kidney to plasma
-    K_Kidney_Urine := f_Kidney_Urine(Age, Increase_Cd_Urine) # Transfer from kidney to urine
+    Fabs = 0.048                        # Fraction of GI-tract Cd retained in epithelium [-]
+    Ka = 0.05                           # Rate of transfer of Cd in the GI-tract to uptake pool [/d]
+    K_Inhalation_Uptake = 0.05          # Rate of transfer of inhalation intake to uptake pool [/d]
+    K_Lung_Intestine = 0.005            # Rate of transfer of Cd in lungs to the GI-tract [/d]
+    F_Uptake_Metallothionein = 0.25     # Fraction of uptake pool transferred to metallothionein [-]
+    Max_Metallothionein = 1             # Maximum mass of Cd that can bind to metallothionein per day [ug/d]
+    K_Plasma_Others = 0.44              # Transfer from plasma to the rest of the body [/d]
+    K_Others_Plasma = 0.00014           # Transfer from rest of the body to plasma [/d]
+    K_Plasma_Feces = 0.27               # Transfer from plasma to feces [/d]
+    K_Plasma_Liver = 0.25               # Transfer from plasma to liver [/d]
+    K_Liver_Plasma = 0.00003            # Transfer from liver to plasma [/d]
+    K_Liver_Metallothionein = 0.00016   # Transfer from liver to metallothionein [/d]
+    K_Liver_Feces = 0.00005             # Transfer from liver to feces [/d]
+    K_RBC_Metallothionein = 0.012       # Transfer from red blood cells to metallothionein [/d]
+    K_Metallothionein_Kidney := f_Metallothionein_Kidney(Age) # Transfer from metallothionein to kidney [/d]
+    K_Kidney_Plasma = 0.00001           # Transfer from kidney to plasma [/d]
+    K_Kidney_Urine := f_Kidney_Urine(Age, Increase_Cd_Urine) # Transfer from kidney to urine [/d]
     Increase_Cd_Urine = 0.0000011       # Temporal factor increasing Cd elimination in urine
-    K_Plasma_RBC = 0.04                 # Transfer from plasma to red blood cells
+    K_Plasma_RBC = 0.04                 # Transfer from plasma to red blood cells [/d]
 
     # Physiological parameters
-    VLiverc = 0.025                   # Fraction of the volume of liver
-    VKidneyc = 0.004                  # Fraction of the volume of kidney
-    VGutc = 0.0182                    # Fraction of the volume of gut
-    VLungc = 0.0068                   # Fraction of the volume of lung
-    VBloodc = 0.076                   # Fraction of the volume of blood
-    HCT = 0.425                       # Hematocrit
+    VLiverc = 0.025                     # Fraction of the volume of liver [-]
+    VKidneyc = 0.004                    # Fraction of the volume of kidney [-]
+    VGutc = 0.0182                      # Fraction of the volume of gut [-]
+    VLungc = 0.0068                     # Fraction of the volume of lung [-]
+    VBloodc = 0.076                     # Fraction of the volume of blood [-]
+    HCT = 0.425                         # Hematocrit [-]
 
-    VBlood := VBloodc * BW            # Blood volume [L]
+    VBlood := VBloodc * BW              # Blood volume [L]
 
     # Compartments
     compartment Metallothionein = 1                    # Compartment of Metallothionein [L]
@@ -66,16 +66,16 @@ model PBK_Cd()
     compartment Others := BW - (Liver + Kidney + Gut + Lung + VBlood)  # Compartment of other tissues [L]
 
     # Species
-    substanceOnly species AGut in Gut                         # Quantity of cadmium in gut (µg)
-    substanceOnly species ALiver in Liver                     # Quantity of cadmium in liver (µg)
-    substanceOnly species AKidney in Kidney                   # Quantity of cadmium in kidneys (µg)
-    substanceOnly species ALung in Lung                       # Quantity of cadmium in lungs (µg)
-    substanceOnly species AUrine in Urine                     # Cumulative quantity of cadmium in urine (µg)
-    substanceOnly species AFeces in Feces                     # Quantity of cadmium in feces (µg)
-    substanceOnly species APlasma in Plasma                   # Quantity of cadmium in plasma (µg)
-    substanceOnly species ARBC in RBC                         # Quantity of cadmium in red blood cells (µg)
-    substanceOnly species AMetallothionein in Metallothionein # Quantity of cadmium in metallothionein (µg)
-    substanceOnly species AOthers in Others                   # Quantity of cadmium in the rest of the body (µg)
+    substanceOnly species AGut in Gut                         # Quantity of cadmium in gut [ug]
+    substanceOnly species ALiver in Liver                     # Quantity of cadmium in liver [ug]
+    substanceOnly species AKidney in Kidney                   # Quantity of cadmium in kidneys [ug]
+    substanceOnly species ALung in Lung                       # Quantity of cadmium in lungs [ug]
+    substanceOnly species AUrine in Urine                     # Cumulative quantity of cadmium in urine [ug]
+    substanceOnly species AFeces in Feces                     # Quantity of cadmium in feces [ug]
+    substanceOnly species APlasma in Plasma                   # Quantity of cadmium in plasma [ug]
+    substanceOnly species ARBC in RBC                         # Quantity of cadmium in red blood cells [ug]
+    substanceOnly species AMetallothionein in Metallothionein # Quantity of cadmium in metallothionein [ug]
+    substanceOnly species AOthers in Others                   # Quantity of cadmium in the rest of the body [ug]
 
     # Initial amounts
     AGut             = 0
