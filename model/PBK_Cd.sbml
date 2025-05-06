@@ -300,7 +300,6 @@
       </unitDefinition>
     </listOfUnitDefinitions>
     <listOfCompartments>
-      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
       <compartment id="Metallothionein" name="metallothionein" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_Liver" id="Liver" name="liver" spatialDimensions="3" size="0.098460625" units="L" constant="false">
         <annotation>
@@ -515,7 +514,6 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species id="AIntestine" name="Amount of intestine" compartment="default_compartment" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="DeltaBW" name="Variability on bodyweight" value="1" units="UNITLESS" constant="true"/>
@@ -885,12 +883,6 @@
               <ci> ALung </ci>
               <ci> K_Inhalation_Uptake </ci>
             </apply>
-            <apply>
-              <times/>
-              <ci> ALung </ci>
-              <ci> K_Lung_Intestine </ci>
-              <ci> Fabs </ci>
-            </apply>
           </apply>
         </math>
       </assignmentRule>
@@ -906,24 +898,15 @@
       <assignmentRule variable="Gut_Plasma_NoLimit">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
-            <plus/>
+            <times/>
             <apply>
-              <times/>
-              <apply>
-                <minus/>
-                <cn type="integer"> 1 </cn>
-                <ci> F_Uptake_Metallothionein </ci>
-              </apply>
-              <ci> AGut </ci>
-              <ci> Ka </ci>
-              <ci> Fabs </ci>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> F_Uptake_Metallothionein </ci>
             </apply>
-            <apply>
-              <times/>
-              <ci> ALung </ci>
-              <ci> K_Lung_Intestine </ci>
-              <ci> Fabs </ci>
-            </apply>
+            <ci> AGut </ci>
+            <ci> Ka </ci>
+            <ci> Fabs </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -952,19 +935,10 @@
               <apply>
                 <divide/>
                 <apply>
-                  <plus/>
-                  <apply>
-                    <times/>
-                    <ci> AGut </ci>
-                    <ci> Ka </ci>
-                    <ci> Fabs </ci>
-                  </apply>
-                  <apply>
-                    <times/>
-                    <ci> ALung </ci>
-                    <ci> K_Lung_Intestine </ci>
-                    <ci> Fabs </ci>
-                  </apply>
+                  <times/>
+                  <ci> AGut </ci>
+                  <ci> Ka </ci>
+                  <ci> Fabs </ci>
                 </apply>
                 <ci> Uptake </ci>
               </apply>
@@ -1067,27 +1041,15 @@
         <listOfProducts>
           <speciesReference species="AMetallothionein" stoichiometry="1" constant="true"/>
         </listOfProducts>
-        <listOfModifiers>
-          <modifierSpeciesReference species="ALung"/>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <minus/>
               <apply>
-                <plus/>
-                <apply>
-                  <times/>
-                  <ci> AGut </ci>
-                  <ci> Ka </ci>
-                  <ci> Fabs </ci>
-                </apply>
-                <apply>
-                  <times/>
-                  <ci> ALung </ci>
-                  <ci> K_Lung_Intestine </ci>
-                  <ci> Fabs </ci>
-                </apply>
+                <times/>
+                <ci> AGut </ci>
+                <ci> Ka </ci>
+                <ci> Fabs </ci>
               </apply>
               <ci> Gut_Plasma </ci>
             </apply>
@@ -1154,7 +1116,7 @@
           <speciesReference species="ALung" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="AIntestine" stoichiometry="1" constant="true"/>
+          <speciesReference species="AGut" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
