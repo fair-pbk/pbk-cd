@@ -669,7 +669,7 @@
       </parameter>
       <parameter id="Increase_Cd_Urine" name="Temporal factor increasing Cd elimination in urine" value="1.1e-06" units="PER_DAY" constant="true"/>
       <parameter id="K_Plasma_RBC" name="Transfer from plasma to red blood cells" value="0.04" units="PER_DAY" constant="true"/>
-      <parameter metaid="meta_VLiverc" id="VLiverc" name="Fraction of volume of liver" value="0.025" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VLiverc" id="VLiverc" name="Volume of liver as fraction of bodyweight" value="0.025" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VLiverc">
@@ -682,7 +682,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VKidneyc" id="VKidneyc" name="Fraction of volume of kidney" value="0.004" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VKidneyc" id="VKidneyc" name="Volume of kidney as fraction of bodyweight" value="0.004" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VKidneyc">
@@ -695,7 +695,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VGutc" id="VGutc" name="Fraction of volume of gut" value="0.0182" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VGutc" id="VGutc" name="Volume of gut as fraction of bodyweight" value="0.0182" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VGutc">
@@ -708,7 +708,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VLungc" id="VLungc" name="Fraction of volume of lung" value="0.0068" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VLungc" id="VLungc" name="Volume of lung as fraction of bodyweight" value="0.0068" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VLungc">
@@ -721,7 +721,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="VBloodc" name="Fraction of volume of blood" value="0.076" units="UNITLESS" constant="true"/>
+      <parameter id="VBloodc" name="Volume of blood as fraction of bodyweight" value="0.076" units="UNITLESS" constant="true"/>
       <parameter metaid="meta_HCT" id="HCT" name="Hematocrit" value="0.425" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -748,13 +748,13 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="Uptake" name="Theorical total dose for metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Uptake" name="Total (systemic) uptake" value="0" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="Uptake_Metallothionein" name="Transfer from total uptake to metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Gut_Plasma_NoLimit" name="Dose from gut to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Gut_Plasma_Limit" name="Dose from gut to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Gut_Plasma_NoLimit" name="Transfer from gut to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Gut_Plasma_Limit" name="Transfer from gut to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="Gut_Plasma" name="Transfer from gut to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Lung_Plasma_NoLimit" name="Dose from lung to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="Lung_Plasma_Limit" name="Dose from lung to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Lung_Plasma_NoLimit" name="Transfer from lung to plasma with unsaturated metallothionein" value="0" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="Lung_Plasma_Limit" name="Transfer from lung to plasma with saturated metallothionein" value="NaN" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="Lung_Plasma" name="Transfer from lung to plasma" value="0" units="MicroGM_PER_DAY" constant="false"/>
     </listOfParameters>
     <listOfRules>

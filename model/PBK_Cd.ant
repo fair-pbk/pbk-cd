@@ -89,18 +89,18 @@ model PBK_Cd()
     AMetallothionein = 0
     AOthers          = 0
 
-    # Total uptake [amount per day]
+    # Total uptake [ug/d]
     Uptake :=  AGut * Ka * Fabs + ALung * K_Inhalation_Uptake
 
-    # Uptake in Metallothionein [amount per day]
+    # Uptake in Metallothionein [ug/d]
     Uptake_Metallothionein := F_Uptake_Metallothionein * Uptake
 
-    # Transfer from gut to plasma [amount per day]
+    # Transfer from gut to plasma [ug/d]
     Gut_Plasma_NoLimit := (1 - F_Uptake_Metallothionein) * (AGut * Ka * Fabs)
     Gut_Plasma_Limit := (AGut * Ka * Fabs + ALung * K_Lung_Intestine * Fabs) - Max_Metallothionein * ((AGut * Ka * Fabs) / Uptake)
     Gut_Plasma := piecewise(Gut_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Gut_Plasma_Limit)
 
-    # Transfer from lung to plasma [amount per day]
+    # Transfer from lung to plasma [ug/d]
     Lung_Plasma_NoLimit := (1 - F_Uptake_Metallothionein) * ALung * K_Inhalation_Uptake
     Lung_Plasma_Limit := ALung * K_Inhalation_Uptake - Max_Metallothionein * (ALung * K_Inhalation_Uptake / Uptake)
     Lung_Plasma := piecewise(Lung_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Lung_Plasma_Limit)
