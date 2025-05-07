@@ -293,6 +293,11 @@
           <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
+      <unitDefinition id="KiloGM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
       <unitDefinition id="YR">
         <listOfUnits>
           <unit kind="second" exponent="1" scale="0" multiplier="31557600"/>
@@ -307,6 +312,12 @@
         <listOfUnits>
           <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
           <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="L_PER_KiloGM">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="gram" exponent="-1" scale="3" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
     </listOfUnitDefinitions>
@@ -528,7 +539,7 @@
     </listOfSpecies>
     <listOfParameters>
       <parameter id="DeltaBW" name="Variability on bodyweight" value="1" units="UNITLESS" constant="true"/>
-      <parameter metaid="meta_BW" id="BW" name="body weight" value="3.938425" units="L" constant="false">
+      <parameter metaid="meta_BW" id="BW" name="body weight" value="3.938425" units="KiloGM" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_BW">
@@ -669,7 +680,7 @@
       </parameter>
       <parameter id="Increase_Cd_Urine" name="Temporal factor increasing Cd elimination in urine" value="1.1e-06" units="PER_DAY" constant="true"/>
       <parameter id="K_Plasma_RBC" name="Transfer from plasma to red blood cells" value="0.04" units="PER_DAY" constant="true"/>
-      <parameter metaid="meta_VLiverc" id="VLiverc" name="Volume of liver as fraction of bodyweight" value="0.025" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VLiverc" id="VLiverc" name="Volume of liver as fraction of bodyweight" value="0.025" units="L_PER_KiloGM" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VLiverc">
@@ -682,7 +693,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VKidneyc" id="VKidneyc" name="Volume of kidney as fraction of bodyweight" value="0.004" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VKidneyc" id="VKidneyc" name="Volume of kidney as fraction of bodyweight" value="0.004" units="L_PER_KiloGM" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VKidneyc">
@@ -695,7 +706,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VGutc" id="VGutc" name="Volume of gut as fraction of bodyweight" value="0.0182" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VGutc" id="VGutc" name="Volume of gut as fraction of bodyweight" value="0.0182" units="L_PER_KiloGM" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VGutc">
@@ -708,7 +719,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_VLungc" id="VLungc" name="Volume of lung as fraction of bodyweight" value="0.0068" units="UNITLESS" constant="true">
+      <parameter metaid="meta_VLungc" id="VLungc" name="Volume of lung as fraction of bodyweight" value="0.0068" units="L_PER_KiloGM" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_VLungc">
@@ -721,7 +732,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="VBloodc" name="Volume of blood as fraction of bodyweight" value="0.076" units="UNITLESS" constant="true"/>
+      <parameter id="VBloodc" name="Volume of blood as fraction of bodyweight" value="0.076" units="L_PER_KiloGM" constant="true"/>
       <parameter metaid="meta_HCT" id="HCT" name="Hematocrit" value="0.425" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -819,15 +830,28 @@
       <assignmentRule variable="Others">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
-            <minus/>
+            <times/>
             <ci> BW </ci>
             <apply>
-              <plus/>
-              <ci> Liver </ci>
-              <ci> Kidney </ci>
-              <ci> Gut </ci>
-              <ci> Lung </ci>
-              <ci> VBlood </ci>
+              <minus/>
+              <apply>
+                <minus/>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <minus/>
+                      <cn type="integer"> 1 </cn>
+                      <ci> VLiverc </ci>
+                    </apply>
+                    <ci> VKidneyc </ci>
+                  </apply>
+                  <ci> VGutc </ci>
+                </apply>
+                <ci> VLungc </ci>
+              </apply>
+              <ci> VBloodc </ci>
             </apply>
           </apply>
         </math>

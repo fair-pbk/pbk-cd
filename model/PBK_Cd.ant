@@ -63,7 +63,7 @@ model PBK_Cd()
     compartment Lung := VLungc * BW                    # Compartment of lungs [L]
     compartment Plasma := VBlood * (1 - HCT)           # Compartment of Plasma [L]
     compartment RBC := VBlood * HCT                    # Compartment of Red Blood Cells [L]
-    compartment Others := BW - (Liver + Kidney + Gut + Lung + VBlood)  # Compartment of other tissues [L]
+    compartment Others := BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)  # Compartment of other tissues [L]
 
     # Species
     substanceOnly species AGut in Gut                         # Quantity of cadmium in gut [ug]
