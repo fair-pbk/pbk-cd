@@ -1,0 +1,44 @@
+id: oral_single
+label: oral_single
+model_instances:
+  - id: PBK_Cd
+    label: PBK_Cd
+    model_path: ./model/PBK_Cd.sbml
+
+scenarios:
+  - id: oral_single
+    label: Oral single dose
+    duration: 4
+    evaluation_resolution: 24
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    initial_states:
+      - target: APlasma
+        amount: 100
+    dosing_events:
+      - type: single_bolus
+        target: AGut
+        amount: 1
+        time: 1
+    outputs:
+      - id: AGut
+        label: Amount in gut
+        output: AGut
+      - id: ALung
+        label: Amount in lung
+        output: ALung
+      - id: APlasma
+        label: Amount in plasma
+        output: APlasma
+      - id: ARBC
+        label: Amount in RBC
+        output: ARBC
+      - id: AMetallothionein
+        label: Amount in metallothionein
+        output: AMetallothionein
+      - id: AKidney
+        label: Amount in kidney
+        output: AKidney
+      - id: AOthers
+        label: Amount in rest
+        output: AOthers

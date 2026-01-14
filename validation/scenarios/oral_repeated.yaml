@@ -1,0 +1,42 @@
+id: oral_repeated
+label: oral_repeated
+model_instances:
+  - id: PBK_Cd
+    label: PBK_Cd
+    model_path: ./model/PBK_Cd.sbml
+
+scenarios:
+  - id: oral_repeated
+    label: Oral repeated dosing
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 10
+    evaluation_resolution: 24
+    dosing_events:
+      - type: repeated_bolus
+        target: AGut
+        amount: 100
+        time: 0
+        interval: 1
+    outputs:
+      - id: AGut
+        label: Amount in gut
+        output: AGut
+      - id: ALung
+        label: Amount in lung
+        output: ALung
+      - id: APlasma
+        label: Amount in plasma
+        output: APlasma
+      - id: ARBC
+        label: Amount in RBC
+        output: ARBC
+      - id: AMetallothionein
+        label: Amount in metallothionein
+        output: AMetallothionein
+      - id: AKidney
+        label: Amount in kidney
+        output: AKidney
+      - id: AOthers
+        label: Amount in rest
+        output: AOthers
