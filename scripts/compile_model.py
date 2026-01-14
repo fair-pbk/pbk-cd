@@ -16,10 +16,9 @@ import uuid
 import tellurium as te
 import libsbml as ls
 import logging
-import pandas as pd
 from pathlib import Path
 
-model_path = './model/'
+MODEL_PATH = './model/'
 
 from sbmlpbkutils import PbkModelValidator
 from sbmlpbkutils import AnnotationsTemplateGenerator
@@ -35,9 +34,9 @@ def create_file_logger(logfile: str) -> logging.Logger:
     logger.addHandler(fh)
     return logger
 
-for file in os.listdir(model_path):
+for file in os.listdir(MODEL_PATH):
     if file.endswith('.ant'):
-        ant_file = os.path.join(model_path, file)
+        ant_file = os.path.join(MODEL_PATH, file)
         sbml_file = Path(ant_file).with_suffix('.sbml')
 
         print(f"Creating SBML file [{sbml_file}] from Antimony file [{ant_file}].")

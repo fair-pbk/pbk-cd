@@ -21,5 +21,8 @@ venv.bak/
 # Log files
 *.log
 
+# Cache files
+.cache/
+
 # Folders
-**/__testoutputs__/*
+validation/outputs
