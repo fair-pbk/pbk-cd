@@ -42,10 +42,10 @@ for (i in c(1:10)){
   Cd_Kidney <- rbind(Cd_Kidney, Result_Cadmium$kidney_burden)
   Cd_Blood <- rbind(Cd_Blood, Result_Cadmium$BLOOD)
   
-  save(Cd_Urinecr, file = "Results/Cd_Urinecr_aggregated.RData")
-  save(Cd_Urine, file = "Results/Cd_Urine_aggregated.RData")
-  save(Cd_Kidney, file = "Results/Cd_Kidney_aggregated.RData")
-  save(Cd_Blood, file = "Results/Cd_Blood_aggregated.RData")
+  save(Cd_Urinecr, file = "Results/Cd_Urinecr_single.RData")
+  save(Cd_Urine, file = "Results/Cd_Urine_single.RData")
+  save(Cd_Kidney, file = "Results/Cd_Kidney_single.RData")
+  save(Cd_Blood, file = "Results/Cd_Blood_single.RData")
   
   print(i)
 }
