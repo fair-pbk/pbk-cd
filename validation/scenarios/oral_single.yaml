@@ -8,7 +8,7 @@ model_instances:
 scenarios:
   - id: oral_single
     label: Oral single dose
-    duration: 4
+    duration: 10
     evaluation_resolution: 24
     time_unit: DAY
     amount_unit: MICROGRAMS
@@ -20,6 +20,10 @@ scenarios:
         target: AGut
         amount: 1
         time: 1
+    parameters:
+      Age: 30
+      AgeRef: 30
+      BWRef: 70
     outputs:
       - id: AGut
         label: Amount in gut
@@ -42,3 +46,18 @@ scenarios:
       - id: AOthers
         label: Amount in rest
         output: AOthers
+    reference_data:
+      - id: reference
+        label: R/mrgsolve
+        file_path: validation/outputs/oral_single/results_R.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          ALung: LUNG
+          APlasma: PLASMA
+          ALiver: LIVER
+          AGut: GUT
+          AKidney: KIDNEY
+          AOthers: OTHER
+          ARBC: RBC
+          AMetallothionein: META

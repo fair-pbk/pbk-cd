@@ -9,7 +9,22 @@ from sbmlpbkutils import run_config, load_config, plot_simulation_results
 
 CONFIGS_PATH = './validation/scenarios/'
 OUTPUT_PATH = './validation/outputs/'
-R_CONFIGS = []
+R_CONFIGS = [
+{
+    'id': 'R_repeated_dose',
+    'file_path': 'validation/R/run_validation_scenarios_repeated_dose.R',
+    'output_files': [
+        './validation/outputs/oral_repeated/results_R.csv'
+    ]
+},
+{
+    'id': 'R_single_dose',
+    'file_path': 'validation/R/run_validation_scenarios_single_dose.R',
+    'output_files': [
+        './validation/outputs/oral_single/results_R.csv'
+    ]
+}
+]
 
 # Configure logger for formatted console output
 console_logger = logging.getLogger('create_simulation_reports')
@@ -89,8 +104,8 @@ def run_r_validation_scenarios(
     for r_config in R_CONFIGS:
         out_files = r_config['output_files']
         if not force_recompute and all([os.path.exists(o) for o in out_files]):
-            logger.info(f"Skipping {r_config['id']} validation scenarios: results already available")
-            return
+            logger.info(f"Skipping R config [{r_config['id']}]: results already available")
+            continue
 
         # Run R validation scenarios
         logger.info("Running R validation scenarios")
