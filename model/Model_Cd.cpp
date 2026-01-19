@@ -10,6 +10,10 @@ Delta_HT = 1    // Variability of height
 
 Delta_creat = 1 // Variability of creatinine excretion
 
+wbw = 70
+
+year = 30
+
 // Variability for male
 	Delta_Brain_M = 1
 	Delta_Kidney_M = 1
@@ -84,19 +88,19 @@ $MAIN
 double year = TIME/365;
 
 // Poids corporel (kg) 
-double wbw = 3.0;
-double ht = 3.0;
-  if(SEXBABY == 1){
-  	wbw = (3.938425 + 0.7518199*year*12 - 0.02023793*pow(year*12,2) + 0.0002921682*pow(year*12,3) - 2.06762e-06*pow(year*12,4) + 8.469e-09*pow(year*12,5) - 2.188427e-11*pow(year*12,6) + 3.699776e-14*pow(year*12,7) - 4.099077e-17*pow(year*12,8) + 2.874804e-20*pow(year*12,9) - 1.159732e-23*pow(year*12,10) + 2.052602e-27*pow(year*12,11))*Delta_BW;
-  	ht = (53.14237 + 2.299147*year*12 - 0.04567729*pow(year*12,2) + 0.0005784706*pow(year*12,3) - 4.082151e-06*pow(year*12,4) + 1.729718e-08*pow(year*12,5) - 4.667123e-11*pow(year*12,6) + 8.238663e-14*pow(year*12,7) - 9.495884e-17*pow(year*12,8) + 6.892621e-20*pow(year*12,9) - 2.861566e-23*pow(year*12,10) + 5.182964e-27*pow(year*12,11))*Delta_HT;
-  }
-  else{
-  	wbw = (3.932403 + 0.6866462*year*12 - 0.01949911*pow(year*12,2) + 0.00031311*pow(year*12,3) - 2.466654e-06*pow(year*12,4) + 1.113217e-08*pow(year*12,5) - 3.131402e-11*pow(year*12,6) + 5.693737e-14*pow(year*12,7) - 6.706947e-17*pow(year*12,8) + 4.947858e-20*pow(year*12,9) - 2.079251e-23*pow(year*12,10) + 3.800367e-27*pow(year*12,11))*Delta_BW;
-  	ht = (54.7663 + 1.901851*year*12 - 0.03451895*pow(year*12,2) + 0.0004589584*pow(year*12,3) - 3.466838e-06*pow(year*12,4) + 1.557048e-08*pow(year*12,5) - 4.400249e-11*pow(year*12,6) + 8.052606e-14*pow(year*12,7) - 9.542125e-17*pow(year*12,8) + 7.073083e-20*pow(year*12,9) - 2.982651e-23*pow(year*12,10) + 5.463555e-27*pow(year*12,11))*Delta_HT;
-  }
+//double wbw = 3.0;
+//double ht = 3.0;
+//  if(SEXBABY == 1){
+//  	wbw = (3.938425 + 0.7518199*year*12 - 0.02023793*pow(year*12,2) + 0.0002921682*pow(year*12,3) - 2.06762e-06*pow(year*12,4) + 8.469e-09*pow(year*12,5) - 2.188427e-11*pow(year*12,6) + 3.699776e-14*pow(year*12,7) - 4.099077e-17*pow(year*12,8) + 2.874804e-20*pow(year*12,9) - 1.159732e-23*pow(year*12,10) + 2.052602e-27*pow(year*12,11))*Delta_BW;
+//  	ht = (53.14237 + 2.299147*year*12 - 0.04567729*pow(year*12,2) + 0.0005784706*pow(year*12,3) - 4.082151e-06*pow(year*12,4) + 1.729718e-08*pow(year*12,5) - 4.667123e-11*pow(year*12,6) + 8.238663e-14*pow(year*12,7) - 9.495884e-17*pow(year*12,8) + 6.892621e-20*pow(year*12,9) - 2.861566e-23*pow(year*12,10) + 5.182964e-27*pow(year*12,11))*Delta_HT;
+//  }
+//else{
+//  	wbw = (3.932403 + 0.6866462*year*12 - 0.01949911*pow(year*12,2) + 0.00031311*pow(year*12,3) - 2.466654e-06*pow(year*12,4) + 1.113217e-08*pow(year*12,5) - 3.131402e-11*pow(year*12,6) + 5.693737e-14*pow(year*12,7) - 6.706947e-17*pow(year*12,8) + 4.947858e-20*pow(year*12,9) - 2.079251e-23*pow(year*12,10) + 3.800367e-27*pow(year*12,11))*Delta_BW;
+//  	ht = (54.7663 + 1.901851*year*12 - 0.03451895*pow(year*12,2) + 0.0004589584*pow(year*12,3) - 3.466838e-06*pow(year*12,4) + 1.557048e-08*pow(year*12,5) - 4.400249e-11*pow(year*12,6) + 8.052606e-14*pow(year*12,7) - 9.542125e-17*pow(year*12,8) + 7.073083e-20*pow(year*12,9) - 2.982651e-23*pow(year*12,10) + 5.463555e-27*pow(year*12,11))*Delta_HT;
+//  }
 
   // Body Mass Index over lifetime (in kg/m^2)
-  double BMI = wbw/pow((ht/100),2);
+//  double BMI = wbw/pow((ht/100),2);
 	
   // Hematocrit (proportion of RBC in blood)
     //Mallick et al. (2020) or Pendse et al. (2020)
