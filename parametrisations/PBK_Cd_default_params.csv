@@ -1,5 +1,6 @@
 idModelInstance,Parameter,Value,Unit,Description,Reference
-PBK_Cd_PARAM,DeltaBW,1.0,dimensionless,Variability on bodyweight,
+PBK_Cd_PARAM,AgeRef,18.0,y,current age of reference indvididual in simulation,
+PBK_Cd_PARAM,BWRef,70.0,kg,body weight of reference indvididual in simulation,
 PBK_Cd_PARAM,Fabs,0.048,dimensionless,Fraction absorbed in intestine,
 PBK_Cd_PARAM,Ka,0.05,/d,Transfer from intestine to total uptake,
 PBK_Cd_PARAM,K_Inhalation_Uptake,0.05,/d,Transfer from lung to total intake,
