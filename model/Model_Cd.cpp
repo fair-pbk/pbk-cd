@@ -85,11 +85,11 @@ nb_cig = 15       // Consumption of cigarets by day
 $MAIN
 
 // Evolution of age with integrations
-double year = TIME/365;
+//double year = TIME/365;
 
 // Poids corporel (kg) 
 //double wbw = 3.0;
-//double ht = 3.0;
+double ht = 0.425;
 //  if(SEXBABY == 1){
 //  	wbw = (3.938425 + 0.7518199*year*12 - 0.02023793*pow(year*12,2) + 0.0002921682*pow(year*12,3) - 2.06762e-06*pow(year*12,4) + 8.469e-09*pow(year*12,5) - 2.188427e-11*pow(year*12,6) + 3.699776e-14*pow(year*12,7) - 4.099077e-17*pow(year*12,8) + 2.874804e-20*pow(year*12,9) - 1.159732e-23*pow(year*12,10) + 2.052602e-27*pow(year*12,11))*Delta_BW;
 //  	ht = (53.14237 + 2.299147*year*12 - 0.04567729*pow(year*12,2) + 0.0005784706*pow(year*12,3) - 4.082151e-06*pow(year*12,4) + 1.729718e-08*pow(year*12,5) - 4.667123e-11*pow(year*12,6) + 8.238663e-14*pow(year*12,7) - 9.495884e-17*pow(year*12,8) + 6.892621e-20*pow(year*12,9) - 2.861566e-23*pow(year*12,10) + 5.182964e-27*pow(year*12,11))*Delta_HT;
