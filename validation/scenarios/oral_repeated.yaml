@@ -23,6 +23,9 @@ scenarios:
       AgeRef: 30
       BWRef: 70
     outputs:
+      - id: BW
+        label: BW
+        output: BW
       - id: AGut
         label: Amount in gut
         output: AGut
@@ -38,28 +41,36 @@ scenarios:
       - id: AMetallothionein
         label: Amount in metallothionein
         output: AMetallothionein
-      - id: AKidney
-        label: Amount in kidney
-        output: AKidney
       - id: ALiver
         label: Amount in liver
         output: ALiver
+      - id: AKidney
+        label: Amount in kidney
+        output: AKidney
       - id: AOthers
         label: Amount in rest
         output: AOthers
+      - id: AUrine
+        label: Amount in urine
+        output: AUrine
+      - id: AFeces
+        label: Amount in feces
+        output: AFeces
     reference_data:
       - id: reference
-        label: R/mrgsolve
+        label: R
         file_path: validation/outputs/oral_repeated/results_R.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
+          BW: wbw
+          AGut: GUT
           ALung: LUNG
           APlasma: PLASMA
-          ALiver: LIVER
-          AGut: GUT
-          AKidney: KIDNEY
-          AOthers: OTHER
           ARBC: RBC
           AMetallothionein: META
-
+          ALiver: LIVER
+          AKidney: KIDNEY
+          AOthers: OTHER
+          AFeces: FECES
+          AUrine: URINE

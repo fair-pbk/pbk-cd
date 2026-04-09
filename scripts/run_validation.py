@@ -11,19 +11,34 @@ CONFIGS_PATH = './validation/scenarios/'
 OUTPUT_PATH = './validation/outputs/'
 R_CONFIGS = [
 {
-    'id': 'R_repeated_dose',
-    'file_path': 'validation/R/run_validation_scenarios_repeated_dose.R',
+    'id': 'r_single_dose',
+    'file_path': 'validation/R/run_validation_single_dose.R',
+    'output_files': [
+        './validation/outputs/oral_single/results_R.csv'
+    ]
+},
+{
+    'id': 'r_repeated_dose',
+    'file_path': 'validation/R/run_validation_repeated_dose.R',
     'output_files': [
         './validation/outputs/oral_repeated/results_R.csv'
     ]
 },
 {
-    'id': 'R_single_dose',
-    'file_path': 'validation/R/run_validation_scenarios_single_dose.R',
+    'id': 'mrgsolve_single_dose',
+    'file_path': 'validation/mrgsolve/run_validation_single_dose.R',
     'output_files': [
-        './validation/outputs/oral_single/results_R.csv'
+        './validation/outputs/oral_single/results_mrgsolve.csv'
     ]
-}
+},
+{
+    'id': 'mrgsolve_repeated_dose',
+    'file_path': 'validation/mrgsolve/run_validation_repeated_dose.R',
+    'output_files': [
+        './validation/outputs/oral_repeated/results_mrgsolve.csv'
+    ]
+},
+
 ]
 
 # Configure logger for formatted console output
