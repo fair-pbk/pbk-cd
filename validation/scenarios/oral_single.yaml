@@ -2,8 +2,9 @@ id: oral_single
 label: oral_single
 model_instances:
   - id: PBK_Cd
-    label: PBK_Cd
+    label: SBML
     model_path: ./model/PBK_Cd.sbml
+    param_file: './parametrisations/PBK_Cd_validation.params.csv'
 
 scenarios:
   - id: oral_single
@@ -14,17 +15,21 @@ scenarios:
     amount_unit: MICROGRAMS
     initial_states:
       - target: APlasma
-        amount: 100
+        amount: 0
     dosing_events:
       - type: single_bolus
         target: AGut
-        amount: 1
+        amount: 100
+        adjustment: BW # adjust for BW
         time: 1
     parameters:
       Age: 30
       AgeRef: 30
-      BWRef: 70
+      BWRef: 71.656
     outputs:
+      - id: BW
+        label: BW
+        output: BW
       - id: AGut
         label: Amount in gut
         output: AGut
@@ -46,6 +51,9 @@ scenarios:
       - id: AOthers
         label: Amount in rest
         output: AOthers
+      - id: AFeces
+        label: Amount in feces
+        output: AFeces
     reference_data:
       - id: reference
         label: R/mrgsolve
@@ -53,6 +61,7 @@ scenarios:
         series_type: TIMELINE
         time_unit: DAY
         mappings:
+          BW: wbw_f
           ALung: LUNG
           APlasma: PLASMA
           ALiver: LIVER
@@ -61,3 +70,4 @@ scenarios:
           AOthers: OTHER
           ARBC: RBC
           AMetallothionein: META
+          AFeces: FECES
