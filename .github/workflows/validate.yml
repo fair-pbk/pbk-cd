@@ -19,7 +19,7 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Create and annotate SBML
-        run: python scripts/create_sbml.py
+        run: python scripts/compile_model.py
       - name: Verify SBML model file unchanged
         run: |
           if ! git diff --quiet --diff-filter=M -- model/*.sbml; then
