@@ -20,7 +20,7 @@ scenarios:
       - type: single_bolus
         target: AGut
         amount: 1000
-        adjustment: BW # adjust for BW
+        #adjustment: BW # adjust for BW
         time: 0
     parameters:
       Age: 30
@@ -65,7 +65,7 @@ scenarios:
         label: R
         file_path: validation/outputs/oral_single/results_R.csv
         series_type: TIMELINE
-        time_unit: HOUR
+        time_unit: DAY
         mappings:
           BW: wbw
           AGut: GUT

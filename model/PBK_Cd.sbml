@@ -1117,6 +1117,7 @@
             <apply>
               <times/>
               <ci> AGut </ci>
+              <ci> Ka </ci>
               <apply>
                 <minus/>
                 <cn type="integer"> 1 </cn>

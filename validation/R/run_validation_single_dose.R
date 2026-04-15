@@ -59,7 +59,7 @@ age_piv_jour <- c(1,30*365)
 df1 <- df1[, age_piv_jour:= floor(rep(age_piv_jour,.N / 2))]
 
 # Food exposure (ug/d)
-df1[,DIET_ing := fifelse(age_piv_jour ==1,0,1000)]
+df1[,GUT := fifelse(age_piv_jour ==1,0,1000)]
 
 # PBK input: Parameters table
 params_all <- copy(df1)[
@@ -80,7 +80,7 @@ params_all <- copy(df1)[
 
 # PBK input 2: Influx event table
 age_end <- 30*365+ndays # 30yo + 1 day.
-event_res <- df1[, .(id, age_piv_jour,DIET_ing)]
+event_res <- df1[, .(id, age_piv_jour,GUT)]
 event_res <- melt(event_res, id.vars = c("id", "age_piv_jour"), 
                   variable.name = "SR_influx_name", value.name = "SR_influx_val")
 event_res[, ii := 1]
@@ -95,7 +95,7 @@ setorder(event_res, id, time)
 event_res[, time := time - 1]
 
 # Observed times
-time_val <- c(30*365,30*365+1:(ndays*24)/365)-1
+time_val <- c(30*365,30*365+1:ndays)-1
 time_obl <- seq(0,40000,length.out=250)
 time_vect <- unique(c(time_val,time_obl))
 ts_vector <- time_vect[order(time_vect)]
@@ -108,7 +108,7 @@ event_res %>%
 # Solve
 sim_output <- rxSolve(object=PBK1, params=params_all, events=event_res) %>%
   dplyr::filter(time %in% time_val) %>%
-  dplyr::mutate(time=(time_val - (30*365-1))*365)
+  dplyr::mutate(time=(time_val - (30*365-1)))
 
 ## Create results path if not exists
 if (!dir.exists(file.path(results_path))) {

@@ -113,10 +113,10 @@ model PBK_Cd()
     Lung_Plasma_Limit := ALung * K_Inhalation_Uptake - Max_Metallothionein * (ALung * K_Inhalation_Uptake / Uptake)
     Lung_Plasma := piecewise(Lung_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Lung_Plasma_Limit)
 
-    # Reactions
+    # Reactions  
     AGut          -> APlasma;           Gut_Plasma
-    AGut          -> AMetallothionein;  (AGut * Ka * Fabs) - Gut_Plasma
-    AGut          -> AFeces;            AGut * (1 - Fabs)
+    AGut          -> AMetallothionein;  AGut * Ka * Fabs - Gut_Plasma
+    AGut          -> AFeces;            AGut * Ka * (1 - Fabs)
     ALung         -> APlasma;           Lung_Plasma
     ALung         -> AMetallothionein;  ALung * K_Inhalation_Uptake - Lung_Plasma
     ALung         -> AGut;              ALung * K_Lung_Intestine
