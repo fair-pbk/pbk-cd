@@ -22,7 +22,7 @@ jobs:
         run: python scripts/compile_model.py
       - name: Verify SBML model file unchanged
         run: |
-          if ! git diff --quiet --diff-filter=M -- model/*.sbml; then
+          if ! git diff --quiet --ignore-cr-at-eol --diff-filter=M -- model/*.sbml; then
             echo "One or more SBML files differ from repository versions."
             git diff -- model/*.sbml
             exit 1
