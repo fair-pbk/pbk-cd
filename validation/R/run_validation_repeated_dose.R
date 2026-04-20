@@ -12,7 +12,7 @@ library(tidyr)
 library(rxode2)
 library(dplyr)
 
-source("validation/R/PBK_Cd.R")
+source("validation/R/cd_pbk_shared.R")
 
 results_path <- "validation/outputs/oral_repeated"
 
