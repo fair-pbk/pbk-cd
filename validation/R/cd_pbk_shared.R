@@ -510,7 +510,7 @@ PBK1 <- rxode2({
   # depending on whether it is viewed as an initial condition or an exposure event.
   d/dt(RBC) = PLASMA * kx - k16 * RBC + CORD_quant*vrbc0;                                           # Red Blood Cells
   
-  d/dt(META) = UPTAKE2 + k14 * LIVER + k16 * RBC - k17 * META - k17b * META;                        # Metallothionein
+  d/dt(META) = UPTAKE2 + k14 * LIVER + k16 * RBC - k17x * META - k17b * META;                        # Metallothionein
   
   BLOOD = (RBC + k20 * (PLASMA + META))/vb;                                                            # total blood
   
@@ -536,7 +536,7 @@ PBK1 <- rxode2({
   
   ucdcr = ur/ucr; 
   
-  total = GUT + RBC + META + LIVER + KIDNEY + OTHER + FECES + URINE + PLASMA + UPTAKE1
+  total = GUT + LUNG + RBC + META + LIVER + KIDNEY + OTHER + FECES + URINE + PLASMA + UPTAKE1
 
 })
 
