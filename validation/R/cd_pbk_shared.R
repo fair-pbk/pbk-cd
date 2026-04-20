@@ -504,7 +504,7 @@ PBK1 <- rxode2({
   # NEW ITEM: DERMAL absorption.
   # NEW ITEM: Exposure at birth. This can likely be implemented differently, 
   # depending on whether it is viewed as an initial condition or an exposure event.
-  d/dt(PLASMA) = UPTAKE3 + k10 * OTHER + k13 * LIVER - k9*PLASMA - k11 * PLASMA - kx * PLASMA + 0.5/100*AIR_derm + 0.5/100*DUST_derm + 0.5/100*COSM_derm + CORD_quant*vp0;                   # Plasma
+  d/dt(PLASMA) = UPTAKE3 + k10 * OTHER + k13 * LIVER - k9*PLASMA - k11 * PLASMA - k12 * PLASMA - kx * PLASMA + 0.5/100*AIR_derm + 0.5/100*DUST_derm + 0.5/100*COSM_derm + CORD_quant*vp0;                   # Plasma
   
   # NEW ITEM: Exposure at birth. This can likely be implemented differently, 
   # depending on whether it is viewed as an initial condition or an exposure event.
@@ -536,7 +536,8 @@ PBK1 <- rxode2({
   
   ucdcr = ur/ucr; 
   
-  
+  total = GUT + RBC + META + LIVER + KIDNEY + OTHER + FECES + URINE + PLASMA + UPTAKE1
+
 })
 
 
