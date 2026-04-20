@@ -25,7 +25,7 @@ scenarios:
     parameters:
       Age: 30
       AgeRef: 30
-      BWRef: 83.64
+      BWRef: 85
     outputs:
       - id: BW
         label: BW
