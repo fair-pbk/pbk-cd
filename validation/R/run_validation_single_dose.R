@@ -95,7 +95,7 @@ setorder(event_res, id, time)
 event_res[, time := time - 1]
 
 # Observed times
-time_val <- c(30*365,30*365+1:ndays)-1
+time_val <- c(30*365,30*365+1:(ndays))-1
 time_obl <- seq(0,40000,length.out=250)
 time_vect <- unique(c(time_val,time_obl))
 ts_vector <- time_vect[order(time_vect)]
@@ -103,7 +103,7 @@ ts_vector <- time_vect[order(time_vect)]
 event_res %>%
   et() %>%
   et(ts_vector) %>%
-  et(timeUnits="d") -> event_res
+  et(timeUnits="h") -> event_res
 
 # Solve
 sim_output <- rxSolve(object=PBK1, params=params_all, events=event_res) %>%
