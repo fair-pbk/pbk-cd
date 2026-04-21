@@ -198,9 +198,12 @@
             <bvar>
               <ci> Age </ci>
             </bvar>
+            <bvar>
+              <ci> K_Metallothionein_Kidney_U30 </ci>
+            </bvar>
             <piecewise>
               <piece>
-                <cn> 0.95 </cn>
+                <ci> K_Metallothionein_Kidney_U30 </ci>
                 <apply>
                   <lt/>
                   <ci> Age </ci>
@@ -210,14 +213,14 @@
               <otherwise>
                 <apply>
                   <minus/>
-                  <cn> 0.95 </cn>
+                  <ci> K_Metallothionein_Kidney_U30 </ci>
                   <apply>
                     <divide/>
                     <apply>
                       <times/>
                       <apply>
                         <divide/>
-                        <cn> 0.95 </cn>
+                        <ci> K_Metallothionein_Kidney_U30 </ci>
                         <cn type="integer"> 3 </cn>
                       </apply>
                       <apply>
@@ -241,11 +244,14 @@
               <ci> Age </ci>
             </bvar>
             <bvar>
+              <ci> K_Kidney_Urine_U30 </ci>
+            </bvar>
+            <bvar>
               <ci> Increase_Cd_Urine </ci>
             </bvar>
             <piecewise>
               <piece>
-                <cn> 0.00014 </cn>
+                <ci> K_Kidney_Urine_U30 </ci>
                 <apply>
                   <lt/>
                   <ci> Age </ci>
@@ -255,7 +261,7 @@
               <otherwise>
                 <apply>
                   <plus/>
-                  <cn> 0.00014 </cn>
+                  <ci> K_Kidney_Urine_U30 </ci>
                   <apply>
                     <times/>
                     <ci> Increase_Cd_Urine </ci>
@@ -553,7 +559,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="deltaBW" constant="false"/>
+      <parameter id="deltaBW" name="Variability on bodyweight" units="UNITLESS" constant="false"/>
       <parameter metaid="meta_BW" id="BW" name="body weight" units="KiloGM" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -653,6 +659,7 @@
         </annotation>
       </parameter>
       <parameter id="K_RBC_Metallothionein" name="Transfer from reb blood cells to metallothionein" value="0.012" units="PER_DAY" constant="true"/>
+      <parameter id="K_Metallothionein_Kidney_U30" name="Transfer from metallothionein to kidney (age &lt; 30)" value="0.95" units="PER_DAY" constant="true"/>
       <parameter id="K_Metallothionein_Kidney" name="Transfer from metallothionein to kidney" units="PER_DAY" constant="false"/>
       <parameter metaid="meta_K_Kidney_Plasma" id="K_Kidney_Plasma" name="Transfer from kidney to plasma" value="1e-05" units="PER_DAY" constant="true">
         <annotation>
@@ -661,6 +668,19 @@
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00498"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_K_Kidney_Urine_U30" id="K_Kidney_Urine_U30" name="Transfer from kidney to urine (age &lt; 30)" value="0.00014" units="PER_DAY" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_K_Kidney_Urine_U30">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00237"/>
                 </rdf:Bag>
               </bqmodel:is>
             </rdf:Description>
@@ -896,6 +916,7 @@
           <apply>
             <ci> f_Metallothionein_Kidney </ci>
             <ci> Age </ci>
+            <ci> K_Metallothionein_Kidney_U30 </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -904,6 +925,7 @@
           <apply>
             <ci> f_Kidney_Urine </ci>
             <ci> Age </ci>
+            <ci> K_Kidney_Urine_U30 </ci>
             <ci> Increase_Cd_Urine </ci>
           </apply>
         </math>

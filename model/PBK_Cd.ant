@@ -4,12 +4,12 @@ function f_BW(Age)
     (3.938425 + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
 end
 
-function f_Metallothionein_Kidney(Age)
-    piecewise(0.95, Age < 30, 0.95-(0.95/3)*(Age-30)/50)
+function f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30)
+    piecewise(K_Metallothionein_Kidney_U30, Age < 30, K_Metallothionein_Kidney_U30 - (K_Metallothionein_Kidney_U30/3) * (Age - 30) / 50)
 end
 
-function f_Kidney_Urine(Age, Increase_Cd_Urine)
-    piecewise(0.00014, Age < 30, 0.00014 + Increase_Cd_Urine * (Age - 30))
+function f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine)
+    piecewise(K_Kidney_Urine_U30, Age < 30, K_Kidney_Urine_U30 + Increase_Cd_Urine * (Age - 30))
 end
 
 model PBK_Cd()
@@ -45,9 +45,11 @@ model PBK_Cd()
     K_Liver_Metallothionein = 0.00016   # Transfer from liver to metallothionein [/d]
     K_Liver_Feces = 0.00005             # Transfer from liver to feces [/d]
     K_RBC_Metallothionein = 0.012       # Transfer from red blood cells to metallothionein [/d]
-    K_Metallothionein_Kidney := f_Metallothionein_Kidney(Age) # Transfer from metallothionein to kidney [/d]
+    K_Metallothionein_Kidney_U30 = 0.95 # Transfer from metallothionein to kidney for age < 30 [/d]
+    K_Metallothionein_Kidney := f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30) # Transfer from metallothionein to kidney [/d]
     K_Kidney_Plasma = 0.00001           # Transfer from kidney to plasma [/d]
-    K_Kidney_Urine := f_Kidney_Urine(Age, Increase_Cd_Urine) # Transfer from kidney to urine [/d]
+    K_Kidney_Urine_U30 = 0.00014            # Transfer from kidney to urine for age < 30 [/d]
+    K_Kidney_Urine := f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine) # Transfer from kidney to urine [/d]
     Increase_Cd_Urine = 0.0000011       # Temporal factor increasing Cd elimination in urine
     K_Plasma_RBC = 0.04                 # Transfer from plasma to red blood cells [/d]
 
