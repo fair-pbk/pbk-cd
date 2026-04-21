@@ -9,13 +9,10 @@ model_instances:
 scenarios:
   - id: oral_single
     label: Oral single dose
-    duration: 40
-    evaluation_resolution: 24
     time_unit: DAY
     amount_unit: MICROGRAMS
-    initial_states:
-      - target: APlasma
-        amount: 0
+    duration: 40
+    evaluation_resolution: 24
     dosing_events:
       - type: single_bolus
         target: AGut

@@ -4,13 +4,14 @@ model_instances:
   - id: PBK_Cd
     label: PBK_Cd
     model_path: ./model/PBK_Cd.sbml
+    param_file: './parametrisations/PBK_Cd_validation.params.csv'
 
 scenarios:
   - id: oral_repeated
     label: Oral repeated dosing
     time_unit: DAY
     amount_unit: MICROGRAMS
-    duration: 10
+    duration: 40
     evaluation_resolution: 24
     dosing_events:
       - type: repeated_bolus
@@ -21,7 +22,7 @@ scenarios:
     parameters:
       Age: 30
       AgeRef: 30
-      BWRef: 70
+      BWRef: 85
     outputs:
       - id: BW
         label: BW

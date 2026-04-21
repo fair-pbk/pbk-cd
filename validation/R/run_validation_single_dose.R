@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
-# Single dose scenario : simulation of 24 hours for single adult age 30 with
-# default (fixed/constant – no variability) parameters and single dose of 1 mg
-# at time 0 >> 1mg / kg bw
+# Single dose scenario : simulation of 40 days for single adult age 30 with
+# default parameters and single dose of 1 mg at time 0.
+#-------------------------------------------------------------------------------
 
 rm(list=ls())
 set.seed(123)
@@ -95,7 +95,7 @@ setorder(event_res, id, time)
 event_res[, time := time - 1]
 
 # Observed times
-time_val <- c(30*365,30*365+1:(ndays))-1
+time_val <- c(30*365,30*365+1:ndays)-1
 time_obl <- seq(0,40000,length.out=250)
 time_vect <- unique(c(time_val,time_obl))
 ts_vector <- time_vect[order(time_vect)]
