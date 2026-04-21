@@ -25,6 +25,13 @@ R_CONFIGS = [
     ]
 },
 {
+    'id': 'r_repeated_lifetime_dose',
+    'file_path': 'validation/R/run_validation_lifetime_repeated_dose.R',
+    'output_files': [
+        './validation/outputs/oral_repeated_lifetime/results_R.csv'
+    ]
+},
+{
     'id': 'mrgsolve_single_dose',
     'file_path': 'validation/mrgsolve/run_validation_single_dose.R',
     'output_files': [
