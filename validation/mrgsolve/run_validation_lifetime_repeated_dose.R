@@ -2,24 +2,26 @@
 
 library(mrgsolve)
 
-results_path <- "validation/outputs/oral_single"
+results_path <- "validation/outputs/oral_repeated_lifetime"
 
 ## Reading of PBK models
 model <- mread("Model_Cd", file = "validation/mrgsolve/Model_Cd.cpp")
 
+ndays <- 3650
+
 ## Extraction of cadmium dietary exposure for PBK modelling
 expo_diet_cd <- ev(
-  amt = 1000,
+  amt = rep(10, ndays+1), 
   ii = 1,
   cmt = "GUT",
   addl = 0
 )
 expo_diet_cd <- as_data_set(expo_diet_cd)
-expo_diet_cd$time <- 0
+expo_diet_cd$time <- c(0:ndays)
 
 ## Estimation of the internal exposure of cadmium
-sim_output <- model %>% param(wbw = 85, year = 30) %>%
-  mrgsim(delta = 1/24, end = 40, events = expo_diet_cd, output = 'df')
+sim_output <- model %>% param(wbw = 1.1 * 3.938425, year = 0) %>%
+  mrgsim(delta = 1/24, end = ndays, events = expo_diet_cd, output = 'df')
 
 ## Create results path if not exists
 if (!dir.exists(file.path(results_path))) {

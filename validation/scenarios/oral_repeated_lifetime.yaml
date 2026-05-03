@@ -75,3 +75,23 @@ scenarios:
           AOthers: OTHER
           AFeces: FECES
           AUrine: URINE
+      - id: mrgsolve
+        label: mrgsolve
+        file_path: validation/outputs/oral_repeated_lifetime/results_mrgsolve.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw_f
+          AGut: GUT
+          ALung: LUNG
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AGut: GUT
+          AKidney: KIDNEY
+          AOthers: OTHER
+          ARBC: RBC
+          AMetallothionein: META
+          AFeces: FECES
+          AUrine: URINE

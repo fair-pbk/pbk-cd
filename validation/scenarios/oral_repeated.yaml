@@ -58,7 +58,7 @@ scenarios:
         label: Amount in feces
         output: AFeces
     reference_data:
-      - id: reference
+      - id: R
         label: R
         file_path: validation/outputs/oral_repeated/results_R.csv
         series_type: TIMELINE
@@ -73,5 +73,25 @@ scenarios:
           ALiver: LIVER
           AKidney: KIDNEY
           AOthers: OTHER
+          AFeces: FECES
+          AUrine: URINE
+      - id: mrgsolve
+        label: mrgsolve
+        file_path: validation/outputs/oral_repeated/results_mrgsolve.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw_f
+          AGut: GUT
+          ALung: LUNG
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AGut: GUT
+          AKidney: KIDNEY
+          AOthers: OTHER
+          ARBC: RBC
+          AMetallothionein: META
           AFeces: FECES
           AUrine: URINE
