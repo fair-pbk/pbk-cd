@@ -1,0 +1,213 @@
+id: R_scenarios
+label: R_scenarios
+model_instances:
+  - id: PBK_Cd
+    label: SBML
+    model_path: ./model/PBK_Cd.sbml
+    param_file: './parametrisations/PBK_Cd_validation.params.csv'
+
+scenarios:
+  - id: oral_single
+    label: Oral single dose
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 40
+    evaluation_resolution: 24
+    dosing_events:
+      - type: single_bolus
+        target: AGut
+        amount: 1000
+        #adjustment: BW # adjust for BW
+        time: 0
+    parameters:
+      Age: 30
+      AgeRef: 30
+      BWRef: 85
+    outputs:
+      - id: BW
+        label: BW
+        output: BW
+      - id: AGut
+        label: Amount in gut
+        output: AGut
+      - id: ALung
+        label: Amount in lung
+        output: ALung
+      - id: APlasma
+        label: Amount in plasma
+        output: APlasma
+      - id: ARBC
+        label: Amount in RBC
+        output: ARBC
+      - id: AMetallothionein
+        label: Amount in metallothionein
+        output: AMetallothionein
+      - id: ALiver
+        label: Amount in liver
+        output: ALiver
+      - id: AKidney
+        label: Amount in kidney
+        output: AKidney
+      - id: AOthers
+        label: Amount in rest
+        output: AOthers
+      - id: AUrine
+        label: Amount in urine
+        output: AUrine
+      - id: AFeces
+        label: Amount in feces
+        output: AFeces
+    reference_data:
+      - id: R
+        label: R
+        file_path: validation/outputs/oral_single/results_R.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw
+          AGut: GUT
+          ALung: LUNG
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AKidney: KIDNEY
+          AOthers: OTHER
+          AFeces: FECES
+          AUrine: URINE
+  - id: oral_repeated
+    label: Oral repeated dosing
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 40
+    evaluation_resolution: 24
+    dosing_events:
+      - type: repeated_bolus
+        target: AGut
+        amount: 100
+        time: 0
+        interval: 1
+    parameters:
+      Age: 30
+      AgeRef: 30
+      BWRef: 85
+    outputs:
+      - id: BW
+        label: BW
+        output: BW
+      - id: AGut
+        label: Amount in gut
+        output: AGut
+      - id: ALung
+        label: Amount in lung
+        output: ALung
+      - id: APlasma
+        label: Amount in plasma
+        output: APlasma
+      - id: ARBC
+        label: Amount in RBC
+        output: ARBC
+      - id: AMetallothionein
+        label: Amount in metallothionein
+        output: AMetallothionein
+      - id: ALiver
+        label: Amount in liver
+        output: ALiver
+      - id: AKidney
+        label: Amount in kidney
+        output: AKidney
+      - id: AOthers
+        label: Amount in rest
+        output: AOthers
+      - id: AUrine
+        label: Amount in urine
+        output: AUrine
+      - id: AFeces
+        label: Amount in feces
+        output: AFeces
+    reference_data:
+      - id: R
+        label: R
+        file_path: validation/outputs/oral_repeated/results_R.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw
+          AGut: GUT
+          ALung: LUNG
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AKidney: KIDNEY
+          AOthers: OTHER
+          AFeces: FECES
+          AUrine: URINE
+  - id: oral_repeated_lifetime
+    label: Oral repeated dosing (lifetime)
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 3650
+    evaluation_resolution: 1
+    dosing_events:
+      - type: repeated_bolus
+        target: AGut
+        amount: 10
+        time: 0
+        interval: 1
+    parameters:
+      Age: 0
+      AgeRef: 30
+      BWRef: 85
+    outputs:
+      - id: BW
+        label: BW
+        output: BW
+      - id: AGut
+        label: Amount in gut
+        output: AGut
+      - id: ALung
+        label: Amount in lung
+        output: ALung
+      - id: APlasma
+        label: Amount in plasma
+        output: APlasma
+      - id: ARBC
+        label: Amount in RBC
+        output: ARBC
+      - id: AMetallothionein
+        label: Amount in metallothionein
+        output: AMetallothionein
+      - id: ALiver
+        label: Amount in liver
+        output: ALiver
+      - id: AKidney
+        label: Amount in kidney
+        output: AKidney
+      - id: AOthers
+        label: Amount in rest
+        output: AOthers
+      - id: AUrine
+        label: Amount in urine
+        output: AUrine
+      - id: AFeces
+        label: Amount in feces
+        output: AFeces
+    reference_data:
+      - id: reference
+        label: R
+        file_path: validation/outputs/oral_repeated_lifetime/results_R.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw
+          AGut: GUT
+          ALung: LUNG
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AKidney: KIDNEY
+          AOthers: OTHER
+          AFeces: FECES
+          AUrine: URINE
