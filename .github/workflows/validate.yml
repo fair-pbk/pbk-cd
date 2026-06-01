@@ -18,12 +18,14 @@ jobs:
         run: sudo apt-get install graphviz
       - name: Install requirements
         run: pip install -r requirements.txt
+      - name: Instantiate template instances
+        run: python scripts/instantiate_template.py
       - name: Create and annotate SBML
-        run: python scripts/compile_model.py
+        run: python scripts/create_sbml.py
       - name: Verify SBML model file unchanged
         run: |
-          if ! git diff --quiet --ignore-cr-at-eol --diff-filter=M -- model/*.sbml; then
+          if ! git diff --quiet --ignore-cr-at-eol --diff-filter=M -- models/**/*.sbml; then
             echo "One or more SBML files differ from repository versions."
-            git diff -- model/*.sbml
+            git diff -- models/**/*.sbml
             exit 1
           fi
