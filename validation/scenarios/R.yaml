@@ -3,8 +3,8 @@ label: R_scenarios
 model_instances:
   - id: PBK_Cd
     label: SBML
-    model_path: ./model/PBK_Cd.sbml
-    param_file: './parametrisations/PBK_Cd_validation.params.csv'
+    model_path: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.sbml
+    param_file: './models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.params.csv'
 
 scenarios:
   - id: oral_single

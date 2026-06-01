@@ -1,0 +1,356 @@
+model_name: Cd_lifetime_Gastellu
+description: >
+  Cadmium PBK model with lifetime physiological scaling.
+  Uses age-dependent body weight and organ fractions from Gastellu et al. (2025).
+template: ../Cd_PBK_Cd.template.ant
+
+functions:
+  - id: f_BW
+    parameters:
+      - Age
+      - BW_birth
+    body: |
+      (BW_birth + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
+  - id: f_Metallothionein_Kidney
+    parameters:
+      - Age
+      - K_Metallothionein_Kidney_U30
+    body: |
+      piecewise(K_Metallothionein_Kidney_U30, Age < 30, K_Metallothionein_Kidney_U30 - (K_Metallothionein_Kidney_U30/3) * (Age - 30) / 50)
+  - id: f_Kidney_Urine
+    parameters:
+      - Age
+      - K_Kidney_Urine_U30
+      - Increase_Cd_Urine
+    body: |
+      piecewise(K_Kidney_Urine_U30, Age < 30, K_Kidney_Urine_U30 + Increase_Cd_Urine * (Age - 30))
+  - id: f_HCT
+    parameters:
+      - Age
+      - HCT_infant
+      - HCT_adult
+    body: |
+      piecewise(HCT_infant, Age <= 2, piecewise(1.12815e-06 * Age^3 - 1.72362e-04 * Age^2 + 8.15264e-03 * Age + 0.327363, Age < 18, HCT_adult))
+  - id: f_VLiverc
+    parameters:
+      - Age
+      - Sex
+    body: |
+      piecewise(piecewise(0.0247 + (0.0409 - 0.0247) * exp(-0.218 * Age), Age <= 79, 0.0247 + 5.371498e-10), Sex == 1, piecewise(0.0233 + (0.038 - 0.0233) * exp(-0.122 * Age), Age <= 79, 0.0233 + 9.58489e-07))
+  - id: f_VKidneyc
+    parameters:
+      - Age
+      - Sex
+    body: |
+      piecewise(piecewise(0.0042 + (0.00767 - 0.0042) * exp(-0.206 * Age), Age <= 79, 0.0042 + 2.969074e-10), Sex == 1, piecewise(0.0046 + (0.00709 - 0.0046) * exp(-0.221 * Age), Age <= 79, 0.0046 + 6.514063e-11))
+  - id: f_VBloodc
+    parameters:
+      - Age
+      - Sex
+    body: |
+      piecewise(piecewise(-0.027 * Age + 0.077, Age < 1, 0.0761 / (1 + exp(-0.683 * Age + 0.946))), Sex == 1, piecewise(-0.0273 * Age + 0.0771, Age < 1, piecewise(3.28e-05 * Age^3 - 1.21e-03 * Age^2 + 1.24e-02 * Age + 3.86e-02, Age < 14.019723, 0.065)))
+
+blocks:
+  - id: SUBJECT_LEVEL_PHYSIOLOGY
+    parameters:
+      - id: Age
+        element_name: age
+        unit: y
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00521
+        bqb_is: ""
+        type: variable
+        value: 18
+      - id: Sex
+        element_name: sex (1=male, 2=female)
+        unit: UNITLESS
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 1
+      - id: BW
+        element_name: body weight
+        unit: kg
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00008
+        bqb_is: ""
+        type: variable
+        assignment: deltaBW * f_BW(Age, BWBirth)
+      - id: AgeRef
+        element_name: current age of reference indvididual in simulation
+        unit: y
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 0
+      - id: BWRef
+        element_name: body weight of reference indvididual in simulation
+        unit: kg
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 3.938425
+      - id: BWBirth
+        element_name: body weight at birth
+        unit: kg
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 3.938425
+      - id: deltaBW
+        element_name: Variability on bodyweight
+        unit: UNITLESS
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: BWRef / f_BW(AgeRef, BWBirth)
+  - id: COMPARTMENT_VOLUME_PARAMETERS
+    parameters:
+      - id: VBloodc
+        element_name: Volume of blood as fraction of bodyweight
+        unit: L/kg
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: f_VBloodc(Age, Sex)
+      - id: HCT_infant
+        element_name: Hematocrit at infant age (<=2 years)
+        unit: UNITLESS
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 0.359
+      - id: HCT_adult
+        element_name: Hematocrit at adult age (>=18 years)
+        unit: UNITLESS
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 0.4248446
+      - id: HCT
+        element_name: Hematocrit
+        unit: UNITLESS
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00527
+        bqb_is: ""
+        type: variable
+        assignment: f_HCT(Age, HCT_infant, HCT_adult)
+      - id: VLiverc
+        element_name: Volume of liver as fraction of bodyweight
+        unit: L/kg
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00078
+        bqb_is: ""
+        type: variable
+        assignment: f_VLiverc(Age, Sex)
+      - id: VKidneyc
+        element_name: Volume of kidney as fraction of bodyweight
+        unit: L/kg
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00080
+        bqb_is: ""
+        type: variable
+        assignment: f_VKidneyc(Age, Sex)
+      - id: VGutc
+        element_name: Volume of gut (stomach) as fraction of bodyweight
+        unit: L/kg
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00509
+        bqb_is: ""
+        type: variable
+        assignment: piecewise(0.0021, Sex == 1, 0.0023)
+      - id: VLungc
+        element_name: Volume of lung as fraction of bodyweight
+        unit: L/kg
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00098
+        bqb_is: ""
+        type: variable
+        assignment: piecewise(0.0068, Sex == 1, 0.0070)
+  - id: COMPARTMENT_VOLUMES
+    parameters:
+      - id: VMetallothionein
+        element_name: Volume of fraction of metallothionein in liver cytosol
+        unit: UNITLESS
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 0.5
+      - id: VLiver
+        element_name: Volume of liver
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: VLiverc * BW
+      - id: VKidney
+        element_name: Volume of kidney
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: VKidneyc * BW
+      - id: VFeces
+        element_name: Volume of feces
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: 1
+      - id: VUrine
+        element_name: Volume of urine
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: 1
+      - id: VGut
+        element_name: Volume of gut
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: VGutc * BW
+      - id: VLung
+        element_name: Volume of lung
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: VLungc * BW
+      - id: VBlood
+        element_name: Volume of blood
+        unit: L
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00108
+        bqb_is: ""
+        type: variable
+        assignment: VBloodc * BW
+      - id: VPlasma
+        element_name: Volume of blood plasma
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: VBlood * (1 - HCT)
+      - id: VRBC
+        element_name: Volume of red blood cells
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: VBlood * HCT
+      - id: VOthers
+        element_name: Volume of rest of the body
+        unit: L
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)
+  - id: KINETIC_PARAMETERS
+    parameters:
+      - id: K_Metallothionein_Kidney_U30
+        element_name: Transfer from metallothionein to kidney (age < 30)
+        unit: /d
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 0.95
+      - id: K_Metallothionein_Kidney
+        element_name: Transfer from metallothionein to kidney
+        unit: /d
+        bqm_is: ""
+        bqb_is: ""
+        type: variable
+        assignment: f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30)
+      - id: K_Kidney_Urine_U30
+        element_name: Transfer from kidney to urine (age < 30)
+        unit: /d
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00237
+        bqb_is: ""
+        type: constant
+        value: 0.00014
+      - id: K_Kidney_Urine
+        element_name: Transfer from kidney to urine
+        unit: /d
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00237
+        bqb_is: ""
+        type: variable
+        assignment: f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine)
+      - id: Increase_Cd_Urine
+        element_name: Temporal factor increasing Cd elimination in urine
+        unit: /d
+        bqm_is: ""
+        bqb_is: ""
+        type: constant
+        value: 0.0000011
+  - id: RATE_RULES
+    rate_rules:
+      - id: Age'
+        element_name: age rate
+        unit: y/d
+        assignment: 1/365
+
+compartments:
+  - id: Metallothionein
+    element_name: metallothionein
+    unit: L
+    bqm_is: ""
+    bqb_is: ""
+    type: compartment
+    assignment: 1
+  - id: Liver
+    element_name: liver
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00558
+    bqb_is: ""
+    type: compartment
+    assignment: VLiverc * BW
+  - id: Kidney
+    element_name: kidney
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00557
+    bqb_is: ""
+    type: compartment
+    assignment: VKidneyc * BW
+  - id: Feces
+    element_name: feces
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00555
+    bqb_is: ""
+    type: compartment
+    assignment: 1
+  - id: Urine
+    element_name: urine
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00556
+    bqb_is: ""
+    type: compartment
+    assignment: 1
+  - id: Gut
+    element_name: gut
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00477
+    bqb_is: ""
+    type: compartment
+    assignment: VGutc * BW
+  - id: Lung
+    element_name: lung
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00559
+    bqb_is: ""
+    type: compartment
+    assignment: VLungc * BW
+  - id: Plasma
+    element_name: blood plasma
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00488
+    bqb_is: ""
+    type: compartment
+    assignment: VBlood * (1 - HCT)
+  - id: RBC
+    element_name: red blood cells
+    unit: L
+    bqm_is: ""
+    bqb_is: ""
+    type: compartment
+    assignment: VBlood * HCT
+  - id: Others
+    element_name: Rest of the body
+    unit: L
+    bqm_is: http://purl.obolibrary.org/obo/PBPKO_00450
+    bqb_is: ""
+    type: compartment
+    assignment: BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)

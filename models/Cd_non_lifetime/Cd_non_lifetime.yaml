@@ -1,0 +1,87 @@
+model_name: Cd_non_lifetime
+description: >
+  Cadmium PBK model with fixed physiology (no lifetime scaling).
+  Uses constant body weight and organ volumes.
+template: ../Cd_PBK_Cd.template.ant
+
+blocks:
+  - id: SUBJECT_LEVEL_PHYSIOLOGY
+    parameters:
+      - id: Age
+        element_name: age
+        unit: y
+        bqm_is: http://purl.obolibrary.org/obo/PBPKO_00521
+        bqb_is: ""
+        type: constant
+        value: 18
+      - id: BW
+        element_name: body weight
+        type: constant
+        value: 70
+        unit: kg
+  - id: KINETIC_PARAMETERS
+    parameters:
+      - id: K_Metallothionein_Kidney
+        type: constant
+        value: 0.95
+      - id: K_Kidney_Urine
+        type: constant
+        value: 0.00014
+  - id: COMPARTMENT_VOLUME_PARAMETERS
+    parameters:
+      - id: VBloodc
+        type: constant
+        value: 0.076
+      - id: HCT
+        type: constant
+        value: 0.425
+      - id: VLiverc
+        type: constant
+        value: 0.025
+      - id: VKidneyc
+        type: constant
+        value: 0.004
+      - id: VGutc
+        type: constant
+        value: 0.0182
+      - id: VLungc
+        type: constant
+        value: 0.0068
+  - id: COMPARTMENT_VOLUMES
+    parameters:
+      - id: VMetallothionein
+        type: variable
+        assignment: 1
+      - id: VLiver
+        type: variable
+        assignment: VLiverc * BW
+      - id: VKidney
+        type: variable
+        assignment: VKidneyc * BW
+      - id: VFeces
+        type: variable
+        assignment: 1
+      - id: VUrine
+        type: variable
+        assignment: 1
+      - id: VGut
+        type: variable
+        assignment: VGutc * BW
+      - id: VLung
+        type: variable
+        assignment: VLungc * BW
+      - id: VBlood
+        element_name: Volume of blood
+        type: variable
+        unit: L
+        assignment: VBloodc * BW
+      - id: VPlasma
+        type: variable
+        assignment: VBlood * (1 - HCT)
+      - id: VRBC
+        type: variable
+        assignment: VBlood * HCT
+      - id: VOthers
+        type: variable
+        assignment: BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)
+

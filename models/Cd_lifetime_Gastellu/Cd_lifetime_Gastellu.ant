@@ -1,0 +1,164 @@
+function f_BW(Age, BW_birth)
+    (BW_birth + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
+end
+
+function f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30)
+    piecewise(K_Metallothionein_Kidney_U30, Age < 30, K_Metallothionein_Kidney_U30 - (K_Metallothionein_Kidney_U30/3) * (Age - 30) / 50)
+end
+
+function f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine)
+    piecewise(K_Kidney_Urine_U30, Age < 30, K_Kidney_Urine_U30 + Increase_Cd_Urine * (Age - 30))
+end
+
+function f_HCT(Age, HCT_infant, HCT_adult)
+    piecewise(HCT_infant, Age <= 2, piecewise(1.12815e-06 * Age^3 - 1.72362e-04 * Age^2 + 8.15264e-03 * Age + 0.327363, Age < 18, HCT_adult))
+end
+
+function f_VLiverc(Age, Sex)
+    piecewise(piecewise(0.0247 + (0.0409 - 0.0247) * exp(-0.218 * Age), Age <= 79, 0.0247 + 5.371498e-10), Sex == 1, piecewise(0.0233 + (0.038 - 0.0233) * exp(-0.122 * Age), Age <= 79, 0.0233 + 9.58489e-07))
+end
+
+function f_VKidneyc(Age, Sex)
+    piecewise(piecewise(0.0042 + (0.00767 - 0.0042) * exp(-0.206 * Age), Age <= 79, 0.0042 + 2.969074e-10), Sex == 1, piecewise(0.0046 + (0.00709 - 0.0046) * exp(-0.221 * Age), Age <= 79, 0.0046 + 6.514063e-11))
+end
+
+function f_VBloodc(Age, Sex)
+    piecewise(piecewise(-0.027 * Age + 0.077, Age < 1, 0.0761 / (1 + exp(-0.683 * Age + 0.946))), Sex == 1, piecewise(-0.0273 * Age + 0.0771, Age < 1, piecewise(3.28e-05 * Age^3 - 1.21e-03 * Age^2 + 1.24e-02 * Age + 3.86e-02, Age < 14.019723, 0.065)))
+end
+
+### PBK Model Template for Cadmium ###
+
+model Cd_lifetime_Gastellu()
+
+    ## Subject-level physiological parameters
+    Age = 18
+    Sex = 1
+    BW := deltaBW * f_BW(Age, BWBirth)
+    AgeRef = 0
+    BWRef = 3.938425
+    BWBirth = 3.938425
+    deltaBW := BWRef / f_BW(AgeRef, BWBirth)
+
+    ## Compartment volume parameters
+    VBloodc := f_VBloodc(Age, Sex)
+    HCT_infant = 0.359
+    HCT_adult = 0.4248446
+    HCT := f_HCT(Age, HCT_infant, HCT_adult)
+    VLiverc := f_VLiverc(Age, Sex)
+    VKidneyc := f_VKidneyc(Age, Sex)
+    VGutc := piecewise(0.0021, Sex == 1, 0.0023)
+    VLungc := piecewise(0.0068, Sex == 1, 0.0070)
+
+    ## Compartment volumes
+    VMetallothionein = 0.5
+    VLiver := VLiverc * BW
+    VKidney := VKidneyc * BW
+    VFeces := 1
+    VUrine := 1
+    VGut := VGutc * BW
+    VLung := VLungc * BW
+    VBlood := VBloodc * BW
+    VPlasma := VBlood * (1 - HCT)
+    VRBC := VBlood * HCT
+    VOthers := BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)
+
+    ## Kinetic parameters
+    Fabs = 0.048                        # Fraction of GI-tract Cd retained in epithelium [-]
+    Ka = 0.05                           # Rate of transfer of Cd in the GI-tract to uptake pool [/d]
+    K_Inhalation_Uptake = 0.05          # Rate of transfer of inhalation intake to uptake pool [/d]
+    K_Lung_Intestine = 0.005            # Rate of transfer of Cd in lungs to the GI-tract [/d]
+    F_Uptake_Metallothionein = 0.25     # Fraction of uptake pool transferred to metallothionein [-]
+    Max_Metallothionein = 1             # Maximum mass of Cd that can bind to metallothionein per day [ug/d]
+    K_Plasma_Others = 0.44              # Transfer from plasma to the rest of the body [/d]
+    K_Others_Plasma = 0.00014           # Transfer from rest of the body to plasma [/d]
+    K_Plasma_Feces = 0.27               # Transfer from plasma to feces [/d]
+    K_Plasma_Liver = 0.25               # Transfer from plasma to liver [/d]
+    K_Liver_Plasma = 0.00003            # Transfer from liver to plasma [/d]
+    K_Liver_Metallothionein = 0.00016   # Transfer from liver to metallothionein [/d]
+    K_Liver_Feces = 0.00005             # Transfer from liver to feces [/d]
+    K_RBC_Metallothionein = 0.012       # Transfer from red blood cells to metallothionein [/d]
+    K_Kidney_Plasma = 0.00001           # Transfer from kidney to plasma [/d]
+    Increase_Cd_Urine = 0.0000011       # Temporal factor increasing Cd elimination in urine
+    K_Plasma_RBC = 0.04                 # Transfer from plasma to red blood cells [/d]
+    K_Metallothionein_Kidney_U30 = 0.95
+    K_Metallothionein_Kidney := f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30)
+    K_Kidney_Urine_U30 = 0.00014
+    K_Kidney_Urine := f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine)
+    Increase_Cd_Urine = 1.1e-06
+
+    # Compartments
+    compartment Metallothionein := VMetallothionein
+    compartment Liver := VLiver
+    compartment Kidney := VKidney
+    compartment Feces := VFeces
+    compartment Urine := VUrine
+    compartment Gut := VGut
+    compartment Lung := VLung
+    compartment Plasma := VPlasma
+    compartment RBC := VRBC
+    compartment Others := VOthers
+
+    # Species
+    substanceOnly species AGut in Gut                         # Quantity of cadmium in gut [ug]
+    substanceOnly species ALiver in Liver                     # Quantity of cadmium in liver [ug]
+    substanceOnly species AKidney in Kidney                   # Quantity of cadmium in kidneys [ug]
+    substanceOnly species ALung in Lung                       # Quantity of cadmium in lungs [ug]
+    substanceOnly species AUrine in Urine                     # Cumulative quantity of cadmium in urine [ug]
+    substanceOnly species AFeces in Feces                     # Quantity of cadmium in feces [ug]
+    substanceOnly species APlasma in Plasma                   # Quantity of cadmium in plasma [ug]
+    substanceOnly species ARBC in RBC                         # Quantity of cadmium in red blood cells [ug]
+    substanceOnly species AMetallothionein in Metallothionein # Quantity of cadmium in metallothionein [ug]
+    substanceOnly species AOthers in Others                   # Quantity of cadmium in the rest of the body [ug]
+
+    # Initial amounts
+    AGut             = 0
+    ALiver           = 0
+    AKidney          = 0
+    ALung            = 0
+    AUrine           = 0
+    AFeces           = 0
+    APlasma          = 0
+    ARBC             = 0
+    AMetallothionein = 0
+    AOthers          = 0
+
+    # Total uptake [ug/d]
+    Uptake :=  AGut * Ka * Fabs + ALung * K_Inhalation_Uptake
+
+    # Uptake in Metallothionein [ug/d]
+    Uptake_Metallothionein := F_Uptake_Metallothionein * Uptake
+
+    # Transfer from gut to plasma [ug/d]
+    Gut_Plasma_NoLimit := (1 - F_Uptake_Metallothionein) * (AGut * Ka * Fabs)
+    Gut_Plasma_Limit := (AGut * Ka * Fabs + ALung * K_Lung_Intestine * Fabs) - Max_Metallothionein * ((AGut * Ka * Fabs) / Uptake)
+    Gut_Plasma := piecewise(Gut_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Gut_Plasma_Limit)
+
+    # Transfer from lung to plasma [ug/d]
+    Lung_Plasma_NoLimit := (1 - F_Uptake_Metallothionein) * ALung * K_Inhalation_Uptake
+    Lung_Plasma_Limit := ALung * K_Inhalation_Uptake - Max_Metallothionein * (ALung * K_Inhalation_Uptake / Uptake)
+    Lung_Plasma := piecewise(Lung_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Lung_Plasma_Limit)
+
+    Age' = 1/365
+
+    # Reactions
+    AGut          -> APlasma;           Gut_Plasma
+    AGut          -> AMetallothionein;  AGut * Ka * Fabs - Gut_Plasma
+    AGut          -> AFeces;            AGut * Ka * (1 - Fabs)
+    ALung         -> APlasma;           Lung_Plasma
+    ALung         -> AMetallothionein;  ALung * K_Inhalation_Uptake - Lung_Plasma
+    ALung         -> AGut;              ALung * K_Lung_Intestine
+    APlasma       -> AOthers;           APlasma * K_Plasma_Others
+    APlasma       -> ARBC;              APlasma * K_Plasma_RBC
+    APlasma       -> AFeces;            APlasma * K_Plasma_Feces
+    APlasma       -> ALiver;            APlasma * K_Plasma_Liver
+    ARBC          -> AMetallothionein;  ARBC * K_RBC_Metallothionein
+    AMetallothionein -> AKidney;        AMetallothionein * K_Metallothionein_Kidney
+    AMetallothionein -> AUrine;         AMetallothionein * (1 - K_Metallothionein_Kidney)
+    ALiver        -> APlasma;           ALiver * K_Liver_Plasma
+    ALiver        -> AMetallothionein;  ALiver * K_Liver_Metallothionein
+    ALiver        -> AFeces;            ALiver * K_Liver_Feces
+    AKidney       -> APlasma;           AKidney * K_Kidney_Plasma
+    AKidney       -> AUrine;            AKidney * K_Kidney_Urine
+    AOthers       -> APlasma;           AOthers * K_Others_Plasma
+
+end

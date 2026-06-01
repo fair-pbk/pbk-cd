@@ -1,7 +1,5 @@
-### PBK Model for Cadmium ###
-
-function f_BW(Age)
-    (3.938425 + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
+function f_BW(Age, BW_birth)
+    (BW_birth + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
 end
 
 function f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30)
@@ -12,23 +10,38 @@ function f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine)
     piecewise(K_Kidney_Urine_U30, Age < 30, K_Kidney_Urine_U30 + Increase_Cd_Urine * (Age - 30))
 end
 
-model PBK_Cd()
+### PBK Model Template for Cadmium ###
 
-    # Parameters
+model Cd_lifetime_BW_Gastellu()
 
-    ## Physiological parameters
+    ## Subject-level physiological parameters
+    Age = 18
+    BW := deltaBW * f_BW(Age, BWBirth)
+    AgeRef = 0
+    BWRef = 3.938425
+    BWBirth = 3.938425
+    deltaBW := BWRef / f_BW(AgeRef, BWBirth)
 
-    ### Reference BW/Age 
-    AgeRef = 18                         # Reference age [yr]
-    BWRef = 70                          # Reference body weight [kg]
+    ## Compartment volume parameters
+    VBloodc = 0.076
+    HCT = 0.425
+    VLiverc = 0.025
+    VKidneyc = 0.004
+    VGutc = 0.0182
+    VLungc = 0.0068
 
-    ### Age
-    Age = 0                             # Age at start of simulation [yr]
-    Age' = 1/365                        # Evolution of the age [y]
-
-    ### Body size
-    deltaBW := BWRef / f_BW(AgeRef)     # Individual deviation of nominal BW [-]
-    BW := deltaBW * f_BW(Age)           # Body weight during simulation [kg]
+    ## Compartment volumes
+    VMetallothionein := 1
+    VLiver := VLiverc * BW
+    VKidney := VKidneyc * BW
+    VFeces := 1
+    VUrine := 1
+    VGut := VGutc * BW
+    VLung := VLungc * BW
+    VBlood := VBloodc * BW
+    VPlasma := VBlood * (1 - HCT)
+    VRBC := VBlood * HCT
+    VOthers := BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)
 
     ## Kinetic parameters
     Fabs = 0.048                        # Fraction of GI-tract Cd retained in epithelium [-]
@@ -45,35 +58,26 @@ model PBK_Cd()
     K_Liver_Metallothionein = 0.00016   # Transfer from liver to metallothionein [/d]
     K_Liver_Feces = 0.00005             # Transfer from liver to feces [/d]
     K_RBC_Metallothionein = 0.012       # Transfer from red blood cells to metallothionein [/d]
-    K_Metallothionein_Kidney_U30 = 0.95 # Transfer from metallothionein to kidney for age < 30 [/d]
-    K_Metallothionein_Kidney := f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30) # Transfer from metallothionein to kidney [/d]
     K_Kidney_Plasma = 0.00001           # Transfer from kidney to plasma [/d]
-    K_Kidney_Urine_U30 = 0.00014            # Transfer from kidney to urine for age < 30 [/d]
-    K_Kidney_Urine := f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine) # Transfer from kidney to urine [/d]
     Increase_Cd_Urine = 0.0000011       # Temporal factor increasing Cd elimination in urine
     K_Plasma_RBC = 0.04                 # Transfer from plasma to red blood cells [/d]
-
-    # Physiological parameters
-    VLiverc = 0.025                     # Fraction of the volume of liver [-]
-    VKidneyc = 0.004                    # Fraction of the volume of kidney [-]
-    VGutc = 0.0182                      # Fraction of the volume of gut [-]
-    VLungc = 0.0068                     # Fraction of the volume of lung [-]
-    VBloodc = 0.076                     # Fraction of the volume of blood [-]
-    HCT = 0.425                         # Hematocrit [-]
-
-    VBlood := VBloodc * BW              # Blood volume [L]
+    K_Metallothionein_Kidney_U30 = 0.95
+    K_Metallothionein_Kidney := f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30)
+    K_Kidney_Urine_U30 = 0.00014
+    K_Kidney_Urine := f_Kidney_Urine(Age, K_Kidney_Urine_U30, Increase_Cd_Urine)
+    Increase_Cd_Urine = 1.1e-06
 
     # Compartments
-    compartment Metallothionein = 1                    # Compartment of Metallothionein [L]
-    compartment Liver := VLiverc * BW                  # Compartment of liver [L]
-    compartment Kidney := VKidneyc * BW                # Compartment of kidneys [L]
-    compartment Feces = 1                              # Compartment of feces [L]
-    compartment Urine = 1                              # Compartment of urine [L]
-    compartment Gut := VGutc * BW                      # Compartment of gut tissues [L]
-    compartment Lung := VLungc * BW                    # Compartment of lungs [L]
-    compartment Plasma := VBlood * (1 - HCT)           # Compartment of Plasma [L]
-    compartment RBC := VBlood * HCT                    # Compartment of Red Blood Cells [L]
-    compartment Others := BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)  # Compartment of other tissues [L]
+    compartment Metallothionein := VMetallothionein
+    compartment Liver := VLiver
+    compartment Kidney := VKidney
+    compartment Feces := VFeces
+    compartment Urine := VUrine
+    compartment Gut := VGut
+    compartment Lung := VLung
+    compartment Plasma := VPlasma
+    compartment RBC := VRBC
+    compartment Others := VOthers
 
     # Species
     substanceOnly species AGut in Gut                         # Quantity of cadmium in gut [ug]
@@ -115,7 +119,9 @@ model PBK_Cd()
     Lung_Plasma_Limit := ALung * K_Inhalation_Uptake - Max_Metallothionein * (ALung * K_Inhalation_Uptake / Uptake)
     Lung_Plasma := piecewise(Lung_Plasma_NoLimit, Uptake_Metallothionein < Max_Metallothionein, Lung_Plasma_Limit)
 
-    # Reactions  
+    Age' = 1/365
+
+    # Reactions
     AGut          -> APlasma;           Gut_Plasma
     AGut          -> AMetallothionein;  AGut * Ka * Fabs - Gut_Plasma
     AGut          -> AFeces;            AGut * Ka * (1 - Fabs)

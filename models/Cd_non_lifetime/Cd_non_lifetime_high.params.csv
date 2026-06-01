@@ -1,0 +1,2 @@
+idModelInstance,Parameter,Value,Unit,Description,Reference,Distribution
+Cd_non_lifetime,BW,70,kg,body weight,,"uniform(65,75)"

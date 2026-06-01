@@ -1,0 +1,4 @@
+idModelInstance,Parameter,Value,Unit,Description,Reference,Distribution
+Cd_lifetime_BW_Gastellu,AgeRef,30,yr,,,
+Cd_lifetime_BW_Gastellu,BWRef,70,kg,,,"uniform(65,75)"
+Cd_lifetime_BW_Gastellu,BWBirth,3.9,kg,,,

@@ -1,0 +1,156 @@
+id: lifetime_comparison
+label: lifetime_comparison
+model_instances:
+  - id: Cd_non_lifetime_low
+    label: Cd_non_lifetime_low
+    model_path: ./models/Cd_non_lifetime/Cd_non_lifetime.sbml
+    param_file: ./models/Cd_non_lifetime/Cd_non_lifetime_low.params.csv
+    target_mappings:
+      CPlasma: '[APlasma]'
+      CLiver: '[ALiver]'
+      CKidney: '[AKidney]'
+  - id: Cd_non_lifetime_high
+    label: Cd_non_lifetime_high
+    model_path: ./models/Cd_non_lifetime/Cd_non_lifetime.sbml
+    param_file: ./models/Cd_non_lifetime/Cd_non_lifetime_high.params.csv
+    target_mappings:
+      CPlasma: '[APlasma]'
+      CLiver: '[ALiver]'
+      CKidney: '[AKidney]'
+  - id: Cd_lifetime_BW_Gastellu
+    label: Cd_lifetime_BW_Gastellu
+    model_path: ./models/Cd_lifetime_BW_Gastellu/Cd_lifetime_BW_Gastellu.sbml
+    param_file: ./models/Cd_lifetime_BW_Gastellu/Cd_lifetime_BW_Gastellu.params.csv
+    target_mappings:
+      CPlasma: '[APlasma]'
+      CLiver: '[ALiver]'
+      CKidney: '[AKidney]'
+  - id: Cd_lifetime_Gastellu
+    label: Cd_lifetime_Gastellu
+    model_path: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.sbml
+    param_file: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.params.csv
+    target_mappings:
+      CPlasma: '[APlasma]'
+      CLiver: '[ALiver]'
+      CKidney: '[AKidney]'
+
+scenarios:
+  - id: oral_repeated
+    label: Oral repeated dosing (1 ug/day)
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 10000
+    evaluation_resolution: 1
+    use_distributions: True
+    n_simulations: 10
+    parameters:
+        Age: 0
+    dosing_events:
+      - type: repeated_bolus
+        target: AGut
+        amount: 1.0
+        time: 0
+        interval: 1
+    outputs:
+      - id: Age
+        label: Age
+        output: Age
+      - id: BW
+        label: BW
+        output: BW
+      - id: AGut
+        label: AGut
+        output: AGut
+      - id: ALiver
+        label: ALiver
+        output: ALiver
+      - id: VLiver
+        label: VLiver
+        output: VLiver
+      - id: CLiver
+        label: CLiver
+        output: CLiver
+      - id: AKidney
+        label: AKidney
+        output: AKidney
+      - id: VKidney
+        label: VKidney
+        output: VKidney
+      - id: CKidney
+        label: CKidney
+        output: CKidney
+      - id: APlasma
+        label: APlasma
+        output: APlasma
+      - id: VPlasma
+        label: VPlasma
+        output: VPlasma
+      - id: CPlasma
+        label: CPlasma
+        output: CPlasma
+      - id: AUrine
+        label: AUrine
+        output: AUrine
+      - id: AFeces
+        label: AFeces
+        output: AFeces
+  - id: oral_repeated_bw_dosing
+    label: Oral (per BW) repeated dosing (10 ug/kg BW/day)
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 10000
+    evaluation_resolution: 1
+    use_distributions: True
+    n_simulations: 10
+    parameters:
+        Age: 0
+    dosing_events:
+      - type: repeated_bolus
+        target: AGut
+        amount: 100
+        adjustment: BW
+        time: 0
+        interval: 1
+    outputs:
+      - id: Age
+        label: Age
+        output: Age
+      - id: BW
+        label: BW
+        output: BW
+      - id: AGut
+        label: AGut
+        output: AGut
+      - id: ALiver
+        label: ALiver
+        output: ALiver
+      - id: VLiver
+        label: VLiver
+        output: VLiver
+      - id: CLiver
+        label: CLiver
+        output: CLiver
+      - id: AKidney
+        label: AKidney
+        output: AKidney
+      - id: VKidney
+        label: VKidney
+        output: VKidney
+      - id: CKidney
+        label: CKidney
+        output: CKidney
+      - id: APlasma
+        label: APlasma
+        output: APlasma
+      - id: VPlasma
+        label: VPlasma
+        output: VPlasma
+      - id: CPlasma
+        label: CPlasma
+        output: CPlasma
+      - id: AUrine
+        label: AUrine
+        output: AUrine
+      - id: AFeces
+        label: AFeces
+        output: AFeces
