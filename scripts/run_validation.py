@@ -67,6 +67,12 @@ if not console_logger.handlers:
 def main():
     parser = argparse.ArgumentParser(description="Run validation scripts arguments.")
     parser.add_argument(
+        '-c',
+        '--config',
+        type=str,
+        help="Run a single YAML config file instead of all scenarios."
+    )
+    parser.add_argument(
         '-f',
         '--force_recompute',
         action='store_true',
@@ -92,12 +98,16 @@ def main():
     # Ensure output path
     os.makedirs(OUTPUT_PATH, exist_ok=True)
 
-    # Run R validaton scenarios
-    run_r_validation_scenarios(force_recompute, logger)
+    if args.config:
+        files = [args.config]
+    else:
+        # Run R validaton scenarios
+        run_r_validation_scenarios(force_recompute, logger)
 
-    # Glob scenario configs and run them
-    configs = glob.glob(f'{CONFIGS_PATH}/**/*.yaml', recursive=True)
-    for file in configs:
+        # Glob scenario configs and run them
+        files = glob.glob(f'{CONFIGS_PATH}/**/*.yaml', recursive=True)
+
+    for file in files:
         file_dir = os.path.dirname(file)
 
         # Load config
