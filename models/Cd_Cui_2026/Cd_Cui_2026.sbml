@@ -113,7 +113,6 @@
       <parameter id="year" value="35" constant="true"/>
       <parameter id="FVB" value="0.067" constant="true"/>
       <parameter id="VB" constant="false"/>
-      <parameter id="VETB" constant="false"/>
       <parameter id="Iwa" value="1.8" constant="true"/>
       <parameter id="VL" constant="false"/>
       <parameter id="FVLB" value="0.11" constant="true"/>
@@ -126,6 +125,7 @@
       <parameter id="VKidneyT" constant="false"/>
       <parameter id="A" constant="false"/>
       <parameter id="B" constant="false"/>
+      <parameter id="VETB" constant="false"/>
       <parameter id="FVRBB" value="0.2182" constant="true"/>
       <parameter id="VRB" constant="false"/>
       <parameter id="VRBB" constant="false"/>
@@ -215,27 +215,6 @@
             <times/>
             <ci> FVB </ci>
             <ci> BWl </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VETB">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <divide/>
-            <apply>
-              <minus/>
-              <ci> A </ci>
-              <apply>
-                <times/>
-                <ci> FVRBB </ci>
-                <ci> B </ci>
-              </apply>
-            </apply>
-            <apply>
-              <minus/>
-              <cn type="integer"> 1 </cn>
-              <ci> FVRBB </ci>
-            </apply>
           </apply>
         </math>
       </assignmentRule>
@@ -340,6 +319,27 @@
               <ci> VL </ci>
             </apply>
             <ci> VK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VETB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <minus/>
+              <ci> A </ci>
+              <apply>
+                <times/>
+                <ci> FVRBB </ci>
+                <ci> B </ci>
+              </apply>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> FVRBB </ci>
+            </apply>
           </apply>
         </math>
       </assignmentRule>
@@ -1175,14 +1175,11 @@
       </reaction>
       <reaction id="_J18" reversible="true">
         <listOfReactants>
-          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
           <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
         </listOfProducts>
-        <listOfModifiers>
-          <modifierSpeciesReference species="AETB_Free"/>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
