@@ -19,7 +19,6 @@ model description "https://www.sciencedirect.com/science/article/pii/S0160412026
 # Blood
   FVB = 0.067				# Fractional Total Blood Volume in L/kg BW
   VB := FVB * BWl			# Total Blood volume in L
-  VETB = 1				# Extra-tissue blood volume 
 
 # Liver
   Iwa = 1.8				# average adult liver weight (kg)
@@ -38,7 +37,7 @@ model description "https://www.sciencedirect.com/science/article/pii/S0160412026
 # Rest of body
   A := VB - VLiverB - VKidneyB
   B := BWl - VL - VK
-  VETB := (A - FVRBB*B)/(1 - FVRBB)	# Extra-tissue blood volume (L)  
+  VETB := (A - FVRBB*B)/(1 - FVRBB)	# Extra-tissue blood volume (L)
   VRB := B - VETB			# RB Volume depending on age (L)
   FVRBB = 0.2182			# Fractional Rest of Body Blood Volume (dimensionless)
   VRBB := FVRBB * VRB			# Rest of Body Blood volume (L)
@@ -319,7 +318,7 @@ AETB_PP -> ARBB_PP; 				QRB * CABlood_PP;
 AETB_RBC -> ARBB_RBC; 				QRB * CABlood_RBC; 
 
 AETB_PP -> AETB_Free;				k5 * AETB_PP;
-AETB_PP -> AETB_PP; 				k6 * AETB_Free * PP; 
+AETB_Free -> AETB_PP; 				k6 * AETB_Free * PP; 
 
 AETB_RBC -> AETB_Free;				C16 * AETB_RBC;
 AETB_Free -> AETB_RBC; 				CX * AETB_Free * RBC;
