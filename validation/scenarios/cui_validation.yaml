@@ -1,5 +1,5 @@
-id: lifetime_comparison
-label: lifetime_comparison
+id: cui_validation
+label: cui_validation
 model_instances:
   - id: Cd_non_lifetime_low
     label: Cd_non_lifetime_low
