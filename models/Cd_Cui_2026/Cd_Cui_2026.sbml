@@ -1,0 +1,2025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="Cui2026_Cd_Human" id="Cui2026_Cd_Human" substanceUnits="MicroGM" timeUnits="DAY" volumeUnits="L" extentUnits="MicroGM">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>Cd PBK (Cui et al, 2026): </p>
+      </body>
+    </notes>
+    <annotation>
+      <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+        <rdf:Description rdf:about="#Cui2026_Cd_Human">
+          <bqbiol:isDescribedBy>
+            <rdf:Bag>
+              <rdf:li rdf:resource="https://www.sciencedirect.com/science/article/pii/S016041202600108X?via%3Dihub#s0190"/>
+              <rdf:li rdf:resource="https://www.sciencedirect.com/science/article/pii/S016041202600108X?via%3Dihub"/>
+            </rdf:Bag>
+          </bqbiol:isDescribedBy>
+        </rdf:Description>
+      </rdf:RDF>
+    </annotation>
+    <listOfUnitDefinitions>
+      <unitDefinition id="MicroGM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="DAY">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="L">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment id="AirDailyIntake" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="DietDailyIntake" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="Lung" spatialDimensions="3" units="L" constant="true"/>
+      <compartment metaid="meta_GILumen" id="GILumen" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_GILumen">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00478"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment id="IntestinalTissue" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="ExtraTissueBlood" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="LiverBlood" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="LiverTissue" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="KidneyBlood" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="KidneyTissue" spatialDimensions="3" units="L" constant="true"/>
+      <compartment metaid="meta_RestofBodyBlood" id="RestofBodyBlood" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_RestofBodyBlood">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00464"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment id="RestofBodyTissue" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="Filtrate" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="Urine" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="Feces" spatialDimensions="3" units="L" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="AAirDailyIntake" compartment="AirDailyIntake" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALU" compartment="Lung" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ADietDailyIntake" compartment="DietDailyIntake" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AGILumen" compartment="GILumen" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AETB_Free" compartment="ExtraTissueBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AETB_PP" compartment="ExtraTissueBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AETB_RBC" compartment="ExtraTissueBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALiverB_Free" compartment="LiverBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALiverB_PP" compartment="LiverBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALiverB_RBC" compartment="LiverBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALiverT_Free" compartment="LiverTissue" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ALiverT_MT" compartment="LiverTissue" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AKidneyB_Free" compartment="KidneyBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AKidneyB_PP" compartment="KidneyBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AKidneyB_RBC" compartment="KidneyBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AKidneyT_Free" compartment="KidneyTissue" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AKidneyT_MT" compartment="KidneyTissue" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ARBB_Free" compartment="RestofBodyBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ARBB_PP" compartment="RestofBodyBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ARBB_RBC" compartment="RestofBodyBlood" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ARBT_Free" compartment="RestofBodyTissue" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="ARBT_MT" compartment="RestofBodyTissue" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AFiltrate_Free" compartment="Filtrate" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AFiltrate_MT" compartment="Filtrate" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AUrineFiltrate" compartment="Urine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AUrineKidneyTissue" compartment="Urine" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AFecesUnabsorbed" compartment="Feces" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AFecesBile" compartment="Feces" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="AFecesIT" compartment="Feces" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="BWa" value="88" constant="true"/>
+      <parameter id="BWl" value="88" constant="true"/>
+      <parameter id="year" value="35" constant="true"/>
+      <parameter id="FVB" value="0.067" constant="true"/>
+      <parameter id="VB" constant="false"/>
+      <parameter id="VETB" constant="false"/>
+      <parameter id="Iwa" value="1.8" constant="true"/>
+      <parameter id="VL" constant="false"/>
+      <parameter id="FVLB" value="0.11" constant="true"/>
+      <parameter id="VLiverB" constant="false"/>
+      <parameter id="VLiverT" constant="false"/>
+      <parameter id="kwa" value="0.31" constant="true"/>
+      <parameter id="VK" constant="false"/>
+      <parameter id="FVKB" value="0.36" constant="true"/>
+      <parameter id="VKidneyB" constant="false"/>
+      <parameter id="VKidneyT" constant="false"/>
+      <parameter id="A" constant="false"/>
+      <parameter id="B" constant="false"/>
+      <parameter id="FVRBB" value="0.2182" constant="true"/>
+      <parameter id="VRB" constant="false"/>
+      <parameter id="VRBB" constant="false"/>
+      <parameter id="VRBT" constant="false"/>
+      <parameter id="Lbm" constant="false"/>
+      <parameter id="tmp" constant="false"/>
+      <parameter id="UCER" constant="false"/>
+      <parameter id="QCB" constant="false"/>
+      <parameter id="FQL" value="0.25" constant="true"/>
+      <parameter id="QL" constant="false"/>
+      <parameter id="FQK" value="0.19" constant="true"/>
+      <parameter id="QK" constant="false"/>
+      <parameter id="FQRB" constant="false"/>
+      <parameter id="QRB" constant="false"/>
+      <parameter id="C1" value="0.1" constant="true"/>
+      <parameter id="C2" value="0.4" constant="true"/>
+      <parameter id="C5" value="0.05" constant="true"/>
+      <parameter id="C7" value="0.25" constant="true"/>
+      <parameter id="C3" value="0.05" constant="true"/>
+      <parameter id="C4" value="0.005" constant="true"/>
+      <parameter id="C6" value="0.05" constant="true"/>
+      <parameter id="C8" value="1" constant="true"/>
+      <parameter id="k5" value="20" constant="true"/>
+      <parameter id="k6" value="80" constant="true"/>
+      <parameter id="CX" value="4" constant="true"/>
+      <parameter id="C16" value="0.012" constant="true"/>
+      <parameter id="f9" value="5e-07" constant="true"/>
+      <parameter id="f10" value="1.98e-08" constant="true"/>
+      <parameter id="f11" value="0.65" constant="true"/>
+      <parameter id="C14" constant="false"/>
+      <parameter id="C13" constant="false"/>
+      <parameter id="C12" constant="false"/>
+      <parameter id="k12" value="20" constant="true"/>
+      <parameter id="k13" value="667" constant="true"/>
+      <parameter id="C15" value="0.00165" constant="true"/>
+      <parameter id="f15" value="0.023" constant="true"/>
+      <parameter id="f16" value="0.099" constant="true"/>
+      <parameter id="k15" constant="false"/>
+      <parameter id="k16" constant="false"/>
+      <parameter id="C17x" value="0.95" constant="true"/>
+      <parameter id="C17" constant="false"/>
+      <parameter id="k18" value="1" constant="true"/>
+      <parameter id="C21" value="7.7e-07" constant="true"/>
+      <parameter id="C19x" value="9.8e-05" constant="true"/>
+      <parameter id="C19" constant="false"/>
+      <parameter id="k20" value="20" constant="true"/>
+      <parameter id="k21" value="11.11" constant="true"/>
+      <parameter id="f22" value="4e-09" constant="true"/>
+      <parameter id="C18" constant="false"/>
+      <parameter id="f23" value="2e-05" constant="true"/>
+      <parameter id="f24" value="1" constant="true"/>
+      <parameter id="C10" constant="false"/>
+      <parameter id="C9" constant="false"/>
+      <parameter id="C11" value="0.0001" constant="true"/>
+      <parameter id="PP" value="1" constant="true"/>
+      <parameter id="RBC" value="1" constant="true"/>
+      <parameter id="MTL" value="1" constant="true"/>
+      <parameter id="MTK" value="1" constant="true"/>
+      <parameter id="CABlood_Free" constant="false"/>
+      <parameter id="CABlood_PP" constant="false"/>
+      <parameter id="CABlood_RBC" constant="false"/>
+      <parameter id="CVLiverB_Free" constant="false"/>
+      <parameter id="CVLiverB_PP" constant="false"/>
+      <parameter id="CVLiverB_RBC" constant="false"/>
+      <parameter id="CLiverT_Free" constant="false"/>
+      <parameter id="CLiverT_MT" constant="false"/>
+      <parameter id="CVKidneyB_Free" constant="false"/>
+      <parameter id="CVKidneyB_PP" constant="false"/>
+      <parameter id="CVKidneyB_RBC" constant="false"/>
+      <parameter id="CKidneyT_Free" constant="false"/>
+      <parameter id="CKidneyT_MT" constant="false"/>
+      <parameter id="CVRBB_Free" constant="false"/>
+      <parameter id="CVRBB_PP" constant="false"/>
+      <parameter id="CVRBB_RBC" constant="false"/>
+      <parameter id="CRBT_Free" constant="false"/>
+      <parameter id="uptakeTotal_Lung" constant="false"/>
+      <parameter id="uptake1_Lung" constant="false"/>
+      <parameter id="uptakeTotal_GI" constant="false"/>
+      <parameter id="uptake2_Lung" constant="false"/>
+      <parameter id="uptake1_GI" constant="false"/>
+      <parameter id="uptake2_GI" constant="false"/>
+    </listOfParameters>
+    <listOfRules>
+      <assignmentRule variable="VB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FVB </ci>
+            <ci> BWl </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VETB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <minus/>
+              <ci> A </ci>
+              <apply>
+                <times/>
+                <ci> FVRBB </ci>
+                <ci> B </ci>
+              </apply>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> FVRBB </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VL">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> Iwa </ci>
+            <apply>
+              <power/>
+              <apply>
+                <divide/>
+                <ci> BWl </ci>
+                <ci> BWa </ci>
+              </apply>
+              <cn> 0.85 </cn>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VLiverB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FVLB </ci>
+            <ci> VL </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VLiverT">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> FVLB </ci>
+            </apply>
+            <ci> VL </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VK">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> kwa </ci>
+            <apply>
+              <power/>
+              <apply>
+                <divide/>
+                <ci> BWl </ci>
+                <ci> BWa </ci>
+              </apply>
+              <cn> 0.84 </cn>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VKidneyB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FVKB </ci>
+            <ci> VK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VKidneyT">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> FVKB </ci>
+            </apply>
+            <ci> VK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="A">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <minus/>
+              <ci> VB </ci>
+              <ci> VLiverB </ci>
+            </apply>
+            <ci> VKidneyB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="B">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <minus/>
+              <ci> BWl </ci>
+              <ci> VL </ci>
+            </apply>
+            <ci> VK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VRB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> B </ci>
+            <ci> VETB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VRBB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FVRBB </ci>
+            <ci> VRB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VRBT">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> FVRBB </ci>
+            </apply>
+            <ci> VRB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Lbm">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <cn> 0.88 </cn>
+            <ci> BWl </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="tmp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <divide/>
+              <apply>
+                <minus/>
+                <ci> Lbm </ci>
+                <cn> 8.58 </cn>
+              </apply>
+              <cn> 0.0272 </cn>
+            </apply>
+            <cn type="integer"> 1000 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="UCER">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn> 0.5 </cn>
+              <apply>
+                <lt/>
+                <ci> tmp </ci>
+                <cn> 0.5 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> tmp </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="QCB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <cn type="integer"> 15 </cn>
+            <apply>
+              <power/>
+              <ci> BWl </ci>
+              <cn> 0.74 </cn>
+            </apply>
+            <cn type="integer"> 24 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="QL">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FQL </ci>
+            <ci> QCB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="QK">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FQK </ci>
+            <ci> QCB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="FQRB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> FQL </ci>
+            </apply>
+            <ci> FQK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="QRB">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FQRB </ci>
+            <ci> QCB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C14">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f9 </ci>
+            <ci> QL </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C13">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f10 </ci>
+            <ci> QL </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C12">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f11 </ci>
+            <ci> QL </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="k15">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f15 </ci>
+            <ci> QK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="k16">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f16 </ci>
+            <ci> QK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C17">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <minus/>
+                <ci> C17x </ci>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <divide/>
+                      <ci> C17x </ci>
+                      <cn type="integer"> 3 </cn>
+                    </apply>
+                    <apply>
+                      <minus/>
+                      <ci> year </ci>
+                      <cn type="integer"> 30 </cn>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> 50 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <gt/>
+                <ci> year </ci>
+                <cn type="integer"> 30 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> C17x </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C19">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <plus/>
+                <ci> C19x </ci>
+                <apply>
+                  <times/>
+                  <ci> C21 </ci>
+                  <apply>
+                    <minus/>
+                    <ci> year </ci>
+                    <cn type="integer"> 30 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <gt/>
+                <ci> year </ci>
+                <cn type="integer"> 30 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> C19x </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C18">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f22 </ci>
+            <ci> QK </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C10">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f23 </ci>
+            <ci> QRB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="C9">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f24 </ci>
+            <ci> QRB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CABlood_Free">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AETB_Free </ci>
+            <ci> VETB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CABlood_PP">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AETB_PP </ci>
+            <ci> VETB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CABlood_RBC">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AETB_RBC </ci>
+            <ci> VETB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVLiverB_Free">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ALiverB_Free </ci>
+            <ci> VLiverB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVLiverB_PP">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ALiverB_PP </ci>
+            <ci> VLiverB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVLiverB_RBC">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ALiverB_RBC </ci>
+            <ci> VLiverB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CLiverT_Free">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ALiverT_Free </ci>
+            <ci> VLiverT </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CLiverT_MT">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ALiverT_MT </ci>
+            <ci> VLiverT </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVKidneyB_Free">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AKidneyB_Free </ci>
+            <ci> VKidneyB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVKidneyB_PP">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AKidneyB_PP </ci>
+            <ci> VKidneyB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVKidneyB_RBC">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AKidneyB_RBC </ci>
+            <ci> VKidneyB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CKidneyT_Free">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AKidneyT_Free </ci>
+            <ci> VKidneyT </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CKidneyT_MT">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> AKidneyT_MT </ci>
+            <ci> VKidneyT </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVRBB_Free">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ARBB_Free </ci>
+            <ci> VRBB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVRBB_PP">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ARBB_PP </ci>
+            <ci> VRBB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CVRBB_RBC">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ARBB_RBC </ci>
+            <ci> VRBB </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CRBT_Free">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ARBT_Free </ci>
+            <ci> VRBT </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakeTotal_Lung">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> C3 </ci>
+            <ci> ALU </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptake1_Lung">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> C8 </ci>
+                  <ci> uptakeTotal_Lung </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> uptakeTotal_Lung </ci>
+                  <ci> uptakeTotal_GI </ci>
+                </apply>
+              </apply>
+              <apply>
+                <gt/>
+                <apply>
+                  <times/>
+                  <ci> C7 </ci>
+                  <apply>
+                    <plus/>
+                    <ci> uptakeTotal_Lung </ci>
+                    <ci> uptakeTotal_GI </ci>
+                  </apply>
+                </apply>
+                <ci> C8 </ci>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <ci> C7 </ci>
+                <ci> uptakeTotal_Lung </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakeTotal_GI">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> C6 </ci>
+            <ci> AGILumen </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptake2_Lung">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> uptakeTotal_Lung </ci>
+            <ci> uptake1_Lung </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptake1_GI">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> C8 </ci>
+                  <ci> uptakeTotal_GI </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> uptakeTotal_Lung </ci>
+                  <ci> uptakeTotal_GI </ci>
+                </apply>
+              </apply>
+              <apply>
+                <gt/>
+                <apply>
+                  <times/>
+                  <ci> C7 </ci>
+                  <apply>
+                    <plus/>
+                    <ci> uptakeTotal_Lung </ci>
+                    <ci> uptakeTotal_GI </ci>
+                  </apply>
+                </apply>
+                <ci> C8 </ci>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <ci> C7 </ci>
+                <ci> uptakeTotal_GI </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptake2_GI">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> uptakeTotal_GI </ci>
+            <ci> uptake1_GI </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="_J0" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AAirDailyIntake" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALU" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C2 </ci>
+              <ci> AAirDailyIntake </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J1" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALU" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AGILumen" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C4 </ci>
+              <ci> ALU </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J2" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALU" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptake2_Lung </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J3" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALU" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptake1_Lung </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J4" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ADietDailyIntake" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AGILumen" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C5 </ci>
+              <ci> ADietDailyIntake </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J5" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AAirDailyIntake" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AGILumen" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C5 </ci>
+              <ci> C1 </ci>
+              <ci> AAirDailyIntake </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J6" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AGILumen" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptake2_GI </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J7" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AGILumen" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptake1_GI </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J8" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QL </ci>
+              <ci> CABlood_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J9" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QL </ci>
+              <ci> CABlood_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J10" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QL </ci>
+              <ci> CABlood_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J11" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QK </ci>
+              <ci> CABlood_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J12" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QK </ci>
+              <ci> CABlood_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J13" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QK </ci>
+              <ci> CABlood_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J14" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QRB </ci>
+              <ci> CABlood_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J15" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QRB </ci>
+              <ci> CABlood_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J16" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QRB </ci>
+              <ci> CABlood_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J17" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k5 </ci>
+              <ci> AETB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J18" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AETB_Free"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k6 </ci>
+              <ci> AETB_Free </ci>
+              <ci> PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J19" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C16 </ci>
+              <ci> AETB_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J20" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> CX </ci>
+              <ci> AETB_Free </ci>
+              <ci> RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J21" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QL </ci>
+              <ci> CVLiverB_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J22" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k6 </ci>
+              <ci> ALiverB_Free </ci>
+              <ci> PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J23" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> CX </ci>
+              <ci> ALiverB_Free </ci>
+              <ci> RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J24" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QL </ci>
+              <ci> CVLiverB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J25" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k5 </ci>
+              <ci> ALiverB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J26" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QL </ci>
+              <ci> CVLiverB_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J27" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C16 </ci>
+              <ci> ALiverB_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J28" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C13 </ci>
+              <ci> CLiverT_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J29" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverT_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C12 </ci>
+              <ci> CVLiverB_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J30" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverT_MT" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverT_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k12 </ci>
+              <ci> ALiverT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J31" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverT_MT" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k13 </ci>
+              <ci> ALiverT_Free </ci>
+              <ci> CLiverT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J32" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverT_MT" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ALiverB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C14 </ci>
+              <ci> CLiverT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J33" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QK </ci>
+              <ci> CVKidneyB_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J34" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k6 </ci>
+              <ci> AKidneyB_Free </ci>
+              <ci> PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J35" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> CX </ci>
+              <ci> AKidneyB_Free </ci>
+              <ci> RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J36" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QK </ci>
+              <ci> CVKidneyB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J37" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k5 </ci>
+              <ci> AKidneyB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J38" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QK </ci>
+              <ci> CVKidneyB_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J39" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C16 </ci>
+              <ci> AKidneyB_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J40" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyT_MT" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyT_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k20 </ci>
+              <ci> AKidneyT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J41" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyT_MT" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k21 </ci>
+              <ci> AKidneyT_Free </ci>
+              <ci> CKidneyT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J42" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C18 </ci>
+              <ci> CKidneyT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J43" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AFiltrate_MT" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyT_MT" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C17 </ci>
+              <ci> AFiltrate_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J44" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QRB </ci>
+              <ci> CVRBB_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J45" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k6 </ci>
+              <ci> ARBB_Free </ci>
+              <ci> PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J46" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> CX </ci>
+              <ci> ARBB_Free </ci>
+              <ci> RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J47" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_PP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QRB </ci>
+              <ci> CVRBB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J48" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k5 </ci>
+              <ci> ARBB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J49" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AETB_RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> QRB </ci>
+              <ci> CVRBB_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J50" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C16 </ci>
+              <ci> ARBB_RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J51" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C10 </ci>
+              <ci> CRBT_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J52" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ARBT_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C9 </ci>
+              <ci> CVRBB_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J53" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C18 </ci>
+              <ci> CKidneyT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J54" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AFiltrate_MT" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AKidneyT_MT" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C17 </ci>
+              <ci> AFiltrate_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J55" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFiltrate_Free" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k16 </ci>
+              <ci> CVKidneyB_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J56" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyB_PP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFiltrate_MT" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k15 </ci>
+              <ci> CVKidneyB_PP </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J57" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AFiltrate_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AUrineFiltrate" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k18 </ci>
+              <ci> AFiltrate_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J58" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AFiltrate_MT" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AUrineFiltrate" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> C17 </ci>
+              </apply>
+              <ci> AFiltrate_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J59" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AUrineKidneyTissue" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C19 </ci>
+              <ci> AKidneyT_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J60" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AKidneyT_MT" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AUrineKidneyTissue" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C19 </ci>
+              <ci> AKidneyT_MT </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J61" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ADietDailyIntake" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFecesUnabsorbed" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> C5 </ci>
+              </apply>
+              <ci> ADietDailyIntake </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J62" reversible="true">
+        <listOfReactants>
+          <speciesReference species="AAirDailyIntake" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFecesUnabsorbed" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> C5 </ci>
+              </apply>
+              <ci> C1 </ci>
+              <ci> AAirDailyIntake </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J63" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALU" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFecesUnabsorbed" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> C5 </ci>
+              </apply>
+              <ci> C4 </ci>
+              <ci> ALU </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J64" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ALiverT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFecesBile" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C15 </ci>
+              <ci> ALiverT_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J65" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ARBT_Free" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AFecesIT" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C11 </ci>
+              <ci> ARBT_Free </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

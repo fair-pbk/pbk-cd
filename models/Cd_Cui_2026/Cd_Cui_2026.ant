@@ -1,0 +1,417 @@
+model Cui2026_Cd_Human()
+
+#Created: Carolina Vogs, June 2026
+#Checked: 
+
+model notes ```
+Cd PBK (Cui et al, 2026):
+```
+model description "https://www.sciencedirect.com/science/article/pii/S016041202600108X?via%3Dihub#s0190"
+
+#------------------------
+# Body size & base volumes
+#------------------------
+
+  BWa = 88				# average men body weight
+  BWl = 88				# is supposed to change over live
+  year = 35				# age, needs to be transformed into an age vector when over life is simulated
+
+# Blood
+  FVB = 0.067				# Fractional Total Blood Volume in L/kg BW
+  VB := FVB * BWl			# Total Blood volume in L
+  VETB = 1				# Extra-tissue blood volume 
+
+# Liver
+  Iwa = 1.8				# average adult liver weight (kg)
+  VL := Iwa * (BWl/BWa)^0.85		# Liver Volume (L)
+  FVLB = 0.11				# Fractional Liver Blood Volume (dimensionless)
+  VLiverB := FVLB * VL			# Liver Blood volume (L)
+  VLiverT := (1-FVLB) * VL		# Liver Tissue Volume (L)
+
+# Kidney
+  kwa = 0.31				# average adult kidney weight (kg)
+  VK := kwa * (BWl/BWa)^0.84		# Kidney Volume (L)
+  FVKB = 0.36				# Fractional Kidney Blood Volume (dimensionless)
+  VKidneyB := FVKB * VK			# Kidney Blood volume (L)
+  VKidneyT := (1-FVKB) * VK		# Kidney Tissue Volume (L)
+
+# Rest of body
+  A := VB - VLiverB - VKidneyB
+  B := BWl - VL - VK
+  VETB := (A - FVRBB*B)/(1 - FVRBB)	# Extra-tissue blood volume (L)  
+  VRB := B - VETB			# RB Volume depending on age (L)
+  FVRBB = 0.2182			# Fractional Rest of Body Blood Volume (dimensionless)
+  VRBB := FVRBB * VRB			# Rest of Body Blood volume (L)
+  VRBT := (1-FVRBB) * VRB		# Rest of Body Tissue Volume (L)
+
+# Others 	
+  Lbm := 0.88 * BWl			# Lean Body mass (kg)
+  tmp := (Lbm - 8.58)/0.0272/1000
+  UCER := piecewise(0.5, tmp < 0.5, tmp) # Urinary creatinine excretion rate (g/day)
+
+#------------------------
+# Flow Rates
+#------------------------
+  QCB := 15 * (BWl)^0.74 * 24		# Cardiac output (L/day)
+  
+  FQL = 0.25				# Fractional Liver Blood flow 
+  QL := FQL * QCB			# Liver Blood flow rate (L/day)
+  
+  FQK = 0.19				# Fractional Kidney Blood flow 
+  QK := FQK * QCB			# Kidney Blood flow rate (L/day)
+
+  FQRB := 1 - FQL - FQK			# Fractional Rest of Body Blood flow 
+  QRB := FQRB * QCB			# Rest of Body Blood flow rate (L/day)
+
+#------------------------
+# Partition coefficients
+#------------------------
+
+# The model is not depending of partition coefficients.
+
+#------------------------
+# Rate of transfers
+#------------------------
+
+# Exposure/absorption fractions for cigarette smoke
+  C1 = 0.1        # inhaled Cd deposited in upper airways and swallowed; cigarette smoke
+  C2 = 0.4        # Fraction of inhaled Cd deposited to Lung (alveolar space)
+  C5 = 0.05       # Fraction of Cd in GI tract to be absorbed 
+  C7 = 0.25       # Fraction of Cd absorbed as CdMT 
+
+# Absorption rate constants
+  C3 = 0.05       # Rate constant of absorption of Cd in Lung to extra tissue blood ETB (1/day)
+  C4 = 0.005      # Rate constant of transfer of Cd in Lung to GI-tract  (1/day)
+  C6 = 0.05       # Rate constant of absorption of Cd in Intestine lumen to Liver Blood (1/day)
+  C8 = 1          # Maximum CdMT absorption rate (ug/day)
+
+# Blood binding/RBC distribution
+  k5 = 20         # Rate constant of dissociation of plasma protein-bound Cd (CdPP) into Free Cd and PP  (1/day)
+  k6 = 80         # Rate constant of association of Free Cd and PP to form CdPP   (1/day)
+  CX = 4          # Rate constant of sequestration of Free Cd into RBC   (1/day)
+  C16 = 0.012     # Rate constant of CdRBC turnover (1/day)
+
+# Liver parameters
+  f9  = 5e-7	  # Coefficient of CdMT efflux from Liver Tissue to Liver Blood relative to Liver Blood flow
+  f10 = 1.98e-8	  # Coefficient of Free Cd efflux from Liver Tissue to Liver Blood relative to Liver Blood flow
+  f11 = 0.65	  # Coefficient of Free Cd influx from Liver Blood to Liver Tissue relative to Liver Blood flow
+
+  C14 := f9 * QL  # Rate constant of CdMT efflux from Liver Tissue to Liver Blood (L/day)
+  C13 := f10 * QL # Rate constant of Free Cd efflux from Liver Tissue to Liver Blood (L/day)
+  C12 := f11 * QL # Rate constant of Free Cd influx from Liver Blood to Liver Tissue (L/day)
+  k12 = 20	  # Rate constant of dissociation of CdMT into Free Cd and MT in Liver Tissue (1/day)
+  k13 = 667	  # Rate constant of association of Free Cd and MT to form CdMT in Liver Tissue (1/day)
+  C15 = 1.65e-3	  # Rate constant of Free Cd excretion from Liver Tissue to feces via bile (1/day)
+
+# Kidney parameters
+  f15 = 0.023	  # Coefficient of CdMT filtration from Kidney Blood to Filtrate relative to Kidney Blood flow
+  f16 = 0.099	  # Coefficient of Free Cd filtration from Kidney Blood to Filtrate relative to Kidney Blood flow
+
+  k15 := f15 * QK # Rate constant of CdMT filtration from Kidney Blood to Filtrate (L/day)
+  k16 := f16 * QK # Rate constant of Free Cd filtration from Kidney Blood to Filtrate (L/day)
+  C17x = 0.95	  # Rate constant of CdMT reabsorption from Filtrate to Kidney Tissue for age ≤ 30
+  C17 := piecewise(C17x - (C17x/3)*(year - 30)/50, year > 30, C17x)					# Age-dependent rate constant of CdMT reabsorption from Filtrate to Kidney Tissue (1/day)	
+  k18 = 1	  # Rate constant of Free Cd excretion from Filtrate to urine (1/day)
+
+  C21 = 7.7e-7	  # Coefficient of increase of rate constant of Free Cd and CdMT excretion from Kidney Tissue to urine for age >30 (1/day * year)
+  C19x = 9.8e-5	  # Rate constant of Free Cd and CdMT excretion from Kidney Tissue to urine for age ≤30 (1/day)
+  C19 := piecewise(C19x + C21 * (year - 30),year > 30, C19x)	# Age-dependent C19x (1/day)
+  k20 = 20	  # Rate constant of dissociation of CdMT in Kidney Tissue into Free Cd and MT in Kidney Tissue (1/day)
+  k21 = 11.11	  # Rate constant of association of Free Cd and MT to form CdMT in Kidney Tissue (1/day)
+
+  f22 = 4e-9	  # Coefficient of Free Cd efflux from Kidney Tissue to Kidney Blood relative to Kidney Blood flow
+  C18 := f22 * QK # Rate constant of Free Cd efflux from Kidney Tissue to Kidney Blood (L/day)
+
+# Rest-of-body parameters
+  f23 = 2e-5	  # Coefficient of Free Cd efflux from RB Tissue to RB Blood relative to RB Blood flow
+  f24 = 1	  # Coefficient of Free Cd influx from RB Blood to RB Tissue relative to RB Blood flow
+
+  C10 := f23 * QRB # Rate constant of Free Cd efflux from RB Tissue to RB Blood (L/day)
+  C9 := f24 * QRB # Rate constant of Free Cd influx from RB Blood to RB Tissue (L/day)
+  C11 = 1e-4	  # Rate constant of Cd excretion from RB Tissue to feces representing fecal Cd sourced from intestine excretion and intestine wall sloughing (1/day)
+
+# Binding components assumed in excess
+  PP = 1	  # Free plasma protein 
+  RBC = 1	  # Free RBC
+  MTL = 1	  # Free MT in Liver Tissue
+  MTK = 1	  # Free MT in Kidney Tissue
+
+
+#------------------------
+# Compartments 
+#------------------------
+compartment AirDailyIntake;
+compartment DietDailyIntake;
+compartment Lung;
+compartment GILumen;
+compartment IntestinalTissue;
+compartment ExtraTissueBlood;
+compartment LiverBlood;
+compartment LiverTissue;
+compartment KidneyBlood;
+compartment KidneyTissue;
+compartment RestofBodyBlood;
+compartment RestofBodyTissue;
+compartment Filtrate;
+compartment Urine;
+compartment Feces;
+
+#------------------------
+# Species
+#------------------------
+
+substanceOnly species AAirDailyIntake in AirDailyIntake
+substanceOnly species ALU in Lung
+
+substanceOnly species ADietDailyIntake in DietDailyIntake
+substanceOnly species AGILumen in GILumen
+
+substanceOnly species AETB_Free in ExtraTissueBlood
+substanceOnly species AETB_PP in ExtraTissueBlood
+substanceOnly species AETB_RBC in ExtraTissueBlood
+
+substanceOnly species ALiverB_Free in LiverBlood
+substanceOnly species ALiverB_PP in LiverBlood
+substanceOnly species ALiverB_RBC in LiverBlood
+substanceOnly species ALiverT_Free in LiverTissue
+substanceOnly species ALiverT_MT in LiverTissue
+
+substanceOnly species AKidneyB_Free in KidneyBlood
+substanceOnly species AKidneyB_PP in KidneyBlood
+substanceOnly species AKidneyB_RBC in KidneyBlood
+substanceOnly species AKidneyT_Free in KidneyTissue
+substanceOnly species AKidneyT_MT in KidneyTissue
+
+substanceOnly species ARBB_Free in RestofBodyBlood
+substanceOnly species ARBB_PP in RestofBodyBlood
+substanceOnly species ARBB_RBC in RestofBodyBlood
+substanceOnly species ARBT_Free in RestofBodyTissue
+substanceOnly species ARBT_MT in RestofBodyTissue
+
+substanceOnly species AFiltrate_Free in Filtrate
+substanceOnly species AFiltrate_MT in Filtrate
+
+substanceOnly species AUrineFiltrate in Urine
+substanceOnly species AUrineKidneyTissue in Urine
+
+substanceOnly species AFecesUnabsorbed in Feces
+substanceOnly species AFecesBile in Feces
+substanceOnly species AFecesIT in Feces
+
+
+#------------------------
+# Initial conditions
+#------------------------
+AAirDailyIntake = 0;
+ALU = 0; 		# Amount of Cd in Lung (Alveolar space)
+ADietDailyIntake = 0;
+AGILumen = 0;
+
+AETB_Free = 0;
+AETB_PP = 0;
+AETB_RBC = 0;
+
+ALiverB_Free = 0;
+ALiverB_PP = 0;
+ALiverB_RBC = 0;
+ALiverT_Free = 0;
+ALiverT_MT = 0;
+
+AKidneyB_Free = 0;
+AKidneyB_PP = 0;
+AKidneyB_RBC = 0;
+AKidneyT_Free = 0;
+AKidneyT_MT = 0;
+
+ARBB_Free = 0;
+ARBB_PP = 0;
+ARBB_RBC = 0;
+ARBT_Free = 0;
+ARBT_MT = 0;
+
+AFiltrate_Free = 0;
+AFiltrate_MT = 0;
+
+AUrineFiltrate = 0;
+AUrineKidneyTissue = 0;
+
+AFecesUnabsorbed = 0;
+AFecesBile = 0;
+AFecesIT = 0;
+
+#------------------------
+# Concentrations
+#------------------------
+
+  CABlood_Free := AETB_Free/VETB
+  CABlood_PP := AETB_PP/VETB
+  CABlood_RBC := AETB_RBC/VETB
+
+  CVLiverB_Free := ALiverB_Free/VLiverB
+  CVLiverB_PP := ALiverB_PP/VLiverB
+  CVLiverB_RBC := ALiverB_RBC/VLiverB
+
+  CLiverT_Free := ALiverT_Free/VLiverT
+  CLiverT_MT := ALiverT_MT/VLiverT
+
+  CVKidneyB_Free := AKidneyB_Free/VKidneyB
+  CVKidneyB_PP := AKidneyB_PP/VKidneyB
+  CVKidneyB_RBC := AKidneyB_RBC/VKidneyB
+
+  CKidneyT_Free := AKidneyT_Free/VKidneyT
+  CKidneyT_MT := AKidneyT_MT/VKidneyT
+
+  CVRBB_Free := ARBB_Free/VRBB
+  CVRBB_PP := ARBB_PP/VRBB
+  CVRBB_RBC := ARBB_RBC/VRBB
+
+  CRBT_Free := ARBT_Free/VRBT
+
+#------------------------
+# Reactions / Transfers
+#------------------------
+
+############################### 
+######## Assignment Rules
+###############################
+uptakeTotal_Lung := C3 * ALU																	# Total Cd absorbed from lung per day - rate
+uptake1_Lung := piecewise(C8 * uptakeTotal_Lung / (uptakeTotal_Lung + uptakeTotal_GI), C7 * (uptakeTotal_Lung + uptakeTotal_GI) > C8, C7 * uptakeTotal_Lung) 	# CdMT absorbed from lung per day - fraction
+uptake2_Lung := uptakeTotal_Lung - uptake1_Lung															# Free Cd absorbed from lung per day - fraction
+
+uptakeTotal_GI := C6 * AGILumen																	# Total Cd absorbed from GI per day - rate
+uptake1_GI := piecewise(C8 * uptakeTotal_GI/(uptakeTotal_Lung + uptakeTotal_GI), C7 * (uptakeTotal_Lung + uptakeTotal_GI) > C8, C7 * uptakeTotal_GI)		# CdMT absorbed from GI per day - fraction
+uptake2_GI := uptakeTotal_GI - uptake1_GI 															# Free Cd absorbed from GI per day - Fraction
+
+############################### 
+######## Inhalation
+###############################
+AAirDailyIntake -> ALU;				C2 * AAirDailyIntake
+ALU -> AGILumen;				C4 * ALU			
+ALU -> AETB_Free;				uptake2_Lung
+ALU -> AETB_PP;					uptake1_Lung
+
+
+############################### 
+######## Oral Absorption
+###############################
+ADietDailyIntake -> AGILumen;			C5 * ADietDailyIntake
+AAirDailyIntake -> AGILumen;			C5 * C1 * AAirDailyIntake
+
+AGILumen -> ALiverB_Free; 			uptake2_GI
+AGILumen -> ALiverB_PP;   			uptake1_GI
+
+
+
+############################### 
+######## ExtraTissueBlood ETB
+###############################
+
+AETB_Free -> ALiverB_Free; 			QL * CABlood_Free;
+AETB_PP -> ALiverB_PP; 				QL * CABlood_PP;
+AETB_RBC -> ALiverB_RBC; 			QL * CABlood_RBC; 
+
+AETB_Free -> AKidneyB_Free; 			QK * CABlood_Free;
+AETB_PP -> AKidneyB_PP; 			QK * CABlood_PP;
+AETB_RBC -> AKidneyB_RBC; 			QK * CABlood_RBC; 
+
+AETB_Free -> ARBB_Free; 			QRB * CABlood_Free;
+AETB_PP -> ARBB_PP; 				QRB * CABlood_PP;
+AETB_RBC -> ARBB_RBC; 				QRB * CABlood_RBC; 
+
+AETB_PP -> AETB_Free;				k5 * AETB_PP;
+AETB_PP -> AETB_PP; 				k6 * AETB_Free * PP; 
+
+AETB_RBC -> AETB_Free;				C16 * AETB_RBC;
+AETB_Free -> AETB_RBC; 				CX * AETB_Free * RBC;
+
+############################### 
+######## Liver blood and tissue
+###############################
+
+# is missing for ALiverB_Free: +uptake2_GI 
+# is missing for ALiverB_PP: +uptake1_GI 
+
+ALiverB_Free -> AETB_Free ; 			QL * CVLiverB_Free;
+ALiverB_Free -> ALiverB_PP; 			k6 * ALiverB_Free * PP; 
+ALiverB_Free -> ALiverB_RBC; 			CX * ALiverB_Free * RBC;
+
+ALiverB_PP -> AETB_PP ; 			QL * CVLiverB_PP;
+ALiverB_PP -> ALiverB_Free;			k5 * ALiverB_PP;
+
+ALiverB_RBC -> AETB_RBC ; 			QL * CVLiverB_RBC;
+ALiverB_RBC -> ALiverB_Free;			C16 * ALiverB_RBC;
+
+# Changes in liver tissue concentration
+ALiverT_Free -> ALiverB_Free;			C13 * CLiverT_Free;
+ALiverB_Free -> ALiverT_Free;			C12 * CVLiverB_Free;
+
+ALiverT_MT -> ALiverT_Free;			k12 * ALiverT_MT;
+ALiverT_Free -> ALiverT_MT;			k13 * ALiverT_Free * CLiverT_MT;
+
+ALiverT_MT -> ALiverB_PP;			C14 * CLiverT_MT;
+
+############################### 
+######## Kidney blood and tissue
+###############################
+
+AKidneyB_Free -> AETB_Free ; 			QK * CVKidneyB_Free;
+AKidneyB_Free -> AKidneyB_PP; 			k6 * AKidneyB_Free * PP; 
+AKidneyB_Free -> AKidneyB_RBC; 			CX * AKidneyB_Free * RBC;
+
+AKidneyB_PP -> AETB_PP ; 			QK * CVKidneyB_PP;
+AKidneyB_PP -> AKidneyB_Free;			k5 * AKidneyB_PP;
+
+AKidneyB_RBC -> AETB_RBC ; 			QK * CVKidneyB_RBC;
+AKidneyB_RBC -> AKidneyB_Free;			C16 * AKidneyB_RBC;
+
+# Changes in kidney tissue concentration
+AKidneyT_MT -> AKidneyT_Free;			k20 * AKidneyT_MT;
+AKidneyT_Free -> AKidneyT_MT;			k21 * AKidneyT_Free * CKidneyT_MT;
+
+AKidneyT_Free -> AKidneyB_Free;			C18 * CKidneyT_MT;
+AFiltrate_MT -> AKidneyT_MT; 			C17 * AFiltrate_MT
+
+############################### 
+######## Rest of body blood and tissue
+###############################
+
+ARBB_Free -> AETB_Free ; 			QRB * CVRBB_Free;
+ARBB_Free -> ARBB_PP; 				k6 * ARBB_Free * PP; 
+ARBB_Free -> ARBB_RBC; 				CX * ARBB_Free * RBC;
+
+ARBB_PP -> AETB_PP ; 				QRB * CVRBB_PP;
+ARBB_PP -> ARBB_Free;				k5 * ARBB_PP;
+
+ARBB_RBC -> AETB_RBC ; 				QRB * CVRBB_RBC;
+ARBB_RBC -> ARBB_Free;				C16 * ARBB_RBC;
+
+# Changes in rest of body tissue concentration
+ARBT_Free -> ARBB_Free;				C10 * CRBT_Free;
+ARBB_Free -> ARBT_Free;				C9 * CVRBB_Free;
+
+AKidneyT_Free -> AKidneyB_Free;			C18 * CKidneyT_MT;
+AFiltrate_MT -> AKidneyT_MT; 			C17 * AFiltrate_MT
+
+
+############################### 
+######## Filtrate and urine
+###############################
+AKidneyB_Free -> AFiltrate_Free; 		k16 * CVKidneyB_Free
+AKidneyB_PP -> AFiltrate_MT; 	 		k15 * CVKidneyB_PP
+
+AFiltrate_Free -> AUrineFiltrate; 		k18 * AFiltrate_Free 
+AFiltrate_MT -> AUrineFiltrate; 		(1 - C17) * AFiltrate_MT
+
+AKidneyT_Free -> AUrineKidneyTissue; 		C19 * AKidneyT_Free
+AKidneyT_MT -> AUrineKidneyTissue; 		C19 * AKidneyT_MT
+
+############################### 
+######## Feces
+###############################
+ADietDailyIntake -> AFecesUnabsorbed;		(1-C5)* ADietDailyIntake
+AAirDailyIntake -> AFecesUnabsorbed;		(1-C5)* C1 * AAirDailyIntake
+ALU -> AFecesUnabsorbed;			(1-C5)* C4 * ALU
+ALiverT_Free -> AFecesBile; 			C15 * ALiverT_Free; 
+ARBT_Free -> AFecesIT; 				C11 * ARBT_Free;
+ 
+end
