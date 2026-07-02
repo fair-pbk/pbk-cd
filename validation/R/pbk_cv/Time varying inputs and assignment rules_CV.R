@@ -1,26 +1,28 @@
 
 # Changes in volumes / time-varying inputs
+#>CB: How to integrate 'phys' in rxSolve(object = ..., params = ..., events = ..., ...) pattern?
+# Perhaps you use another solver...
 
 phys <- function(time, sex, Delta_BWs3, Delta_creat,
                  k5_h, k5_f, k17, k19, k21) {
   
-  year <- time / 365
+  year <- time / 365;
   
-  y2 = year * year
-  y3 = y2 * year
-  y4 = y3 * year
-  y5 = y4 * year
-  y6 = y5 * year
+  y2 = year * year;
+  y3 = y2 * year;
+  y4 = y3 * year;
+  y5 = y4 * year;
+  y6 = y5 * year;
   
-  mval <- year * 12
+  mval <- year * 12;
   # 1/ Body weight ----
   # NEW ITEM: Delta body weight. Before age 3, linear decline. 
   # The reference value is an in input.
   
   if (time <= 1095) {
-    Delta_BW <- 1 + (Delta_BWs3 - 1) * (time / 1095)
+    Delta_BW <- 1 + (Delta_BWs3 - 1) * (time / 1095);
   } else {
-    Delta_BW <- Delta_BWs3
+    Delta_BW <- Delta_BWs3;
   }
   
   # BW en kg
@@ -87,17 +89,17 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
   
   if (sex == 1) {
     if (year < 1) {
-      vb <- (-0.027 * year + 0.077) * wbw
+      vb <- (-0.027 * year + 0.077) * wbw;
     } else {
-      vb <- (0.0761 / (1 + exp(-0.683 * year + 0.946))) * wbw 
+      vb <- (0.0761 / (1 + exp(-0.683 * year + 0.946))) * wbw;
     }
   } else {
     if (year < 1) {
-      vb <- (-0.0273 * year + 0.0771) * wbw
+      vb <- (-0.0273 * year + 0.0771) * wbw;
     } else if (year < 14.019723) {
-      vb <- (3.28e-05 * y3 - 1.21e-03 * y2 + 1.24e-02 * year + 3.86e-02) * wbw
+      vb <- (3.28e-05 * y3 - 1.21e-03 * y2 + 1.24e-02 * year + 3.86e-02) * wbw;
     } else {
-      vb <- 0.065 * wbw
+      vb <- 0.065 * wbw;
     }
   }
   
@@ -181,26 +183,29 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
   
   ucr <- (
     0.032 +
-      2.098e-02*year +
-      9.104e-03*year^2 -
-      4.550e-04*year^3 +
-      7.578e-06*year^4 -
-      4.232e-08*year^5
-  ) * Delta_creat
+      2.098e-02*y2 +
+      9.104e-03*y3 -
+      4.550e-04*y4 +
+      7.578e-06*y5 -
+      4.232e-08*y6
+  ) * Delta_creat;
   
   if (year > 70) {
-    ucr <- 0.865756 * Delta_creat
+    ucr <- 0.865756 * Delta_creat;
   }
   
 
   
   # 11/ k5, k19x, k17x, k17b ----
   
-  # NEW ITEM: I suggest we make this distinction outside of the PBK.
+  #>CB: You may find it more appropriate to calculate k5 within the PBK rather 
+  # than in the pre-processing of the parameters for each individual?
+  # I presume that it is recalculated every time here.
+  
   if (sex == 1) {
-    k5 <- k5_h
+    k5 <- k5_h;
   } else {
-    k5 <- k5_f
+    k5 <- k5_f;
   }
   
   if (year <= 30) {
@@ -216,10 +221,10 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
   
   # 12/ Total bodyweight and rest
   # 12/ Rest of body / other tissues ----
-  vother <- wbw - (vk + vb + vl + vintestine + vlungs)
+  vother <- wbw - (vk + vb + vl + vintestine + vlungs);
   
   if (vother < 0) {
-    stop("vother is negative. Check organ volume equations.")
+    stop("vother is negative. Check organ volume equations.");
   }
   
   wbw_f =  vk + vb + vl  + vintestine + vlungs + vother;
@@ -230,15 +235,15 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
   # 14/ initial volumes for blood
   # hct0 is now used
   if (sex == 1) {
-    wbw0 <- 3.938425 * Delta_BW
+    wbw0 <- 3.938425 * Delta_BW;
   } else {
-    wbw0 <- 3.932403 * Delta_BW
+    wbw0 <- 3.932403 * Delta_BW;
   }
   
-  hct0 <- 0.359
-  vb0 <- 0.0771 * wbw0
-  vp0 <- (1 - hct0) * vb0
-  vrbc0 <- hct0 * vb0
+  hct0 <- 0.359;
+  vb0 <- 0.0771 * wbw0;
+  vp0 <- (1 - hct0) * vb0;
+  vrbc0 <- hct0 * vb0;
   
   
   return(list(
