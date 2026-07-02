@@ -17,7 +17,9 @@ PBK1 <- rxode2({
   d/dt(COSM_derm) = - kderm_release * COSM_derm; # NEW ITEM
   # Added CORD_quant explicitly as initial amount
   #d/dt(CORD_quant) = - CORD_quant; # NEW ITEM
-  
+  # >CB: Okay but unless I'm mistaken, in rxSolve you can't assign different initial 
+  # conditions to different individuals: ideally, exposure at birth could be different.
+  # That's why I put this here.
   
   d/dt(LUNG) = fabs_inh *kinh_release * k2_dust*(AIR_inhal_ing * VInhalation) + fabs_inh *kinh_release * k2_cig * CIG_inhal_ing - LUNG*(k3 + k4);           # pulmonary region at t=T
   
@@ -26,8 +28,11 @@ PBK1 <- rxode2({
   d/dt(GUT) = (fabs_ing * king_release * DIET_ing* wbw_f + fabs_ing * king_release *SOIL_ing + fabs_ing * king_release * COSM_ing + fabs_ing * king_release * DUST_ing + fabs_inh * kinh_release *k1_cig * CIG_inhal_ing + fabs_inh * kinh_release * k1_dust * (AIR_inhal_ing * VInhalation) + k4 * LUNG)  - k5 * GUT;  # GI-tract
   
   # NEW
-  d/dt(INTESTINE) = k5 * GUT - k6 * INTESTINE
-    
+  d/dt(INTESTINE) = k5 * GUT - k6 * INTESTINE;
+  #>CB: When I compare the INTESTINE value in your code with the GUT value in my code 
+  # for a simulation, all other things being equal, your INTESTINE value is 10 times higher.
+
+  
   UPTAKE2=k8;
   if ((k7*UPTAKE1) <= k8) {UPTAKE2=k7*UPTAKE1;} # UPTAKE2 flow to metallothionein (b3) has a maximum = k8
   UPTAKE3 = UPTAKE1 - UPTAKE2; # UPTAKE3 goes to plasma pool (b1)
@@ -72,9 +77,9 @@ PBK1 <- rxode2({
   
   ucdcr = ur/ucr; 
   
-  d/dt(EXH) = (1-k1-k2) * LUNG                                                                     # Exhalaltion
+  d/dt(EXH) = (1-k1-k2) * LUNG;                                                                     # Exhalaltion
   
-  total = GUT + LUNG + RBC + META + LIVER + KIDNEY + OTHER + FECES + URINE + PLASMA + UPTAKE1
+  total = GUT + LUNG + RBC + META + LIVER + KIDNEY + OTHER + FECES + URINE + PLASMA + UPTAKE1;
   
 })
 
@@ -118,4 +123,6 @@ inits <- c(
   FECES = 0,
   URINE = 0,
   EXH = 0
-)
+) #>CB: What solver do you use after? In rxSolve unless I am mistaken, we can't have different initial
+  # per individuals. It is a small limitation when we want to have different CI per individual.
+
