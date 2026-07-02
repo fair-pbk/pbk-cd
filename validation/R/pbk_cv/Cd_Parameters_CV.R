@@ -37,7 +37,10 @@ theta <- c(
   k15     = 0.00005,   # Liver -> feces (/day)
   
   # Red blood cells (B2)
-  kx       = 0.04,     # Plasma -> RBC (/day)
+  kx       = 0.04,     # Plasma -> RBC (/day)  
+  #>CB: The solution you are proposing to have k9 + k11 + kx + k12 = 1 is to fix everithing?​​
+  #>CB: Shouldn't we allow for some uncertainty regarding these parameters?
+  
   k16      = 0.012,    # RBC -> metallothionein pool (/day)
   
   # Metallothionein pool (B3)
@@ -58,8 +61,11 @@ theta <- c(
   king_release = 1,     # Release rate in GI tract(/day)
   fabs_inh = 1,         # absorbed fraction in lung
   kinh_release = 1,     # Release rate in lung (/day)
-  fabs_derm = 0.05/100, # absorbed fraction from skin to plasma 
+  fabs_derm = 0.5/100, # absorbed fraction from skin to plasma
   kderm_release = 1     # Release rate from skin to plasma (/day)
+
+  k1 = 0.1, # You use them in your code. Not sure of the value you want to use.
+  k2 = 0.2  # You use them in your code. Not sure of the value you want to use.
 )
 
 
