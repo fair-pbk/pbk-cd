@@ -111,7 +111,7 @@ inits <- c(
   DUST_derm = 0,
   COSM_derm = 0,
   LUNG = 0,
-  INTESTINA = 0,
+  INTESTINE = 0,
   GUT = 0,
   UPTAKE1 = 0,
   PLASMA = Ccord * p0$vp0,
