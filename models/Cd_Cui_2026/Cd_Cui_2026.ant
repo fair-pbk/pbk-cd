@@ -1,19 +1,37 @@
-model Cui2026_Cd_Human()
+model PBK_Cd_Human_Cui2026()
 
 #Created: Carolina Vogs, June 2026
 #Checked: 
 
 model notes ```
 Cd PBK (Cui et al, 2026):
+Notes: Some changes in parameters needs to be set active when modeling factory dust and women
 ```
 model description "https://www.sciencedirect.com/science/article/pii/S016041202600108X?via%3Dihub#s0190"
+
+#------------------------
+# NOTE: Dose description outside PBK model
+#------------------------
+# INHALATION
+#
+# AAirDailyIntake -> ALU;				C2 * AAirDailyIntake
+# C2 = 0.4        # Fraction of inhaled Cd deposited to Lung (alveolar space) - cigarette smoke
+# C2 = 0.13        # Fraction of inhaled Cd deposited to Lung (alveolar space) - factory dust
+# ALU -> AFecesUnabsorbed;			(1-C5)* C4 * ALU
+#
+# INGESTION
+#
+# ADietDailyIntake -> AGILumen;			C5 * ADietDailyIntake
+# AAirDailyIntake -> AGILumen;			C5 * C1 * AAirDailyIntake
+# ADietDailyIntake -> AFecesUnabsorbed;		(1-C5)* ADietDailyIntake
+# AAirDailyIntake -> AFecesUnabsorbed;		(1-C5)* C1 * AAirDailyIntake
 
 #------------------------
 # Body size & base volumes
 #------------------------
 
-  BWa = 88				# average men body weight
-  BWl = 88				# is supposed to change over live
+  BWa = 88				# average male body weight
+  BWl = 88				# is supposed to change over life
   year = 35				# age, needs to be transformed into an age vector when over life is simulated
 
 # Blood
@@ -35,18 +53,20 @@ model description "https://www.sciencedirect.com/science/article/pii/S0160412026
   VKidneyT := (1-FVKB) * VK		# Kidney Tissue Volume (L)
 
 # Rest of body
+  FVRBB = 0.02182			# Fractional Rest of Body Blood Volume (dimensionless)  
   A := VB - VLiverB - VKidneyB
   B := BWl - VL - VK
-  VETB := (A - FVRBB*B)/(1 - FVRBB)	# Extra-tissue blood volume (L)
+  VETB := (A - FVRBB*B)/(1 - FVRBB)	# Extra-tissue blood volume (L)  
   VRB := B - VETB			# RB Volume depending on age (L)
-  FVRBB = 0.2182			# Fractional Rest of Body Blood Volume (dimensionless)
   VRBB := FVRBB * VRB			# Rest of Body Blood volume (L)
   VRBT := (1-FVRBB) * VRB		# Rest of Body Tissue Volume (L)
 
+
 # Others 	
-  Lbm := 0.88 * BWl			# Lean Body mass (kg)
+  Lbm := 0.88 * BWl			# Lean Body mass (kg); male
+   # Lbm := 0.85 * BWl			# Lean Body mass (kg); female
   tmp := (Lbm - 8.58)/0.0272/1000
-  UCER := piecewise(0.5, tmp < 0.5, tmp) # Urinary creatinine excretion rate (g/day)
+  UCER := piecewise(0.5, tmp < 0.5, tmp)# Urinary creatinine excretion rate (g/day)
 
 #------------------------
 # Flow Rates
@@ -66,7 +86,7 @@ model description "https://www.sciencedirect.com/science/article/pii/S0160412026
 # Partition coefficients
 #------------------------
 
-# The model is not depending of partition coefficients.
+# The model does not depend on partition coefficients.
 
 #------------------------
 # Rate of transfers
@@ -74,8 +94,10 @@ model description "https://www.sciencedirect.com/science/article/pii/S0160412026
 
 # Exposure/absorption fractions for cigarette smoke
   C1 = 0.1        # inhaled Cd deposited in upper airways and swallowed; cigarette smoke
-  C2 = 0.4        # Fraction of inhaled Cd deposited to Lung (alveolar space)
-  C5 = 0.05       # Fraction of Cd in GI tract to be absorbed 
+  # C1 = 0.7      # inhaled Cd deposited in upper airways and swallowed; factory dust
+  C5 = 0.05       # Fraction of Cd in GI tract to be absorbed; men 
+  # C5 = 0.05     # Fraction of Cd in GI tract to be absorbed; women age < 13 years 
+  # C5 = 0.085    # Fraction of Cd in GI tract to be absorbed; women age ><=13 years 
   C7 = 0.25       # Fraction of Cd absorbed as CdMT 
 
 # Absorption rate constants
@@ -108,12 +130,12 @@ model description "https://www.sciencedirect.com/science/article/pii/S0160412026
 
   k15 := f15 * QK # Rate constant of CdMT filtration from Kidney Blood to Filtrate (L/day)
   k16 := f16 * QK # Rate constant of Free Cd filtration from Kidney Blood to Filtrate (L/day)
-  C17x = 0.95	  # Rate constant of CdMT reabsorption from Filtrate to Kidney Tissue for age ≤ 30
+  C17x = 0.95	  # Rate constant of CdMT reabsorption from Filtrate to Kidney Tissue for age <= 30
   C17 := piecewise(C17x - (C17x/3)*(year - 30)/50, year > 30, C17x)					# Age-dependent rate constant of CdMT reabsorption from Filtrate to Kidney Tissue (1/day)	
   k18 = 1	  # Rate constant of Free Cd excretion from Filtrate to urine (1/day)
 
   C21 = 7.7e-7	  # Coefficient of increase of rate constant of Free Cd and CdMT excretion from Kidney Tissue to urine for age >30 (1/day * year)
-  C19x = 9.8e-5	  # Rate constant of Free Cd and CdMT excretion from Kidney Tissue to urine for age ≤30 (1/day)
+  C19x = 9.8e-5	  # Rate constant of Free Cd and CdMT excretion from Kidney Tissue to urine for age <= 30 (1/day)
   C19 := piecewise(C19x + C21 * (year - 30),year > 30, C19x)	# Age-dependent C19x (1/day)
   k20 = 20	  # Rate constant of dissociation of CdMT in Kidney Tissue into Free Cd and MT in Kidney Tissue (1/day)
   k21 = 11.11	  # Rate constant of association of Free Cd and MT to form CdMT in Kidney Tissue (1/day)
@@ -139,30 +161,26 @@ model description "https://www.sciencedirect.com/science/article/pii/S0160412026
 #------------------------
 # Compartments 
 #------------------------
-compartment AirDailyIntake;
-compartment DietDailyIntake;
-compartment Lung;
-compartment GILumen;
-compartment IntestinalTissue;
-compartment ExtraTissueBlood;
-compartment LiverBlood;
-compartment LiverTissue;
-compartment KidneyBlood;
-compartment KidneyTissue;
-compartment RestofBodyBlood;
-compartment RestofBodyTissue;
-compartment Filtrate;
-compartment Urine;
-compartment Feces;
+compartment Lung; Lung = 1
+compartment GILumen; GILumen = 1
+compartment ExtraTissueBlood; ExtraTissueBlood = VETB
+compartment LiverBlood; LiverBlood = VLiverB
+compartment LiverTissue; LiverTissue = VLiverT
+compartment KidneyBlood; KidneyBlood = VKidneyB
+compartment KidneyTissue; KidneyTissue = VKidneyT
+compartment RestofBodyBlood; RestofBodyBlood = VRBB
+compartment RestofBodyTissue; RestofBodyTissue = VRBT
+compartment Filtrate; Filtrate = 1
+compartment Urine; Urine = 1
+compartment Feces; Feces = 1
 
 #------------------------
 # Species
 #------------------------
 
-substanceOnly species AAirDailyIntake in AirDailyIntake
+
 substanceOnly species ALU in Lung
 
-substanceOnly species ADietDailyIntake in DietDailyIntake
 substanceOnly species AGILumen in GILumen
 
 substanceOnly species AETB_Free in ExtraTissueBlood
@@ -185,7 +203,6 @@ substanceOnly species ARBB_Free in RestofBodyBlood
 substanceOnly species ARBB_PP in RestofBodyBlood
 substanceOnly species ARBB_RBC in RestofBodyBlood
 substanceOnly species ARBT_Free in RestofBodyTissue
-substanceOnly species ARBT_MT in RestofBodyTissue
 
 substanceOnly species AFiltrate_Free in Filtrate
 substanceOnly species AFiltrate_MT in Filtrate
@@ -201,9 +218,7 @@ substanceOnly species AFecesIT in Feces
 #------------------------
 # Initial conditions
 #------------------------
-AAirDailyIntake = 0;
 ALU = 0; 		# Amount of Cd in Lung (Alveolar space)
-ADietDailyIntake = 0;
 AGILumen = 0;
 
 AETB_Free = 0;
@@ -226,7 +241,6 @@ ARBB_Free = 0;
 ARBB_PP = 0;
 ARBB_RBC = 0;
 ARBT_Free = 0;
-ARBT_MT = 0;
 
 AFiltrate_Free = 0;
 AFiltrate_MT = 0;
@@ -274,17 +288,19 @@ AFecesIT = 0;
 ######## Assignment Rules
 ###############################
 uptakeTotal_Lung := C3 * ALU																	# Total Cd absorbed from lung per day - rate
-uptake1_Lung := piecewise(C8 * uptakeTotal_Lung / (uptakeTotal_Lung + uptakeTotal_GI), C7 * (uptakeTotal_Lung + uptakeTotal_GI) > C8, C7 * uptakeTotal_Lung) 	# CdMT absorbed from lung per day - fraction
-uptake2_Lung := uptakeTotal_Lung - uptake1_Lung															# Free Cd absorbed from lung per day - fraction
+uptake1_Lung := piecewise(0, uptakeTotal_Lung + uptakeTotal_GI <= 0, C8 * uptakeTotal_Lung / (uptakeTotal_Lung + uptakeTotal_GI), C7 * (uptakeTotal_Lung + uptakeTotal_GI) > C8, C7 * uptakeTotal_Lung)		# CdMT absorbed from lung per day - fraction
+uptake2_Lung := uptakeTotal_Lung - uptake1_Lung		
 
+												
 uptakeTotal_GI := C6 * AGILumen																	# Total Cd absorbed from GI per day - rate
-uptake1_GI := piecewise(C8 * uptakeTotal_GI/(uptakeTotal_Lung + uptakeTotal_GI), C7 * (uptakeTotal_Lung + uptakeTotal_GI) > C8, C7 * uptakeTotal_GI)		# CdMT absorbed from GI per day - fraction
+uptake1_GI := piecewise(0, uptakeTotal_Lung + uptakeTotal_GI <= 0, C8 * uptakeTotal_GI / (uptakeTotal_Lung + uptakeTotal_GI), C7 * (uptakeTotal_Lung + uptakeTotal_GI) > C8, C7 * uptakeTotal_GI)		# CdMT absorbed from GI per day - fraction
 uptake2_GI := uptakeTotal_GI - uptake1_GI 															# Free Cd absorbed from GI per day - Fraction
+
 
 ############################### 
 ######## Inhalation
 ###############################
-AAirDailyIntake -> ALU;				C2 * AAirDailyIntake
+
 ALU -> AGILumen;				C4 * ALU			
 ALU -> AETB_Free;				uptake2_Lung
 ALU -> AETB_PP;					uptake1_Lung
@@ -293,8 +309,7 @@ ALU -> AETB_PP;					uptake1_Lung
 ############################### 
 ######## Oral Absorption
 ###############################
-ADietDailyIntake -> AGILumen;			C5 * ADietDailyIntake
-AAirDailyIntake -> AGILumen;			C5 * C1 * AAirDailyIntake
+
 
 AGILumen -> ALiverB_Free; 			uptake2_GI
 AGILumen -> ALiverB_PP;   			uptake1_GI
@@ -327,8 +342,6 @@ AETB_Free -> AETB_RBC; 				CX * AETB_Free * RBC;
 ######## Liver blood and tissue
 ###############################
 
-# is missing for ALiverB_Free: +uptake2_GI 
-# is missing for ALiverB_PP: +uptake1_GI 
 
 ALiverB_Free -> AETB_Free ; 			QL * CVLiverB_Free;
 ALiverB_Free -> ALiverB_PP; 			k6 * ALiverB_Free * PP; 
@@ -345,7 +358,7 @@ ALiverT_Free -> ALiverB_Free;			C13 * CLiverT_Free;
 ALiverB_Free -> ALiverT_Free;			C12 * CVLiverB_Free;
 
 ALiverT_MT -> ALiverT_Free;			k12 * ALiverT_MT;
-ALiverT_Free -> ALiverT_MT;			k13 * ALiverT_Free * CLiverT_MT;
+ALiverT_Free -> ALiverT_MT;			k13 * ALiverT_Free * MTL;
 
 ALiverT_MT -> ALiverB_PP;			C14 * CLiverT_MT;
 
@@ -365,9 +378,9 @@ AKidneyB_RBC -> AKidneyB_Free;			C16 * AKidneyB_RBC;
 
 # Changes in kidney tissue concentration
 AKidneyT_MT -> AKidneyT_Free;			k20 * AKidneyT_MT;
-AKidneyT_Free -> AKidneyT_MT;			k21 * AKidneyT_Free * CKidneyT_MT;
+AKidneyT_Free -> AKidneyT_MT;			k21 * AKidneyT_Free * MTK;
 
-AKidneyT_Free -> AKidneyB_Free;			C18 * CKidneyT_MT;
+AKidneyT_Free -> AKidneyB_Free;			C18 * CKidneyT_Free;
 AFiltrate_MT -> AKidneyT_MT; 			C17 * AFiltrate_MT
 
 ############################### 
@@ -388,8 +401,6 @@ ARBB_RBC -> ARBB_Free;				C16 * ARBB_RBC;
 ARBT_Free -> ARBB_Free;				C10 * CRBT_Free;
 ARBB_Free -> ARBT_Free;				C9 * CVRBB_Free;
 
-AKidneyT_Free -> AKidneyB_Free;			C18 * CKidneyT_MT;
-AFiltrate_MT -> AKidneyT_MT; 			C17 * AFiltrate_MT
 
 
 ############################### 
@@ -407,9 +418,8 @@ AKidneyT_MT -> AUrineKidneyTissue; 		C19 * AKidneyT_MT
 ############################### 
 ######## Feces
 ###############################
-ADietDailyIntake -> AFecesUnabsorbed;		(1-C5)* ADietDailyIntake
-AAirDailyIntake -> AFecesUnabsorbed;		(1-C5)* C1 * AAirDailyIntake
-ALU -> AFecesUnabsorbed;			(1-C5)* C4 * ALU
+
+
 ALiverT_Free -> AFecesBile; 			C15 * ALiverT_Free; 
 ARBT_Free -> AFecesIT; 				C11 * ARBT_Free;
  
