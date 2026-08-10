@@ -143,8 +143,10 @@ blocks:
         unit: UNITLESS
         bqm_is: http://purl.obolibrary.org/obo/PBPKO_00527
         bqb_is: ""
-        type: variable
-        assignment: f_HCT(Age, HCT_infant, HCT_adult)
+        #type: variable
+        #assignment: f_HCT(Age, HCT_infant, HCT_adult)
+        type: constant
+        value: 0.425
       - id: VLiverc
         element_name: Volume of liver as fraction of bodyweight
         unit: L/kg

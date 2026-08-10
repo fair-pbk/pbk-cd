@@ -5,6 +5,8 @@ model_instances:
     label: SBML
     model_path: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.sbml
     param_file: './models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.params.csv'
+    target_mappings:
+      VPlasma: 'Plasma'
 
 scenarios:
   - id: oral_single
@@ -36,6 +38,9 @@ scenarios:
       - id: APlasma
         label: Amount in plasma
         output: APlasma
+      - id: VPlasma
+        label: Plasma volume
+        output: VPlasma
       - id: ARBC
         label: Amount in RBC
         output: ARBC
@@ -75,6 +80,7 @@ scenarios:
           AOthers: OTHER
           AFeces: FECES
           AUrine: URINE
+          VPlasma: vp
   - id: oral_repeated
     label: Oral repeated dosing
     time_unit: DAY
@@ -95,6 +101,9 @@ scenarios:
       - id: BW
         label: BW
         output: BW
+      - id: Age
+        label: Age
+        output: Age
       - id: AGut
         label: Amount in gut
         output: AGut
@@ -104,6 +113,9 @@ scenarios:
       - id: APlasma
         label: Amount in plasma
         output: APlasma
+      - id: VPlasma
+        label: Plasma volume
+        output: VPlasma
       - id: ARBC
         label: Amount in RBC
         output: ARBC
@@ -143,6 +155,7 @@ scenarios:
           AOthers: OTHER
           AFeces: FECES
           AUrine: URINE
+          VPlasma: vp
   - id: oral_repeated_lifetime
     label: Oral repeated dosing (lifetime)
     time_unit: DAY
@@ -172,6 +185,9 @@ scenarios:
       - id: APlasma
         label: Amount in plasma
         output: APlasma
+      - id: VPlasma
+        label: Plasma volume
+        output: VPlasma
       - id: ARBC
         label: Amount in RBC
         output: ARBC
@@ -211,3 +227,4 @@ scenarios:
           AOthers: OTHER
           AFeces: FECES
           AUrine: URINE
+          VPlasma: vp

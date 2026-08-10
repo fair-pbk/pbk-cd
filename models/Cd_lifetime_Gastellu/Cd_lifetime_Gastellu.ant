@@ -51,7 +51,7 @@ model Cd_lifetime_Gastellu()
     VBloodc := f_VBloodc(Age, Sex)
     HCT_infant = 0.359
     HCT_adult = 0.4248446
-    HCT := f_HCT(Age, HCT_infant, HCT_adult)
+    HCT = 0.425
     VLiverc := f_VLiverc(Age, Sex)
     VKidneyc := f_VKidneyc(Age, Sex)
     VGutc := piecewise(0.0021, Sex == 1, 0.0023)

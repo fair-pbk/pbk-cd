@@ -1207,7 +1207,7 @@
       <parameter id="VBloodc" name="Volume of blood as fraction of bodyweight" units="L_PER_KiloGM" constant="false"/>
       <parameter id="HCT_infant" value="0.359" constant="true"/>
       <parameter id="HCT_adult" value="0.4248446" constant="true"/>
-      <parameter metaid="meta_HCT" id="HCT" name="Hematocrit" units="UNITLESS" constant="false">
+      <parameter metaid="meta_HCT" id="HCT" name="Hematocrit" value="0.425" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_HCT">
@@ -1527,16 +1527,6 @@
             <ci> f_VBloodc </ci>
             <ci> Age </ci>
             <ci> Sex </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="HCT">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <ci> f_HCT </ci>
-            <ci> Age </ci>
-            <ci> HCT_infant </ci>
-            <ci> HCT_adult </ci>
           </apply>
         </math>
       </assignmentRule>
