@@ -13,7 +13,7 @@
       </rdf:RDF>
     </annotation>
     <listOfFunctionDefinitions>
-      <functionDefinition id="f_BW">
+      <functionDefinition id="f_BW_male">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <lambda>
             <bvar>
@@ -22,10 +22,16 @@
             <bvar>
               <ci> BW_birth </ci>
             </bvar>
-            <apply>
-              <plus/>
-              <apply>
-                <minus/>
+            <piecewise>
+              <piece>
+                <cn type="integer"> 76 </cn>
+                <apply>
+                  <gt/>
+                  <ci> Age </ci>
+                  <cn type="integer"> 79 </cn>
+                </apply>
+              </piece>
+              <otherwise>
                 <apply>
                   <plus/>
                   <apply>
@@ -44,17 +50,49 @@
                                 <minus/>
                                 <apply>
                                   <plus/>
-                                  <ci> BW_birth </ci>
+                                  <apply>
+                                    <minus/>
+                                    <apply>
+                                      <plus/>
+                                      <ci> BW_birth </ci>
+                                      <apply>
+                                        <times/>
+                                        <cn> 0.7518199 </cn>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                    </apply>
+                                    <apply>
+                                      <times/>
+                                      <cn> 0.02023793 </cn>
+                                      <apply>
+                                        <power/>
+                                        <apply>
+                                          <times/>
+                                          <ci> Age </ci>
+                                          <cn type="integer"> 12 </cn>
+                                        </apply>
+                                        <cn type="integer"> 2 </cn>
+                                      </apply>
+                                    </apply>
+                                  </apply>
                                   <apply>
                                     <times/>
-                                    <cn> 0.7518199 </cn>
-                                    <ci> Age </ci>
-                                    <cn type="integer"> 12 </cn>
+                                    <cn> 0.0002921682 </cn>
+                                    <apply>
+                                      <power/>
+                                      <apply>
+                                        <times/>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                      <cn type="integer"> 3 </cn>
+                                    </apply>
                                   </apply>
                                 </apply>
                                 <apply>
                                   <times/>
-                                  <cn> 0.02023793 </cn>
+                                  <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
                                   <apply>
                                     <power/>
                                     <apply>
@@ -62,13 +100,13 @@
                                       <ci> Age </ci>
                                       <cn type="integer"> 12 </cn>
                                     </apply>
-                                    <cn type="integer"> 2 </cn>
+                                    <cn type="integer"> 4 </cn>
                                   </apply>
                                 </apply>
                               </apply>
                               <apply>
                                 <times/>
-                                <cn> 0.0002921682 </cn>
+                                <cn type="e-notation"> 8.469 <sep/> -9 </cn>
                                 <apply>
                                   <power/>
                                   <apply>
@@ -76,13 +114,13 @@
                                     <ci> Age </ci>
                                     <cn type="integer"> 12 </cn>
                                   </apply>
-                                  <cn type="integer"> 3 </cn>
+                                  <cn type="integer"> 5 </cn>
                                 </apply>
                               </apply>
                             </apply>
                             <apply>
                               <times/>
-                              <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
+                              <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
                               <apply>
                                 <power/>
                                 <apply>
@@ -90,13 +128,13 @@
                                   <ci> Age </ci>
                                   <cn type="integer"> 12 </cn>
                                 </apply>
-                                <cn type="integer"> 4 </cn>
+                                <cn type="integer"> 6 </cn>
                               </apply>
                             </apply>
                           </apply>
                           <apply>
                             <times/>
-                            <cn type="e-notation"> 8.469 <sep/> -9 </cn>
+                            <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
                             <apply>
                               <power/>
                               <apply>
@@ -104,13 +142,13 @@
                                 <ci> Age </ci>
                                 <cn type="integer"> 12 </cn>
                               </apply>
-                              <cn type="integer"> 5 </cn>
+                              <cn type="integer"> 7 </cn>
                             </apply>
                           </apply>
                         </apply>
                         <apply>
                           <times/>
-                          <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
+                          <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
                           <apply>
                             <power/>
                             <apply>
@@ -118,13 +156,13 @@
                               <ci> Age </ci>
                               <cn type="integer"> 12 </cn>
                             </apply>
-                            <cn type="integer"> 6 </cn>
+                            <cn type="integer"> 8 </cn>
                           </apply>
                         </apply>
                       </apply>
                       <apply>
                         <times/>
-                        <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
+                        <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
                         <apply>
                           <power/>
                           <apply>
@@ -132,13 +170,13 @@
                             <ci> Age </ci>
                             <cn type="integer"> 12 </cn>
                           </apply>
-                          <cn type="integer"> 7 </cn>
+                          <cn type="integer"> 9 </cn>
                         </apply>
                       </apply>
                     </apply>
                     <apply>
                       <times/>
-                      <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
+                      <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
                       <apply>
                         <power/>
                         <apply>
@@ -146,13 +184,13 @@
                           <ci> Age </ci>
                           <cn type="integer"> 12 </cn>
                         </apply>
-                        <cn type="integer"> 8 </cn>
+                        <cn type="integer"> 10 </cn>
                       </apply>
                     </apply>
                   </apply>
                   <apply>
                     <times/>
-                    <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
+                    <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
                     <apply>
                       <power/>
                       <apply>
@@ -160,38 +198,242 @@
                         <ci> Age </ci>
                         <cn type="integer"> 12 </cn>
                       </apply>
-                      <cn type="integer"> 9 </cn>
+                      <cn type="integer"> 11 </cn>
                     </apply>
                   </apply>
                 </apply>
+              </otherwise>
+            </piecewise>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f_BW_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> Age </ci>
+            </bvar>
+            <bvar>
+              <ci> BW_birth </ci>
+            </bvar>
+            <piecewise>
+              <piece>
+                <cn type="integer"> 68 </cn>
                 <apply>
-                  <times/>
-                  <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
+                  <gt/>
+                  <ci> Age </ci>
+                  <cn type="integer"> 79 </cn>
+                </apply>
+              </piece>
+              <otherwise>
+                <apply>
+                  <plus/>
                   <apply>
-                    <power/>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <apply>
+                        <minus/>
+                        <apply>
+                          <plus/>
+                          <apply>
+                            <minus/>
+                            <apply>
+                              <plus/>
+                              <apply>
+                                <minus/>
+                                <apply>
+                                  <plus/>
+                                  <apply>
+                                    <minus/>
+                                    <apply>
+                                      <plus/>
+                                      <ci> BW_birth </ci>
+                                      <apply>
+                                        <times/>
+                                        <cn> 0.6866462 </cn>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                    </apply>
+                                    <apply>
+                                      <times/>
+                                      <cn> 0.01949911 </cn>
+                                      <apply>
+                                        <power/>
+                                        <apply>
+                                          <times/>
+                                          <ci> Age </ci>
+                                          <cn type="integer"> 12 </cn>
+                                        </apply>
+                                        <cn type="integer"> 2 </cn>
+                                      </apply>
+                                    </apply>
+                                  </apply>
+                                  <apply>
+                                    <times/>
+                                    <cn> 0.00031311 </cn>
+                                    <apply>
+                                      <power/>
+                                      <apply>
+                                        <times/>
+                                        <ci> Age </ci>
+                                        <cn type="integer"> 12 </cn>
+                                      </apply>
+                                      <cn type="integer"> 3 </cn>
+                                    </apply>
+                                  </apply>
+                                </apply>
+                                <apply>
+                                  <times/>
+                                  <cn type="e-notation"> 2.466654 <sep/> -6 </cn>
+                                  <apply>
+                                    <power/>
+                                    <apply>
+                                      <times/>
+                                      <ci> Age </ci>
+                                      <cn type="integer"> 12 </cn>
+                                    </apply>
+                                    <cn type="integer"> 4 </cn>
+                                  </apply>
+                                </apply>
+                              </apply>
+                              <apply>
+                                <times/>
+                                <cn type="e-notation"> 1.113217 <sep/> -8 </cn>
+                                <apply>
+                                  <power/>
+                                  <apply>
+                                    <times/>
+                                    <ci> Age </ci>
+                                    <cn type="integer"> 12 </cn>
+                                  </apply>
+                                  <cn type="integer"> 5 </cn>
+                                </apply>
+                              </apply>
+                            </apply>
+                            <apply>
+                              <times/>
+                              <cn type="e-notation"> 3.131402 <sep/> -11 </cn>
+                              <apply>
+                                <power/>
+                                <apply>
+                                  <times/>
+                                  <ci> Age </ci>
+                                  <cn type="integer"> 12 </cn>
+                                </apply>
+                                <cn type="integer"> 6 </cn>
+                              </apply>
+                            </apply>
+                          </apply>
+                          <apply>
+                            <times/>
+                            <cn type="e-notation"> 5.693737 <sep/> -14 </cn>
+                            <apply>
+                              <power/>
+                              <apply>
+                                <times/>
+                                <ci> Age </ci>
+                                <cn type="integer"> 12 </cn>
+                              </apply>
+                              <cn type="integer"> 7 </cn>
+                            </apply>
+                          </apply>
+                        </apply>
+                        <apply>
+                          <times/>
+                          <cn type="e-notation"> 6.706947 <sep/> -17 </cn>
+                          <apply>
+                            <power/>
+                            <apply>
+                              <times/>
+                              <ci> Age </ci>
+                              <cn type="integer"> 12 </cn>
+                            </apply>
+                            <cn type="integer"> 8 </cn>
+                          </apply>
+                        </apply>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn type="e-notation"> 4.947858 <sep/> -20 </cn>
+                        <apply>
+                          <power/>
+                          <apply>
+                            <times/>
+                            <ci> Age </ci>
+                            <cn type="integer"> 12 </cn>
+                          </apply>
+                          <cn type="integer"> 9 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
                     <apply>
                       <times/>
-                      <ci> Age </ci>
-                      <cn type="integer"> 12 </cn>
+                      <cn type="e-notation"> 2.079251 <sep/> -23 </cn>
+                      <apply>
+                        <power/>
+                        <apply>
+                          <times/>
+                          <ci> Age </ci>
+                          <cn type="integer"> 12 </cn>
+                        </apply>
+                        <cn type="integer"> 10 </cn>
+                      </apply>
                     </apply>
-                    <cn type="integer"> 10 </cn>
                   </apply>
-                </apply>
-              </apply>
-              <apply>
-                <times/>
-                <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
-                <apply>
-                  <power/>
                   <apply>
                     <times/>
-                    <ci> Age </ci>
-                    <cn type="integer"> 12 </cn>
+                    <cn type="e-notation"> 3.800367 <sep/> -27 </cn>
+                    <apply>
+                      <power/>
+                      <apply>
+                        <times/>
+                        <ci> Age </ci>
+                        <cn type="integer"> 12 </cn>
+                      </apply>
+                      <cn type="integer"> 11 </cn>
+                    </apply>
                   </apply>
-                  <cn type="integer"> 11 </cn>
                 </apply>
-              </apply>
-            </apply>
+              </otherwise>
+            </piecewise>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f_BW">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> Age </ci>
+            </bvar>
+            <bvar>
+              <ci> Sex </ci>
+            </bvar>
+            <bvar>
+              <ci> BW_birth </ci>
+            </bvar>
+            <piecewise>
+              <piece>
+                <apply>
+                  <ci> f_BW_male </ci>
+                  <ci> Age </ci>
+                  <ci> BW_birth </ci>
+                </apply>
+                <apply>
+                  <eq/>
+                  <ci> Sex </ci>
+                  <cn type="integer"> 1 </cn>
+                </apply>
+              </piece>
+              <otherwise>
+                <apply>
+                  <ci> f_BW_female </ci>
+                  <ci> Age </ci>
+                  <ci> BW_birth </ci>
+                </apply>
+              </otherwise>
+            </piecewise>
           </lambda>
         </math>
       </functionDefinition>
@@ -1259,6 +1501,7 @@
             <apply>
               <ci> f_BW </ci>
               <ci> Age </ci>
+              <ci> Sex </ci>
               <ci> BWBirth </ci>
             </apply>
           </apply>
@@ -1272,6 +1515,7 @@
             <apply>
               <ci> f_BW </ci>
               <ci> AgeRef </ci>
+              <ci> Sex </ci>
               <ci> BWBirth </ci>
             </apply>
           </apply>

@@ -1,5 +1,13 @@
-function f_BW(Age, BW_birth)
-    (BW_birth + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
+function f_BW_male(Age, BW_birth)
+    piecewise(76, Age > 79, BW_birth + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
+end
+
+function f_BW_female(Age, BW_birth)
+    piecewise(68, Age > 79, BW_birth + 0.6866462*Age*12 - 0.01949911*(Age*12)^2 + 0.00031311*(Age*12)^3 - 2.466654e-6*(Age*12)^4 + 1.113217e-08*(Age*12)^5 - 3.131402e-11*(Age*12)^6 + 5.693737e-14*(Age*12)^7 - 6.706947e-17*(Age*12)^8 + 4.947858e-20*(Age*12)^9 - 2.079251e-23*(Age*12)^10 + 3.800367e-27*(Age*12)^11)
+end
+
+function f_BW(Age, Sex, BW_birth)
+    piecewise(f_BW_male(Age, BW_birth), Sex == 1, f_BW_female(Age, BW_birth))
 end
 
 function f_Metallothionein_Kidney(Age, K_Metallothionein_Kidney_U30)
@@ -33,11 +41,11 @@ model Cd_lifetime_Gastellu()
     ## Subject-level physiological parameters
     Age = 18
     Sex = 1
-    BW := deltaBW * f_BW(Age, BWBirth)
+    BW := deltaBW * f_BW(Age, Sex, BWBirth)
     AgeRef = 0
     BWRef = 3.938425
     BWBirth = 3.938425
-    deltaBW := BWRef / f_BW(AgeRef, BWBirth)
+    deltaBW := BWRef / f_BW(AgeRef, Sex, BWBirth)
 
     ## Compartment volume parameters
     VBloodc := f_VBloodc(Age, Sex)

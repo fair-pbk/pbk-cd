@@ -5,12 +5,25 @@ description: >
 template: ../Cd_PBK_Cd.template.ant
 
 functions:
-  - id: f_BW
+  - id: f_BW_male
     parameters:
       - Age
       - BW_birth
     body: |
-      (BW_birth + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
+      piecewise(76, Age > 79, BW_birth + 0.7518199*Age*12 - 0.02023793*(Age*12)^2 + 0.0002921682*(Age*12)^3 - 2.06762e-6*(Age*12)^4 + 8.469e-09*(Age*12)^5 - 2.188427e-11*(Age*12)^6 + 3.699776e-14*(Age*12)^7 - 4.099077e-17*(Age*12)^8 + 2.874804e-20*(Age*12)^9 - 1.159732e-23*(Age*12)^10 + 2.052602e-27*(Age*12)^11)
+  - id: f_BW_female
+    parameters:
+      - Age
+      - BW_birth
+    body: |
+      piecewise(68, Age > 79, BW_birth + 0.6866462*Age*12 - 0.01949911*(Age*12)^2 + 0.00031311*(Age*12)^3 - 2.466654e-6*(Age*12)^4 + 1.113217e-08*(Age*12)^5 - 3.131402e-11*(Age*12)^6 + 5.693737e-14*(Age*12)^7 - 6.706947e-17*(Age*12)^8 + 4.947858e-20*(Age*12)^9 - 2.079251e-23*(Age*12)^10 + 3.800367e-27*(Age*12)^11)
+  - id: f_BW
+    parameters:
+      - Age
+      - Sex
+      - BW_birth
+    body: |
+      piecewise(f_BW_male(Age, BW_birth), Sex == 1, f_BW_female(Age, BW_birth))
   - id: f_Metallothionein_Kidney
     parameters:
       - Age
@@ -73,7 +86,7 @@ blocks:
         bqm_is: http://purl.obolibrary.org/obo/PBPKO_00008
         bqb_is: ""
         type: variable
-        assignment: deltaBW * f_BW(Age, BWBirth)
+        assignment: deltaBW * f_BW(Age, Sex, BWBirth)
       - id: AgeRef
         element_name: current age of reference indvididual in simulation
         unit: y
@@ -101,7 +114,7 @@ blocks:
         bqm_is: ""
         bqb_is: ""
         type: variable
-        assignment: BWRef / f_BW(AgeRef, BWBirth)
+        assignment: BWRef / f_BW(AgeRef, Sex, BWBirth)
   - id: COMPARTMENT_VOLUME_PARAMETERS
     parameters:
       - id: VBloodc
