@@ -60,7 +60,7 @@ scenarios:
     reference_data:
       - id: R
         label: R
-        file_path: validation/outputs/oral_single/results_R.csv
+        file_path: validation/outputs/reference/R/oral_single.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
@@ -128,7 +128,7 @@ scenarios:
     reference_data:
       - id: R
         label: R
-        file_path: validation/outputs/oral_repeated/results_R.csv
+        file_path: validation/outputs/reference/R/oral_repeated.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
@@ -196,7 +196,7 @@ scenarios:
     reference_data:
       - id: reference
         label: R
-        file_path: validation/outputs/oral_repeated_lifetime/results_R.csv
+        file_path: validation/outputs/reference/R/oral_repeated_lifetime.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:

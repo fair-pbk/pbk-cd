@@ -13,7 +13,8 @@ library(dplyr)
 
 source("validation/R/cd_pbk_shared.R")
 
-results_path <- "validation/outputs/oral_repeated_lifetime"
+results_path <- "validation/outputs/reference/R/"
+results_file <- "oral_repeated_lifetime.csv"
 
 df1 <- setDT(data.frame(id=1))
 df1[, sex := 1] # Male
@@ -112,8 +113,8 @@ sim_output <- rxSolve(object=PBK1, params=params_all, events=event_res) %>%
 
 ## Create results path if not exists
 if (!dir.exists(file.path(results_path))) {
-  dir.create(file.path(results_path))
+  dir.create(file.path(results_path), recursive = TRUE)
 }
 
 # Write outputs
-write.csv(sim_output, paste(results_path, "/results_R.csv", sep=""))
+write.csv(sim_output, paste(results_path, results_file, sep=""))

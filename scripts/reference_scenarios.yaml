@@ -1,0 +1,19 @@
+reference_scenarios:
+  - id: r_single_dose
+    output_file: ./validation/outputs/reference/R/oral_single.csv
+    file_path: validation/R/run_validation_single_dose.R
+  - id: r_repeated_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated.csv
+    file_path: validation/R/run_validation_repeated_dose.R
+  - id: r_repeated_lifetime_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated_lifetime.csv
+    file_path: validation/R/run_validation_lifetime_repeated_dose.R
+  - id: mrgsolve_single_dose
+    output_file: ./validation/outputs/reference/mrgsolve/oral_single.csv
+    file_path: validation/mrgsolve/run_validation_single_dose.R
+  - id: mrgsolve_repeated_dose
+    output_file: ./validation/outputs/reference/mrgsolve/oral_repeated.csv
+    file_path: validation/mrgsolve/run_validation_repeated_dose.R
+  - id: mrgsolve_repeated_lifetime_dose
+    output_file: ./validation/outputs/reference/mrgsolve/oral_repeated_lifetime.csv
+    file_path: validation/mrgsolve/run_validation_lifetime_repeated_dose.R

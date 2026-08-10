@@ -60,7 +60,7 @@ scenarios:
     reference_data:
       - id: mrgsolve
         label: mrgsolve
-        file_path: validation/outputs/oral_single/results_mrgsolve.csv
+        file_path: validation/outputs/reference/mrgsolve/oral_single.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
@@ -131,7 +131,7 @@ scenarios:
     reference_data:
       - id: mrgsolve
         label: mrgsolve
-        file_path: validation/outputs/oral_repeated/results_mrgsolve.csv
+        file_path: validation/outputs/reference/mrgsolve/oral_repeated.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
@@ -202,7 +202,7 @@ scenarios:
     reference_data:
       - id: mrgsolve
         label: mrgsolve
-        file_path: validation/outputs/oral_repeated_lifetime/results_mrgsolve.csv
+        file_path: validation/outputs/reference/mrgsolve/oral_repeated_lifetime.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
