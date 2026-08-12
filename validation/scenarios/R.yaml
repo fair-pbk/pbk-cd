@@ -6,7 +6,7 @@ model_instances:
     model_path: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.sbml
     param_file: './models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.params.csv'
     target_mappings:
-      VPlasma: 'Plasma'
+      VBlood: 'VBlood'
 
 scenarios:
   - id: oral_single
@@ -38,9 +38,9 @@ scenarios:
       - id: APlasma
         label: Amount in plasma
         output: APlasma
-      - id: VPlasma
-        label: Plasma volume
-        output: VPlasma
+      - id: VBlood
+        label: Blood volume
+        output: VBlood
       - id: ARBC
         label: Amount in RBC
         output: ARBC
@@ -69,7 +69,7 @@ scenarios:
         series_type: TIMELINE
         time_unit: DAY
         mappings:
-          BW: wbw
+          BW: wbw_f
           AGut: GUT
           ALung: LUNG
           APlasma: PLASMA
@@ -80,7 +80,7 @@ scenarios:
           AOthers: OTHER
           AFeces: FECES
           AUrine: URINE
-          VPlasma: vp
+          VBlood: vb
   - id: oral_repeated
     label: Oral repeated dosing
     time_unit: DAY
@@ -113,9 +113,9 @@ scenarios:
       - id: APlasma
         label: Amount in plasma
         output: APlasma
-      - id: VPlasma
-        label: Plasma volume
-        output: VPlasma
+      - id: VBlood
+        label: Blood volume
+        output: VBlood
       - id: ARBC
         label: Amount in RBC
         output: ARBC
@@ -144,7 +144,7 @@ scenarios:
         series_type: TIMELINE
         time_unit: DAY
         mappings:
-          BW: wbw
+          BW: wbw_f
           AGut: GUT
           ALung: LUNG
           APlasma: PLASMA
@@ -155,7 +155,7 @@ scenarios:
           AOthers: OTHER
           AFeces: FECES
           AUrine: URINE
-          VPlasma: vp
+          VBlood: vb
   - id: oral_repeated_lifetime
     label: Oral repeated dosing (lifetime)
     time_unit: DAY
@@ -185,9 +185,9 @@ scenarios:
       - id: APlasma
         label: Amount in plasma
         output: APlasma
-      - id: VPlasma
-        label: Plasma volume
-        output: VPlasma
+      - id: VBlood
+        label: Blood volume
+        output: VBlood
       - id: ARBC
         label: Amount in RBC
         output: ARBC
@@ -216,7 +216,7 @@ scenarios:
         series_type: TIMELINE
         time_unit: DAY
         mappings:
-          BW: wbw
+          BW: wbw_f
           AGut: GUT
           ALung: LUNG
           APlasma: PLASMA
@@ -227,4 +227,4 @@ scenarios:
           AOthers: OTHER
           AFeces: FECES
           AUrine: URINE
-          VPlasma: vp
+          VBlood: vb

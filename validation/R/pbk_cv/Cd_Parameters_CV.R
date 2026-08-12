@@ -62,7 +62,7 @@ theta <- c(
   fabs_inh = 1,         # absorbed fraction in lung
   kinh_release = 1,     # Release rate in lung (/day)
   fabs_derm = 0.5/100, # absorbed fraction from skin to plasma
-  kderm_release = 1     # Release rate from skin to plasma (/day)
+  kderm_release = 1,    # Release rate from skin to plasma (/day)
 
   k1 = 0.1, # You use them in your code. Not sure of the value you want to use.
   k2 = 0.2  # You use them in your code. Not sure of the value you want to use.
