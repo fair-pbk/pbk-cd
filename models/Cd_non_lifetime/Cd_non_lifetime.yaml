@@ -22,53 +22,70 @@ blocks:
   - id: KINETIC_PARAMETERS
     parameters:
       - id: K_Metallothionein_Kidney
+        description: Fraction of metallothionein Cd transferred to kidney (k17)
         type: constant
         value: 0.95
+        unit: UNITLESS
       - id: K_Kidney_Urine
+        description: Baseline kidney -> urine elimination (/day) (k19)
         type: constant
         value: 0.00014
+        unit: /d
   - id: COMPARTMENT_VOLUME_PARAMETERS
     parameters:
-      - id: VBloodc
-        type: constant
-        value: 0.076
       - id: HCT
         type: constant
         value: 0.425
+        unit: UNITLESS
+      - id: VBloodc
+        type: constant
+        value: 0.076
+        unit: L/kg
       - id: VLiverc
         type: constant
         value: 0.025
+        unit: L/kg
       - id: VKidneyc
         type: constant
         value: 0.004
+        unit: L/kg
       - id: VGutc
         type: constant
         value: 0.0182
+        unit: L/kg
       - id: VLungc
         type: constant
         value: 0.0068
+        unit: L/kg
   - id: COMPARTMENT_VOLUMES
     parameters:
       - id: VMetallothionein
         type: variable
+        unit: L
         assignment: 1
       - id: VLiver
         type: variable
+        unit: L
         assignment: VLiverc * BW
       - id: VKidney
         type: variable
+        unit: L
         assignment: VKidneyc * BW
       - id: VFeces
         type: variable
+        unit: L
         assignment: 1
       - id: VUrine
         type: variable
+        unit: L
         assignment: 1
       - id: VGut
         type: variable
+        unit: L
         assignment: VGutc * BW
       - id: VLung
         type: variable
+        unit: L
         assignment: VLungc * BW
       - id: VBlood
         element_name: Volume of blood
@@ -77,11 +94,14 @@ blocks:
         assignment: VBloodc * BW
       - id: VPlasma
         type: variable
+        unit: L
         assignment: VBlood * (1 - HCT)
       - id: VRBC
         type: variable
+        unit: L
         assignment: VBlood * HCT
       - id: VOthers
         type: variable
+        unit: L
         assignment: BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)
 

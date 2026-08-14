@@ -109,17 +109,17 @@ def create_instance_annotations(template_annotations_path, instance_config, outp
     for p in yaml_params:
         if (p["id"], "parameter") not in existing:
             new_rows.append({"element_id": p["id"], "sbml_type": "parameter",
-                             "element_name": "", "unit": "",
+                             "element_name": p.get("element_name", ""), "unit": p["unit"],
                              "annotation_type": "rdf", "qualifier": "BQM_IS",
                              "URI": "", "remark": ""})
             new_rows.append({"element_id": p["id"], "sbml_type": "parameter",
-                             "element_name": "", "unit": "",
+                             "element_name": p.get("element_name", ""), "unit": p["unit"],
                              "annotation_type": "rdf", "qualifier": "BQB_IS",
                              "URI": "", "remark": ""})
     for c in yaml_compartments:
         if (c["id"], "compartment") not in existing:
             new_rows.append({"element_id": c["id"], "sbml_type": "compartment",
-                             "element_name": "", "unit": "",
+                             "element_name": c.get("element_name", ""), "unit": c["unit"],
                              "annotation_type": "rdf", "qualifier": "BQM_IS",
                              "URI": "", "remark": ""})
 

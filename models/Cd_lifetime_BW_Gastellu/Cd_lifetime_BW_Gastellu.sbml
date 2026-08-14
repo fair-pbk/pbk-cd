@@ -423,7 +423,19 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment id="RBC" name="red blood cells" spatialDimensions="3" units="L" constant="false"/>
+      <compartment metaid="meta_RBC" id="RBC" name="red blood cells" spatialDimensions="3" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_RBC">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00634"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
       <compartment metaid="meta_Others" id="Others" name="Rest of the body" spatialDimensions="3" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -574,7 +586,7 @@
         </annotation>
       </parameter>
       <parameter id="deltaBW" name="Variability on bodyweight" units="UNITLESS" constant="false"/>
-      <parameter id="BWBirth" value="3.938425" constant="true"/>
+      <parameter id="BWBirth" name="body weight at birth" value="3.938425" units="KiloGM" constant="true"/>
       <parameter id="AgeRef" name="current age of reference indvididual in simulation" value="0" units="YR" constant="true"/>
       <parameter id="BWRef" name="body weight of reference indvididual in simulation" value="3.938425" units="KiloGM" constant="true"/>
       <parameter id="VBloodc" name="Volume of blood as fraction of bodyweight" value="0.076" units="L_PER_KiloGM" constant="true"/>
@@ -643,13 +655,13 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="VMetallothionein" value="1" constant="false"/>
-      <parameter id="VLiver" constant="false"/>
-      <parameter id="VKidney" constant="false"/>
-      <parameter id="VFeces" value="1" constant="false"/>
-      <parameter id="VUrine" value="1" constant="false"/>
-      <parameter id="VGut" constant="false"/>
-      <parameter id="VLung" constant="false"/>
+      <parameter id="VMetallothionein" name="Volume of fraction of metallothionein in liver cytosol" value="1" units="UNITLESS" constant="false"/>
+      <parameter id="VLiver" name="Volume of liver" units="L" constant="false"/>
+      <parameter id="VKidney" name="Volume of kidney" units="L" constant="false"/>
+      <parameter id="VFeces" name="Volume of feces" value="1" units="L" constant="false"/>
+      <parameter id="VUrine" name="Volume of urine" value="1" units="L" constant="false"/>
+      <parameter id="VGut" name="Volume of gut" units="L" constant="false"/>
+      <parameter id="VLung" name="Volume of lung" units="L" constant="false"/>
       <parameter metaid="meta_VBlood" id="VBlood" name="Volume of blood" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -663,9 +675,9 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="VPlasma" constant="false"/>
-      <parameter id="VRBC" constant="false"/>
-      <parameter id="VOthers" constant="false"/>
+      <parameter id="VPlasma" name="Volume of blood plasma" units="L" constant="false"/>
+      <parameter id="VRBC" name="Volume of red blood cells" units="L" constant="false"/>
+      <parameter id="VOthers" name="Volume of rest of the body" units="L" constant="false"/>
       <parameter metaid="meta_Fabs" id="Fabs" name="Fraction absorbed in intestine" value="0.048" units="UNITLESS" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">

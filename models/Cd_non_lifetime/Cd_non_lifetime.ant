@@ -7,8 +7,8 @@ model Cd_non_lifetime()
     BW = 70
 
     ## Compartment volume parameters
-    VBloodc = 0.076
     HCT = 0.425
+    VBloodc = 0.076
     VLiverc = 0.025
     VKidneyc = 0.004
     VGutc = 0.0182
@@ -28,23 +28,23 @@ model Cd_non_lifetime()
     VOthers := BW * (1 - VLiverc - VKidneyc - VGutc - VLungc - VBloodc)
 
     ## Kinetic parameters
-    Fabs = 0.048                        # Fraction of GI-tract Cd retained in epithelium [-]
-    Ka = 0.05                           # Rate of transfer of Cd in the GI-tract to uptake pool [/d]
-    K_Inhalation_Uptake = 0.05          # Rate of transfer of inhalation intake to uptake pool [/d]
-    K_Lung_Intestine = 0.005            # Rate of transfer of Cd in lungs to the GI-tract [/d]
-    F_Uptake_Metallothionein = 0.25     # Fraction of uptake pool transferred to metallothionein [-]
-    Max_Metallothionein = 1             # Maximum mass of Cd that can bind to metallothionein per day [ug/d]
-    K_Plasma_Others = 0.44              # Transfer from plasma to the rest of the body [/d]
-    K_Others_Plasma = 0.00014           # Transfer from rest of the body to plasma [/d]
-    K_Plasma_Feces = 0.27               # Transfer from plasma to feces [/d]
-    K_Plasma_Liver = 0.25               # Transfer from plasma to liver [/d]
-    K_Liver_Plasma = 0.00003            # Transfer from liver to plasma [/d]
-    K_Liver_Metallothionein = 0.00016   # Transfer from liver to metallothionein [/d]
-    K_Liver_Feces = 0.00005             # Transfer from liver to feces [/d]
-    K_RBC_Metallothionein = 0.012       # Transfer from red blood cells to metallothionein [/d]
-    K_Kidney_Plasma = 0.00001           # Transfer from kidney to plasma [/d]
-    Increase_Cd_Urine = 0.0000011       # Temporal factor increasing Cd elimination in urine
-    K_Plasma_RBC = 0.04                 # Transfer from plasma to red blood cells [/d]
+    Fabs = 0.048                        # Fraction of GI-tract Cd retained in epithelium (k5) [-]
+    Ka = 0.05                           # Rate of transfer of Cd in the GI-tract to uptake pool (k6) [/d]
+    K_Inhalation_Uptake = 0.05          # Rate of transfer of inhalation intake to uptake pool (k3) [/d]
+    K_Lung_Intestine = 0.005            # Rate of transfer of Cd in lungs to the GI-tract (k4) [/d]
+    F_Uptake_Metallothionein = 0.25     # Fraction of uptake pool transferred to metallothionein (k7) [-]
+    Max_Metallothionein = 1             # Maximum mass of Cd that can bind to metallothionein per day (k8) [ug/d]
+    K_Plasma_Others = 0.44              # Transfer from plasma to the rest of the body (k9) [/d]
+    K_Others_Plasma = 0.00014           # Transfer from rest of the body to plasma (k10) [/d]
+    K_Plasma_Feces = 0.27               # Transfer from plasma to feces (k11) [/d]
+    K_Plasma_Liver = 0.25               # Transfer from plasma to liver (k12) [/d]
+    K_Liver_Plasma = 0.00003            # Transfer from liver to plasma (k13) [/d]
+    K_Liver_Metallothionein = 0.00016   # Transfer from liver to metallothionein (k14) [/d]
+    K_Liver_Feces = 0.00005             # Transfer from liver to feces (k15) [/d]
+    K_RBC_Metallothionein = 0.012       # Transfer from red blood cells to metallothionein (k16) [/d]
+    K_Kidney_Plasma = 0.00001           # Transfer from kidney to plasma (k18) [/d]
+    Increase_Cd_Urine = 0.0000011       # Temporal factor increasing Cd elimination in urine [/d]
+    K_Plasma_RBC = 0.04                 # Transfer from plasma to red blood cells (kX) [/d]
     K_Metallothionein_Kidney = 0.95
     K_Kidney_Urine = 0.00014
 
@@ -85,7 +85,7 @@ model Cd_non_lifetime()
     AOthers          = 0
 
     # Total uptake [ug/d]
-    Uptake :=  AGut * Ka * Fabs + ALung * K_Inhalation_Uptake
+    Uptake := AGut * Ka * Fabs + ALung * K_Inhalation_Uptake
 
     # Uptake in Metallothionein [ug/d]
     Uptake_Metallothionein := F_Uptake_Metallothionein * Uptake
