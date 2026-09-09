@@ -4,19 +4,19 @@ PBK1 <- rxode2({
 
   # ODE ----
  
-  d/dt(AIR_inhal_ing) = - kinh_release * AIR_inhal_ing; # Exposure by inhalation (µg/L)
-  d/dt(CIG_inhal_ing) = - kinh_release * CIG_inhal_ing; # NEW ITEM
+  d/dt(AIR_inhal_ing) = - kinh_release * AIR_inhal_ing; # Exposure by inhalation.   AIR_inhal_ing UNIT: µg/L.
+  d/dt(CIG_inhal_ing) = - kinh_release * CIG_inhal_ing;                             CIG_inhal_ing UNIT: µg.
  
-  d/dt(DIET_ing) = - king_release * DIET_ing ; # Dietary exposure (µg/kg)
-  d/dt(SOIL_ing) = - king_release * SOIL_ing; # Exposure by soil (µg)
-  d/dt(DUST_ing) = - king_release * DUST_ing; # Exposure by dust (µg)
-  d/dt(COSM_ing) = - king_release * COSM_ing; # NEW ITEM (µg)
+  d/dt(DIET_ing) = - king_release * DIET_ing ; # Dietary exposure (µg/kg)                DIET_ing UNIT: µg/kg.
+  d/dt(SOIL_ing) = - king_release * SOIL_ing; # Exposure by soil (µg)                    SOIL_ing UNIT: µg.             
+  d/dt(DUST_ing) = - king_release * DUST_ing; # Exposure by dust (µg)                    DUST_ing UNIT: µg.
+  d/dt(COSM_ing) = - king_release * COSM_ing; # NEW ITEM (µg)                            COSM_ing UNIT: µg.
   
-  d/dt(AIR_derm) = - kderm_release * AIR_derm; # NEW ITEM
-  d/dt(DUST_derm) = - kderm_release * DUST_derm; # NEW ITEM
-  d/dt(COSM_derm) = - kderm_release * COSM_derm; # NEW ITEM
+  d/dt(AIR_derm) = - kderm_release * AIR_derm; # NEW ITEM                                AIR_derm UNIT: µg.
+  d/dt(DUST_derm) = - kderm_release * DUST_derm; # NEW ITEM                              DUST_derm UNIT: µg.
+  d/dt(COSM_derm) = - kderm_release * COSM_derm; # NEW ITEM                              COSM_derm UNIT: µg.
   # Added CORD_quant explicitly as initial amount
-  #d/dt(CORD_quant) = - CORD_quant; # NEW ITEM
+  #d/dt(CORD_quant) = - CORD_quant; # NEW ITEM                                            
   
   
   d/dt(LUNG) = fabs_inh *kinh_release * k2_dust*(AIR_inhal_ing * VInhalation) + fabs_inh *kinh_release * k2_cig * CIG_inhal_ing - LUNG*(k3 + k4);           # pulmonary region at t=T
