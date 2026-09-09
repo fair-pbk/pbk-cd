@@ -5,7 +5,7 @@ PBK1 <- rxode2({
   # ODE ----
  
   d/dt(AIR_inhal_ing) = - kinh_release * AIR_inhal_ing; # Exposure by inhalation.   AIR_inhal_ing UNIT: µg/L.
-  d/dt(CIG_inhal_ing) = - kinh_release * CIG_inhal_ing;                             CIG_inhal_ing UNIT: µg.
+  d/dt(CIG_inhal_ing) = - kinh_release * CIG_inhal_ing; #                           CIG_inhal_ing UNIT: µg.
  
   d/dt(DIET_ing) = - king_release * DIET_ing ; # Dietary exposure (µg/kg)                DIET_ing UNIT: µg/kg.
   d/dt(SOIL_ing) = - king_release * SOIL_ing; # Exposure by soil (µg)                    SOIL_ing UNIT: µg.             
