@@ -106,7 +106,7 @@ if __name__ == "__main__":
         '--skip_r',
         action="store_true",
         default=False,
-        help="Force re-calculation of validation results instead of using cached results."
+        help="Skip running of R validation scenarios."
     )
     args = parser.parse_args()
 

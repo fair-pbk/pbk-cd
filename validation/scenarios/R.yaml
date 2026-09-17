@@ -65,7 +65,7 @@ scenarios:
     reference_data:
       - id: R
         label: R
-        file_path: validation/outputs/reference/R/oral_single.csv
+        file_path: validation/outputs/reference/R/oral_single/pbk_cd_gastellu_2026.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
@@ -140,7 +140,7 @@ scenarios:
     reference_data:
       - id: R
         label: R
-        file_path: validation/outputs/reference/R/oral_repeated.csv
+        file_path: validation/outputs/reference/R/oral_repeated/pbk_cd_gastellu_2026.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
@@ -212,7 +212,7 @@ scenarios:
     reference_data:
       - id: reference
         label: R
-        file_path: validation/outputs/reference/R/oral_repeated_lifetime.csv
+        file_path: validation/outputs/reference/R/oral_repeated_lifetime/pbk_cd_gastellu_2026.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
