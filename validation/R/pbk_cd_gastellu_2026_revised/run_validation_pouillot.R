@@ -134,5 +134,4 @@ sim_output <- rxSolve(
 if (!dir.exists(file.path(results_path))) {
   dir.create(file.path(results_path), recursive = TRUE)
 }
-plot(sim_output$time/365,sim_output$KIDNEY/sim_output$vk)
 write.csv(sim_output, paste(results_path, "/", model_id, ".csv", sep=""))
