@@ -2,7 +2,7 @@ model_name: Cd_lifetime_BW_Gastellu
 description: >
   Cadmium PBK model with BW-based lifetime physiological scaling.
   Uses age-dependent body weight growth curve from Gastellu et al. (2025).
-template: ../Cd_PBK_Cd.template.ant
+template: ../pbk_cd_gastellu_2026_revised.template.ant
 
 functions:
   - id: f_BW

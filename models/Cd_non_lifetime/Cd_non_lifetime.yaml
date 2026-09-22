@@ -2,7 +2,7 @@ model_name: Cd_non_lifetime
 description: >
   Cadmium PBK model with fixed physiology (no lifetime scaling).
   Uses constant body weight and organ volumes.
-template: ../Cd_PBK_Cd.template.ant
+template: ../pbk_cd_gastellu_2026_revised.template.ant
 
 blocks:
   - id: SUBJECT_LEVEL_PHYSIOLOGY

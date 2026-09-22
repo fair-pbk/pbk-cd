@@ -2,7 +2,7 @@ model_name: Cd_lifetime_Gastellu
 description: >
   Cadmium PBK model with lifetime physiological scaling.
   Uses age-dependent body weight and organ fractions from Gastellu et al. (2025).
-template: ../Cd_PBK_Cd.template.ant
+template: ../pbk_cd_gastellu_2026_revised.template.ant
 
 functions:
   - id: f_BW_male

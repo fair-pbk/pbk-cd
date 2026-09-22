@@ -285,7 +285,7 @@ scenarios:
     label: Oral repeated dosing (pouillot)
     time_unit: DAY
     amount_unit: MICROGRAMS
-    duration: 18250
+    duration: 29200
     evaluation_resolution: 1
     dosing_events:
       - type: repeated_bolus
@@ -294,6 +294,7 @@ scenarios:
         adjustment: BW
         time: 0
         interval: 1
+        until: 18250
     parameters:
       Age: 0
       AgeRef: 30
