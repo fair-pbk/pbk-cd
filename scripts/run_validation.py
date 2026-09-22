@@ -11,7 +11,7 @@ from sbmlpbkutils import run_config, load_config, plot_simulation_results
 
 CONFIGS_PATH = './validation/scenarios/'
 OUTPUT_PATH = './validation/outputs/'
-REFERENCE_SCENARIOS_PATH = './scripts/reference_scenarios.yaml'
+REFERENCE_SCENARIOS_PATH = './validation/reference_scenarios.yaml'
 
 def load_reference_scenarios(path=REFERENCE_SCENARIOS_PATH):
     """Load the list of reference scenarios from a YAML file."""
@@ -83,7 +83,7 @@ def run_r_validation_scenarios(
             continue
 
         # Run R validation scenarios
-        logger.info("Running R validation scenarios")
+        logger.info(f"Running R validation scenario [{r_config['id']}]")
         subprocess.run(['Rscript', r_config['file_path']], check=False)
 
 if __name__ == "__main__":

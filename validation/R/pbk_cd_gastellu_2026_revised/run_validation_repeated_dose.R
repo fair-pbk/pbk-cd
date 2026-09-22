@@ -6,13 +6,13 @@
 # Load packages
 library(rxode2)
 library(dplyr)
-source("validation/R/pbk_cd_gastellu_2026_revised/Cd_Parameters_CV.R")
-source("validation/R/pbk_cd_gastellu_2026_revised/Time varying inputs and assignment rules_CV.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/default_parameters.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/time_varying_assignments.R")
 source("validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R")
 
-
-
-# /Needsrxode2# /Needs to be adjusted!!!!!!!!
+# Write outputs
+model_id <- "pbk_cd_gastellu_2026_revised"
+results_path <- "validation/outputs/reference/R/oral_repeated"
 
 # Simulation setup
 
@@ -95,12 +95,14 @@ inits <- c(
   EXH = 0
 )
 
-ev_bolus_single <- data.frame(
-  id = c(1),
-  time = 0,
-  evid = c(1),
-  cmt = c("GUT"),
-  amt = c(1000)
+
+
+ev_repeated <- data.frame(
+  id = 1,
+  time = seq(0, ndays, by = 1),
+  evid = 1,
+  cmt = "GUT",
+  amt = 100
 )
 
 # Add observation rows separately so each dose time is also sampled.
@@ -112,11 +114,11 @@ ev_observed <- data.frame(
   amt = 0
 )
 
-ev_single<- bind_rows(ev_bolus_single, ev_observed)
+ev_repeated <- bind_rows(ev_repeated, ev_observed)
 
 # Add physiology covariates to every event and observation row
 phys_cov$time <- phys_cov$time - age_start_days
-ev_single <- ev_single %>%
+ev_repeated <- ev_repeated %>%
   left_join(phys_cov, by = c("id", "time")) %>%
   arrange(id, time, desc(evid))
 
@@ -124,13 +126,10 @@ ev_single <- ev_single %>%
 sim_output <- rxSolve(
   PBK1,
   params = theta,
-  events = ev_single,
+  events = ev_repeated,
   inits = inits
-)
-
-# Write outputs
-model_id <- "pbk_cd_gastellu_2026_revised"
-results_path <- "validation/outputs/reference/R/oral_single"
+) %>%
+  dplyr::filter(time %in% seq(0,ndays, 1)) 
 
 ## Create results path if not exists
 if (!dir.exists(file.path(results_path))) {

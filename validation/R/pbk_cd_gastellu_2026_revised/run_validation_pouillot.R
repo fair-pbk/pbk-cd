@@ -6,13 +6,13 @@
 # Load packages
 library(rxode2)
 library(dplyr)
-source("validation/R/pbk_cd_gastellu_2026_revised/Cd_Parameters_CV.R")
-source("validation/R/pbk_cd_gastellu_2026_revised/Time varying inputs and assignment rules_CV.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/default_parameters.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/time_varying_assignments.R")
 source("validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R")
 
-
-
-# /Needsrxode2# /Needs to be adjusted!!!!!!!!
+# Write outputs
+model_id <- "pbk_cd_gastellu_2026_revised"
+results_path <- "validation/outputs/reference/R/oral_repeated_pouillot"
 
 # Simulation setup
 
@@ -129,10 +129,6 @@ sim_output <- rxSolve(
   events = event_res,
   inits = inits
 ) 
-
-# Write outputs
-model_id <- "pbk_cd_gastellu_2026_revised"
-results_path <- "validation/outputs/reference/R/oral_repeated_pouillot"
 
 ## Create results path if not exists
 if (!dir.exists(file.path(results_path))) {

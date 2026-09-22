@@ -1,0 +1,36 @@
+reference_scenarios:
+  - id: r_orig_single_dose
+    output_file: ./validation/outputs/reference/R/oral_single/pbk_cd_gastellu_2026.csv
+    file_path: validation/R/pbk_cd_gastellu_2026/run_validation_single_dose.R
+  - id: r_orig_repeated_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated/pbk_cd_gastellu_2026.csv
+    file_path: validation/R/pbk_cd_gastellu_2026/run_validation_repeated_dose.R
+  - id: r_orig_repeated_lifetime_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated_lifetime/pbk_cd_gastellu_2026.csv
+    file_path: validation/R/pbk_cd_gastellu_2026/run_validation_lifetime_repeated_dose.R
+  - id: r_orig_repeated_lifetime_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated_pouillot/pbk_cd_gastellu_2026.csv
+    file_path: validation/R/pbk_cd_gastellu_2026/run_validation_pouillot.R
+
+  - id: r_revised_single_dose
+    output_file: ./validation/outputs/reference/R/oral_single/pbk_cd_gastellu_2026_revised.csv
+    file_path: validation/R/pbk_cd_gastellu_2026_revised/run_validation_single_dose.R
+  - id: r_revised_repeated_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated/pbk_cd_gastellu_2026_revised.csv
+    file_path: validation/R/pbk_cd_gastellu_2026_revised/run_validation_repeated_dose.R
+  - id: r_revised_repeated_lifetime_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated_lifetime/pbk_cd_gastellu_2026_revised.csv
+    file_path: validation/R/pbk_cd_gastellu_2026_revised/run_validation_lifetime_repeated_dose.R
+  - id: r_revised_repeated_lifetime_dose
+    output_file: ./validation/outputs/reference/R/oral_repeated_pouillot/pbk_cd_gastellu_2026_revised.csv
+    file_path: validation/R/pbk_cd_gastellu_2026_revised/run_validation_pouillot.R
+
+  - id: mrgsolve_single_dose
+    output_file: ./validation/outputs/reference/mrgsolve/oral_single.csv
+    file_path: validation/mrgsolve/run_validation_single_dose.R
+  - id: mrgsolve_repeated_dose
+    output_file: ./validation/outputs/reference/mrgsolve/oral_repeated.csv
+    file_path: validation/mrgsolve/run_validation_repeated_dose.R
+  - id: mrgsolve_repeated_lifetime_dose
+    output_file: ./validation/outputs/reference/mrgsolve/oral_repeated_lifetime.csv
+    file_path: validation/mrgsolve/run_validation_lifetime_repeated_dose.R

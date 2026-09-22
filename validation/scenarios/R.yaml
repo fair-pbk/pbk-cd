@@ -62,8 +62,8 @@ scenarios:
         label: Amount in feces
         output: AFeces
     reference_data:
-      - id: R
-        label: R
+      - id: R_orig
+        label: R_orig
         file_path: validation/outputs/reference/R/oral_single/pbk_cd_gastellu_2026.csv
         series_type: TIMELINE
         time_unit: DAY
@@ -155,8 +155,8 @@ scenarios:
         label: Amount in feces
         output: AFeces
     reference_data:
-      - id: R
-        label: R
+      - id: R_orig
+        label: R_orig
         file_path: validation/outputs/reference/R/oral_repeated/pbk_cd_gastellu_2026.csv
         series_type: TIMELINE
         time_unit: DAY
@@ -245,8 +245,8 @@ scenarios:
         label: Amount in feces
         output: AFeces
     reference_data:
-      - id: reference
-        label: R
+      - id: R_orig
+        label: R_orig
         file_path: validation/outputs/reference/R/oral_repeated_lifetime/pbk_cd_gastellu_2026.csv
         series_type: TIMELINE
         time_unit: DAY
@@ -336,8 +336,8 @@ scenarios:
         label: Amount in feces
         output: AFeces
     reference_data:
-      - id: R
-        label: R
+      - id: R_orig
+        label: R_orig
         file_path: validation/outputs/reference/R/oral_repeated_pouillot/pbk_cd_gastellu_2026.csv
         series_type: TIMELINE
         time_unit: DAY

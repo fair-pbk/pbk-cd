@@ -6,27 +6,27 @@
 # Load packages
 library(rxode2)
 library(dplyr)
-source("validation/R/pbk_cd_gastellu_2026_revised/Cd_Parameters_CV.R")
-source("validation/R/pbk_cd_gastellu_2026_revised/Time varying inputs and assignment rules_CV.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/default_parameters.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/time_varying_assignments.R")
 source("validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R")
 
-
-
-# /Needsrxode2# /Needs to be adjusted!!!!!!!!
+# Write outputs
+model_id <- "pbk_cd_gastellu_2026_revised"
+results_path <- "validation/outputs/reference/R/oral_repeated_lifetime"
 
 # Simulation setup
 
-sex_i <- 1
+sex_i <- 2
 Delta_BWs3 <- 1
 Delta_creat <- 1
 
-ndays <- 40 # days
-age_start <- 30 # years
-age_start_days <- age_start * 365
-times <- seq(age_start_days, age_start_days + ndays, by = 1)
+age_start <- 0*365 # years
+age_end <- 10*365
+dosing_stepsize <- 1
+observation_times <- seq(age_start, age_end, by = 1)
 
 # Pre-compute physiology covariates
-phys_cov <- do.call(rbind, lapply(times, function(t) {
+phys_cov <- do.call(rbind, lapply(observation_times, function(t) {
   
   p <- phys(
     time = t,
@@ -95,45 +95,38 @@ inits <- c(
   EXH = 0
 )
 
-
-
-ev_repeated <- data.frame(
+ev_lifetime <- data.frame(
   id = 1,
-  time = seq(0, ndays, by = 1),
+  time = seq(age_start,age_end,dosing_stepsize),
   evid = 1,
-  cmt = "GUT",
-  amt = 100
+  cmt = "GUT"
 )
 
-# Add observation rows separately so each dose time is also sampled.
+# Add observation rows before joining physiology so rxSolve receives a plain
+# data frame with all required covariates.
 ev_observed <- data.frame(
   id = 1,
-  time = seq(0, ndays, by = 1),
+  time = observation_times-age_start,
   evid = 0,
   cmt = NA_character_,
   amt = 0
 )
 
-ev_repeated <- bind_rows(ev_repeated, ev_observed)
-
-# Add physiology covariates to every event and observation row
-phys_cov$time <- phys_cov$time - age_start_days
-ev_repeated <- ev_repeated %>%
+phys_cov$time <- observation_times-age_start
+event_res <- ev_lifetime %>%
+  bind_rows(ev_observed) %>%
   left_join(phys_cov, by = c("id", "time")) %>%
+  mutate(amt=0.2*dosing_stepsize*wbw_f) %>%
   arrange(id, time, desc(evid))
+
 
 # Solve
 sim_output <- rxSolve(
   PBK1,
   params = theta,
-  events = ev_repeated,
+  events = event_res,
   inits = inits
-) %>%
-  dplyr::filter(time %in% seq(0,ndays, 1)) 
-
-# Write outputs
-model_id <- "pbk_cd_gastellu_2026_revised"
-results_path <- "validation/outputs/reference/R/oral_repeated"
+) 
 
 ## Create results path if not exists
 if (!dir.exists(file.path(results_path))) {
