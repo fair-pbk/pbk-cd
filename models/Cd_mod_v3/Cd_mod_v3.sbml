@@ -1,0 +1,2402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="Cd_mod_v3" id="Cd_mod_v3" substanceUnits="NanoGM" timeUnits="DAY" volumeUnits="L">
+    <annotation>
+      <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+        <rdf:Description rdf:about="#Cd_mod_v3">
+          <bqbiol:hasProperty>
+            <rdf:Bag>
+              <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+            </rdf:Bag>
+          </bqbiol:hasProperty>
+          <bqbiol:hasTaxon>
+            <rdf:Bag>
+              <rdf:li rdf:resource="http://purl.obolibrary.org/obo/NCBITaxon_9606"/>
+            </rdf:Bag>
+          </bqbiol:hasTaxon>
+        </rdf:Description>
+      </rdf:RDF>
+    </annotation>
+    <listOfUnitDefinitions>
+      <unitDefinition id="NanoGM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="DAY">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="L">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MicroGM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="UNITLESS">
+        <listOfUnits>
+          <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="PER_DAY">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MicroGM_PER_DAY">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="YR">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="31557600"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment metaid="meta_LungComp" id="LungComp" name="lung compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_LungComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00559"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_GUT_LUMENComp" id="GUT_LUMENComp" name="gut lumen compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_GUT_LUMENComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00478"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_INTESTINE_TISSUEComp" id="INTESTINE_TISSUEComp" name="intestinal tissue compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_INTESTINE_TISSUEComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_02004"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_PlasmaComp" id="PlasmaComp" name="plasma compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_PlasmaComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00488"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_RBCComp" id="RBCComp" name="red blood cell compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_RBCComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00634"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment id="MTComp" name="Metallothionein compartment" spatialDimensions="3" units="L" constant="true"/>
+      <compartment metaid="meta_LiverComp" id="LiverComp" name="liver compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_LiverComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00558"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_KidneyComp" id="KidneyComp" name="kidney compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_KidneyComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00557"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_OtherComp" id="OtherComp" name="rest of body compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_OtherComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00450"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_FecesComp" id="FecesComp" name="feces compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_FecesComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00555"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment metaid="meta_UrineComp" id="UrineComp" name="urine compartment" spatialDimensions="3" units="L" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_UrineComp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00556"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species metaid="meta_LUNG" id="LUNG" name="amount in lung" compartment="LungComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_LUNG">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_GUT_LUMEN" id="GUT_LUMEN" name="amount in lumen" compartment="GUT_LUMENComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_GUT_LUMEN">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_06009"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_INTESTINE_TISSUE" id="INTESTINE_TISSUE" name="amount in intestinal tissue" compartment="INTESTINE_TISSUEComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_INTESTINE_TISSUE">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_06015"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_PLASMA" id="PLASMA" name="amount in plasma" compartment="PlasmaComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_PLASMA">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00502"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="RBC" name="amount in red blood cells" compartment="RBCComp" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species id="META" name="amount in metallothionein" compartment="MTComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species metaid="meta_LIVER" id="LIVER" name="amount in liver" compartment="LiverComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_LIVER">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00497"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_KIDNEY" id="KIDNEY" name="amount in kidney" compartment="KidneyComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_KIDNEY">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00498"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_OTHER" id="OTHER" name="amount in restbody" compartment="OtherComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_OTHER">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00501"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_FECES" id="FECES" name="cumulative amount in feces" compartment="FecesComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_FECES">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00275"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_URINE" id="URINE" name="cumulative amount in urine" compartment="UrineComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_URINE">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00274"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="k1_cig" name="Respiratory deposition to GI from smoke" value="0.1" units="UNITLESS" constant="true"/>
+      <parameter id="k1_dust" name="Respiratory deposition to GI from dust" value="0.7" units="UNITLESS" constant="true"/>
+      <parameter id="k2_cig" name="Respiratory deposition to lung from smoke" value="0.4" units="UNITLESS" constant="true"/>
+      <parameter id="k2_dust" name="Respiratory deposition to lung from dust" value="0.13" units="UNITLESS" constant="true"/>
+      <parameter id="k3" name="First-order transfer rate constant from lung to total systemic uptake" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="k4" name="First-order transfer rate constant from lung to GI" value="0.005" units="PER_DAY" constant="true"/>
+      <parameter metaid="meta_kabs" id="kabs" name="First-order rate constant (added explicitly for unit consistency)" value="1" units="PER_DAY" constant="true">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_kabs">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_03075"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="k5_h" name="Fraction of absorbed Cd in gut transferred to intestine in males" value="0.05" units="UNITLESS" constant="true"/>
+      <parameter id="k5_f" name="Fraction of absorbed Cd in gut transferred to intestine in females" value="0.1" units="UNITLESS" constant="true"/>
+      <parameter id="k6" name="First-order transfer rate constant from intestine to total systemic uptake" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="k7" name="Fraction of total systemic Cd uptake to the metallothionein" value="0.25" units="UNITLESS" constant="true"/>
+      <parameter id="k8" name="Maximum Cd flux into the metallothionein" value="1" units="MicroGM_PER_DAY" constant="true"/>
+      <parameter id="k_MT_out" name="First-order turnover rate constant for MT-bound Cd (added explicitly for unit consistency)" value="1" units="PER_DAY" constant="true"/>
+      <parameter id="k9" name="kinetic constant rate PLASMA -&gt; OTHER tissues" value="0.44" units="PER_DAY" constant="true"/>
+      <parameter id="k10" name="kinetic constant rate OTHER tissues -&gt; PLASMA" value="0.00014" units="PER_DAY" constant="true"/>
+      <parameter id="k11" name="kinetic constant rate PLASMA -&gt; feces" value="0.27" units="PER_DAY" constant="true"/>
+      <parameter id="k12" name="kinetic constant rate PLASMA -&gt; liver" value="0.25" units="PER_DAY" constant="true"/>
+      <parameter id="k13" name="kinetic constant rate liver -&gt; PLASMA" value="3e-05" units="PER_DAY" constant="true"/>
+      <parameter id="k14" name="kinetic constant rate liver -&gt; MT pool" value="0.00016" units="PER_DAY" constant="true"/>
+      <parameter id="k15" name="kinetic constant rate liver -&gt; feces" value="5e-05" units="PER_DAY" constant="true"/>
+      <parameter id="kx" name="kinetic constant rate PLASMA -&gt; RBC" value="0.04" units="PER_DAY" constant="true"/>
+      <parameter id="k16" name="kinetic constant rate RBC-&gt; MT pool" value="0.012" units="PER_DAY" constant="true"/>
+      <parameter id="k17" name="Fraction of MT-bound Cd removal to KIDNEY; remainder goes directly to urine." value="0.95" units="UNITLESS" constant="true"/>
+      <parameter id="k18" name="kinetic constant rate KIDNEY -&gt; PLASMA" value="1e-05" units="PER_DAY" constant="true"/>
+      <parameter id="k19" name="urine elimination rate constant" value="0.00014" units="PER_DAY" constant="true"/>
+      <parameter id="k21" name="Age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" constant="true"/>
+      <parameter id="k20" name="Fraction of PLASMA + META Cd amounts to calculated whole-blood Cd" value="0.1" units="UNITLESS" constant="true"/>
+      <parameter id="sex" value="2" constant="true"/>
+      <parameter id="Delta_BWs3" value="0.2" constant="true"/>
+      <parameter id="Delta_creat" value="0.2" constant="true"/>
+      <parameter id="Ccord" value="0" constant="true"/>
+      <parameter id="year" units="YR" constant="false"/>
+      <parameter id="mval" constant="false"/>
+      <parameter id="Delta_BW" constant="false"/>
+      <parameter id="BW_male_ref" constant="false"/>
+      <parameter id="BW_female_ref" constant="false"/>
+      <parameter id="BW_male" constant="false"/>
+      <parameter id="BW_female" constant="false"/>
+      <parameter id="wbw" constant="false"/>
+      <parameter id="hct_mid" constant="false"/>
+      <parameter id="hct" constant="false"/>
+      <parameter id="vb_male" constant="false"/>
+      <parameter id="vb_female" constant="false"/>
+      <parameter id="vb" constant="false"/>
+      <parameter id="vp" constant="false"/>
+      <parameter id="vrbc" constant="false"/>
+      <parameter id="vk_male" constant="false"/>
+      <parameter id="vk_female" constant="false"/>
+      <parameter id="vk" constant="false"/>
+      <parameter id="vlungs" constant="false"/>
+      <parameter id="vint_male" constant="false"/>
+      <parameter id="vint_female" constant="false"/>
+      <parameter id="vintestine" constant="false"/>
+      <parameter id="vl_male" constant="false"/>
+      <parameter id="vl_female" constant="false"/>
+      <parameter id="vl" constant="false"/>
+      <parameter id="vother" constant="false"/>
+      <parameter id="wbw_f" constant="false"/>
+      <parameter id="Vtidal_male" constant="false"/>
+      <parameter id="Vtidal_female" constant="false"/>
+      <parameter id="Vtidal" constant="false"/>
+      <parameter id="FqBreath" constant="false"/>
+      <parameter id="vds_male" constant="false"/>
+      <parameter id="vds_female" constant="false"/>
+      <parameter id="vds" constant="false"/>
+      <parameter id="VInhalation" constant="false"/>
+      <parameter id="ucr_base" constant="false"/>
+      <parameter id="ucr" constant="false"/>
+      <parameter id="Vurine" constant="false"/>
+      <parameter id="k5_active" constant="false"/>
+      <parameter id="k19x" constant="false"/>
+      <parameter id="k17_decline" constant="false"/>
+      <parameter id="k17x" constant="false"/>
+      <parameter id="k17b" constant="false"/>
+      <parameter id="wbw0" constant="false"/>
+      <parameter id="vb0" constant="false"/>
+      <parameter id="Acord_total" constant="false"/>
+      <parameter id="uptakeTotal_Lung" constant="false"/>
+      <parameter id="uptakeTotal_GI" constant="false"/>
+      <parameter id="TOTAL_UPTAKE" constant="false"/>
+      <parameter id="UPTAKE_MT" constant="false"/>
+      <parameter id="UPTAKE_PLASMA" constant="false"/>
+      <parameter id="uptakeMT_Lung" constant="false"/>
+      <parameter id="uptakeMT_GI" constant="false"/>
+      <parameter id="uptakePlasma_Lung" constant="false"/>
+      <parameter id="uptakePlasma_GI" constant="false"/>
+      <parameter id="BLOOD" constant="false"/>
+      <parameter id="BLOOD_burden" constant="false"/>
+      <parameter id="kidney_burden" constant="false"/>
+      <parameter id="ur" constant="false"/>
+      <parameter id="Conc_urine_cd" constant="false"/>
+      <parameter id="ucdcr" constant="false"/>
+      <parameter id="total_internal" constant="false"/>
+      <parameter id="Excreted" constant="false"/>
+    </listOfParameters>
+    <listOfInitialAssignments>
+      <initialAssignment symbol="RBC">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> Acord_total </ci>
+        </math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+    <listOfRules>
+      <assignmentRule variable="year">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+            <cn type="integer"> 365 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mval">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> year </ci>
+            <cn type="integer"> 12 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Delta_BW">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <ci> Delta_BWs3 </ci>
+                      <cn type="integer"> 1 </cn>
+                    </apply>
+                    <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  </apply>
+                  <cn type="integer"> 1095 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <leq/>
+                <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                <cn type="integer"> 1095 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> Delta_BWs3 </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="BW_male_ref">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <apply>
+              <minus/>
+              <apply>
+                <plus/>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <plus/>
+                    <apply>
+                      <minus/>
+                      <apply>
+                        <plus/>
+                        <apply>
+                          <minus/>
+                          <apply>
+                            <plus/>
+                            <apply>
+                              <minus/>
+                              <apply>
+                                <plus/>
+                                <cn> 3.938425 </cn>
+                                <apply>
+                                  <times/>
+                                  <cn> 0.7518199 </cn>
+                                  <ci> mval </ci>
+                                </apply>
+                              </apply>
+                              <apply>
+                                <times/>
+                                <cn> 0.02023793 </cn>
+                                <apply>
+                                  <power/>
+                                  <ci> mval </ci>
+                                  <cn type="integer"> 2 </cn>
+                                </apply>
+                              </apply>
+                            </apply>
+                            <apply>
+                              <times/>
+                              <cn> 0.0002921682 </cn>
+                              <apply>
+                                <power/>
+                                <ci> mval </ci>
+                                <cn type="integer"> 3 </cn>
+                              </apply>
+                            </apply>
+                          </apply>
+                          <apply>
+                            <times/>
+                            <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
+                            <apply>
+                              <power/>
+                              <ci> mval </ci>
+                              <cn type="integer"> 4 </cn>
+                            </apply>
+                          </apply>
+                        </apply>
+                        <apply>
+                          <times/>
+                          <cn type="e-notation"> 8.469 <sep/> -9 </cn>
+                          <apply>
+                            <power/>
+                            <ci> mval </ci>
+                            <cn type="integer"> 5 </cn>
+                          </apply>
+                        </apply>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
+                        <apply>
+                          <power/>
+                          <ci> mval </ci>
+                          <cn type="integer"> 6 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
+                      <apply>
+                        <power/>
+                        <ci> mval </ci>
+                        <cn type="integer"> 7 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
+                    <apply>
+                      <power/>
+                      <ci> mval </ci>
+                      <cn type="integer"> 8 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
+                  <apply>
+                    <power/>
+                    <ci> mval </ci>
+                    <cn type="integer"> 9 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
+                <apply>
+                  <power/>
+                  <ci> mval </ci>
+                  <cn type="integer"> 10 </cn>
+                </apply>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
+              <apply>
+                <power/>
+                <ci> mval </ci>
+                <cn type="integer"> 11 </cn>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="BW_female_ref">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <apply>
+              <minus/>
+              <apply>
+                <plus/>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <plus/>
+                    <apply>
+                      <minus/>
+                      <apply>
+                        <plus/>
+                        <apply>
+                          <minus/>
+                          <apply>
+                            <plus/>
+                            <apply>
+                              <minus/>
+                              <apply>
+                                <plus/>
+                                <cn> 3.932403 </cn>
+                                <apply>
+                                  <times/>
+                                  <cn> 0.6866462 </cn>
+                                  <ci> mval </ci>
+                                </apply>
+                              </apply>
+                              <apply>
+                                <times/>
+                                <cn> 0.01949911 </cn>
+                                <apply>
+                                  <power/>
+                                  <ci> mval </ci>
+                                  <cn type="integer"> 2 </cn>
+                                </apply>
+                              </apply>
+                            </apply>
+                            <apply>
+                              <times/>
+                              <cn> 0.00031311 </cn>
+                              <apply>
+                                <power/>
+                                <ci> mval </ci>
+                                <cn type="integer"> 3 </cn>
+                              </apply>
+                            </apply>
+                          </apply>
+                          <apply>
+                            <times/>
+                            <cn type="e-notation"> 2.466654 <sep/> -6 </cn>
+                            <apply>
+                              <power/>
+                              <ci> mval </ci>
+                              <cn type="integer"> 4 </cn>
+                            </apply>
+                          </apply>
+                        </apply>
+                        <apply>
+                          <times/>
+                          <cn type="e-notation"> 1.113217 <sep/> -8 </cn>
+                          <apply>
+                            <power/>
+                            <ci> mval </ci>
+                            <cn type="integer"> 5 </cn>
+                          </apply>
+                        </apply>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn type="e-notation"> 3.131402 <sep/> -11 </cn>
+                        <apply>
+                          <power/>
+                          <ci> mval </ci>
+                          <cn type="integer"> 6 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="e-notation"> 5.693737 <sep/> -14 </cn>
+                      <apply>
+                        <power/>
+                        <ci> mval </ci>
+                        <cn type="integer"> 7 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 6.706947 <sep/> -17 </cn>
+                    <apply>
+                      <power/>
+                      <ci> mval </ci>
+                      <cn type="integer"> 8 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 4.947858 <sep/> -20 </cn>
+                  <apply>
+                    <power/>
+                    <ci> mval </ci>
+                    <cn type="integer"> 9 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="e-notation"> 2.079251 <sep/> -23 </cn>
+                <apply>
+                  <power/>
+                  <ci> mval </ci>
+                  <cn type="integer"> 10 </cn>
+                </apply>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <cn type="e-notation"> 3.800367 <sep/> -27 </cn>
+              <apply>
+                <power/>
+                <ci> mval </ci>
+                <cn type="integer"> 11 </cn>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="BW_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <ci> BW_male_ref </ci>
+                <ci> Delta_BW </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 79 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn type="integer"> 76 </cn>
+                <ci> Delta_BW </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="BW_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <ci> BW_female_ref </ci>
+                <ci> Delta_BW </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 79 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn type="integer"> 68 </cn>
+                <ci> Delta_BW </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="wbw">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> BW_male </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> BW_female </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="hct_mid">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <cn type="e-notation"> 1.12815 <sep/> -6 </cn>
+                <apply>
+                  <power/>
+                  <ci> year </ci>
+                  <cn type="integer"> 3 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn> 0.000172362 </cn>
+                <apply>
+                  <power/>
+                  <ci> year </ci>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <cn> 0.00815264 </cn>
+              <ci> year </ci>
+            </apply>
+            <cn> 0.327363 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="hct">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn> 0.359 </cn>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 2 </cn>
+              </apply>
+            </piece>
+            <piece>
+              <ci> hct_mid </ci>
+              <apply>
+                <lt/>
+                <ci> year </ci>
+                <cn type="integer"> 18 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn> 0.4248446 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vb_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <times/>
+                    <cn> -0.027 </cn>
+                    <ci> year </ci>
+                  </apply>
+                  <cn> 0.077 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> year </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <apply>
+                  <divide/>
+                  <cn> 0.0761 </cn>
+                  <apply>
+                    <plus/>
+                    <cn type="integer"> 1 </cn>
+                    <apply>
+                      <exp/>
+                      <apply>
+                        <plus/>
+                        <apply>
+                          <times/>
+                          <cn> -0.683 </cn>
+                          <ci> year </ci>
+                        </apply>
+                        <cn> 0.946 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vb_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <times/>
+                    <cn> -0.0273 </cn>
+                    <ci> year </ci>
+                  </apply>
+                  <cn> 0.0771 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> year </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <times/>
+                      <cn type="e-notation"> 3.28 <sep/> -5 </cn>
+                      <apply>
+                        <power/>
+                        <ci> year </ci>
+                        <cn type="integer"> 3 </cn>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn> 0.00121 </cn>
+                      <apply>
+                        <power/>
+                        <ci> year </ci>
+                        <cn type="integer"> 2 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn> 0.0124 </cn>
+                    <ci> year </ci>
+                  </apply>
+                  <cn> 0.0386 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> year </ci>
+                <cn> 14.019723 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn> 0.065 </cn>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vb">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> vb_male </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> vb_female </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> hct </ci>
+            </apply>
+            <ci> vb </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vrbc">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> hct </ci>
+            <ci> vb </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vk_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0042 </cn>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn> 0.00767 </cn>
+                      <cn> 0.0042 </cn>
+                    </apply>
+                    <apply>
+                      <exp/>
+                      <apply>
+                        <times/>
+                        <cn> -0.206 </cn>
+                        <ci> year </ci>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 79 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0042 </cn>
+                  <cn type="e-notation"> 2.969074 <sep/> -10 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vk_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0046 </cn>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn> 0.00709 </cn>
+                      <cn> 0.0046 </cn>
+                    </apply>
+                    <apply>
+                      <exp/>
+                      <apply>
+                        <times/>
+                        <cn> -0.221 </cn>
+                        <ci> year </ci>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 79 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0046 </cn>
+                  <cn type="e-notation"> 6.514063 <sep/> -11 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vk">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> vk_male </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> vk_female </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vlungs">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <cn> 0.0068 </cn>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn> 0.007 </cn>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vint_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> -8.2562 <sep/> -5 </cn>
+                    <apply>
+                      <power/>
+                      <ci> year </ci>
+                      <cn type="integer"> 2 </cn>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn> 0.0013523 </cn>
+                    <ci> year </ci>
+                  </apply>
+                  <cn> 0.01293 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> year </ci>
+                <cn type="integer"> 16 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn> 0.014 </cn>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vint_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> -7.421 <sep/> -5 </cn>
+                    <apply>
+                      <power/>
+                      <ci> year </ci>
+                      <cn type="integer"> 2 </cn>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn> 0.001276 </cn>
+                    <ci> year </ci>
+                  </apply>
+                  <cn> 0.01298 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> year </ci>
+                <cn> 14.453301 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn> 0.016 </cn>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vintestine">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> vint_male </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> vint_female </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vl_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0247 </cn>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn> 0.0409 </cn>
+                      <cn> 0.0247 </cn>
+                    </apply>
+                    <apply>
+                      <exp/>
+                      <apply>
+                        <times/>
+                        <cn> -0.218 </cn>
+                        <ci> year </ci>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 79 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0247 </cn>
+                  <cn type="e-notation"> 5.371498 <sep/> -10 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vl_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0233 </cn>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn> 0.038 </cn>
+                      <cn> 0.0233 </cn>
+                    </apply>
+                    <apply>
+                      <exp/>
+                      <apply>
+                        <times/>
+                        <cn> -0.122 </cn>
+                        <ci> year </ci>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 79 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0233 </cn>
+                  <cn type="e-notation"> 9.58489 <sep/> -7 </cn>
+                </apply>
+                <ci> wbw </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vl">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> vl_male </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> vl_female </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vother">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> wbw </ci>
+            <apply>
+              <plus/>
+              <ci> vk </ci>
+              <ci> vb </ci>
+              <ci> vl </ci>
+              <ci> vintestine </ci>
+              <ci> vlungs </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="wbw_f">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> vk </ci>
+            <ci> vb </ci>
+            <ci> vl </ci>
+            <ci> vintestine </ci>
+            <ci> vlungs </ci>
+            <ci> vother </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Vtidal_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <cn> 0.0337 </cn>
+                  <ci> year </ci>
+                </apply>
+                <cn> 0.0407 </cn>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> year </ci>
+                <cn type="integer"> 21 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn> 0.75 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Vtidal_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <cn> 0.46 </cn>
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn> 0.0392 </cn>
+                <cn> 0.46 </cn>
+              </apply>
+              <apply>
+                <exp/>
+                <apply>
+                  <times/>
+                  <cn> -0.127 </cn>
+                  <ci> year </ci>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Vtidal">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> Vtidal_male </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> Vtidal_female </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="FqBreath">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <cn type="integer"> 12 </cn>
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn> 38.9 </cn>
+                <cn type="integer"> 12 </cn>
+              </apply>
+              <apply>
+                <exp/>
+                <apply>
+                  <times/>
+                  <cn> -0.176 </cn>
+                  <ci> year </ci>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vds_male">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <cn> 0.0076 </cn>
+                  <ci> year </ci>
+                </apply>
+                <cn> 0.0101 </cn>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn> 18.4 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn> 0.15 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vds_female">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <cn> 0.12 </cn>
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn> 0.0107 </cn>
+                <cn> 0.12 </cn>
+              </apply>
+              <apply>
+                <exp/>
+                <apply>
+                  <times/>
+                  <cn> -0.0986 </cn>
+                  <ci> year </ci>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vds">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> vds_male </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> vds_female </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="VInhalation">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> FqBreath </ci>
+            <apply>
+              <minus/>
+              <ci> Vtidal </ci>
+              <ci> vds </ci>
+            </apply>
+            <cn type="integer"> 60 </cn>
+            <cn type="integer"> 24 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="ucr_base">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <cn> 0.032 </cn>
+                  <apply>
+                    <times/>
+                    <cn> 0.02098 </cn>
+                    <ci> year </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn> 0.009104 </cn>
+                    <apply>
+                      <power/>
+                      <ci> year </ci>
+                      <cn type="integer"> 2 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn> 0.000455 </cn>
+                  <apply>
+                    <power/>
+                    <ci> year </ci>
+                    <cn type="integer"> 3 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="e-notation"> 7.578 <sep/> -6 </cn>
+                <apply>
+                  <power/>
+                  <ci> year </ci>
+                  <cn type="integer"> 4 </cn>
+                </apply>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <cn type="e-notation"> 4.232 <sep/> -8 </cn>
+              <apply>
+                <power/>
+                <ci> year </ci>
+                <cn type="integer"> 5 </cn>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="ucr">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <ci> ucr_base </ci>
+                <ci> Delta_creat </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 70 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn> 0.865756 </cn>
+                <ci> Delta_creat </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Vurine">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <cn> 0.0294 </cn>
+            <ci> wbw_f </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="k5_active">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> k5_h </ci>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> k5_f </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="k19x">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> k19 </ci>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 30 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <plus/>
+                <ci> k19 </ci>
+                <apply>
+                  <times/>
+                  <ci> k21 </ci>
+                  <apply>
+                    <minus/>
+                    <ci> year </ci>
+                    <cn type="integer"> 30 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="k17_decline">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> k17 </ci>
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <apply>
+                  <divide/>
+                  <ci> k17 </ci>
+                  <cn type="integer"> 3 </cn>
+                </apply>
+                <apply>
+                  <minus/>
+                  <ci> year </ci>
+                  <cn type="integer"> 30 </cn>
+                </apply>
+              </apply>
+              <cn type="integer"> 50 </cn>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="k17x">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <ci> k17 </ci>
+              <apply>
+                <leq/>
+                <ci> year </ci>
+                <cn type="integer"> 30 </cn>
+              </apply>
+            </piece>
+            <piece>
+              <cn type="integer"> 0 </cn>
+              <apply>
+                <lt/>
+                <ci> k17_decline </ci>
+                <cn type="integer"> 0 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> k17_decline </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="k17b">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <cn type="integer"> 1 </cn>
+            <ci> k17x </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="wbw0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn> 3.938425 </cn>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn> 3.932403 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vb0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <cn> 0.077 </cn>
+                <ci> wbw0 </ci>
+              </apply>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn> 0.0771 </cn>
+                <ci> wbw0 </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Acord_total">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> Ccord </ci>
+            <ci> vb0 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakeTotal_Lung">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> k3 </ci>
+            <ci> LUNG </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakeTotal_GI">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> k6 </ci>
+            <ci> INTESTINE_TISSUE </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="TOTAL_UPTAKE">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> uptakeTotal_Lung </ci>
+            <ci> uptakeTotal_GI </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="UPTAKE_MT">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <ci> k7 </ci>
+                <ci> TOTAL_UPTAKE </ci>
+              </apply>
+              <apply>
+                <leq/>
+                <apply>
+                  <times/>
+                  <ci> k7 </ci>
+                  <ci> TOTAL_UPTAKE </ci>
+                </apply>
+                <ci> k8 </ci>
+              </apply>
+            </piece>
+            <otherwise>
+              <ci> k8 </ci>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="UPTAKE_PLASMA">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> TOTAL_UPTAKE </ci>
+            <ci> UPTAKE_MT </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakeMT_Lung">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn type="integer"> 0 </cn>
+              <apply>
+                <leq/>
+                <ci> TOTAL_UPTAKE </ci>
+                <cn type="integer"> 0 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> UPTAKE_MT </ci>
+                  <ci> uptakeTotal_Lung </ci>
+                </apply>
+                <ci> TOTAL_UPTAKE </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakeMT_GI">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn type="integer"> 0 </cn>
+              <apply>
+                <leq/>
+                <ci> TOTAL_UPTAKE </ci>
+                <cn type="integer"> 0 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> UPTAKE_MT </ci>
+                  <ci> uptakeTotal_GI </ci>
+                </apply>
+                <ci> TOTAL_UPTAKE </ci>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakePlasma_Lung">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> uptakeTotal_Lung </ci>
+            <ci> uptakeMT_Lung </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="uptakePlasma_GI">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> uptakeTotal_GI </ci>
+            <ci> uptakeMT_GI </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="BLOOD">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> RBC </ci>
+            <apply>
+              <times/>
+              <ci> k20 </ci>
+              <apply>
+                <plus/>
+                <ci> PLASMA </ci>
+                <ci> META </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="BLOOD_burden">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> BLOOD </ci>
+            <ci> vb </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="kidney_burden">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> KIDNEY </ci>
+            <ci> vk </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="ur">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <apply>
+              <times/>
+              <ci> k_MT_out </ci>
+              <ci> k17b </ci>
+              <ci> META </ci>
+            </apply>
+            <apply>
+              <times/>
+              <ci> k19x </ci>
+              <ci> KIDNEY </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Conc_urine_cd">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ur </ci>
+            <ci> Vurine </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="ucdcr">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> ur </ci>
+            <ci> ucr </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="total_internal">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> GUT_LUMEN </ci>
+            <ci> INTESTINE_TISSUE </ci>
+            <ci> LUNG </ci>
+            <ci> RBC </ci>
+            <ci> META </ci>
+            <ci> LIVER </ci>
+            <ci> KIDNEY </ci>
+            <ci> OTHER </ci>
+            <ci> PLASMA </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Excreted">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> FECES </ci>
+            <ci> URINE </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="_J0" reversible="true">
+        <listOfReactants>
+          <speciesReference species="LUNG" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="GUT_LUMEN" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k4 </ci>
+              <ci> LUNG </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J1" reversible="true">
+        <listOfReactants>
+          <speciesReference species="LUNG" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="META" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptakeMT_Lung </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J2" reversible="true">
+        <listOfReactants>
+          <speciesReference species="LUNG" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptakePlasma_Lung </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J3" reversible="true">
+        <listOfReactants>
+          <speciesReference species="GUT_LUMEN" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="INTESTINE_TISSUE" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k5_active </ci>
+              <ci> kabs </ci>
+              <ci> GUT_LUMEN </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J4" reversible="true">
+        <listOfReactants>
+          <speciesReference species="GUT_LUMEN" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FECES" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> k5_active </ci>
+              </apply>
+              <ci> kabs </ci>
+              <ci> GUT_LUMEN </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J5" reversible="true">
+        <listOfReactants>
+          <speciesReference species="INTESTINE_TISSUE" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="META" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptakeMT_GI </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J6" reversible="true">
+        <listOfReactants>
+          <speciesReference species="INTESTINE_TISSUE" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uptakePlasma_GI </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J7" reversible="true">
+        <listOfReactants>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="OTHER" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k9 </ci>
+              <ci> PLASMA </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J8" reversible="true">
+        <listOfReactants>
+          <speciesReference species="OTHER" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k10 </ci>
+              <ci> OTHER </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J9" reversible="true">
+        <listOfReactants>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FECES" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k11 </ci>
+              <ci> PLASMA </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J10" reversible="true">
+        <listOfReactants>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="LIVER" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k12 </ci>
+              <ci> PLASMA </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J11" reversible="true">
+        <listOfReactants>
+          <speciesReference species="LIVER" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k13 </ci>
+              <ci> LIVER </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J12" reversible="true">
+        <listOfReactants>
+          <speciesReference species="LIVER" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="META" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k14 </ci>
+              <ci> LIVER </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J13" reversible="true">
+        <listOfReactants>
+          <speciesReference species="LIVER" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FECES" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k15 </ci>
+              <ci> LIVER </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J14" reversible="true">
+        <listOfReactants>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RBC" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kx </ci>
+              <ci> PLASMA </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J15" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RBC" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="META" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k16 </ci>
+              <ci> RBC </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J16" reversible="true">
+        <listOfReactants>
+          <speciesReference species="META" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="KIDNEY" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k_MT_out </ci>
+              <ci> k17x </ci>
+              <ci> META </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J17" reversible="true">
+        <listOfReactants>
+          <speciesReference species="META" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="URINE" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k_MT_out </ci>
+              <ci> k17b </ci>
+              <ci> META </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J18" reversible="true">
+        <listOfReactants>
+          <speciesReference species="KIDNEY" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PLASMA" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k18 </ci>
+              <ci> KIDNEY </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_J19" reversible="true">
+        <listOfReactants>
+          <speciesReference species="KIDNEY" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="URINE" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k19x </ci>
+              <ci> KIDNEY </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
