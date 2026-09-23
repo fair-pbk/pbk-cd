@@ -58,7 +58,7 @@ age_piv_jour <- c(1)
 df1 <- df1[, age_piv_jour:= floor(rep(age_piv_jour,.N / 1))]
 
 # Food exposure (ug/d)
-df1[,GUT := 10]
+df1[,DIET_ing := 10]
 
 # PBK input 1: Parameters table
 
@@ -81,7 +81,7 @@ params_all <- copy(df1)[
 # PBK input 2: Influx event table
 
 age_end <- 100*365 # 10yo.
-event_res <- df1[, .(id, age_piv_jour,GUT)]
+event_res <- df1[, .(id, age_piv_jour,DIET_ing)]
 event_res <- melt(event_res, id.vars = c("id", "age_piv_jour"), 
                   variable.name = "SR_influx_name", value.name = "SR_influx_val")
 event_res[, ii := 1]

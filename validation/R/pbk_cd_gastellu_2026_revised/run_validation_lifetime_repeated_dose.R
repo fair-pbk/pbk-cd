@@ -15,14 +15,14 @@ model_id <- "pbk_cd_gastellu_2026_revised"
 results_path <- "validation/outputs/reference/R/oral_repeated_lifetime"
 
 # Simulation setup
-
-sex_i <- 2
-Delta_BWs3 <- 1
+sex_i <- 1
+Delta_BWs3 <- 1.1
 Delta_creat <- 1
 
 age_start <- 0*365 # years
 age_end <- 10*365
 dosing_stepsize <- 1
+dose <- 10 # ug/day
 observation_times <- seq(age_start, age_end, by = 1)
 
 # Pre-compute physiology covariates
@@ -116,7 +116,7 @@ phys_cov$time <- observation_times-age_start
 event_res <- ev_lifetime %>%
   bind_rows(ev_observed) %>%
   left_join(phys_cov, by = c("id", "time")) %>%
-  mutate(amt=0.2*dosing_stepsize*wbw_f) %>%
+  mutate(amt=dose*dosing_stepsize*wbw_f) %>%
   arrange(id, time, desc(evid))
 
 
