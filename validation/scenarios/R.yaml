@@ -3,8 +3,8 @@ label: R_scenarios
 model_instances:
   - id: PBK_Cd
     label: SBML
-    model_path: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.sbml
-    param_file: './models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.params.csv'
+    model_path: ./models/Cd_mod_v3/Cd_mod_v3.sbml
+    param_file: './models/Cd_mod_v3/Cd_mod_v3.params.csv'
     target_mappings:
       VBlood: 'VBlood'
 scenarios:
@@ -16,7 +16,7 @@ scenarios:
     evaluation_resolution: 24
     dosing_events:
       - type: single_bolus
-        target: AGut
+        target: GUT_LUMEN
         amount: 1000
         #adjustment: BW # adjust for BW
         time: 0
@@ -27,40 +27,40 @@ scenarios:
     outputs:
       - id: BW
         label: BW
-        output: BW
+        output: wbw
       - id: AGut
         label: Amount in gut
-        output: AGut
+        output: GUT_LUMEN
       - id: ALung
         label: Amount in lung
-        output: ALung
+        output: LUNG
       - id: APlasma
         label: Amount in plasma
-        output: APlasma
+        output: PLASMA
       - id: VBlood
         label: Blood volume
-        output: VBlood
+        output: vb
       - id: ARBC
         label: Amount in RBC
-        output: ARBC
+        output: RBC
       - id: AMetallothionein
         label: Amount in metallothionein
-        output: AMetallothionein
+        output: META
       - id: ALiver
         label: Amount in liver
-        output: ALiver
+        output: LIVER
       - id: AKidney
         label: Amount in kidney
-        output: AKidney
+        output: KIDNEY
       - id: AOthers
         label: Amount in rest
-        output: AOthers
+        output: OTHER
       - id: AUrine
         label: Amount in urine
-        output: AUrine
+        output: URINE
       - id: AFeces
         label: Amount in feces
-        output: AFeces
+        output: FECES
     reference_data:
       - id: R_orig
         label: R_orig
@@ -117,43 +117,40 @@ scenarios:
     outputs:
       - id: BW
         label: BW
-        output: BW
-      - id: Age
-        label: Age
-        output: Age
+        output: wbw
       - id: AGut
         label: Amount in gut
-        output: AGut
+        output: GUT_LUMEN
       - id: ALung
         label: Amount in lung
-        output: ALung
+        output: LUNG
       - id: APlasma
         label: Amount in plasma
-        output: APlasma
+        output: PLASMA
       - id: VBlood
         label: Blood volume
-        output: VBlood
+        output: vb
       - id: ARBC
         label: Amount in RBC
-        output: ARBC
+        output: RBC
       - id: AMetallothionein
         label: Amount in metallothionein
-        output: AMetallothionein
+        output: META
       - id: ALiver
         label: Amount in liver
-        output: ALiver
+        output: LIVER
       - id: AKidney
         label: Amount in kidney
-        output: AKidney
+        output: KIDNEY
       - id: AOthers
         label: Amount in rest
-        output: AOthers
+        output: OTHER
       - id: AUrine
         label: Amount in urine
-        output: AUrine
+        output: URINE
       - id: AFeces
         label: Amount in feces
-        output: AFeces
+        output: FECES
     reference_data:
       - id: R_orig
         label: R_orig
@@ -210,40 +207,40 @@ scenarios:
     outputs:
       - id: BW
         label: BW
-        output: BW
+        output: wbw
       - id: AGut
         label: Amount in gut
-        output: AGut
+        output: GUT_LUMEN
       - id: ALung
         label: Amount in lung
-        output: ALung
+        output: LUNG
       - id: APlasma
         label: Amount in plasma
-        output: APlasma
+        output: PLASMA
       - id: VBlood
         label: Blood volume
-        output: VBlood
+        output: vb
       - id: ARBC
         label: Amount in RBC
-        output: ARBC
+        output: RBC
       - id: AMetallothionein
         label: Amount in metallothionein
-        output: AMetallothionein
+        output: META
       - id: ALiver
         label: Amount in liver
-        output: ALiver
+        output: LIVER
       - id: AKidney
         label: Amount in kidney
-        output: AKidney
+        output: KIDNEY
       - id: AOthers
         label: Amount in rest
-        output: AOthers
+        output: OTHER
       - id: AUrine
         label: Amount in urine
-        output: AUrine
+        output: URINE
       - id: AFeces
         label: Amount in feces
-        output: AFeces
+        output: FECES
     reference_data:
       - id: R_orig
         label: R_orig
@@ -302,40 +299,40 @@ scenarios:
     outputs:
       - id: BW
         label: BW
-        output: BW
+        output: wbw
       - id: AGut
         label: Amount in gut
-        output: AGut
+        output: GUT_LUMEN
       - id: ALung
         label: Amount in lung
-        output: ALung
+        output: LUNG
       - id: APlasma
         label: Amount in plasma
-        output: APlasma
+        output: PLASMA
       - id: VBlood
         label: Blood volume
-        output: VBlood
+        output: vb
       - id: ARBC
         label: Amount in RBC
-        output: ARBC
+        output: RBC
       - id: AMetallothionein
         label: Amount in metallothionein
-        output: AMetallothionein
+        output: META
       - id: ALiver
         label: Amount in liver
-        output: ALiver
+        output: LIVER
       - id: AKidney
         label: Amount in kidney
-        output: AKidney
+        output: KIDNEY
       - id: AOthers
         label: Amount in rest
-        output: AOthers
+        output: OTHER
       - id: AUrine
         label: Amount in urine
-        output: AUrine
+        output: URINE
       - id: AFeces
         label: Amount in feces
-        output: AFeces
+        output: FECES
     reference_data:
       - id: R_orig
         label: R_orig
