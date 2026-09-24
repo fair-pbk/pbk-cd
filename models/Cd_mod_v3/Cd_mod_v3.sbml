@@ -17,6 +17,284 @@
         </rdf:Description>
       </rdf:RDF>
     </annotation>
+    <listOfFunctionDefinitions>
+      <functionDefinition id="BW_male_lifetime">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> mval </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <apply>
+                        <minus/>
+                        <apply>
+                          <plus/>
+                          <apply>
+                            <minus/>
+                            <apply>
+                              <plus/>
+                              <apply>
+                                <minus/>
+                                <apply>
+                                  <plus/>
+                                  <cn> 3.938425 </cn>
+                                  <apply>
+                                    <times/>
+                                    <cn> 0.7518199 </cn>
+                                    <ci> mval </ci>
+                                  </apply>
+                                </apply>
+                                <apply>
+                                  <times/>
+                                  <cn> 0.02023793 </cn>
+                                  <apply>
+                                    <power/>
+                                    <ci> mval </ci>
+                                    <cn type="integer"> 2 </cn>
+                                  </apply>
+                                </apply>
+                              </apply>
+                              <apply>
+                                <times/>
+                                <cn> 0.0002921682 </cn>
+                                <apply>
+                                  <power/>
+                                  <ci> mval </ci>
+                                  <cn type="integer"> 3 </cn>
+                                </apply>
+                              </apply>
+                            </apply>
+                            <apply>
+                              <times/>
+                              <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
+                              <apply>
+                                <power/>
+                                <ci> mval </ci>
+                                <cn type="integer"> 4 </cn>
+                              </apply>
+                            </apply>
+                          </apply>
+                          <apply>
+                            <times/>
+                            <cn type="e-notation"> 8.469 <sep/> -9 </cn>
+                            <apply>
+                              <power/>
+                              <ci> mval </ci>
+                              <cn type="integer"> 5 </cn>
+                            </apply>
+                          </apply>
+                        </apply>
+                        <apply>
+                          <times/>
+                          <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
+                          <apply>
+                            <power/>
+                            <ci> mval </ci>
+                            <cn type="integer"> 6 </cn>
+                          </apply>
+                        </apply>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
+                        <apply>
+                          <power/>
+                          <ci> mval </ci>
+                          <cn type="integer"> 7 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
+                      <apply>
+                        <power/>
+                        <ci> mval </ci>
+                        <cn type="integer"> 8 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
+                    <apply>
+                      <power/>
+                      <ci> mval </ci>
+                      <cn type="integer"> 9 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
+                  <apply>
+                    <power/>
+                    <ci> mval </ci>
+                    <cn type="integer"> 10 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
+                <apply>
+                  <power/>
+                  <ci> mval </ci>
+                  <cn type="integer"> 11 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="BW_female_lifetime">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> mval </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <apply>
+                        <minus/>
+                        <apply>
+                          <plus/>
+                          <apply>
+                            <minus/>
+                            <apply>
+                              <plus/>
+                              <apply>
+                                <minus/>
+                                <apply>
+                                  <plus/>
+                                  <cn> 3.932403 </cn>
+                                  <apply>
+                                    <times/>
+                                    <cn> 0.6866462 </cn>
+                                    <ci> mval </ci>
+                                  </apply>
+                                </apply>
+                                <apply>
+                                  <times/>
+                                  <cn> 0.01949911 </cn>
+                                  <apply>
+                                    <power/>
+                                    <ci> mval </ci>
+                                    <cn type="integer"> 2 </cn>
+                                  </apply>
+                                </apply>
+                              </apply>
+                              <apply>
+                                <times/>
+                                <cn> 0.00031311 </cn>
+                                <apply>
+                                  <power/>
+                                  <ci> mval </ci>
+                                  <cn type="integer"> 3 </cn>
+                                </apply>
+                              </apply>
+                            </apply>
+                            <apply>
+                              <times/>
+                              <cn type="e-notation"> 2.466654 <sep/> -6 </cn>
+                              <apply>
+                                <power/>
+                                <ci> mval </ci>
+                                <cn type="integer"> 4 </cn>
+                              </apply>
+                            </apply>
+                          </apply>
+                          <apply>
+                            <times/>
+                            <cn type="e-notation"> 1.113217 <sep/> -8 </cn>
+                            <apply>
+                              <power/>
+                              <ci> mval </ci>
+                              <cn type="integer"> 5 </cn>
+                            </apply>
+                          </apply>
+                        </apply>
+                        <apply>
+                          <times/>
+                          <cn type="e-notation"> 3.131402 <sep/> -11 </cn>
+                          <apply>
+                            <power/>
+                            <ci> mval </ci>
+                            <cn type="integer"> 6 </cn>
+                          </apply>
+                        </apply>
+                      </apply>
+                      <apply>
+                        <times/>
+                        <cn type="e-notation"> 5.693737 <sep/> -14 </cn>
+                        <apply>
+                          <power/>
+                          <ci> mval </ci>
+                          <cn type="integer"> 7 </cn>
+                        </apply>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="e-notation"> 6.706947 <sep/> -17 </cn>
+                      <apply>
+                        <power/>
+                        <ci> mval </ci>
+                        <cn type="integer"> 8 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <cn type="e-notation"> 4.947858 <sep/> -20 </cn>
+                    <apply>
+                      <power/>
+                      <ci> mval </ci>
+                      <cn type="integer"> 9 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="e-notation"> 2.079251 <sep/> -23 </cn>
+                  <apply>
+                    <power/>
+                    <ci> mval </ci>
+                    <cn type="integer"> 10 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="e-notation"> 3.800367 <sep/> -27 </cn>
+                <apply>
+                  <power/>
+                  <ci> mval </ci>
+                  <cn type="integer"> 11 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
     <listOfUnitDefinitions>
       <unitDefinition id="NanoGM">
         <listOfUnits>
@@ -355,14 +633,12 @@
       <parameter id="k21" name="Age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" constant="true"/>
       <parameter id="k20" name="Fraction of PLASMA + META Cd amounts to calculated whole-blood Cd" value="0.1" units="UNITLESS" constant="true"/>
       <parameter id="sex" value="2" constant="true"/>
-      <parameter id="Delta_BWs3" value="0.2" constant="true"/>
-      <parameter id="Delta_creat" value="0.2" constant="true"/>
+      <parameter id="Age" value="30" constant="true"/>
+      <parameter id="Delta_BWs3" value="1" constant="true"/>
+      <parameter id="Delta_creat" value="1" constant="true"/>
       <parameter id="Ccord" value="0" constant="true"/>
       <parameter id="year" units="YR" constant="false"/>
-      <parameter id="mval" constant="false"/>
       <parameter id="Delta_BW" constant="false"/>
-      <parameter id="BW_male_ref" constant="false"/>
-      <parameter id="BW_female_ref" constant="false"/>
       <parameter id="BW_male" constant="false"/>
       <parameter id="BW_female" constant="false"/>
       <parameter id="wbw" constant="false"/>
@@ -433,18 +709,13 @@
       <assignmentRule variable="year">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
-            <divide/>
-            <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
-            <cn type="integer"> 365 </cn>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="mval">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> year </ci>
-            <cn type="integer"> 12 </cn>
+            <plus/>
+            <apply>
+              <divide/>
+              <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+              <cn type="integer"> 365 </cn>
+            </apply>
+            <ci> Age </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -464,14 +735,19 @@
                       <ci> Delta_BWs3 </ci>
                       <cn type="integer"> 1 </cn>
                     </apply>
-                    <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                    <ci> year </ci>
+                    <cn type="integer"> 365 </cn>
                   </apply>
                   <cn type="integer"> 1095 </cn>
                 </apply>
               </apply>
               <apply>
                 <leq/>
-                <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                <apply>
+                  <times/>
+                  <ci> year </ci>
+                  <cn type="integer"> 365 </cn>
+                </apply>
                 <cn type="integer"> 1095 </cn>
               </apply>
             </piece>
@@ -481,279 +757,20 @@
           </piecewise>
         </math>
       </assignmentRule>
-      <assignmentRule variable="BW_male_ref">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <apply>
-              <minus/>
-              <apply>
-                <plus/>
-                <apply>
-                  <minus/>
-                  <apply>
-                    <plus/>
-                    <apply>
-                      <minus/>
-                      <apply>
-                        <plus/>
-                        <apply>
-                          <minus/>
-                          <apply>
-                            <plus/>
-                            <apply>
-                              <minus/>
-                              <apply>
-                                <plus/>
-                                <cn> 3.938425 </cn>
-                                <apply>
-                                  <times/>
-                                  <cn> 0.7518199 </cn>
-                                  <ci> mval </ci>
-                                </apply>
-                              </apply>
-                              <apply>
-                                <times/>
-                                <cn> 0.02023793 </cn>
-                                <apply>
-                                  <power/>
-                                  <ci> mval </ci>
-                                  <cn type="integer"> 2 </cn>
-                                </apply>
-                              </apply>
-                            </apply>
-                            <apply>
-                              <times/>
-                              <cn> 0.0002921682 </cn>
-                              <apply>
-                                <power/>
-                                <ci> mval </ci>
-                                <cn type="integer"> 3 </cn>
-                              </apply>
-                            </apply>
-                          </apply>
-                          <apply>
-                            <times/>
-                            <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
-                            <apply>
-                              <power/>
-                              <ci> mval </ci>
-                              <cn type="integer"> 4 </cn>
-                            </apply>
-                          </apply>
-                        </apply>
-                        <apply>
-                          <times/>
-                          <cn type="e-notation"> 8.469 <sep/> -9 </cn>
-                          <apply>
-                            <power/>
-                            <ci> mval </ci>
-                            <cn type="integer"> 5 </cn>
-                          </apply>
-                        </apply>
-                      </apply>
-                      <apply>
-                        <times/>
-                        <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
-                        <apply>
-                          <power/>
-                          <ci> mval </ci>
-                          <cn type="integer"> 6 </cn>
-                        </apply>
-                      </apply>
-                    </apply>
-                    <apply>
-                      <times/>
-                      <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
-                      <apply>
-                        <power/>
-                        <ci> mval </ci>
-                        <cn type="integer"> 7 </cn>
-                      </apply>
-                    </apply>
-                  </apply>
-                  <apply>
-                    <times/>
-                    <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
-                    <apply>
-                      <power/>
-                      <ci> mval </ci>
-                      <cn type="integer"> 8 </cn>
-                    </apply>
-                  </apply>
-                </apply>
-                <apply>
-                  <times/>
-                  <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
-                  <apply>
-                    <power/>
-                    <ci> mval </ci>
-                    <cn type="integer"> 9 </cn>
-                  </apply>
-                </apply>
-              </apply>
-              <apply>
-                <times/>
-                <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
-                <apply>
-                  <power/>
-                  <ci> mval </ci>
-                  <cn type="integer"> 10 </cn>
-                </apply>
-              </apply>
-            </apply>
-            <apply>
-              <times/>
-              <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
-              <apply>
-                <power/>
-                <ci> mval </ci>
-                <cn type="integer"> 11 </cn>
-              </apply>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="BW_female_ref">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <apply>
-              <minus/>
-              <apply>
-                <plus/>
-                <apply>
-                  <minus/>
-                  <apply>
-                    <plus/>
-                    <apply>
-                      <minus/>
-                      <apply>
-                        <plus/>
-                        <apply>
-                          <minus/>
-                          <apply>
-                            <plus/>
-                            <apply>
-                              <minus/>
-                              <apply>
-                                <plus/>
-                                <cn> 3.932403 </cn>
-                                <apply>
-                                  <times/>
-                                  <cn> 0.6866462 </cn>
-                                  <ci> mval </ci>
-                                </apply>
-                              </apply>
-                              <apply>
-                                <times/>
-                                <cn> 0.01949911 </cn>
-                                <apply>
-                                  <power/>
-                                  <ci> mval </ci>
-                                  <cn type="integer"> 2 </cn>
-                                </apply>
-                              </apply>
-                            </apply>
-                            <apply>
-                              <times/>
-                              <cn> 0.00031311 </cn>
-                              <apply>
-                                <power/>
-                                <ci> mval </ci>
-                                <cn type="integer"> 3 </cn>
-                              </apply>
-                            </apply>
-                          </apply>
-                          <apply>
-                            <times/>
-                            <cn type="e-notation"> 2.466654 <sep/> -6 </cn>
-                            <apply>
-                              <power/>
-                              <ci> mval </ci>
-                              <cn type="integer"> 4 </cn>
-                            </apply>
-                          </apply>
-                        </apply>
-                        <apply>
-                          <times/>
-                          <cn type="e-notation"> 1.113217 <sep/> -8 </cn>
-                          <apply>
-                            <power/>
-                            <ci> mval </ci>
-                            <cn type="integer"> 5 </cn>
-                          </apply>
-                        </apply>
-                      </apply>
-                      <apply>
-                        <times/>
-                        <cn type="e-notation"> 3.131402 <sep/> -11 </cn>
-                        <apply>
-                          <power/>
-                          <ci> mval </ci>
-                          <cn type="integer"> 6 </cn>
-                        </apply>
-                      </apply>
-                    </apply>
-                    <apply>
-                      <times/>
-                      <cn type="e-notation"> 5.693737 <sep/> -14 </cn>
-                      <apply>
-                        <power/>
-                        <ci> mval </ci>
-                        <cn type="integer"> 7 </cn>
-                      </apply>
-                    </apply>
-                  </apply>
-                  <apply>
-                    <times/>
-                    <cn type="e-notation"> 6.706947 <sep/> -17 </cn>
-                    <apply>
-                      <power/>
-                      <ci> mval </ci>
-                      <cn type="integer"> 8 </cn>
-                    </apply>
-                  </apply>
-                </apply>
-                <apply>
-                  <times/>
-                  <cn type="e-notation"> 4.947858 <sep/> -20 </cn>
-                  <apply>
-                    <power/>
-                    <ci> mval </ci>
-                    <cn type="integer"> 9 </cn>
-                  </apply>
-                </apply>
-              </apply>
-              <apply>
-                <times/>
-                <cn type="e-notation"> 2.079251 <sep/> -23 </cn>
-                <apply>
-                  <power/>
-                  <ci> mval </ci>
-                  <cn type="integer"> 10 </cn>
-                </apply>
-              </apply>
-            </apply>
-            <apply>
-              <times/>
-              <cn type="e-notation"> 3.800367 <sep/> -27 </cn>
-              <apply>
-                <power/>
-                <ci> mval </ci>
-                <cn type="integer"> 11 </cn>
-              </apply>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
       <assignmentRule variable="BW_male">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <piecewise>
             <piece>
               <apply>
                 <times/>
-                <ci> BW_male_ref </ci>
+                <apply>
+                  <ci> BW_male_lifetime </ci>
+                  <apply>
+                    <times/>
+                    <ci> year </ci>
+                    <cn type="integer"> 12 </cn>
+                  </apply>
+                </apply>
                 <ci> Delta_BW </ci>
               </apply>
               <apply>
@@ -778,7 +795,14 @@
             <piece>
               <apply>
                 <times/>
-                <ci> BW_female_ref </ci>
+                <apply>
+                  <ci> BW_female_lifetime </ci>
+                  <apply>
+                    <times/>
+                    <ci> year </ci>
+                    <cn type="integer"> 12 </cn>
+                  </apply>
+                </apply>
                 <ci> Delta_BW </ci>
               </apply>
               <apply>

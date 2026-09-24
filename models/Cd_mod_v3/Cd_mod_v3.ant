@@ -1,3 +1,15 @@
+# ============================================================
+# Body weight lifetime functions
+# ============================================================
+
+function BW_male_lifetime(mval)    
+    3.938425 + 0.7518199 * mval - 0.02023793 * mval^2 + 0.0002921682 * mval^3 - 2.06762e-6 * mval^4 + 8.469e-9 * mval^5 - 2.188427e-11 * mval^6 + 3.699776e-14 * mval^7 - 4.099077e-17 * mval^8 + 2.874804e-20 * mval^9 - 1.159732e-23 * mval^10 + 2.052602e-27 * mval^11
+end
+
+function BW_female_lifetime(mval)    
+    3.932403 + 0.6866462 * mval - 0.01949911 * mval^2 + 0.00031311 * mval^3 - 2.466654e-6 * mval^4 + 1.113217e-8 * mval^5 - 3.131402e-11 * mval^6 + 5.693737e-14 * mval^7 - 6.706947e-17 * mval^8 + 4.947858e-20 * mval^9 - 2.079251e-23 * mval^10 + 3.800367e-27 * mval^11
+end
+
 model Cd_mod_v3()
 
 # ============================================================
@@ -8,53 +20,52 @@ model Cd_mod_v3()
 # sex: 1 = male, 2 = female
 # ============================================================
 
-
 # ============================================================
 # PARAMETERS
 # ============================================================
 
-# Respiratory deposition fractions
+# Respiratory deposition fractions [-]
 k1_cig  = 0.10
 k1_dust = 0.70
 k2_cig  = 0.40
 k2_dust = 0.13
 
-# Respiratory transfer
+# Respiratory transfer [/d]
 k3 = 0.05
 k4 = 0.005
 
-# GI processing
-kabs = 1
-k5_h = 0.05
-k5_f = 0.10
-k6 = 0.05
+# GI processing 
+kabs = 1 #[/d]
+k5_h = 0.05 #[-]
+k5_f = 0.10 #[-]
+k6 = 0.05 #[/d]
 
 # Systemic uptake / MT
-k7 = 0.25
-k8 = 1.0
-k_MT_out = 1
+k7 = 0.25 #[-]
+k8 = 1.0 #[ug/day]
+k_MT_out = 1 #[/d]
 
 # Plasma distribution
-k9  = 0.44
-k10 = 0.00014
-k11 = 0.27
-k12 = 0.25
-k13 = 0.00003
-k14 = 0.00016
-k15 = 0.00005
+k9  = 0.44 #[/d]
+k10 = 0.00014 #[/d]
+k11 = 0.27 #[/d]
+k12 = 0.25 #[/d]
+k13 = 0.00003 #[/d]
+k14 = 0.00016 #[/d]
+k15 = 0.00005 #[/d]
 
 # RBC
-kx  = 0.04
-k16 = 0.012
+kx  = 0.04 #[/d]
+k16 = 0.012 #[/d]
 
 # MT / kidney
-k17 = 0.95
-k18 = 0.00001
-k19 = 0.00014
+k17 = 0.95 #[-]
+k18 = 0.00001 #[/d]
+k19 = 0.00014 #[/d]
 k21 = 0.0000011
 
 # Whole-blood calculation
-k20 = 0.10
+k20 = 0.10 #[-]
 
 # Exposure availability / release
 # f_ing_available  = 1
@@ -67,31 +78,38 @@ k20 = 0.10
 # ============================================================
 # INDIVIDUAL INPUTS
 # ============================================================
-
 sex = 2
+Age = 30 # Age at start of simulation [year]
 
-Delta_BWs3 = 0.2
-Delta_creat = 0.2
+# scaling with respect to reference BW
+Delta_BWs3 = 1 
+Delta_creat = 1
 
 # Measured whole-cord-blood Cd concentration
 # Unit: ug/L
 Ccord = 0
 
 # ============================================================
+# This could be a way to use BWTarget instead of a delta_BW
+# ============================================================
+# AgeRef = 30 # Reference age corresponding to target body weight
+# BWTarget = 85 # Target body weight at reference age [kg]
+# BWRef := piecewise(BW_male_lifetime(AgeRef*12), sex==1, BW_female_lifetime(AgeRef*12)) # Reference body weight based on average lifetime equation
+# Delta_BWs3 := BWTarget / BWRef # Scaling factor to scale reference body weight to target weight.
+# ============================================================
+# ============================================================
+
+# ============================================================
 # TIME-VARYING PHYSIOLOGY
 # ============================================================
 
-year := time / 365
-mval := year * 12
-
-Delta_BW := piecewise( 1 + (Delta_BWs3 - 1) * time / 1095, time <= 1095, Delta_BWs3 )
+year := time / 365 + Age
+Delta_BW := piecewise( 1 + (Delta_BWs3 - 1) * (year * 365) / 1095, (year * 365) <= 1095, Delta_BWs3 )
 
 # Body weight
-BW_male_ref := 3.938425 + 0.7518199 * mval - 0.02023793 * mval^2 + 0.0002921682 * mval^3 - 2.06762e-6 * mval^4 + 8.469e-9 * mval^5 - 2.188427e-11 * mval^6 + 3.699776e-14 * mval^7 - 4.099077e-17 * mval^8 + 2.874804e-20 * mval^9 - 1.159732e-23 * mval^10 + 2.052602e-27 * mval^11
-BW_female_ref := 3.932403 + 0.6866462 * mval - 0.01949911 * mval^2 + 0.00031311 * mval^3 - 2.466654e-6 * mval^4 + 1.113217e-8 * mval^5 - 3.131402e-11 * mval^6 + 5.693737e-14 * mval^7 - 6.706947e-17 * mval^8 + 4.947858e-20 * mval^9 - 2.079251e-23 * mval^10 + 3.800367e-27 * mval^11
-BW_male := piecewise( BW_male_ref * Delta_BW, year <= 79, 76 * Delta_BW )
-BW_female := piecewise( BW_female_ref * Delta_BW, year <= 79, 68 * Delta_BW )
-wbw := piecewise( BW_male, sex == 1, BW_female )
+BW_male := piecewise( BW_male_lifetime(year*12) * Delta_BW, year <= 79, 76 * Delta_BW )
+BW_female := piecewise( BW_female_lifetime(year*12) * Delta_BW, year <= 79, 68 * Delta_BW )
+wbw := piecewise(BW_male, sex == 1, BW_female )
 
 # Hematocrit
 hct_mid := 1.12815e-6 * year^3 - 1.72362e-4 * year^2 + 8.15264e-3 * year + 0.327363
@@ -160,7 +178,6 @@ k17b := 1 - k17x
 # ============================================================
 # CORD-BLOOD INITIALIZATION
 # ============================================================
-
 wbw0 := piecewise( 3.938425, sex == 1, 3.932403 )
 vb0 := piecewise( 0.0770 * wbw0, sex == 1, 0.0771 * wbw0 )
 

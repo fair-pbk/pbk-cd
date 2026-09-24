@@ -6,7 +6,18 @@ model_instances:
     model_path: ./models/Cd_mod_v3/Cd_mod_v3.sbml
     param_file: './models/Cd_mod_v3/Cd_mod_v3.params.csv'
     target_mappings:
-      VBlood: 'VBlood'
+      VBlood: 'vb'
+      BW: 'wbw'
+      AGut: 'GUT_LUMEN'
+      ALung: 'LUNG'
+      APlasma: 'PLASMA'
+      ARBC: 'RBC'
+      AMetallothionein: 'META'
+      ALiver: 'LIVER'
+      AKidney: 'KIDNEY'
+      AOthers: 'OTHER'
+      AUrine: 'URINE'
+      AFeces: 'FECES'
 scenarios:
   - id: oral_single
     label: Oral single dose
@@ -16,14 +27,14 @@ scenarios:
     evaluation_resolution: 24
     dosing_events:
       - type: single_bolus
-        target: GUT_LUMEN
+        target: AGut
         amount: 1000
-        #adjustment: BW # adjust for BW
         time: 0
     parameters:
       Age: 30
-      AgeRef: 30
-      BWRef: 85
+      sex: 2
+      # AgeRef: 30
+      # BWRef: 85
     outputs:
       - id: BW
         label: BW
@@ -112,8 +123,9 @@ scenarios:
         interval: 1
     parameters:
       Age: 30
-      AgeRef: 30
-      BWRef: 85
+      sex: 2
+      # AgeRef: 30
+      # BWRef: 85
     outputs:
       - id: BW
         label: BW
@@ -198,16 +210,18 @@ scenarios:
       - type: repeated_bolus
         target: AGut
         amount: 10
+        adjustment: BW
         time: 0
         interval: 1
     parameters:
       Age: 0
-      AgeRef: 30
-      BWRef: 85
+      sex: 2
+      # AgeRef: 30
+      # BWRef: 85
     outputs:
       - id: BW
         label: BW
-        output: wbw
+        output: wbw_f
       - id: AGut
         label: Amount in gut
         output: GUT_LUMEN
@@ -294,8 +308,9 @@ scenarios:
         until: 18250
     parameters:
       Age: 0
-      AgeRef: 30
-      BWRef: 85
+      sex: 2
+      # AgeRef: 30
+      # BWRef: 85
     outputs:
       - id: BW
         label: BW
