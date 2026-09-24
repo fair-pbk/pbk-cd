@@ -1,8 +1,6 @@
-__Physiologically Based Kinetic (PBK) model for Cadmium (Cd)__
+# Cadmium PBK model 
 
-This repository develop a PBK model for Cd in SBML.
-
-The project is developed in the framework of PARC (WP 6 & 8).
+This repository contains a revised implementation of the cadmium PBK model of [Gastellu et al., 2026](https://doi.org/10.1016/j.fct.2024.115111).
 
 ## Building the SBML and running the validation scipts
 
