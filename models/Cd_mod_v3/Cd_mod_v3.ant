@@ -12,391 +12,384 @@ end
 
 model Cd_mod_v3()
 
-# ============================================================
-# Cadmium PBK model
-#
-# Time unit: day
-# Internal Cd amounts: ug
-# sex: 1 = male, 2 = female
-# ============================================================
-
-# ============================================================
-# PARAMETERS
-# ============================================================
-
-# Respiratory deposition fractions [-]
-k1_cig  = 0.10
-k1_dust = 0.70
-k2_cig  = 0.40
-k2_dust = 0.13
-
-# Respiratory transfer [/d]
-k3 = 0.05
-k4 = 0.005
-
-# GI processing 
-kabs = 1 #[/d]
-k5_h = 0.05 #[-]
-k5_f = 0.10 #[-]
-k6 = 0.05 #[/d]
-
-# Systemic uptake / MT
-k7 = 0.25 #[-]
-k8 = 1.0 #[ug/day]
-k_MT_out = 1 #[/d]
-
-# Plasma distribution
-k9  = 0.44 #[/d]
-k10 = 0.00014 #[/d]
-k11 = 0.27 #[/d]
-k12 = 0.25 #[/d]
-k13 = 0.00003 #[/d]
-k14 = 0.00016 #[/d]
-k15 = 0.00005 #[/d]
-
-# RBC
-kx  = 0.04 #[/d]
-k16 = 0.012 #[/d]
-
-# MT / kidney
-k17 = 0.95 #[-]
-k18 = 0.00001 #[/d]
-k19 = 0.00014 #[/d]
-k21 = 0.0000011
-
-# Whole-blood calculation
-k20 = 0.10 #[-]
-
-# Exposure availability / release
-# f_ing_available  = 1
-# king_release     = 1
-# f_inh_available  = 1
-# kinh_release     = 1
-# f_derm_available = 0.0005
-# kderm_release    = 1
-
-# ============================================================
-# INDIVIDUAL INPUTS
-# ============================================================
-sex = 2
-Age = 30 # Age at start of simulation [year]
-
-# scaling with respect to reference BW
-Delta_BWs3 = 1 
-Delta_creat = 1
-
-# Measured whole-cord-blood Cd concentration
-# Unit: ug/L
-Ccord = 0
-
-# ============================================================
-# This could be a way to use BWTarget instead of a delta_BW
-# ============================================================
-# AgeRef = 30 # Reference age corresponding to target body weight
-# BWTarget = 85 # Target body weight at reference age [kg]
-# BWRef := piecewise(BW_male_lifetime(AgeRef*12), sex==1, BW_female_lifetime(AgeRef*12)) # Reference body weight based on average lifetime equation
-# Delta_BWs3 := BWTarget / BWRef # Scaling factor to scale reference body weight to target weight.
-# ============================================================
-# ============================================================
-
-# ============================================================
-# TIME-VARYING PHYSIOLOGY
-# ============================================================
-
-year := time / 365 + Age
-Delta_BW := piecewise( 1 + (Delta_BWs3 - 1) * (year * 365) / 1095, (year * 365) <= 1095, Delta_BWs3 )
-
-# Body weight
-BW_male := piecewise( BW_male_lifetime(year*12) * Delta_BW, year <= 79, 76 * Delta_BW )
-BW_female := piecewise( BW_female_lifetime(year*12) * Delta_BW, year <= 79, 68 * Delta_BW )
-wbw := piecewise(BW_male, sex == 1, BW_female )
-
-# Hematocrit
-hct_mid := 1.12815e-6 * year^3 - 1.72362e-4 * year^2 + 8.15264e-3 * year + 0.327363
-hct := piecewise( 0.359, year <= 2, hct_mid, year < 18, 0.4248446 )
-
-# Blood volume
-vb_male := piecewise( (-0.027 * year + 0.077) * wbw, year < 1, (0.0761 / (1 + exp(-0.683 * year + 0.946))) * wbw )
-vb_female := piecewise( (-0.0273 * year + 0.0771) * wbw, year < 1, (3.28e-5 * year^3 - 1.21e-3 * year^2 + 1.24e-2 * year + 3.86e-2) * wbw, year < 14.019723, 0.065 * wbw )
-vb := piecewise( vb_male, sex == 1, vb_female )
-
-vp := (1 - hct) * vb
-vrbc := hct * vb
-
-# Kidney
-vk_male := piecewise( (0.0042 + (0.00767 - 0.0042) * exp(-0.206 * year)) * wbw, year <= 79, (0.0042 + 2.969074e-10) * wbw )
-vk_female := piecewise( (0.0046 + (0.00709 - 0.0046) * exp(-0.221 * year)) * wbw, year <= 79, (0.0046 + 6.514063e-11) * wbw )
-vk := piecewise( vk_male, sex == 1, vk_female )
-
-# Lung
-vlungs := piecewise( 0.0068 * wbw, sex == 1, 0.0070 * wbw )
-
-# Intestinal tract
-vint_male := piecewise( (-8.2562e-5 * year^2 + 1.3523e-3 * year + 1.293e-2) * wbw, year < 16, 0.014 * wbw )
-vint_female := piecewise( (-7.421e-5 * year^2 + 1.276e-3 * year + 1.298e-2) * wbw, year < 14.453301, 0.0160 * wbw )
-vintestine := piecewise( vint_male, sex == 1, vint_female )
-
-# Liver
-vl_male := piecewise( (0.0247 + (0.0409 - 0.0247) * exp(-0.218 * year)) * wbw, year <= 79, (0.0247 + 5.371498e-10) * wbw )
-vl_female := piecewise( (0.0233 + (0.038 - 0.0233) * exp(-0.122 * year)) * wbw, year <= 79, (0.0233 + 9.58489e-7) * wbw )
-vl := piecewise( vl_male, sex == 1, vl_female )
-
-# Rest of body
-vother := wbw - (vk + vb + vl + vintestine + vlungs)
-wbw_f := vk + vb + vl + vintestine + vlungs + vother
-
-# Inhalation physiology
-Vtidal_male := piecewise( 0.0337 * year + 0.0407, year < 21, 0.75 )
-Vtidal_female := 0.46 + (0.0392 - 0.46) * exp(-0.127 * year)
-Vtidal := piecewise( Vtidal_male, sex == 1, Vtidal_female )
-
-FqBreath := 12 + (38.9 - 12) * exp(-0.176 * year)
-vds_male := piecewise( 0.0076 * year + 0.0101, year <= 18.4, 0.15 )
-vds_female := 0.12 + (0.0107 - 0.12) * exp(-0.0986 * year)
-vds := piecewise( vds_male, sex == 1, vds_female )
-
-VInhalation := FqBreath * (Vtidal - vds) * 60 * 24
-
-# Creatinine
-ucr_base := 0.032 + 2.098e-2 * year + 9.104e-3 * year^2 - 4.550e-4 * year^3 + 7.578e-6 * year^4 - 4.232e-8 * year^5
-ucr := piecewise( ucr_base * Delta_creat, year <= 70, 0.865756 * Delta_creat )
-
-# Urine volume
-Vurine := 0.0294 * wbw_f
-
-# Sex-specific GI fraction
-k5_active := piecewise( k5_h, sex == 1, k5_f )
-
-# Age-dependent kidney elimination
-k19x := piecewise( k19, year <= 30, k19 + k21 * (year - 30) )
-
-# Age-dependent MT -> kidney fraction
-k17_decline := k17 - (k17 / 3) * (year - 30) / 50
-k17x := piecewise( k17, year <= 30, 0, k17_decline < 0, k17_decline )
-k17b := 1 - k17x
-
-# ============================================================
-# CORD-BLOOD INITIALIZATION
-# ============================================================
-wbw0 := piecewise( 3.938425, sex == 1, 3.932403 )
-vb0 := piecewise( 0.0770 * wbw0, sex == 1, 0.0771 * wbw0 )
-
-Acord_total := Ccord * vb0
-
-# ============================================================
-# COMPARTMENTS
-# ============================================================
-
-# compartment Source;
-compartment LungComp;
-compartment GUT_LUMENComp;
-compartment INTESTINE_TISSUEComp;
-compartment PlasmaComp;
-compartment RBCComp;
-compartment MTComp;
-compartment LiverComp;
-compartment KidneyComp;
-compartment OtherComp;
-compartment FecesComp;
-compartment UrineComp;
-# compartment ExhComp;
-
-# ============================================================
-# SPECIES
-# ============================================================
-
-# Exposure source variables
-# substanceOnly species AIR_inhal_ing in Source
-# substanceOnly species CIG_inhal_ing in Source
-
-# substanceOnly species DIET_ing in Source
-# substanceOnly species SOIL_ing in Source
-# substanceOnly species DUST_ing in Source
-# substanceOnly species COSM_ing in Source
-
-# substanceOnly species AIR_derm in Source
-# substanceOnly species DUST_derm in Source
-# substanceOnly species COSM_derm in Source
-
-# Internal Cd states
-substanceOnly species LUNG in LungComp
-substanceOnly species GUT_LUMEN in GUT_LUMENComp
-substanceOnly species INTESTINE_TISSUE in INTESTINE_TISSUEComp
-
-substanceOnly species PLASMA in PlasmaComp
-substanceOnly species RBC in RBCComp
-substanceOnly species META in MTComp
-
-substanceOnly species LIVER in LiverComp
-substanceOnly species KIDNEY in KidneyComp
-substanceOnly species OTHER in OtherComp
-
-# Cumulative outputs
-substanceOnly species FECES in FecesComp
-substanceOnly species URINE in UrineComp
-# substanceOnly species EXH in ExhComp
-
-# ============================================================
-# INITIAL CONDITIONS
-# ============================================================
-
-# AIR_inhal_ing = 0
-# CIG_inhal_ing = 0
-# DIET_ing = 0
-# SOIL_ing = 0
-# DUST_ing = 0
-# COSM_ing = 0
-
-# AIR_derm = 0
-# DUST_derm = 0
-# COSM_derm = 0
-
-LUNG = 0
-GUT_LUMEN = 0
-INTESTINE_TISSUE = 0
-
-PLASMA = 0
-RBC = Acord_total
-META = 0
-
-LIVER = 0
-KIDNEY = 0
-OTHER = 0
-
-FECES = 0
-URINE = 0
-# EXH = 0
-
-# ============================================================
-# ALGEBRAIC FLUXES
-# ============================================================
-
-uptakeTotal_Lung := k3 * LUNG
-uptakeTotal_GI := k6 * INTESTINE_TISSUE
-TOTAL_UPTAKE := uptakeTotal_Lung + uptakeTotal_GI
-
-# Total flux to MT
-UPTAKE_MT := piecewise(k7 * TOTAL_UPTAKE, leq(k7 * TOTAL_UPTAKE, k8), k8)
-UPTAKE_PLASMA := TOTAL_UPTAKE - UPTAKE_MT
-
-# Distribute the total MT flux between lung and intestinal uptake
-uptakeMT_Lung := piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_Lung / TOTAL_UPTAKE)
-uptakeMT_GI := piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_GI / TOTAL_UPTAKE)
-
-# Remaining source-specific uptake goes to plasma
-uptakePlasma_Lung := uptakeTotal_Lung - uptakeMT_Lung
-uptakePlasma_GI := uptakeTotal_GI - uptakeMT_GI
-
-# ============================================================
-# EXPOSURE SOURCE DECAY
-# ============================================================
-
-# AIR_inhal_ing -> ;       kinh_release * AIR_inhal_ing
-# CIG_inhal_ing -> ;       kinh_release * CIG_inhal_ing
-
-# DIET_ing -> ;            king_release * DIET_ing
-# SOIL_ing -> ;            king_release * SOIL_ing
-# DUST_ing -> ;            king_release * DUST_ing
-# COSM_ing -> ;            king_release * COSM_ing
-
-# AIR_derm -> ;            kderm_release * AIR_derm
-# DUST_derm -> ;           kderm_release * DUST_derm
-# COSM_derm -> ;           kderm_release * COSM_derm
-
-# ============================================================
-# EXPOSURE INPUTS TO PBK MODEL
-# ============================================================
-
-# Ambient air -> lung
-# AIR_inhal_ing -> LUNG;    f_inh_available * k2_dust * AIR_inhal_ing * VInhalation
-
-# Ambient air -> GI tract via NP/TB deposition
-# AIR_inhal_ing -> GUT_LUMEN;    f_inh_available * k1_dust * AIR_inhal_ing * VInhalation
-
-# Ambient air -> exhaled
-# AIR_inhal_ing -> EXH;    (1 - k1_dust - k2_dust) * f_inh_available * AIR_inhal_ing * VInhalation
-
-# Cigarette Cd -> lung
-# CIG_inhal_ing -> LUNG;    f_inh_available * kinh_release * k2_cig * CIG_inhal_ing
-
-# Cigarette Cd -> GI tract
-# CIG_inhal_ing -> GUT_LUMEN;    f_inh_available * kinh_release * k1_cig * CIG_inhal_ing
-
-# Cigarette Cd -> exhaled
-# CIG_inhal_ing -> EXH;    (1 - k1_cig - k2_cig) * f_inh_available * kinh_release * CIG_inhal_ing
-
-# Ingested exposure sources -> GI tract
-# DIET_ing -> GUT_LUMEN;    f_ing_available * king_release * DIET_ing * wbw_f
-
-# SOIL_ing -> GUT_LUMEN;    f_ing_available * king_release * SOIL_ing
-
-# DUST_ing -> GUT_LUMEN;    f_ing_available * king_release * DUST_ing
-
-# COSM_ing -> GUT_LUMEN;    f_ing_available * king_release * COSM_ing
-
-# Dermal sources -> plasma
-# AIR_derm -> PLASMA;    f_derm_available * kderm_release * AIR_derm
-
-# DUST_derm -> PLASMA;    f_derm_available * kderm_release * DUST_derm
-
-# COSM_derm -> PLASMA;    f_derm_available * kderm_release * COSM_derm
-
-# ============================================================
-# RESPIRATORY / GI ABSORPTION
-# ============================================================
-
-# Lung -> GI
-LUNG -> GUT_LUMEN;    k4 * LUNG
-
-# Lung -> MT and plasma
-LUNG -> META;    uptakeMT_Lung
-
-LUNG -> PLASMA;  uptakePlasma_Lung
-
-# GUT_LUMEN -> INTESTINE_TISSUE
-GUT_LUMEN -> INTESTINE_TISSUE;    k5_active * kabs * GUT_LUMEN
-
-# GUT_LUMEN -> feces
-GUT_LUMEN -> FECES;    (1 - k5_active) * kabs * GUT_LUMEN
-
-# INTESTINE_TISSUE -> MT and plasma
-INTESTINE_TISSUE -> META;    uptakeMT_GI
-
-INTESTINE_TISSUE -> PLASMA;    uptakePlasma_GI
-
-# ============================================================
-# PLASMA / RBC / MT / TISSUE TRANSFERS
-# ============================================================
-
-PLASMA -> OTHER;    k9 * PLASMA
-OTHER -> PLASMA;    k10 * OTHER
-PLASMA -> FECES;    k11 * PLASMA
-PLASMA -> LIVER;    k12 * PLASMA
-LIVER -> PLASMA;    k13 * LIVER
-LIVER -> META;    k14 * LIVER
-LIVER -> FECES;    k15 * LIVER
-PLASMA -> RBC;    kx * PLASMA
-RBC -> META;    k16 * RBC
-META -> KIDNEY;    k_MT_out * k17x * META
-META -> URINE;    k_MT_out * k17b * META
-KIDNEY -> PLASMA;    k18 * KIDNEY
-KIDNEY -> URINE;    k19x * KIDNEY
-
-# ============================================================
-# DERIVED OUTPUTS
-# ============================================================
-
-BLOOD := RBC + k20 * (PLASMA + META)
-BLOOD_burden := BLOOD / vb
-
-kidney_burden := KIDNEY / vk
-
-ur := k_MT_out * k17b * META + k19x * KIDNEY
-Conc_urine_cd := ur / Vurine
-ucdcr := ur / ucr
-
-total_internal := GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA
-
-Excreted := FECES + URINE       # + EXH
+    # ============================================================
+    # Cadmium PBK model
+    #
+    # Time unit: day
+    # Internal Cd amounts: ug
+    # sex: 1 = male, 2 = female
+    # ============================================================
+
+    # ============================================================
+    # PARAMETERS
+    # ============================================================
+
+    # Respiratory deposition fractions [-]
+    #k1_cig  = 0.10
+    #k1_dust = 0.70
+    #k2_cig  = 0.40
+    #k2_dust = 0.13
+
+    # Respiratory transfer [/d]
+    k3 = 0.05
+    k4 = 0.005
+
+    # GI processing 
+    kabs = 1        # [/d]
+    k5_h = 0.05     # [-]
+    k5_f = 0.10     # [-]
+    k6 = 0.05       # [/d]
+
+    # Systemic uptake / MT
+    k7 = 0.25       # [-]
+    k8 = 1.0        # [ug/day]
+    k_MT_out = 1    # [/d]
+
+    # Plasma distribution
+    k9  = 0.44      # [/d]
+    k10 = 0.00014   # [/d]
+    k11 = 0.27      # [/d]
+    k12 = 0.25      # [/d]
+    k13 = 0.00003   # [/d]
+    k14 = 0.00016   # [/d]
+    k15 = 0.00005   # [/d]
+
+    # RBC
+    kx  = 0.04      # [/d]
+    k16 = 0.012     # [/d]
+
+    # MT / kidney
+    k17 = 0.95      # [-]
+    k18 = 0.00001   # [/d]
+    k19 = 0.00014   # [/d]
+    k21 = 0.0000011
+
+    # Whole-blood calculation
+    k20 = 0.10      # [-]
+
+    # Exposure availability / release
+    # f_ing_available  = 1
+    # king_release     = 1
+    # f_inh_available  = 1
+    # kinh_release     = 1
+    # f_derm_available = 0.0005
+    # kderm_release    = 1
+
+    # ============================================================
+    # INDIVIDUAL INPUTS
+    # ============================================================
+
+    sex = 2             # [1 = male, 2 = female]
+    Age = 30            # Age at start of simulation [year]
+
+    # scaling with respect to reference BW
+    Delta_BWs3 = 1      # [-]
+    Delta_creat = 1     # [-]
+
+    # Measured whole-cord-blood Cd concentration
+    Ccord = 0           # [ug/L]
+
+    # ============================================================
+    # This could be a way to use BWTarget instead of a delta_BW
+    # ============================================================
+    # AgeRef = 30 # Reference age corresponding to target body weight
+    # BWTarget = 85 # Target body weight at reference age [kg]
+    # BWRef := piecewise(BW_male_lifetime(AgeRef*12), sex==1, BW_female_lifetime(AgeRef*12)) # Reference body weight based on average lifetime equation
+    # Delta_BWs3 := BWTarget / BWRef # Scaling factor to scale reference body weight to target weight.
+    # ============================================================
+    # ============================================================
+
+    # ============================================================
+    # TIME-VARYING PHYSIOLOGY
+    # ============================================================
+
+    year := time / 365 + Age
+    Delta_BW := piecewise( 1 + (Delta_BWs3 - 1) * (year * 365) / 1095, (year * 365) <= 1095, Delta_BWs3 )
+
+    # Body weight
+    BW_male := piecewise( BW_male_lifetime(year*12) * Delta_BW, year <= 79, 76 * Delta_BW )
+    BW_female := piecewise( BW_female_lifetime(year*12) * Delta_BW, year <= 79, 68 * Delta_BW )
+    wbw := piecewise(BW_male, sex == 1, BW_female )
+
+    # Hematocrit
+    hct_mid := 1.12815e-6 * year^3 - 1.72362e-4 * year^2 + 8.15264e-3 * year + 0.327363
+    hct := piecewise( 0.359, year <= 2, hct_mid, year < 18, 0.4248446 )
+
+    # Blood volume
+    vb_male := piecewise( (-0.027 * year + 0.077) * wbw, year < 1, (0.0761 / (1 + exp(-0.683 * year + 0.946))) * wbw )
+    vb_female := piecewise( (-0.0273 * year + 0.0771) * wbw, year < 1, (3.28e-5 * year^3 - 1.21e-3 * year^2 + 1.24e-2 * year + 3.86e-2) * wbw, year < 14.019723, 0.065 * wbw )
+    vb := piecewise( vb_male, sex == 1, vb_female )
+
+    vp := (1 - hct) * vb
+    vrbc := hct * vb
+
+    # Kidney
+    vk_male := piecewise( (0.0042 + (0.00767 - 0.0042) * exp(-0.206 * year)) * wbw, year <= 79, (0.0042 + 2.969074e-10) * wbw )
+    vk_female := piecewise( (0.0046 + (0.00709 - 0.0046) * exp(-0.221 * year)) * wbw, year <= 79, (0.0046 + 6.514063e-11) * wbw )
+    vk := piecewise( vk_male, sex == 1, vk_female )
+
+    # Lung
+    vlungs := piecewise( 0.0068 * wbw, sex == 1, 0.0070 * wbw )
+
+    # Intestinal tract
+    vint_male := piecewise( (-8.2562e-5 * year^2 + 1.3523e-3 * year + 1.293e-2) * wbw, year < 16, 0.014 * wbw )
+    vint_female := piecewise( (-7.421e-5 * year^2 + 1.276e-3 * year + 1.298e-2) * wbw, year < 14.453301, 0.0160 * wbw )
+    vintestine := piecewise( vint_male, sex == 1, vint_female )
+
+    # Liver
+    vl_male := piecewise( (0.0247 + (0.0409 - 0.0247) * exp(-0.218 * year)) * wbw, year <= 79, (0.0247 + 5.371498e-10) * wbw )
+    vl_female := piecewise( (0.0233 + (0.038 - 0.0233) * exp(-0.122 * year)) * wbw, year <= 79, (0.0233 + 9.58489e-7) * wbw )
+    vl := piecewise( vl_male, sex == 1, vl_female )
+
+    # Rest of body
+    vother := wbw - (vk + vb + vl + vintestine + vlungs)
+    wbw_f := vk + vb + vl + vintestine + vlungs + vother
+
+    # Inhalation physiology
+    Vtidal_male := piecewise( 0.0337 * year + 0.0407, year < 21, 0.75 )
+    Vtidal_female := 0.46 + (0.0392 - 0.46) * exp(-0.127 * year)
+    Vtidal := piecewise( Vtidal_male, sex == 1, Vtidal_female )
+
+    FqBreath := 12 + (38.9 - 12) * exp(-0.176 * year)
+    vds_male := piecewise( 0.0076 * year + 0.0101, year <= 18.4, 0.15 )
+    vds_female := 0.12 + (0.0107 - 0.12) * exp(-0.0986 * year)
+    vds := piecewise( vds_male, sex == 1, vds_female )
+
+    VInhalation := FqBreath * (Vtidal - vds) * 60 * 24
+
+    # Creatinine
+    ucr_base := 0.032 + 2.098e-2 * year + 9.104e-3 * year^2 - 4.550e-4 * year^3 + 7.578e-6 * year^4 - 4.232e-8 * year^5
+    ucr := piecewise( ucr_base * Delta_creat, year <= 70, 0.865756 * Delta_creat )
+
+    # Urine volume
+    Vurine := 0.0294 * wbw_f
+
+    # Sex-specific GI fraction
+    k5_active := piecewise( k5_h, sex == 1, k5_f )
+
+    # Age-dependent kidney elimination
+    k19x := piecewise( k19, year <= 30, k19 + k21 * (year - 30) )
+
+    # Age-dependent MT -> kidney fraction
+    k17_decline := k17 - (k17 / 3) * (year - 30) / 50
+    k17x := piecewise( k17, year <= 30, 0, k17_decline < 0, k17_decline )
+    k17b := 1 - k17x
+
+    # ============================================================
+    # CORD-BLOOD INITIALIZATION
+    # ============================================================
+    wbw0 := piecewise( 3.938425, sex == 1, 3.932403 )
+    vb0 := piecewise( 0.0770 * wbw0, sex == 1, 0.0771 * wbw0 )
+
+    Acord_total := Ccord * vb0
+
+    # ============================================================
+    # COMPARTMENTS
+    # ============================================================
+
+    # compartment Source;
+    compartment LungComp;
+    compartment GUT_LUMENComp;
+    compartment INTESTINE_TISSUEComp;
+    compartment PlasmaComp;
+    compartment RBCComp;
+    compartment MTComp;
+    compartment LiverComp;
+    compartment KidneyComp;
+    compartment OtherComp;
+    compartment FecesComp;
+    compartment UrineComp;
+    # compartment ExhComp;
+
+    # ============================================================
+    # SPECIES
+    # ============================================================
+
+    # Exposure source variables
+    # substanceOnly species AIR_inhal_ing in Source
+    # substanceOnly species CIG_inhal_ing in Source
+
+    # substanceOnly species DIET_ing in Source
+    # substanceOnly species SOIL_ing in Source
+    # substanceOnly species DUST_ing in Source
+    # substanceOnly species COSM_ing in Source
+
+    # substanceOnly species AIR_derm in Source
+    # substanceOnly species DUST_derm in Source
+    # substanceOnly species COSM_derm in Source
+
+    # Internal Cd states
+    substanceOnly species LUNG in LungComp
+    substanceOnly species GUT_LUMEN in GUT_LUMENComp
+    substanceOnly species INTESTINE_TISSUE in INTESTINE_TISSUEComp
+
+    substanceOnly species PLASMA in PlasmaComp
+    substanceOnly species RBC in RBCComp
+    substanceOnly species META in MTComp
+
+    substanceOnly species LIVER in LiverComp
+    substanceOnly species KIDNEY in KidneyComp
+    substanceOnly species OTHER in OtherComp
+
+    # Cumulative outputs
+    substanceOnly species FECES in FecesComp
+    substanceOnly species URINE in UrineComp
+    # substanceOnly species EXH in ExhComp
+
+    # ============================================================
+    # INITIAL CONDITIONS
+    # ============================================================
+
+    # AIR_inhal_ing = 0
+    # CIG_inhal_ing = 0
+    # DIET_ing = 0
+    # SOIL_ing = 0
+    # DUST_ing = 0
+    # COSM_ing = 0
+
+    # AIR_derm = 0
+    # DUST_derm = 0
+    # COSM_derm = 0
+
+    LUNG = 0
+    GUT_LUMEN = 0
+    INTESTINE_TISSUE = 0
+
+    PLASMA = 0
+    RBC = Acord_total
+    META = 0
+
+    LIVER = 0
+    KIDNEY = 0
+    OTHER = 0
+
+    FECES = 0
+    URINE = 0
+    # EXH = 0
+
+    # ============================================================
+    # ALGEBRAIC FLUXES
+    # ============================================================
+
+    uptakeTotal_Lung := k3 * LUNG
+    uptakeTotal_GI := k6 * INTESTINE_TISSUE
+    TOTAL_UPTAKE := uptakeTotal_Lung + uptakeTotal_GI
+
+    # Total flux to MT
+    UPTAKE_MT := piecewise(k7 * TOTAL_UPTAKE, k7 * TOTAL_UPTAKE <= k8, k8)
+    UPTAKE_PLASMA := TOTAL_UPTAKE - UPTAKE_MT
+
+    # Distribute the total MT flux between lung and intestinal uptake
+    uptakeMT_Lung := piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_Lung / TOTAL_UPTAKE)
+    uptakeMT_GI := piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_GI / TOTAL_UPTAKE)
+
+    # Remaining source-specific uptake goes to plasma
+    uptakePlasma_Lung := uptakeTotal_Lung - uptakeMT_Lung
+    uptakePlasma_GI := uptakeTotal_GI - uptakeMT_GI
+
+    # ============================================================
+    # EXPOSURE SOURCE DECAY
+    # ============================================================
+
+    # AIR_inhal_ing -> ;       kinh_release * AIR_inhal_ing
+    # CIG_inhal_ing -> ;       kinh_release * CIG_inhal_ing
+
+    # DIET_ing -> ;            king_release * DIET_ing
+    # SOIL_ing -> ;            king_release * SOIL_ing
+    # DUST_ing -> ;            king_release * DUST_ing
+    # COSM_ing -> ;            king_release * COSM_ing
+
+    # AIR_derm -> ;            kderm_release * AIR_derm
+    # DUST_derm -> ;           kderm_release * DUST_derm
+    # COSM_derm -> ;           kderm_release * COSM_derm
+
+    # ============================================================
+    # EXPOSURE INPUTS TO PBK MODEL
+    # ============================================================
+
+    # Ambient air -> lung
+    # AIR_inhal_ing -> LUNG;        f_inh_available * k2_dust * AIR_inhal_ing * VInhalation
+
+    # Ambient air -> GI tract via NP/TB deposition
+    # AIR_inhal_ing -> GUT_LUMEN;   f_inh_available * k1_dust * AIR_inhal_ing * VInhalation
+
+    # Ambient air -> exhaled
+    # AIR_inhal_ing -> EXH;         (1 - k1_dust - k2_dust) * f_inh_available * AIR_inhal_ing * VInhalation
+
+    # Cigarette Cd -> lung
+    # CIG_inhal_ing -> LUNG;        f_inh_available * kinh_release * k2_cig * CIG_inhal_ing
+
+    # Cigarette Cd -> GI tract
+    # CIG_inhal_ing -> GUT_LUMEN;   f_inh_available * kinh_release * k1_cig * CIG_inhal_ing
+
+    # Cigarette Cd -> exhaled
+    # CIG_inhal_ing -> EXH;     (1 - k1_cig - k2_cig) * f_inh_available * kinh_release * CIG_inhal_ing
+
+    # Ingested exposure sources -> GI tract
+    # DIET_ing -> GUT_LUMEN;    f_ing_available * king_release * DIET_ing * wbw_f
+    # SOIL_ing -> GUT_LUMEN;    f_ing_available * king_release * SOIL_ing
+    # DUST_ing -> GUT_LUMEN;    f_ing_available * king_release * DUST_ing
+    # COSM_ing -> GUT_LUMEN;    f_ing_available * king_release * COSM_ing
+
+    # Dermal sources -> plasma
+    # AIR_derm -> PLASMA;       f_derm_available * kderm_release * AIR_derm
+    # DUST_derm -> PLASMA;      f_derm_available * kderm_release * DUST_derm
+    # COSM_derm -> PLASMA;      f_derm_available * kderm_release * COSM_derm
+
+    # ============================================================
+    # RESPIRATORY / GI ABSORPTION
+    # ============================================================
+
+    # Lung -> GI
+    LUNG -> GUT_LUMEN;              k4 * LUNG
+
+    # Lung -> MT and plasma
+    LUNG -> META;                   uptakeMT_Lung
+    LUNG -> PLASMA;                 uptakePlasma_Lung
+
+    # GUT_LUMEN -> INTESTINE_TISSUE
+    GUT_LUMEN -> INTESTINE_TISSUE;  k5_active * kabs * GUT_LUMEN
+
+    # GUT_LUMEN -> feces
+    GUT_LUMEN -> FECES;             (1 - k5_active) * kabs * GUT_LUMEN
+
+    # INTESTINE_TISSUE -> MT and plasma
+    INTESTINE_TISSUE -> META;       uptakeMT_GI
+    INTESTINE_TISSUE -> PLASMA;     uptakePlasma_GI
+
+    # ============================================================
+    # PLASMA / RBC / MT / TISSUE TRANSFERS
+    # ============================================================
+
+    PLASMA -> OTHER;    k9 * PLASMA
+    OTHER -> PLASMA;    k10 * OTHER
+    PLASMA -> FECES;    k11 * PLASMA
+    PLASMA -> LIVER;    k12 * PLASMA
+    LIVER -> PLASMA;    k13 * LIVER
+    LIVER -> META;      k14 * LIVER
+    LIVER -> FECES;     k15 * LIVER
+    PLASMA -> RBC;      kx * PLASMA
+    RBC -> META;        k16 * RBC
+    META -> KIDNEY;     k_MT_out * k17x * META
+    META -> URINE;      k_MT_out * k17b * META
+    KIDNEY -> PLASMA;   k18 * KIDNEY
+    KIDNEY -> URINE;    k19x * KIDNEY
+
+    # ============================================================
+    # DERIVED OUTPUTS
+    # ============================================================
+
+    BLOOD := RBC + k20 * (PLASMA + META)
+    BLOOD_burden := BLOOD / vb
+
+    kidney_burden := KIDNEY / vk
+
+    ur := k_MT_out * k17b * META + k19x * KIDNEY
+    Conc_urine_cd := ur / Vurine
+    ucdcr := ur / ucr
+
+    total_internal := GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA
+
+    Excreted := FECES + URINE       # + EXH
 
 end

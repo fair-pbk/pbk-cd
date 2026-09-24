@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
-  <model metaid="Cd_mod_v3" id="Cd_mod_v3" substanceUnits="NanoGM" timeUnits="DAY" volumeUnits="L">
+  <model metaid="Cd_mod_v3" id="Cd_mod_v3" substanceUnits="MicroGM" timeUnits="DAY" volumeUnits="L" extentUnits="MicroGM">
     <annotation>
       <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
         <rdf:Description rdf:about="#Cd_mod_v3">
@@ -296,9 +296,9 @@
       </functionDefinition>
     </listOfFunctionDefinitions>
     <listOfUnitDefinitions>
-      <unitDefinition id="NanoGM">
+      <unitDefinition id="MicroGM">
         <listOfUnits>
-          <unit kind="gram" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
       <unitDefinition id="DAY">
@@ -311,19 +311,14 @@
           <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
-      <unitDefinition id="MicroGM">
+      <unitDefinition id="PER_DAY">
         <listOfUnits>
-          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
         </listOfUnits>
       </unitDefinition>
       <unitDefinition id="UNITLESS">
         <listOfUnits>
           <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="PER_DAY">
-        <listOfUnits>
-          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
         </listOfUnits>
       </unitDefinition>
       <unitDefinition id="MicroGM_PER_DAY">
@@ -332,9 +327,48 @@
           <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
         </listOfUnits>
       </unitDefinition>
+      <unitDefinition id="PER_YR">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="31557600"/>
+        </listOfUnits>
+      </unitDefinition>
       <unitDefinition id="YR">
         <listOfUnits>
           <unit kind="second" exponent="1" scale="0" multiplier="31557600"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="KiloGM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="PER_MIN">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="60"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="L_PER_DAY">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="GM_PER_DAY">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MicroGM_PER_L">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MicroGM_PER_GM">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+          <unit kind="gram" exponent="-1" scale="0" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
     </listOfUnitDefinitions>
@@ -481,6 +515,11 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00504"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
@@ -494,6 +533,11 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_06009"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
@@ -507,6 +551,11 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_06015"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
@@ -520,12 +569,41 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00502"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
       </species>
-      <species id="RBC" name="amount in red blood cells" compartment="RBCComp" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
-      <species id="META" name="amount in metallothionein" compartment="MTComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>
+      <species metaid="meta_RBC" id="RBC" name="amount in red blood cells" compartment="RBCComp" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_RBC">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="meta_META" id="META" name="amount in metallothionein" compartment="MTComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_META">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
       <species metaid="meta_LIVER" id="LIVER" name="amount in liver" compartment="LiverComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -535,6 +613,11 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00497"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
@@ -548,6 +631,11 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00498"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
@@ -561,6 +649,11 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00501"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
@@ -574,6 +667,11 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00275"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
@@ -587,16 +685,17 @@
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00274"/>
                 </rdf:Bag>
               </bqmodel:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22978"/>
+                </rdf:Bag>
+              </bqbiol:is>
             </rdf:Description>
           </rdf:RDF>
         </annotation>
       </species>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="k1_cig" name="Respiratory deposition to GI from smoke" value="0.1" units="UNITLESS" constant="true"/>
-      <parameter id="k1_dust" name="Respiratory deposition to GI from dust" value="0.7" units="UNITLESS" constant="true"/>
-      <parameter id="k2_cig" name="Respiratory deposition to lung from smoke" value="0.4" units="UNITLESS" constant="true"/>
-      <parameter id="k2_dust" name="Respiratory deposition to lung from dust" value="0.13" units="UNITLESS" constant="true"/>
       <parameter id="k3" name="First-order transfer rate constant from lung to total systemic uptake" value="0.05" units="PER_DAY" constant="true"/>
       <parameter id="k4" name="First-order transfer rate constant from lung to GI" value="0.005" units="PER_DAY" constant="true"/>
       <parameter metaid="meta_kabs" id="kabs" name="First-order rate constant (added explicitly for unit consistency)" value="1" units="PER_DAY" constant="true">
@@ -630,73 +729,409 @@
       <parameter id="k17" name="Fraction of MT-bound Cd removal to KIDNEY; remainder goes directly to urine." value="0.95" units="UNITLESS" constant="true"/>
       <parameter id="k18" name="kinetic constant rate KIDNEY -&gt; PLASMA" value="1e-05" units="PER_DAY" constant="true"/>
       <parameter id="k19" name="urine elimination rate constant" value="0.00014" units="PER_DAY" constant="true"/>
-      <parameter id="k21" name="Age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" constant="true"/>
+      <parameter id="k21" name="Age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" units="PER_YR" constant="true"/>
       <parameter id="k20" name="Fraction of PLASMA + META Cd amounts to calculated whole-blood Cd" value="0.1" units="UNITLESS" constant="true"/>
-      <parameter id="sex" value="2" constant="true"/>
+      <parameter id="sex" name="sex discrimination" value="2" units="UNITLESS" constant="true"/>
       <parameter id="Age" value="30" constant="true"/>
-      <parameter id="Delta_BWs3" value="1" constant="true"/>
-      <parameter id="Delta_creat" value="1" constant="true"/>
-      <parameter id="Ccord" value="0" constant="true"/>
-      <parameter id="year" units="YR" constant="false"/>
-      <parameter id="Delta_BW" constant="false"/>
-      <parameter id="BW_male" constant="false"/>
-      <parameter id="BW_female" constant="false"/>
-      <parameter id="wbw" constant="false"/>
-      <parameter id="hct_mid" constant="false"/>
-      <parameter id="hct" constant="false"/>
-      <parameter id="vb_male" constant="false"/>
-      <parameter id="vb_female" constant="false"/>
-      <parameter id="vb" constant="false"/>
-      <parameter id="vp" constant="false"/>
-      <parameter id="vrbc" constant="false"/>
-      <parameter id="vk_male" constant="false"/>
-      <parameter id="vk_female" constant="false"/>
-      <parameter id="vk" constant="false"/>
-      <parameter id="vlungs" constant="false"/>
-      <parameter id="vint_male" constant="false"/>
-      <parameter id="vint_female" constant="false"/>
-      <parameter id="vintestine" constant="false"/>
-      <parameter id="vl_male" constant="false"/>
-      <parameter id="vl_female" constant="false"/>
-      <parameter id="vl" constant="false"/>
-      <parameter id="vother" constant="false"/>
-      <parameter id="wbw_f" constant="false"/>
-      <parameter id="Vtidal_male" constant="false"/>
-      <parameter id="Vtidal_female" constant="false"/>
-      <parameter id="Vtidal" constant="false"/>
-      <parameter id="FqBreath" constant="false"/>
-      <parameter id="vds_male" constant="false"/>
-      <parameter id="vds_female" constant="false"/>
-      <parameter id="vds" constant="false"/>
-      <parameter id="VInhalation" constant="false"/>
-      <parameter id="ucr_base" constant="false"/>
-      <parameter id="ucr" constant="false"/>
-      <parameter id="Vurine" constant="false"/>
-      <parameter id="k5_active" constant="false"/>
-      <parameter id="k19x" constant="false"/>
-      <parameter id="k17_decline" constant="false"/>
-      <parameter id="k17x" constant="false"/>
-      <parameter id="k17b" constant="false"/>
-      <parameter id="wbw0" constant="false"/>
-      <parameter id="vb0" constant="false"/>
-      <parameter id="Acord_total" constant="false"/>
-      <parameter id="uptakeTotal_Lung" constant="false"/>
-      <parameter id="uptakeTotal_GI" constant="false"/>
-      <parameter id="TOTAL_UPTAKE" constant="false"/>
-      <parameter id="UPTAKE_MT" constant="false"/>
-      <parameter id="UPTAKE_PLASMA" constant="false"/>
-      <parameter id="uptakeMT_Lung" constant="false"/>
-      <parameter id="uptakeMT_GI" constant="false"/>
-      <parameter id="uptakePlasma_Lung" constant="false"/>
-      <parameter id="uptakePlasma_GI" constant="false"/>
-      <parameter id="BLOOD" constant="false"/>
-      <parameter id="BLOOD_burden" constant="false"/>
-      <parameter id="kidney_burden" constant="false"/>
-      <parameter id="ur" constant="false"/>
-      <parameter id="Conc_urine_cd" constant="false"/>
-      <parameter id="ucdcr" constant="false"/>
-      <parameter id="total_internal" constant="false"/>
-      <parameter id="Excreted" constant="false"/>
+      <parameter id="Delta_BWs3" name="Individual body-weight multiplier reached at age 3" value="1" units="UNITLESS" constant="true"/>
+      <parameter id="Delta_creat" name="Individual multiplicative adjustment to predicted urine creatinine output" value="1" units="UNITLESS" constant="true"/>
+      <parameter id="Ccord" name="Measured Cd concentration in cord whole blood used to initialize birth Cd amount" value="0" units="MicroGM_PER_DAY" constant="true"/>
+      <parameter metaid="meta_year" id="year" name="Age in years" units="YR" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_year">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00521"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="Delta_BW" name="Age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)" units="UNITLESS" constant="false"/>
+      <parameter metaid="meta_BW_male" id="BW_male" name="measured bodyweight for male participiant" units="KiloGM" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_BW_male">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_BW_female" id="BW_female" name="measured bodyweight for female participiant" units="KiloGM" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_BW_female">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_wbw" id="wbw" name="bodyweight for the selected sex and age" units="KiloGM" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_wbw">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="hct_mid" name="Predicted hematocrit in the age-dependent (ages 2–18 years)" units="UNITLESS" constant="false"/>
+      <parameter id="hct" name="age-specific hematocrit fraction" units="UNITLESS" constant="false"/>
+      <parameter metaid="meta_vb_male" id="vb_male" name="Male whole-blood volume or mass calculated from body weight" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vb_male">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00108"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vb_female" id="vb_female" name="Female whole-blood volume or mass calculated from body weight" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vb_female">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00108"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vb" id="vb" name="whole blood volume" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vb">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00108"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vp" id="vp" name="volume of plasma" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vp">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00103"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="vrbc" name="volume of red blood cells" units="L" constant="false"/>
+      <parameter metaid="meta_vk_male" id="vk_male" name="Male kidney volume" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vk_male">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00079"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vk_female" id="vk_female" name="Female kidney volume" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vk_female">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00079"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vk" id="vk" name="volume of kidney" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vk">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00079"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vlungs" id="vlungs" name="volume of lung" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vlungs">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00097"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vint_male" id="vint_male" name="volume of male intestine" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vint_male">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00069"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vint_female" id="vint_female" name="volume of female intestine" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vint_female">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00069"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vintestine" id="vintestine" name="volume of intestine" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vintestine">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00069"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vl_male" id="vl_male" name="volume of male liver" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vl_male">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00077"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vl_female" id="vl_female" name="volume of female liver" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vl_female">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00077"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vl" id="vl" name="volume of liver" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vl">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00077"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vother" id="vother" name="volume of rest body" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vother">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00105"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_wbw_f" id="wbw_f" name="Caculated body weight from organ volumes" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_wbw_f">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="Vtidal_male" name="Age-dependent tidal breathing volume in males (L/breath)" units="L" constant="false"/>
+      <parameter id="Vtidal_female" name="Age-dependent tidal breathing volume in females (L/breath)" units="L" constant="false"/>
+      <parameter id="Vtidal" name="Tidal breathing volume (L/breath)" units="L" constant="false"/>
+      <parameter id="FqBreath" name="Age-dependent breathing frequency (breaths/min)" units="PER_MIN" constant="false"/>
+      <parameter id="vds_male" name="Age-dependent respiratory dead-space volume in males (L/breath)" units="L" constant="false"/>
+      <parameter id="vds_female" name="Age-dependent respiratory dead-space volume in females (L/breath)" units="L" constant="false"/>
+      <parameter id="vds" name="Respiratory dead-space volume (L/breath)" units="L" constant="false"/>
+      <parameter id="VInhalation" name="Daily inhaled air volume" units="L_PER_DAY" constant="false"/>
+      <parameter id="ucr_base" name="Reference creatinine output before Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
+      <parameter id="ucr" name="Age-dependent creatinine output after Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
+      <parameter id="Vurine" name="predicted urine volume" units="L_PER_DAY" constant="false"/>
+      <parameter id="k5_active" name="sex-specific gut:intestine fraction" units="UNITLESS" constant="false"/>
+      <parameter id="k19x" name="age-adjusted kidney:urine rate" units="PER_DAY" constant="false"/>
+      <parameter id="k17_decline" name="age-related changes of k17" units="UNITLESS" constant="false"/>
+      <parameter id="k17x" name="age-adjusted MT removal fraction to kidney" units="UNITLESS" constant="false"/>
+      <parameter id="k17b" name="MT removal fraction to urine" units="UNITLESS" constant="false"/>
+      <parameter metaid="meta_wbw0" id="wbw0" name="bodyweight at birth" units="KiloGM" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_wbw0">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vb0" id="vb0" name="volume of whole blood at birth" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vb0">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00108"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="Acord_total" name="initial Cd amound from measured cord whole blood" units="MicroGM" constant="false"/>
+      <parameter id="uptakeTotal_Lung" name="Systemic Cd uptake flux from lung" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakeTotal_GI" name="Systemic Cd uptake flux from intestine" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="TOTAL_UPTAKE" name="Sum of lung and GI systemic uptake fluxes" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="UPTAKE_MT" name="Remaining systemic Cd uptake flux to MT" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="UPTAKE_PLASMA" name="Remaining systemic Cd uptake flux to plasma" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakeMT_Lung" name="Lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakeMT_GI" name="GI contribution to MT uptake flux, allocated in proportion to GI share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakePlasma_Lung" name="Lung contribution to plasma uptake flux" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakePlasma_GI" name="GI contribution to plasma uptake flux" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter metaid="meta_BLOOD" id="BLOOD" name="amount in whole blood" units="MicroGM" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_BLOOD">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00623"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_BLOOD_burden" id="BLOOD_burden" name="concentration in whole blood" units="MicroGM_PER_L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_BLOOD_burden">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00301"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_kidney_burden" id="kidney_burden" name="concentration in kidney" units="MicroGM_PER_L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_kidney_burden">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00541"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_ur" id="ur" name="urinary clearance rate" units="MicroGM_PER_DAY" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_ur">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00232"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_Conc_urine_cd" id="Conc_urine_cd" name="concentration in urine" units="MicroGM_PER_L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_Conc_urine_cd">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00302"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_ucdcr" id="ucdcr" name="Urinary concentration normalized to creatinine (ug/g creatine)" units="MicroGM_PER_GM" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_ucdcr">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00302"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter id="total_internal" name="Total internal amount" units="MicroGM" constant="false"/>
+      <parameter id="Excreted" name="Total amount excreted" units="MicroGM" constant="false"/>
     </listOfParameters>
     <listOfInitialAssignments>
       <initialAssignment symbol="RBC">
