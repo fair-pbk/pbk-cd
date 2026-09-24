@@ -276,7 +276,14 @@ model Cd_mod_v3()
     TOTAL_UPTAKE := uptakeTotal_Lung + uptakeTotal_GI
 
     # Total flux to MT
-    UPTAKE_MT := piecewise(k7 * TOTAL_UPTAKE, k7 * TOTAL_UPTAKE <= k8, k8)
+    # Original hard cap: UPTAKE_MT = min(k7 * TOTAL_UPTAKE, k8)
+    # Replaced the discontinuous piecewise function with a smooth approximation
+    # to improve numerical stability when the uptake flux crosses the cap.
+    # UPTAKE_MT := piecewise(k7 * TOTAL_UPTAKE, k7 * TOTAL_UPTAKE <= k8, k8)
+    # The smoothing scale controls the width of the transition around k8.
+    UPTAKE_MT_SMOOTH := 0.01 * k8
+    # Below the cap this approaches k7 * TOTAL_UPTAKE; above it, k8.
+    UPTAKE_MT := k7 * TOTAL_UPTAKE + (k8 - k7 * TOTAL_UPTAKE) / (1 + exp((k8 - k7 * TOTAL_UPTAKE) / UPTAKE_MT_SMOOTH))
     UPTAKE_PLASMA := TOTAL_UPTAKE - UPTAKE_MT
 
     # Distribute the total MT flux between lung and intestinal uptake

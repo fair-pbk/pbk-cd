@@ -1046,6 +1046,7 @@
       <parameter id="uptakeTotal_Lung" name="Systemic Cd uptake flux from lung" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeTotal_GI" name="Systemic Cd uptake flux from intestine" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="TOTAL_UPTAKE" name="Sum of lung and GI systemic uptake fluxes" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="UPTAKE_MT_SMOOTH" constant="false"/>
       <parameter id="UPTAKE_MT" name="Remaining systemic Cd uptake flux to MT" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="UPTAKE_PLASMA" name="Remaining systemic Cd uptake flux to plasma" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeMT_Lung" name="Lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
@@ -2324,29 +2325,57 @@
           </apply>
         </math>
       </assignmentRule>
+      <assignmentRule variable="UPTAKE_MT_SMOOTH">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <cn> 0.01 </cn>
+            <ci> k8 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
       <assignmentRule variable="UPTAKE_MT">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
+          <apply>
+            <plus/>
+            <apply>
+              <times/>
+              <ci> k7 </ci>
+              <ci> TOTAL_UPTAKE </ci>
+            </apply>
+            <apply>
+              <divide/>
               <apply>
-                <times/>
-                <ci> k7 </ci>
-                <ci> TOTAL_UPTAKE </ci>
-              </apply>
-              <apply>
-                <leq/>
+                <minus/>
+                <ci> k8 </ci>
                 <apply>
                   <times/>
                   <ci> k7 </ci>
                   <ci> TOTAL_UPTAKE </ci>
                 </apply>
-                <ci> k8 </ci>
               </apply>
-            </piece>
-            <otherwise>
-              <ci> k8 </ci>
-            </otherwise>
-          </piecewise>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <apply>
+                  <exp/>
+                  <apply>
+                    <divide/>
+                    <apply>
+                      <minus/>
+                      <ci> k8 </ci>
+                      <apply>
+                        <times/>
+                        <ci> k7 </ci>
+                        <ci> TOTAL_UPTAKE </ci>
+                      </apply>
+                    </apply>
+                    <ci> UPTAKE_MT_SMOOTH </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="UPTAKE_PLASMA">
