@@ -29,3 +29,9 @@ python ./scripts/run_validation.py
 ```
 
 By default, this script reuses existing outputs from previous runs. To override and recalculate outputs that already exist, use the `-f` option.
+
+To run the run simulation scenarios for a specific scenario config (e.g. thos defined in [validation/scenarios/R.yaml](validation/scenarios/R.yaml)), type:
+
+```
+python ./scripts/run_validation.py -c validation/scenarios/R.yaml
+```

@@ -15,6 +15,17 @@ The `reference_scenarios.yaml` file lists the R and mrgsolve reference scripts a
 - **`mrgsolve.yaml`**: Defines the corresponding oral single-dose, repeated-dose, and lifetime scenarios for comparison with mrgsolve.
 - **`lifetime_comparison.yaml`**: Compares lifetime and non-lifetime model variants under constant and body-weight-adjusted repeated dosing.
 
+### R validation (`R.yaml`)
+
+The R validation scenarios compare the SBML model with both the original and revised R implementations. All individuals are female (`sex = 2`); `BW` denotes the model-calculated body weight.
+
+| Scenario | Duration | Dosing | Individual |
+|---|---:|---|---|
+| `oral_single` | 40 days | Single oral bolus of 1000 ug at day 0 | Age 30 years; no BW adjustment |
+| `oral_repeated` | 40 days | Oral bolus of 100 ug every day from day 0 | Age 30 years; no BW adjustment |
+| `oral_repeated_lifetime` | 10 years (3650 days) | Oral bolus of 10 ug/kg BW every day from day 0 | Age 0 years; daily BW-adjusted dose |
+| `oral_repeated_pouillot` | 80 years (29200 days) | Oral bolus of 0.2 ug/kg BW every day from day 0 through day 18250 | Age 0 years; daily BW-adjusted dose |
+
 ## Running simulations
 
 From the repository root, run all validation simulations with:
