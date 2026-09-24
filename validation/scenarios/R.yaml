@@ -32,7 +32,7 @@ scenarios:
         time: 0
     parameters:
       Age: 30
-      sex: 2
+      sex: 1
       # AgeRef: 30
       # BWRef: 85
     outputs:
@@ -123,7 +123,7 @@ scenarios:
         interval: 1
     parameters:
       Age: 30
-      sex: 2
+      sex: 1
       # AgeRef: 30
       # BWRef: 85
     outputs:
@@ -215,7 +215,7 @@ scenarios:
         interval: 1
     parameters:
       Age: 0
-      sex: 2
+      sex: 1
       # AgeRef: 30
       # BWRef: 85
     outputs:
@@ -308,7 +308,7 @@ scenarios:
         until: 18250
     parameters:
       Age: 0
-      sex: 2
+      sex: 1
       # AgeRef: 30
       # BWRef: 85
     outputs:
