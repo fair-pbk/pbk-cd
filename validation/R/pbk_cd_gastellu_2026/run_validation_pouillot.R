@@ -81,12 +81,12 @@ params_all <- copy(df1)[
 
 # PBK input 2: Influx event table
 
-age_end <- 80*365 # 100yo.
+dose_end <- 50*365 # age when dose stops.
 event_res <- df1[, .(id, age_piv_jour, DIET_ing)]
 event_res <- melt(event_res, id.vars = c("id", "age_piv_jour"), 
                   variable.name = "SR_influx_name", value.name = "SR_influx_val")
 event_res[, ii := 1]
-event_res[, next_piv := shift(age_piv_jour, type = "lead", fill = age_end)-1, 
+event_res[, next_piv := shift(age_piv_jour, type = "lead", fill = dose_end)-1, 
           by = .(id, SR_influx_name)]
 event_res[, addl := next_piv - age_piv_jour]
 event_res[, next_piv := NULL]

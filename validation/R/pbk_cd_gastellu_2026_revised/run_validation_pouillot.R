@@ -99,7 +99,7 @@ inits <- c(
 
 ev_lifetime <- data.frame(
   id = 1,
-  time = seq(simulation_start,simulation_end,dose_stepsize),
+  time = seq(simulation_start,dose_end,dose_stepsize),
   evid = 1,
   cmt = "GUT"
 )

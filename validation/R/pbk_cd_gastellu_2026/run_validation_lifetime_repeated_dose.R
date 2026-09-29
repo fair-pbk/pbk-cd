@@ -18,7 +18,7 @@ results_path <- "validation/outputs/reference/R/oral_repeated_lifetime"
 
 df1 <- setDT(data.frame(id=1))
 df1[, sex := 1] # Male
-df1[, Delta_BWs3 := 1.1] # Close to the mean Bw trajectory.
+df1[, Delta_BWs3 := 1] # Close to the mean Bw trajectory.
 df1[,Delta_creat := 1] # Mean value.
 df1[,k2_cig:= 0.6] # coeff smoke -> alveola. Not used in this scenario.
 df1[,k1_dust := 0.9] # Not used in this scenario.

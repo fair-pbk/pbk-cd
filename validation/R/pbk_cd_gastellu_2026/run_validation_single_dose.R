@@ -20,7 +20,7 @@ ndays <- 40
 
 df1 <- setDT(data.frame(id=1))
 df1[, sex := 1] # Male
-df1[, Delta_BWs3 := 1.1]  # Close to the mean Bw trajectory
+df1[, Delta_BWs3 := 1]  # Close to the mean Bw trajectory
 df1[,Delta_creat := 1]    # Mean value
 df1[,k2_cig:= 0.6]        # coeff smoke -> alveola. Not used in this scenario.
 df1[,k1_dust := 0.9]      # Not used in this scenario.
@@ -59,8 +59,8 @@ df1 %>%
 age_piv_jour <- c(1,30*365)
 df1 <- df1[, age_piv_jour:= floor(rep(age_piv_jour,.N / 2))]
 
-# Food exposure (ug/d)
-df1[,GUT := fifelse(age_piv_jour ==1,0,1000)]
+# Food exposure (ug/kg bw/d)
+df1[,DIET_ing := fifelse(age_piv_jour ==1,0,1000)]
 
 # PBK input: Parameters table
 params_all <- copy(df1)[
@@ -80,8 +80,8 @@ params_all <- copy(df1)[
 ]
 
 # PBK input 2: Influx event table
-age_end <- 30*365+ndays # 30yo + 1 day.
-event_res <- df1[, .(id, age_piv_jour,GUT)]
+age_end <- 30*365+ndays # 30yo + 40 day.
+event_res <- df1[, .(id, age_piv_jour,DIET_ing)]
 event_res <- melt(event_res, id.vars = c("id", "age_piv_jour"), 
                   variable.name = "SR_influx_name", value.name = "SR_influx_val")
 event_res[, ii := 1]

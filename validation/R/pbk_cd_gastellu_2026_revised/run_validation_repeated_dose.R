@@ -15,18 +15,17 @@ model_id <- "pbk_cd_gastellu_2026_revised"
 results_path <- "validation/outputs/reference/R/oral_repeated"
 
 # Simulation setup
-
 sex_i <- 1
 Delta_BWs3 <- 1
 Delta_creat <- 1
 
-ndays <- 40 # days
-age_start <- 30 # years
-age_start_days <- age_start * 365
-times <- seq(age_start_days, age_start_days + ndays, by = 1)
+ndays <- 40
+simulation_start <- 30*365 # days
+simulation_end <- simulation_start+ndays # days
+observation_times <- seq(simulation_start, simulation_end, by = 1)
 
 # Pre-compute physiology covariates
-phys_cov <- do.call(rbind, lapply(times, function(t) {
+phys_cov <- do.call(rbind, lapply(observation_times, function(t) {
   
   p <- phys(
     time = t,
@@ -95,14 +94,11 @@ inits <- c(
   EXH = 0
 )
 
-
-
 ev_repeated <- data.frame(
   id = 1,
   time = seq(0, ndays, by = 1),
   evid = 1,
-  cmt = "GUT",
-  amt = 100
+  cmt = "GUT"
 )
 
 # Add observation rows separately so each dose time is also sampled.
@@ -114,19 +110,18 @@ ev_observed <- data.frame(
   amt = 0
 )
 
-ev_repeated <- bind_rows(ev_repeated, ev_observed)
-
-# Add physiology covariates to every event and observation row
-phys_cov$time <- phys_cov$time - age_start_days
-ev_repeated <- ev_repeated %>%
+phys_cov$time <- observation_times-simulation_start
+event_res <- ev_repeated %>%
+  bind_rows(ev_observed) %>%
   left_join(phys_cov, by = c("id", "time")) %>%
+  mutate(amt=100*wbw_f) %>%
   arrange(id, time, desc(evid))
 
 # Solve
 sim_output <- rxSolve(
   PBK1,
   params = theta,
-  events = ev_repeated,
+  events = event_res,
   inits = inits
 ) %>%
   dplyr::filter(time %in% seq(0,ndays, 1)) 

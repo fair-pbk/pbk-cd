@@ -29,6 +29,7 @@ scenarios:
       - type: single_bolus
         target: AGut
         amount: 1000
+        adjustment: BW
         time: 0
     parameters:
       Age: 30
@@ -119,6 +120,7 @@ scenarios:
       - type: repeated_bolus
         target: AGut
         amount: 100
+        adjustment: BW
         time: 0
         interval: 1
     parameters:

@@ -17,10 +17,11 @@ model_id <- "pbk_cd_gastellu_2026"
 results_path <- "validation/outputs/reference/R/oral_repeated"
 
 ndays <- 40
+age_start <- 30*365 # days
 
 df1 <- setDT(data.frame(id=1))
 df1[, sex := 1] # Male
-df1[, Delta_BWs3 := 1.1]  # Close to the mean Bw trajectory
+df1[, Delta_BWs3 := 1]  # Close to the mean Bw trajectory
 df1[,Delta_creat := 1]    # Mean value
 df1[,k2_cig:= 0.6]        # coeff smoke -> alveola. Not used in this scenario.
 df1[,k1_dust := 0.9]      # Not used in this scenario.
@@ -50,10 +51,10 @@ df1[,k20 := 0.1]
 # Create daily entries
 df1 <- df1[rep(1, ndays+1), ]  # repeat for ndays
 df1[, day := 0:ndays]
-df1[, age_piv_jour := 30*365 + day]
+df1[, age_piv_jour := age_start + day]
 
 # Food exposure (ug/d) - daily dose
-df1[, GUT := 100]
+df1[, DIET_ing := 100]
 
 # PBK input: Parameters table
 params_all <- copy(df1)[
@@ -74,7 +75,7 @@ params_all <- copy(df1)[
 
 # PBK input 2: Influx event table
 age_end <- ndays+1
-event_res <- df1[, .(id, day, GUT)]
+event_res <- df1[, .(id, day, DIET_ing)]
 event_res <- melt(event_res, id.vars = c("id", "day"), 
                   variable.name = "SR_influx_name", value.name = "SR_influx_val")
 event_res[, ii := 1]
@@ -85,10 +86,11 @@ event_res[, next_piv := NULL]
 setnames(event_res, old = c("day", "SR_influx_name", "SR_influx_val"), 
          new = c("time", "cmt", "amt"))
 event_res <- event_res[amt != 0]
+event_res$time <- event_res$time + age_start
 setorder(event_res, id, time)
 
 # Observed times
-time_val <- 0:ndays
+time_val <- seq(age_start,age_start+ndays,1)
 time_obl <- seq(0,40000,length.out=250)
 time_vect <- unique(c(time_val,time_obl))
 ts_vector <- time_vect[order(time_vect)]
@@ -101,7 +103,7 @@ event_res %>%
 # Solve
 sim_output <- rxSolve(object=PBK1, params=params_all, events=event_res) %>%
   dplyr::filter(time %in% time_val) %>%
-  dplyr::mutate(time=time_val)
+  dplyr::mutate(time=0:40)
 
 ## Create results path if not exists
 if (!dir.exists(file.path(results_path))) {
