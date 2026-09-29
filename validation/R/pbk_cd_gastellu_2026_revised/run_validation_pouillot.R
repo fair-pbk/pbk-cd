@@ -22,7 +22,7 @@ Delta_creat <- 1
 
 simulation_start <- 0*365 # days
 simulation_end <- 80*365 # days
-dose_end <- 50*365
+dose_end <- 80*365
 dose_stepsize <- 10
 observation_times <- seq(simulation_start, simulation_end, by = 1)
 
