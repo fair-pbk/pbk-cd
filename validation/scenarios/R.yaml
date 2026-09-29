@@ -34,8 +34,8 @@ scenarios:
     parameters:
       Age: 30
       sex: 1
-      # AgeRef: 30
-      # BWRef: 85
+      AgeRef: 30
+      BWRef: 85
     outputs:
       - id: BW
         label: BW
@@ -126,8 +126,8 @@ scenarios:
     parameters:
       Age: 30
       sex: 1
-      # AgeRef: 30
-      # BWRef: 85
+      AgeRef: 30
+      BWRef: 85
     outputs:
       - id: BW
         label: BW
@@ -218,8 +218,8 @@ scenarios:
     parameters:
       Age: 0
       sex: 1
-      # AgeRef: 30
-      # BWRef: 85
+      AgeRef: 30
+      BWRef: 85
     outputs:
       - id: BW
         label: BW
@@ -307,12 +307,11 @@ scenarios:
         adjustment: BW
         time: 0
         interval: 1
-        #until: 18250
     parameters:
       Age: 0
       sex: 1
-      # AgeRef: 30
-      # BWRef: 85
+      AgeRef: 30
+      BWRef: 85
     outputs:
       - id: BW
         label: BW

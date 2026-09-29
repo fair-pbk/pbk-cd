@@ -732,8 +732,11 @@
       <parameter id="k21" name="Age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" units="PER_YR" constant="true"/>
       <parameter id="k20" name="Fraction of PLASMA + META Cd amounts to calculated whole-blood Cd" value="0.1" units="UNITLESS" constant="true"/>
       <parameter id="sex" name="sex discrimination" value="2" units="UNITLESS" constant="true"/>
-      <parameter id="Age" value="30" constant="true"/>
-      <parameter id="Delta_BWs3" name="Individual body-weight multiplier reached at age 3" value="1" units="UNITLESS" constant="true"/>
+      <parameter id="Age" name="Age of the individual at start of simulation" value="30" units="YR" constant="true"/>
+      <parameter id="AgeRef" name="Reference age used for scaling of nominal body weight to reference body weight" value="30" units="YR" constant="true"/>
+      <parameter id="BWRef" name="Body weight of individual at reference age" value="85" units="KiloGM" constant="true"/>
+      <parameter id="BWNominal" constant="false"/>
+      <parameter id="Delta_BWs3" name="Individual body-weight multiplier reached at reference age" units="UNITLESS" constant="false"/>
       <parameter id="Delta_creat" name="Individual multiplicative adjustment to predicted urine creatinine output" value="1" units="UNITLESS" constant="true"/>
       <parameter id="Ccord" name="Measured Cd concentration in cord whole blood used to initialize birth Cd amount" value="0" units="MicroGM_PER_DAY" constant="true"/>
       <parameter metaid="meta_year" id="year" name="Age in years" units="YR" constant="false">
@@ -1142,6 +1145,46 @@
       </initialAssignment>
     </listOfInitialAssignments>
     <listOfRules>
+      <assignmentRule variable="BWNominal">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <ci> BW_male_lifetime </ci>
+                <apply>
+                  <times/>
+                  <ci> AgeRef </ci>
+                  <cn type="integer"> 12 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <ci> BW_female_lifetime </ci>
+                <apply>
+                  <times/>
+                  <ci> AgeRef </ci>
+                  <cn type="integer"> 12 </cn>
+                </apply>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Delta_BWs3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> BWRef </ci>
+            <ci> BWNominal </ci>
+          </apply>
+        </math>
+      </assignmentRule>
       <assignmentRule variable="year">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>

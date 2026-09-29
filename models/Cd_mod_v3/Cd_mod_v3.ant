@@ -78,26 +78,18 @@ model Cd_mod_v3()
     # ============================================================
     # INDIVIDUAL INPUTS
     # ============================================================
-
     sex = 2             # [1 = male, 2 = female]
     Age = 30            # Age at start of simulation [year]
 
-    # scaling with respect to reference BW
-    Delta_BWs3 = 1      # [-]
+    # scaling with respect to nominal BW
+    AgeRef = 30 # Reference age corresponding to target body weight
+    BWRef = 85 # Target body weight at reference age [kg]
+    BWNominal := piecewise(BW_male_lifetime(AgeRef*12), sex==1, BW_female_lifetime(AgeRef*12)) # Nominal body weight at reference age based on nominal lifetime equation
+    Delta_BWs3 := BWRef / BWNominal # Scaling factor to scale nopminal body weight to reference (=target) weight.
     Delta_creat = 1     # [-]
 
     # Measured whole-cord-blood Cd concentration
     Ccord = 0           # [ug/L]
-
-    # ============================================================
-    # This could be a way to use BWTarget instead of a delta_BW
-    # ============================================================
-    # AgeRef = 30 # Reference age corresponding to target body weight
-    # BWTarget = 85 # Target body weight at reference age [kg]
-    # BWRef := piecewise(BW_male_lifetime(AgeRef*12), sex==1, BW_female_lifetime(AgeRef*12)) # Reference body weight based on average lifetime equation
-    # Delta_BWs3 := BWTarget / BWRef # Scaling factor to scale reference body weight to target weight.
-    # ============================================================
-    # ============================================================
 
     # ============================================================
     # TIME-VARYING PHYSIOLOGY
