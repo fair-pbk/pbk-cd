@@ -342,20 +342,15 @@
           <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
-      <unitDefinition id="PER_MIN">
+      <unitDefinition id="GM_PER_DAY">
         <listOfUnits>
-          <unit kind="second" exponent="-1" scale="0" multiplier="60"/>
+          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
         </listOfUnits>
       </unitDefinition>
       <unitDefinition id="L_PER_DAY">
         <listOfUnits>
           <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
-          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="GM_PER_DAY">
-        <listOfUnits>
-          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
           <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
         </listOfUnits>
       </unitDefinition>
@@ -1003,14 +998,6 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="Vtidal_male" name="Age-dependent tidal breathing volume in males (L/breath)" units="L" constant="false"/>
-      <parameter id="Vtidal_female" name="Age-dependent tidal breathing volume in females (L/breath)" units="L" constant="false"/>
-      <parameter id="Vtidal" name="Tidal breathing volume (L/breath)" units="L" constant="false"/>
-      <parameter id="FqBreath" name="Age-dependent breathing frequency (breaths/min)" units="PER_MIN" constant="false"/>
-      <parameter id="vds_male" name="Age-dependent respiratory dead-space volume in males (L/breath)" units="L" constant="false"/>
-      <parameter id="vds_female" name="Age-dependent respiratory dead-space volume in females (L/breath)" units="L" constant="false"/>
-      <parameter id="vds" name="Respiratory dead-space volume (L/breath)" units="L" constant="false"/>
-      <parameter id="VInhalation" name="Daily inhaled air volume" units="L_PER_DAY" constant="false"/>
       <parameter id="ucr_base" name="Reference creatinine output before Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
       <parameter id="ucr" name="Age-dependent creatinine output after Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
       <parameter id="Vurine" name="predicted urine volume" units="L_PER_DAY" constant="false"/>
@@ -1919,177 +1906,6 @@
             <ci> vintestine </ci>
             <ci> vlungs </ci>
             <ci> vother </ci>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Vtidal_male">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <apply>
-                <plus/>
-                <apply>
-                  <times/>
-                  <cn> 0.0337 </cn>
-                  <ci> year </ci>
-                </apply>
-                <cn> 0.0407 </cn>
-              </apply>
-              <apply>
-                <lt/>
-                <ci> year </ci>
-                <cn type="integer"> 21 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <cn> 0.75 </cn>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Vtidal_female">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <cn> 0.46 </cn>
-            <apply>
-              <times/>
-              <apply>
-                <minus/>
-                <cn> 0.0392 </cn>
-                <cn> 0.46 </cn>
-              </apply>
-              <apply>
-                <exp/>
-                <apply>
-                  <times/>
-                  <cn> -0.127 </cn>
-                  <ci> year </ci>
-                </apply>
-              </apply>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="Vtidal">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <ci> Vtidal_male </ci>
-              <apply>
-                <eq/>
-                <ci> sex </ci>
-                <cn type="integer"> 1 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <ci> Vtidal_female </ci>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="FqBreath">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <cn type="integer"> 12 </cn>
-            <apply>
-              <times/>
-              <apply>
-                <minus/>
-                <cn> 38.9 </cn>
-                <cn type="integer"> 12 </cn>
-              </apply>
-              <apply>
-                <exp/>
-                <apply>
-                  <times/>
-                  <cn> -0.176 </cn>
-                  <ci> year </ci>
-                </apply>
-              </apply>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="vds_male">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <apply>
-                <plus/>
-                <apply>
-                  <times/>
-                  <cn> 0.0076 </cn>
-                  <ci> year </ci>
-                </apply>
-                <cn> 0.0101 </cn>
-              </apply>
-              <apply>
-                <leq/>
-                <ci> year </ci>
-                <cn> 18.4 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <cn> 0.15 </cn>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="vds_female">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <cn> 0.12 </cn>
-            <apply>
-              <times/>
-              <apply>
-                <minus/>
-                <cn> 0.0107 </cn>
-                <cn> 0.12 </cn>
-              </apply>
-              <apply>
-                <exp/>
-                <apply>
-                  <times/>
-                  <cn> -0.0986 </cn>
-                  <ci> year </ci>
-                </apply>
-              </apply>
-            </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="vds">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <ci> vds_male </ci>
-              <apply>
-                <eq/>
-                <ci> sex </ci>
-                <cn type="integer"> 1 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <ci> vds_female </ci>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="VInhalation">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <ci> FqBreath </ci>
-            <apply>
-              <minus/>
-              <ci> Vtidal </ci>
-              <ci> vds </ci>
-            </apply>
-            <cn type="integer"> 60 </cn>
-            <cn type="integer"> 24 </cn>
           </apply>
         </math>
       </assignmentRule>

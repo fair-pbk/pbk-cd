@@ -82,8 +82,8 @@ model Cd_mod_v3()
     Age = 30            # Age at start of simulation [year]
 
     # scaling with respect to nominal BW
-    AgeRef = 30 # Reference age corresponding to target body weight
-    BWRef = 85 # Target body weight at reference age [kg]
+    AgeRef = 30         # Reference age corresponding to target body weight
+    BWRef = 85          # Target body weight at reference age [kg]
     BWNominal := piecewise(BW_male_lifetime(AgeRef*12), sex==1, BW_female_lifetime(AgeRef*12)) # Nominal body weight at reference age based on nominal lifetime equation
     Delta_BWs3 := BWRef / BWNominal # Scaling factor to scale nopminal body weight to reference (=target) weight.
     Delta_creat = 1     # [-]
@@ -115,39 +115,39 @@ model Cd_mod_v3()
     vp := (1 - hct) * vb
     vrbc := hct * vb
 
-    # Kidney
+    # Kidney volume
     vk_male := piecewise( (0.0042 + (0.00767 - 0.0042) * exp(-0.206 * year)) * wbw, year <= 79, (0.0042 + 2.969074e-10) * wbw )
     vk_female := piecewise( (0.0046 + (0.00709 - 0.0046) * exp(-0.221 * year)) * wbw, year <= 79, (0.0046 + 6.514063e-11) * wbw )
     vk := piecewise( vk_male, sex == 1, vk_female )
 
-    # Lung
+    # Lung volume
     vlungs := piecewise( 0.0068 * wbw, sex == 1, 0.0070 * wbw )
 
-    # Intestinal tract
+    # Intestinal tract volume
     vint_male := piecewise( (-8.2562e-5 * year^2 + 1.3523e-3 * year + 1.293e-2) * wbw, year < 16, 0.014 * wbw )
     vint_female := piecewise( (-7.421e-5 * year^2 + 1.276e-3 * year + 1.298e-2) * wbw, year < 14.453301, 0.0160 * wbw )
     vintestine := piecewise( vint_male, sex == 1, vint_female )
 
-    # Liver
+    # Liver volume
     vl_male := piecewise( (0.0247 + (0.0409 - 0.0247) * exp(-0.218 * year)) * wbw, year <= 79, (0.0247 + 5.371498e-10) * wbw )
     vl_female := piecewise( (0.0233 + (0.038 - 0.0233) * exp(-0.122 * year)) * wbw, year <= 79, (0.0233 + 9.58489e-7) * wbw )
     vl := piecewise( vl_male, sex == 1, vl_female )
 
-    # Rest of body
+    # Rest of body volume
     vother := wbw - (vk + vb + vl + vintestine + vlungs)
     wbw_f := vk + vb + vl + vintestine + vlungs + vother
 
     # Inhalation physiology
-    Vtidal_male := piecewise( 0.0337 * year + 0.0407, year < 21, 0.75 )
-    Vtidal_female := 0.46 + (0.0392 - 0.46) * exp(-0.127 * year)
-    Vtidal := piecewise( Vtidal_male, sex == 1, Vtidal_female )
+    #Vtidal_male := piecewise( 0.0337 * year + 0.0407, year < 21, 0.75 )
+    #Vtidal_female := 0.46 + (0.0392 - 0.46) * exp(-0.127 * year)
+    #Vtidal := piecewise( Vtidal_male, sex == 1, Vtidal_female )
 
-    FqBreath := 12 + (38.9 - 12) * exp(-0.176 * year)
-    vds_male := piecewise( 0.0076 * year + 0.0101, year <= 18.4, 0.15 )
-    vds_female := 0.12 + (0.0107 - 0.12) * exp(-0.0986 * year)
-    vds := piecewise( vds_male, sex == 1, vds_female )
+    #FqBreath := 12 + (38.9 - 12) * exp(-0.176 * year)
+    #vds_male := piecewise( 0.0076 * year + 0.0101, year <= 18.4, 0.15 )
+    #vds_female := 0.12 + (0.0107 - 0.12) * exp(-0.0986 * year)
+    #vds := piecewise( vds_male, sex == 1, vds_female )
 
-    VInhalation := FqBreath * (Vtidal - vds) * 60 * 24
+    #VInhalation := FqBreath * (Vtidal - vds) * 60 * 24
 
     # Creatinine
     ucr_base := 0.032 + 2.098e-2 * year + 9.104e-3 * year^2 - 4.550e-4 * year^3 + 7.578e-6 * year^4 - 4.232e-8 * year^5
