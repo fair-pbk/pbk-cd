@@ -76,17 +76,18 @@ model Cd_mod_v3()
     # kderm_release    = 1
 
     # ============================================================
-    # INDIVIDUAL INPUTS
+    # INDIVIDUAL-LEVEL PARAMETERS
     # ============================================================
-    sex = 2             # [1 = male, 2 = female]
-    Age = 30            # Age at start of simulation [year]
 
     # scaling with respect to nominal BW
-    AgeRef = 30         # Reference age corresponding to target body weight
-    BWRef = 85          # Target body weight at reference age [kg]
+    Age = 30                            # Age at start of simulation [year]
+    AgeRef = 30                         # Reference age corresponding to target body weight
+    sex = 2                             # [1 = male, 2 = female]
+    year := time / 365 + Age            # Age during simulation
+    BWRef = 85                          # Target body weight at reference age [kg]
     BWNominal := piecewise(BW_male_lifetime(AgeRef*12), sex==1, BW_female_lifetime(AgeRef*12)) # Nominal body weight at reference age based on nominal lifetime equation
-    Delta_BWs3 := BWRef / BWNominal # Scaling factor to scale nopminal body weight to reference (=target) weight.
-    Delta_creat = 1     # [-]
+    Delta_BWs3 := BWRef / BWNominal     # Scaling factor to scale nopminal body weight to reference (=target) weight.
+    Delta_BW := piecewise( 1 + (Delta_BWs3 - 1) * (year * 365) / 1095, (year * 365) <= 1095, Delta_BWs3 )
 
     # Measured whole-cord-blood Cd concentration
     Ccord = 0           # [ug/L]
@@ -94,9 +95,6 @@ model Cd_mod_v3()
     # ============================================================
     # TIME-VARYING PHYSIOLOGY
     # ============================================================
-
-    year := time / 365 + Age
-    Delta_BW := piecewise( 1 + (Delta_BWs3 - 1) * (year * 365) / 1095, (year * 365) <= 1095, Delta_BWs3 )
 
     # Body weight
     BW_male := piecewise( BW_male_lifetime(year*12) * Delta_BW, year <= 79, 76 * Delta_BW )
@@ -150,6 +148,7 @@ model Cd_mod_v3()
     #VInhalation := FqBreath * (Vtidal - vds) * 60 * 24
 
     # Creatinine
+    Delta_creat = 1                     # [-]
     ucr_base := 0.032 + 2.098e-2 * year + 9.104e-3 * year^2 - 4.550e-4 * year^3 + 7.578e-6 * year^4 - 4.232e-8 * year^5
     ucr := piecewise( ucr_base * Delta_creat, year <= 70, 0.865756 * Delta_creat )
 
@@ -381,14 +380,14 @@ model Cd_mod_v3()
     BLOOD := RBC + k20 * (PLASMA + META)
     BLOOD_burden := BLOOD / vb
 
-    kidney_burden := KIDNEY / vk
+    #kidney_burden := KIDNEY / vk
 
     ur := k_MT_out * k17b * META + k19x * KIDNEY
     Conc_urine_cd := ur / Vurine
     ucdcr := ur / ucr
 
-    total_internal := GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA
+    #total_internal := GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA
 
-    Excreted := FECES + URINE       # + EXH
+    #Excreted := FECES + URINE       # + EXH
 
 end
