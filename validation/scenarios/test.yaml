@@ -1,0 +1,114 @@
+id: Test
+label: Test
+model_instances:
+  - id: PBK_Cd
+    label: SBML
+    model_path: ./models/Cd_mod_v3/Cd_mod_v3.sbml
+    param_file: './models/Cd_mod_v3/Cd_mod_v3.params.csv'
+    target_mappings:
+      VBlood: 'vb'
+      BW: 'wbw'
+      AGut: 'GUT_LUMEN'
+      ALung: 'LUNG'
+      APlasma: 'PLASMA'
+      ARBC: 'RBC'
+      AMetallothionein: 'META'
+      ALiver: 'LIVER'
+      AKidney: 'KIDNEY'
+      AOthers: 'OTHER'
+      AUrine: 'URINE'
+      AFeces: 'FECES'
+scenarios:
+  - id: oral_repeated_pouillot
+    label: Oral repeated dosing (pouillot)
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 29200
+    evaluation_resolution: 1
+    dosing_events:
+      - type: repeated_bolus
+        target: AGut
+        amount: 0.2
+        adjustment: BW
+        time: 0
+        interval: 1
+        until: 18250
+    parameters:
+      Age: 0
+      sex: 1
+      # AgeRef: 30
+      # BWRef: 85
+    outputs:
+      - id: BW
+        label: BW
+        output: wbw
+      - id: AGut
+        label: Amount in gut
+        output: GUT_LUMEN
+      - id: ALung
+        label: Amount in lung
+        output: LUNG
+      - id: APlasma
+        label: Amount in plasma
+        output: PLASMA
+      - id: VBlood
+        label: Blood volume
+        output: vb
+      - id: ARBC
+        label: Amount in RBC
+        output: RBC
+      - id: AMetallothionein
+        label: Amount in metallothionein
+        output: META
+      - id: ALiver
+        label: Amount in liver
+        output: LIVER
+      - id: AKidney
+        label: Amount in kidney
+        output: KIDNEY
+      - id: AOthers
+        label: Amount in rest
+        output: OTHER
+      - id: AUrine
+        label: Amount in urine
+        output: URINE
+      - id: AFeces
+        label: Amount in feces
+        output: FECES
+    reference_data:
+      - id: R_orig
+        label: R_orig
+        file_path: validation/outputs/reference/R/oral_repeated_pouillot/pbk_cd_gastellu_2026.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw_f
+          AGut: GUT
+          ALung: LUNG
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AKidney: KIDNEY
+          AOthers: OTHER
+          AFeces: FECES
+          AUrine: URINE
+          VBlood: vb
+      - id: R_revised
+        label: R_revised
+        file_path: validation/outputs/reference/R/oral_repeated_pouillot/pbk_cd_gastellu_2026_revised.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw_f
+          AGut: GUT
+          ALung: LUNG
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AKidney: KIDNEY
+          AOthers: OTHER
+          AFeces: FECES
+          AUrine: URINE
+          VBlood: vb
