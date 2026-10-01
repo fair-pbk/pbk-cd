@@ -3,8 +3,8 @@ label: R_scenarios
 model_instances:
   - id: PBK_Cd
     label: SBML
-    model_path: ./models/Cd_mod_v3/Cd_mod_v3.sbml
-    param_file: './models/Cd_mod_v3/Cd_mod_v3.params.csv'
+    model_path: ./models/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.sbml
+    param_file: './models/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.params.csv'
     target_mappings:
       VBlood: 'vb'
       BW: 'wbw'

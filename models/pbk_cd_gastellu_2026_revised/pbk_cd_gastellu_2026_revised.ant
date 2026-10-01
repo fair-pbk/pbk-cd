@@ -10,7 +10,7 @@ function BW_female_lifetime(mval)
     3.932403 + 0.6866462 * mval - 0.01949911 * mval^2 + 0.00031311 * mval^3 - 2.466654e-6 * mval^4 + 1.113217e-8 * mval^5 - 3.131402e-11 * mval^6 + 5.693737e-14 * mval^7 - 6.706947e-17 * mval^8 + 4.947858e-20 * mval^9 - 2.079251e-23 * mval^10 + 3.800367e-27 * mval^11
 end
 
-model Cd_mod_v3()
+model pbk_cd_gastellu_2026_revised()
 
     # ============================================================
     # Cadmium PBK model
