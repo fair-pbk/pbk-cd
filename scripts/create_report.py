@@ -21,7 +21,7 @@ from sbmlpbkutils import (
     RenderMode
 )
 
-MODELS_PATH = './models/'
+MODELS_PATH = './model/'
 REPORT_PATH = './docs/'
 CITATION_FILE = './CITATION.cff'
 

@@ -6,17 +6,17 @@
 
 ## Overview
 
-| key                          | value                          |
-|:-----------------------------|:-------------------------------|
-| Modelled species/orgamism(s) | *not specified*                |
-| Model chemical(s)            | *not specified*                |
-| Input route(s)               | 1 (inhalation)                 |
-| Time resolution              | d                              |
-| Amounts unit                 | ug                             |
-| Volume unit                  | L                              |
-| Number of compartments       | 11                             |
-| Number of species            | 11                             |
-| Number of parameters         | 81 (29 external / 52 internal) |
+| key                          | value                                         |
+|:-----------------------------|:----------------------------------------------|
+| Modelled species/orgamism(s) | http://purl.obolibrary.org/obo/NCBITaxon_9606 |
+| Model chemical(s)            | http://purl.obolibrary.org/obo/CHEBI_22978    |
+| Input route(s)               | 1 (inhalation)                                |
+| Time resolution              | d                                             |
+| Amounts unit                 | ug                                            |
+| Volume unit                  | L                                             |
+| Number of compartments       | 11                                            |
+| Number of species            | 11                                            |
+| Number of parameters         | 81 (29 external / 52 internal)                |
 
 ## Diagram
 
@@ -171,7 +171,7 @@
 |:------------------|:-------------------------------------------------------------------------------------------|:----------------|:-------------------------------------------|
 | k3                | First-order transfer rate constant from lung to total systemic uptake                      | /d              | *not specified*                            |
 | k4                | First-order transfer rate constant from lung to GI                                         | /d              | *not specified*                            |
-| kabs              | First-order rate constant (added explicitly for unit consistency)                          | /d              | *not specified*                            |
+| kabs              | First-order absorption rate constant                                                       | /d              | *not specified*                            |
 | k5_h              | Fraction of absorbed Cd in gut transferred to intestine in males                           | dimensionless   | *not specified*                            |
 | k5_f              | Fraction of absorbed Cd in gut transferred to intestine in females                         | dimensionless   | *not specified*                            |
 | k6                | First-order transfer rate constant from intestine to total systemic uptake                 | /d              | *not specified*                            |

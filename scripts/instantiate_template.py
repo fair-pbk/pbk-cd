@@ -163,7 +163,7 @@ def main():
     logger = setup_logger()
     models_dir = Path("models")
     yamls = sorted(models_dir.rglob("*.yaml"))
-    logger.info("Found %d YAML config(s) in %s", len(yamls), models_dir)
+    logger.info("Found %d YAML template config(s) in %s", len(yamls), models_dir)
     for yaml_file in yamls:
         process_instance(yaml_file, logger)
 

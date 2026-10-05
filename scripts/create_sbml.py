@@ -19,7 +19,7 @@ import logging
 from sbmlpbkutils import PbkModelValidator
 from sbmlpbkutils import PbkModelAnnotator
 
-MODELS_PATH = './models/'
+MODELS_PATH = './model/'
 CITATION_FILE = None
 
 def create_file_logger(logfile: str) -> logging.Logger:
@@ -36,6 +36,7 @@ def compile_models():
     for ant_file in Path(MODELS_PATH).rglob('*.ant'):
         if ant_file.name.endswith('.template.ant'):
             continue
+
         ant_file = str(ant_file)
         sbml_file = Path(ant_file).with_suffix('.sbml')
 
