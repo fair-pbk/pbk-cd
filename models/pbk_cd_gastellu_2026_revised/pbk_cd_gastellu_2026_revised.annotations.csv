@@ -42,7 +42,7 @@ k3,parameter,First-order transfer rate constant from lung to total systemic upta
 k3,parameter,,,rdf,BQB_IS,,
 k4,parameter,First-order transfer rate constant from lung to GI,/d,rdf,BQM_IS,,
 k4,parameter,,,rdf,BQB_IS,,
-kabs,parameter,First-order rate constant (added explicitly for unit consistency),/d,rdf,BQM_IS,http://purl.obolibrary.org/obo/PBPKO_03075,
+kabs,parameter,First-order absorption rate constant,/d,rdf,BQM_IS,http://purl.obolibrary.org/obo/PBPKO_03075,
 kabs,parameter,,,rdf,BQB_IS,,
 k5_h,parameter,Fraction of absorbed Cd in gut transferred to intestine in males,UNITLESS,rdf,BQM_IS,,
 k5_h,parameter,,,rdf,BQB_IS,,

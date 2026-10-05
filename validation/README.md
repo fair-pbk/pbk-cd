@@ -11,9 +11,8 @@ The `reference_scenarios.yaml` file lists the R and mrgsolve reference scripts a
 
 ## Scenarios
 
-- **`R.yaml`**: Defines oral single-dose, repeated-dose, and lifetime scenarios for comparison with the R reference implementations.
-- **`mrgsolve.yaml`**: Defines the corresponding oral single-dose, repeated-dose, and lifetime scenarios for comparison with mrgsolve.
-- **`lifetime_comparison.yaml`**: Compares lifetime and non-lifetime model variants under constant and body-weight-adjusted repeated dosing.
+- **`R.yaml`**: Validation scenarios for comparison with the R reference implementations.
+- **`mrgsolve.yaml`**: Validation scenarios for comparison with the mrgsolve reference implmentation.
 
 ### R validation (`R.yaml`)
 

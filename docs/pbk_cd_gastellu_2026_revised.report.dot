@@ -1,0 +1,224 @@
+digraph {
+	graph [ratio=fill,
+		size="7,4"
+	];
+	node [fontname=Arial];
+	subgraph cluster_LungComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-LungComp",
+			label="LungComp
+[PBPKO:00559]",
+			shape=box,
+			style="filled,rounded"
+		];
+		LUNG	[color=black,
+			fillcolor=gold,
+			href="#species-LUNG",
+			label="LUNG
+[PBPKO:00504]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_GUT_LUMENComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-GUT_LUMENComp",
+			label="GUT_LUMENComp
+[PBPKO:00478]",
+			shape=box,
+			style="filled,rounded"
+		];
+		GUT_LUMEN	[color=black,
+			fillcolor=gold,
+			href="#species-GUT_LUMEN",
+			label="GUT_LUMEN
+[-]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_INTESTINE_TISSUEComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-INTESTINE_TISSUEComp",
+			label="INTESTINE_TISSUEComp
+[-]",
+			shape=box,
+			style="filled,rounded"
+		];
+		INTESTINE_TISSUE	[color=black,
+			fillcolor=gold,
+			href="#species-INTESTINE_TISSUE",
+			label="INTESTINE_TISSUE
+[-]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_PlasmaComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-PlasmaComp",
+			label="PlasmaComp
+[PBPKO:00488]",
+			shape=box,
+			style="filled,rounded"
+		];
+		PLASMA	[color=black,
+			fillcolor=gold,
+			href="#species-PLASMA",
+			label="PLASMA
+[PBPKO:00502]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_RBCComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-RBCComp",
+			label="RBCComp
+[PBPKO:00634]",
+			shape=box,
+			style="filled,rounded"
+		];
+		RBC	[color=black,
+			fillcolor=gold,
+			href="#species-RBC",
+			label="RBC
+[-]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_MTComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-MTComp",
+			label="MTComp
+[-]",
+			shape=box,
+			style="filled,rounded"
+		];
+		META	[color=black,
+			fillcolor=gold,
+			href="#species-META",
+			label="META
+[-]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_LiverComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-LiverComp",
+			label="LiverComp
+[PBPKO:00558]",
+			shape=box,
+			style="filled,rounded"
+		];
+		LIVER	[color=black,
+			fillcolor=gold,
+			href="#species-LIVER",
+			label="LIVER
+[PBPKO:00497]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_KidneyComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-KidneyComp",
+			label="KidneyComp
+[PBPKO:00557]",
+			shape=box,
+			style="filled,rounded"
+		];
+		KIDNEY	[color=black,
+			fillcolor=gold,
+			href="#species-KIDNEY",
+			label="KIDNEY
+[PBPKO:00498]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_OtherComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-OtherComp",
+			label="OtherComp
+[PBPKO:00450]",
+			shape=box,
+			style="filled,rounded"
+		];
+		OTHER	[color=black,
+			fillcolor=gold,
+			href="#species-OTHER",
+			label="OTHER
+[PBPKO:00501]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_FecesComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-FecesComp",
+			label="FecesComp
+[PBPKO:00555]",
+			shape=box,
+			style="filled,rounded"
+		];
+		FECES	[color=black,
+			fillcolor=gold,
+			href="#species-FECES",
+			label="FECES
+[PBPKO:00275]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_UrineComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-UrineComp",
+			label="UrineComp
+[PBPKO:00556]",
+			shape=box,
+			style="filled,rounded"
+		];
+		URINE	[color=black,
+			fillcolor=gold,
+			href="#species-URINE",
+			label="URINE
+[PBPKO:00274]",
+			shape=box,
+			style="filled,rounded"];
+	}
+	LUNG -> GUT_LUMEN	[label=_J0];
+	LUNG -> PLASMA	[label=_J2];
+	LUNG -> META	[label=_J1];
+	GUT_LUMEN -> INTESTINE_TISSUE	[label=_J3];
+	GUT_LUMEN -> FECES	[label=_J4];
+	INTESTINE_TISSUE -> PLASMA	[label=_J6];
+	INTESTINE_TISSUE -> META	[label=_J5];
+	PLASMA -> RBC	[label=_J14];
+	PLASMA -> LIVER	[label=_J10];
+	PLASMA -> OTHER	[label=_J7];
+	PLASMA -> FECES	[label=_J9];
+	RBC -> META	[label=_J15];
+	META -> KIDNEY	[label=_J16];
+	META -> URINE	[label=_J17];
+	LIVER -> PLASMA	[label=_J11];
+	LIVER -> META	[label=_J12];
+	LIVER -> FECES	[label=_J13];
+	KIDNEY -> PLASMA	[label=_J18];
+	KIDNEY -> URINE	[label=_J19];
+	OTHER -> PLASMA	[label=_J8];
+}

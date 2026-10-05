@@ -1,0 +1,202 @@
+digraph {
+	graph [ratio=fill,
+		size="7,4"
+	];
+	node [fontname=Arial];
+	subgraph cluster_LungComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-LungComp",
+			label=LungComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		LUNG	[color=black,
+			fillcolor=gold,
+			href="#species-LUNG",
+			label=LUNG,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_GUT_LUMENComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-GUT_LUMENComp",
+			label=GUT_LUMENComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		GUT_LUMEN	[color=black,
+			fillcolor=gold,
+			href="#species-GUT_LUMEN",
+			label=GUT_LUMEN,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_INTESTINE_TISSUEComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-INTESTINE_TISSUEComp",
+			label=INTESTINE_TISSUEComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		INTESTINE_TISSUE	[color=black,
+			fillcolor=gold,
+			href="#species-INTESTINE_TISSUE",
+			label=INTESTINE_TISSUE,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_PlasmaComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-PlasmaComp",
+			label=PlasmaComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		PLASMA	[color=black,
+			fillcolor=gold,
+			href="#species-PLASMA",
+			label=PLASMA,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_RBCComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-RBCComp",
+			label=RBCComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		RBC	[color=black,
+			fillcolor=gold,
+			href="#species-RBC",
+			label=RBC,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_MTComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-MTComp",
+			label=MTComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		META	[color=black,
+			fillcolor=gold,
+			href="#species-META",
+			label=META,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_LiverComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-LiverComp",
+			label=LiverComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		LIVER	[color=black,
+			fillcolor=gold,
+			href="#species-LIVER",
+			label=LIVER,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_KidneyComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-KidneyComp",
+			label=KidneyComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		KIDNEY	[color=black,
+			fillcolor=gold,
+			href="#species-KIDNEY",
+			label=KIDNEY,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_OtherComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-OtherComp",
+			label=OtherComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		OTHER	[color=black,
+			fillcolor=gold,
+			href="#species-OTHER",
+			label=OTHER,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_FecesComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-FecesComp",
+			label=FecesComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		FECES	[color=black,
+			fillcolor=gold,
+			href="#species-FECES",
+			label=FECES,
+			shape=box,
+			style="filled,rounded"];
+	}
+	subgraph cluster_UrineComp {
+		graph [color=black,
+			fillcolor=lightblue,
+			fontname=Arial,
+			href="#compartment-UrineComp",
+			label=UrineComp,
+			shape=box,
+			style="filled,rounded"
+		];
+		URINE	[color=black,
+			fillcolor=gold,
+			href="#species-URINE",
+			label=URINE,
+			shape=box,
+			style="filled,rounded"];
+	}
+	LUNG -> GUT_LUMEN;
+	LUNG -> PLASMA;
+	LUNG -> META;
+	GUT_LUMEN -> INTESTINE_TISSUE;
+	GUT_LUMEN -> FECES;
+	INTESTINE_TISSUE -> PLASMA;
+	INTESTINE_TISSUE -> META;
+	PLASMA -> RBC;
+	PLASMA -> LIVER;
+	PLASMA -> OTHER;
+	PLASMA -> FECES;
+	RBC -> META;
+	META -> KIDNEY;
+	META -> URINE;
+	LIVER -> PLASMA;
+	LIVER -> META;
+	LIVER -> FECES;
+	KIDNEY -> PLASMA;
+	KIDNEY -> URINE;
+	OTHER -> PLASMA;
+}
