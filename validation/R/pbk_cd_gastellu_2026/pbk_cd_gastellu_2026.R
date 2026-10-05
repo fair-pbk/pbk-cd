@@ -1,6 +1,6 @@
 # 1. Without source-route tracking
 
-PBK1 <- rxode2({ 
+pbk_cd <- rxode2({ 
   year=time/365 ;
   
   # 1/ Body weight ----

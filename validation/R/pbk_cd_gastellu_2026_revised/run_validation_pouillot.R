@@ -124,7 +124,7 @@ event_res <- ev_lifetime %>%
 
 # Solve
 sim_output <- rxSolve(
-  PBK1,
+  pbk_cd,
   params = theta,
   events = event_res,
   inits = inits

@@ -107,7 +107,7 @@ event_res %>%
   et(timeUnits="d") -> event_res
 
 # Solve
-sim_output <- rxSolve(object=PBK1, params=params_all, events=event_res) %>%
+sim_output <- rxSolve(object=pbk_cd, params=params_all, events=event_res) %>%
   dplyr::filter(time %in% time_val) %>%
   dplyr::mutate(time=time_val)
 
