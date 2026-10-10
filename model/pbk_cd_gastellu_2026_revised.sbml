@@ -473,7 +473,7 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment metaid="meta_FecesComp" id="FecesComp" name="feces compartment" spatialDimensions="3" units="L" constant="true">
+      <compartment metaid="meta_FecesComp" id="FecesComp" name="feces compartment" spatialDimensions="3" size="1" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_FecesComp">
@@ -1036,7 +1036,6 @@
       <parameter id="uptakeTotal_Lung" name="Systemic Cd uptake flux from lung" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeTotal_GI" name="Systemic Cd uptake flux from intestine" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="TOTAL_UPTAKE" name="Sum of lung and GI systemic uptake fluxes" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="UPTAKE_MT_SMOOTH" constant="false"/>
       <parameter id="UPTAKE_MT" name="Remaining systemic Cd uptake flux to MT" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="UPTAKE_PLASMA" name="Remaining systemic Cd uptake flux to plasma" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeMT_Lung" name="Lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
@@ -1113,6 +1112,46 @@
       <initialAssignment symbol="RBC">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <ci> Acord_total </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="LungComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> vlungs </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="INTESTINE_TISSUEComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> vintestine </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="PlasmaComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> vp </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="RBCComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> vrbc </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="LiverComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> vl </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="KidneyComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> vk </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="OtherComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> vother </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="UrineComp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> Vurine </ci>
         </math>
       </initialAssignment>
     </listOfInitialAssignments>
@@ -2169,15 +2208,6 @@
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="UPTAKE_MT_SMOOTH">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <times/>
-            <cn> 0.01 </cn>
-            <ci> k8 </ci>
-          </apply>
-        </math>
-      </assignmentRule>
       <assignmentRule variable="UPTAKE_MT">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
@@ -2214,7 +2244,11 @@
                         <ci> TOTAL_UPTAKE </ci>
                       </apply>
                     </apply>
-                    <ci> UPTAKE_MT_SMOOTH </ci>
+                    <apply>
+                      <times/>
+                      <cn> 0.01 </cn>
+                      <ci> k8 </ci>
+                    </apply>
                   </apply>
                 </apply>
               </apply>

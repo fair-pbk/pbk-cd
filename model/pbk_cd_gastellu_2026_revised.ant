@@ -110,7 +110,10 @@ model pbk_cd_gastellu_2026_revised()
     vb_female := piecewise( (-0.0273 * year + 0.0771) * wbw, year < 1, (3.28e-5 * year^3 - 1.21e-3 * year^2 + 1.24e-2 * year + 3.86e-2) * wbw, year < 14.019723, 0.065 * wbw )
     vb := piecewise( vb_male, sex == 1, vb_female )
 
+    # Plasma volume
     vp := (1 - hct) * vb
+
+    # Red blood cells volume
     vrbc := hct * vb
 
     # Kidney volume
@@ -179,17 +182,17 @@ model pbk_cd_gastellu_2026_revised()
     # ============================================================
 
     # compartment Source;
-    compartment LungComp;
+    compartment LungComp = vlungs;
     compartment GUT_LUMENComp;
-    compartment INTESTINE_TISSUEComp;
-    compartment PlasmaComp;
-    compartment RBCComp;
+    compartment INTESTINE_TISSUEComp = vintestine;
+    compartment PlasmaComp = vp;
+    compartment RBCComp = vrbc;
     compartment MTComp;
-    compartment LiverComp;
-    compartment KidneyComp;
-    compartment OtherComp;
-    compartment FecesComp;
-    compartment UrineComp;
+    compartment LiverComp = vl;
+    compartment KidneyComp = vk;
+    compartment OtherComp = vother;
+    compartment FecesComp = 1;
+    compartment UrineComp = Vurine;
     # compartment ExhComp;
 
     # ============================================================
@@ -270,11 +273,9 @@ model pbk_cd_gastellu_2026_revised()
     # Original hard cap: UPTAKE_MT = min(k7 * TOTAL_UPTAKE, k8)
     # Replaced the discontinuous piecewise function with a smooth approximation
     # to improve numerical stability when the uptake flux crosses the cap.
-    # UPTAKE_MT := piecewise(k7 * TOTAL_UPTAKE, k7 * TOTAL_UPTAKE <= k8, k8)
-    # The smoothing scale controls the width of the transition around k8.
-    UPTAKE_MT_SMOOTH := 0.01 * k8
+    # The smoothing scale of 0.01 controls the width of the transition around k8.
     # Below the cap this approaches k7 * TOTAL_UPTAKE; above it, k8.
-    UPTAKE_MT := k7 * TOTAL_UPTAKE + (k8 - k7 * TOTAL_UPTAKE) / (1 + exp((k8 - k7 * TOTAL_UPTAKE) / UPTAKE_MT_SMOOTH))
+    UPTAKE_MT := k7 * TOTAL_UPTAKE + (k8 - k7 * TOTAL_UPTAKE) / (1 + exp((k8 - k7 * TOTAL_UPTAKE) / (0.01 * k8)))
     UPTAKE_PLASMA := TOTAL_UPTAKE - UPTAKE_MT
 
     # Distribute the total MT flux between lung and intestinal uptake
