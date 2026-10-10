@@ -14,9 +14,8 @@ model_id <- "pbk_cd_gastellu_2026_revised"
 results_path <- "validation/outputs/reference/R/oral_repeated_pouillot"
 
 # Simulation setup
-
 sex_i <- 1
-Delta_BWs3 <- 1
+Delta_BWs3 <- 1.1
 Delta_creat <- 1
 
 simulation_start <- 0*365 # days
