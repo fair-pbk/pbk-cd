@@ -158,7 +158,7 @@ model pbk_cd_gastellu_2026_revised()
     Vurine := 0.0294 * wbw_f
 
     # Sex-specific GI fraction
-    k5_active := piecewise( k5_h, sex == 1, k5_f )
+    k5 := piecewise( k5_h, sex == 1, k5_f )
 
     # Age-dependent kidney elimination
     k19x := piecewise( k19, year <= 30, k19 + k21 * (year - 30) )
@@ -346,10 +346,10 @@ model pbk_cd_gastellu_2026_revised()
     LUNG -> PLASMA;                 uptakePlasma_Lung
 
     # GUT_LUMEN -> INTESTINE_TISSUE
-    GUT_LUMEN -> INTESTINE_TISSUE;  k5_active * kabs * GUT_LUMEN
+    GUT_LUMEN -> INTESTINE_TISSUE;  k5 * kabs * GUT_LUMEN
 
     # GUT_LUMEN -> feces
-    GUT_LUMEN -> FECES;             (1 - k5_active) * kabs * GUT_LUMEN
+    GUT_LUMEN -> FECES;             (1 - k5) * kabs * GUT_LUMEN
 
     # INTESTINE_TISSUE -> MT and plasma
     INTESTINE_TISSUE -> META;       uptakeMT_GI

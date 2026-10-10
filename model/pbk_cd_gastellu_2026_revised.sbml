@@ -1020,7 +1020,7 @@
       <parameter id="ucr_base" name="Reference creatinine output before Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
       <parameter id="ucr" name="Age-dependent creatinine output after Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
       <parameter id="Vurine" name="Average urine volume" units="L" constant="false"/>
-      <parameter id="k5_active" name="sex-specific gut:intestine fraction" units="UNITLESS" constant="false"/>
+      <parameter id="k5" name="sex-specific gut:intestine fraction" units="UNITLESS" constant="false"/>
       <parameter id="k19x" name="age-adjusted kidney:urine rate" units="PER_DAY" constant="false"/>
       <parameter id="k17_decline" name="age-related changes of k17" units="UNITLESS" constant="false"/>
       <parameter id="k17x" name="age-adjusted MT removal fraction to kidney" units="UNITLESS" constant="false"/>
@@ -2061,7 +2061,7 @@
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="k5_active">
+      <assignmentRule variable="k5">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <piecewise>
             <piece>
@@ -2445,7 +2445,7 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> k5_active </ci>
+              <ci> k5 </ci>
               <ci> kabs </ci>
               <ci> GUT_LUMEN </ci>
             </apply>
@@ -2466,7 +2466,7 @@
               <apply>
                 <minus/>
                 <cn type="integer"> 1 </cn>
-                <ci> k5_active </ci>
+                <ci> k5 </ci>
               </apply>
               <ci> kabs </ci>
               <ci> GUT_LUMEN </ci>
