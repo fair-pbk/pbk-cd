@@ -34,6 +34,18 @@ The following changes were made to the Antimony/SBML reimplementation for compli
 
 The SBML implementation is validated against an R implementation of the original model ([pbk_cd_gastellu_2026.R](validation/R/pbk_cd_gastellu_2026/pbk_cd_gastellu_2026.R)) and an R implementation of the revised model ([pbk_cd_gastellu_2026_revised.R](validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R)). The validation scenarios include a single-dose, repeated-dose, and two lifetime-dosing scenarios. Scenario definitions, reference scripts, run instructions, and output details are documented in the [validation README](validation/README.md).
 
+## Open issues
+
+The model is currently still under development. The following issues still need to be addressed:
+
+- Decide on use of `k5` as parameter or to compute from `k5_f` and `k5_f`.
+- Include smooth approximation of hard cap in UPTAKE_MT also in R implementation of revised model.
+- Resolve unit inconsistency in assignment of `vother`. The mass unit of `wbw` is kg, which is consistent with the the volume unit of `vother`. An explicit density parameter/conversion should resolve this.
+- Unit inconsistency in calculation of `Conc_urine_cd`. Consider removal of this variable altogether, as is can be derived after simulation.
+- Consider computing `ucdcr` from `URINE` instead of `ur`.
+- Consider removal of uring concentration per creatinine from model as it can also be computed from the outputs after simulation.
+- Consider removal of calculation of initial whole-cord-blood concentration(`Acord_total`) and initialisation of `RBC`.
+
 ## Running the scipts
 
 ### Prerequisites
