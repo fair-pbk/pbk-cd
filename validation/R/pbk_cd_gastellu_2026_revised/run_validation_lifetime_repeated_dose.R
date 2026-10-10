@@ -7,7 +7,6 @@
 library(rxode2)
 library(dplyr)
 source("validation/R/pbk_cd_gastellu_2026_revised/default_parameters.R")
-source("validation/R/pbk_cd_gastellu_2026_revised/time_varying_assignments.R")
 source("validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R")
 
 # Write outputs
@@ -118,7 +117,6 @@ event_res <- ev_lifetime %>%
   left_join(phys_cov, by = c("id", "time")) %>%
   mutate(amt=dose*dosing_stepsize*wbw_f) %>%
   arrange(id, time, desc(evid))
-
 
 # Solve
 sim_output <- rxSolve(
