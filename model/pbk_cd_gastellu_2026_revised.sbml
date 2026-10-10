@@ -24,10 +24,8 @@
             <bvar>
               <ci> mval </ci>
             </bvar>
-            <apply>
-              <plus/>
-              <apply>
-                <minus/>
+            <piecewise>
+              <piece>
                 <apply>
                   <plus/>
                   <apply>
@@ -46,113 +44,131 @@
                                 <minus/>
                                 <apply>
                                   <plus/>
-                                  <cn> 3.938425 </cn>
+                                  <apply>
+                                    <minus/>
+                                    <apply>
+                                      <plus/>
+                                      <cn> 3.938425 </cn>
+                                      <apply>
+                                        <times/>
+                                        <cn> 0.7518199 </cn>
+                                        <ci> mval </ci>
+                                      </apply>
+                                    </apply>
+                                    <apply>
+                                      <times/>
+                                      <cn> 0.02023793 </cn>
+                                      <apply>
+                                        <power/>
+                                        <ci> mval </ci>
+                                        <cn type="integer"> 2 </cn>
+                                      </apply>
+                                    </apply>
+                                  </apply>
                                   <apply>
                                     <times/>
-                                    <cn> 0.7518199 </cn>
-                                    <ci> mval </ci>
+                                    <cn> 0.0002921682 </cn>
+                                    <apply>
+                                      <power/>
+                                      <ci> mval </ci>
+                                      <cn type="integer"> 3 </cn>
+                                    </apply>
                                   </apply>
                                 </apply>
                                 <apply>
                                   <times/>
-                                  <cn> 0.02023793 </cn>
+                                  <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
                                   <apply>
                                     <power/>
                                     <ci> mval </ci>
-                                    <cn type="integer"> 2 </cn>
+                                    <cn type="integer"> 4 </cn>
                                   </apply>
                                 </apply>
                               </apply>
                               <apply>
                                 <times/>
-                                <cn> 0.0002921682 </cn>
+                                <cn type="e-notation"> 8.469 <sep/> -9 </cn>
                                 <apply>
                                   <power/>
                                   <ci> mval </ci>
-                                  <cn type="integer"> 3 </cn>
+                                  <cn type="integer"> 5 </cn>
                                 </apply>
                               </apply>
                             </apply>
                             <apply>
                               <times/>
-                              <cn type="e-notation"> 2.06762 <sep/> -6 </cn>
+                              <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
                               <apply>
                                 <power/>
                                 <ci> mval </ci>
-                                <cn type="integer"> 4 </cn>
+                                <cn type="integer"> 6 </cn>
                               </apply>
                             </apply>
                           </apply>
                           <apply>
                             <times/>
-                            <cn type="e-notation"> 8.469 <sep/> -9 </cn>
+                            <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
                             <apply>
                               <power/>
                               <ci> mval </ci>
-                              <cn type="integer"> 5 </cn>
+                              <cn type="integer"> 7 </cn>
                             </apply>
                           </apply>
                         </apply>
                         <apply>
                           <times/>
-                          <cn type="e-notation"> 2.188427 <sep/> -11 </cn>
+                          <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
                           <apply>
                             <power/>
                             <ci> mval </ci>
-                            <cn type="integer"> 6 </cn>
+                            <cn type="integer"> 8 </cn>
                           </apply>
                         </apply>
                       </apply>
                       <apply>
                         <times/>
-                        <cn type="e-notation"> 3.699776 <sep/> -14 </cn>
+                        <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
                         <apply>
                           <power/>
                           <ci> mval </ci>
-                          <cn type="integer"> 7 </cn>
+                          <cn type="integer"> 9 </cn>
                         </apply>
                       </apply>
                     </apply>
                     <apply>
                       <times/>
-                      <cn type="e-notation"> 4.099077 <sep/> -17 </cn>
+                      <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
                       <apply>
                         <power/>
                         <ci> mval </ci>
-                        <cn type="integer"> 8 </cn>
+                        <cn type="integer"> 10 </cn>
                       </apply>
                     </apply>
                   </apply>
                   <apply>
                     <times/>
-                    <cn type="e-notation"> 2.874804 <sep/> -20 </cn>
+                    <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
                     <apply>
                       <power/>
                       <ci> mval </ci>
-                      <cn type="integer"> 9 </cn>
+                      <cn type="integer"> 11 </cn>
                     </apply>
                   </apply>
                 </apply>
                 <apply>
-                  <times/>
-                  <cn type="e-notation"> 1.159732 <sep/> -23 </cn>
+                  <leq/>
+                  <ci> mval </ci>
                   <apply>
-                    <power/>
-                    <ci> mval </ci>
-                    <cn type="integer"> 10 </cn>
+                    <times/>
+                    <cn type="integer"> 79 </cn>
+                    <cn type="integer"> 12 </cn>
                   </apply>
                 </apply>
-              </apply>
-              <apply>
-                <times/>
-                <cn type="e-notation"> 2.052602 <sep/> -27 </cn>
-                <apply>
-                  <power/>
-                  <ci> mval </ci>
-                  <cn type="integer"> 11 </cn>
-                </apply>
-              </apply>
-            </apply>
+              </piece>
+              <otherwise>
+                <cn type="integer"> 76 </cn>
+              </otherwise>
+            </piecewise>
           </lambda>
         </math>
       </functionDefinition>
@@ -162,10 +178,8 @@
             <bvar>
               <ci> mval </ci>
             </bvar>
-            <apply>
-              <plus/>
-              <apply>
-                <minus/>
+            <piecewise>
+              <piece>
                 <apply>
                   <plus/>
                   <apply>
@@ -184,113 +198,131 @@
                                 <minus/>
                                 <apply>
                                   <plus/>
-                                  <cn> 3.932403 </cn>
+                                  <apply>
+                                    <minus/>
+                                    <apply>
+                                      <plus/>
+                                      <cn> 3.932403 </cn>
+                                      <apply>
+                                        <times/>
+                                        <cn> 0.6866462 </cn>
+                                        <ci> mval </ci>
+                                      </apply>
+                                    </apply>
+                                    <apply>
+                                      <times/>
+                                      <cn> 0.01949911 </cn>
+                                      <apply>
+                                        <power/>
+                                        <ci> mval </ci>
+                                        <cn type="integer"> 2 </cn>
+                                      </apply>
+                                    </apply>
+                                  </apply>
                                   <apply>
                                     <times/>
-                                    <cn> 0.6866462 </cn>
-                                    <ci> mval </ci>
+                                    <cn> 0.00031311 </cn>
+                                    <apply>
+                                      <power/>
+                                      <ci> mval </ci>
+                                      <cn type="integer"> 3 </cn>
+                                    </apply>
                                   </apply>
                                 </apply>
                                 <apply>
                                   <times/>
-                                  <cn> 0.01949911 </cn>
+                                  <cn type="e-notation"> 2.466654 <sep/> -6 </cn>
                                   <apply>
                                     <power/>
                                     <ci> mval </ci>
-                                    <cn type="integer"> 2 </cn>
+                                    <cn type="integer"> 4 </cn>
                                   </apply>
                                 </apply>
                               </apply>
                               <apply>
                                 <times/>
-                                <cn> 0.00031311 </cn>
+                                <cn type="e-notation"> 1.113217 <sep/> -8 </cn>
                                 <apply>
                                   <power/>
                                   <ci> mval </ci>
-                                  <cn type="integer"> 3 </cn>
+                                  <cn type="integer"> 5 </cn>
                                 </apply>
                               </apply>
                             </apply>
                             <apply>
                               <times/>
-                              <cn type="e-notation"> 2.466654 <sep/> -6 </cn>
+                              <cn type="e-notation"> 3.131402 <sep/> -11 </cn>
                               <apply>
                                 <power/>
                                 <ci> mval </ci>
-                                <cn type="integer"> 4 </cn>
+                                <cn type="integer"> 6 </cn>
                               </apply>
                             </apply>
                           </apply>
                           <apply>
                             <times/>
-                            <cn type="e-notation"> 1.113217 <sep/> -8 </cn>
+                            <cn type="e-notation"> 5.693737 <sep/> -14 </cn>
                             <apply>
                               <power/>
                               <ci> mval </ci>
-                              <cn type="integer"> 5 </cn>
+                              <cn type="integer"> 7 </cn>
                             </apply>
                           </apply>
                         </apply>
                         <apply>
                           <times/>
-                          <cn type="e-notation"> 3.131402 <sep/> -11 </cn>
+                          <cn type="e-notation"> 6.706947 <sep/> -17 </cn>
                           <apply>
                             <power/>
                             <ci> mval </ci>
-                            <cn type="integer"> 6 </cn>
+                            <cn type="integer"> 8 </cn>
                           </apply>
                         </apply>
                       </apply>
                       <apply>
                         <times/>
-                        <cn type="e-notation"> 5.693737 <sep/> -14 </cn>
+                        <cn type="e-notation"> 4.947858 <sep/> -20 </cn>
                         <apply>
                           <power/>
                           <ci> mval </ci>
-                          <cn type="integer"> 7 </cn>
+                          <cn type="integer"> 9 </cn>
                         </apply>
                       </apply>
                     </apply>
                     <apply>
                       <times/>
-                      <cn type="e-notation"> 6.706947 <sep/> -17 </cn>
+                      <cn type="e-notation"> 2.079251 <sep/> -23 </cn>
                       <apply>
                         <power/>
                         <ci> mval </ci>
-                        <cn type="integer"> 8 </cn>
+                        <cn type="integer"> 10 </cn>
                       </apply>
                     </apply>
                   </apply>
                   <apply>
                     <times/>
-                    <cn type="e-notation"> 4.947858 <sep/> -20 </cn>
+                    <cn type="e-notation"> 3.800367 <sep/> -27 </cn>
                     <apply>
                       <power/>
                       <ci> mval </ci>
-                      <cn type="integer"> 9 </cn>
+                      <cn type="integer"> 11 </cn>
                     </apply>
                   </apply>
                 </apply>
                 <apply>
-                  <times/>
-                  <cn type="e-notation"> 2.079251 <sep/> -23 </cn>
+                  <leq/>
+                  <ci> mval </ci>
                   <apply>
-                    <power/>
-                    <ci> mval </ci>
-                    <cn type="integer"> 10 </cn>
+                    <times/>
+                    <cn type="integer"> 79 </cn>
+                    <cn type="integer"> 12 </cn>
                   </apply>
                 </apply>
-              </apply>
-              <apply>
-                <times/>
-                <cn type="e-notation"> 3.800367 <sep/> -27 </cn>
-                <apply>
-                  <power/>
-                  <ci> mval </ci>
-                  <cn type="integer"> 11 </cn>
-                </apply>
-              </apply>
-            </apply>
+              </piece>
+              <otherwise>
+                <cn type="integer"> 68 </cn>
+              </otherwise>
+            </piecewise>
           </lambda>
         </math>
       </functionDefinition>
@@ -766,32 +798,6 @@
       </parameter>
       <parameter id="Delta_BWs3" name="Individual body-weight multiplier reached at reference age" units="UNITLESS" constant="false"/>
       <parameter id="Delta_BW" name="Age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)" units="UNITLESS" constant="false"/>
-      <parameter metaid="meta_BW_male" id="BW_male" name="measured bodyweight for male participiant" units="KiloGM" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_BW_male">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
-      <parameter metaid="meta_BW_female" id="BW_female" name="measured bodyweight for female participiant" units="KiloGM" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_BW_female">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
       <parameter metaid="meta_wbw" id="wbw" name="bodyweight for the selected sex and age" units="KiloGM" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -1283,12 +1289,13 @@
           </piecewise>
         </math>
       </assignmentRule>
-      <assignmentRule variable="BW_male">
+      <assignmentRule variable="wbw">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <apply>
-                <times/>
+          <apply>
+            <times/>
+            <ci> Delta_BW </ci>
+            <piecewise>
+              <piece>
                 <apply>
                   <ci> BW_male_lifetime </ci>
                   <apply>
@@ -1297,30 +1304,13 @@
                     <cn type="integer"> 12 </cn>
                   </apply>
                 </apply>
-                <ci> Delta_BW </ci>
-              </apply>
-              <apply>
-                <leq/>
-                <ci> year </ci>
-                <cn type="integer"> 79 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <apply>
-                <times/>
-                <cn type="integer"> 76 </cn>
-                <ci> Delta_BW </ci>
-              </apply>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="BW_female">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <apply>
-                <times/>
+                <apply>
+                  <eq/>
+                  <ci> sex </ci>
+                  <cn type="integer"> 1 </cn>
+                </apply>
+              </piece>
+              <otherwise>
                 <apply>
                   <ci> BW_female_lifetime </ci>
                   <apply>
@@ -1329,39 +1319,9 @@
                     <cn type="integer"> 12 </cn>
                   </apply>
                 </apply>
-                <ci> Delta_BW </ci>
-              </apply>
-              <apply>
-                <leq/>
-                <ci> year </ci>
-                <cn type="integer"> 79 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <apply>
-                <times/>
-                <cn type="integer"> 68 </cn>
-                <ci> Delta_BW </ci>
-              </apply>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="wbw">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <ci> BW_male </ci>
-              <apply>
-                <eq/>
-                <ci> sex </ci>
-                <cn type="integer"> 1 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <ci> BW_female </ci>
-            </otherwise>
-          </piecewise>
+              </otherwise>
+            </piecewise>
+          </apply>
         </math>
       </assignmentRule>
       <assignmentRule variable="hct_mid">

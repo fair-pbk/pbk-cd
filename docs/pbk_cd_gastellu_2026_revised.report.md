@@ -16,7 +16,7 @@
 | Volume unit                  | L                                             |
 | Number of compartments       | 11                                            |
 | Number of species            | 11                                            |
-| Number of parameters         | 80 (29 external / 51 internal)                |
+| Number of parameters         | 78 (29 external / 49 internal)                |
 
 ## Diagram
 
@@ -105,9 +105,7 @@
 | vb0               | piecewise(0.077 * wbw0, eq(sex, 1), 0.0771 * wbw0)                                                                                                                          |
 | Delta_BWs3        | BWRef / BWNominal                                                                                                                                                           |
 | Delta_BW          | piecewise(1 + (Delta_BWs3 - 1) * year * 365 / 1095, leq(year * 365, 1095), Delta_BWs3)                                                                                      |
-| BW_male           | piecewise(BW_male_lifetime(year * 12) * Delta_BW, leq(year, 79), 76 * Delta_BW)                                                                                             |
-| BW_female         | piecewise(BW_female_lifetime(year * 12) * Delta_BW, leq(year, 79), 68 * Delta_BW)                                                                                           |
-| wbw               | piecewise(BW_male, eq(sex, 1), BW_female)                                                                                                                                   |
+| wbw               | Delta_BW * piecewise(BW_male_lifetime(year * 12), eq(sex, 1), BW_female_lifetime(year * 12))                                                                                |
 | hct_mid           | 1.12815e-6 * pow(year, 3) - 0.000172362 * pow(year, 2) + 0.00815264 * year + 0.327363                                                                                       |
 | hct               | piecewise(0.359, leq(year, 2), hct_mid, lt(year, 18), 0.4248446)                                                                                                            |
 | vb_male           | piecewise((-0.027 * year + 0.077) * wbw, lt(year, 1), 0.0761 / (1 + exp(-0.683 * year + 0.946)) * wbw)                                                                      |
@@ -167,10 +165,10 @@
 
 ## Function definitions
 
-| function           | definition                                                                                                                                                                                                                                                                                                                                                                   |
-|:-------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| BW_male_lifetime   | BW_male_lifetime(mval) = lambda(mval, 3.938425 + 0.7518199 * mval - 0.02023793 * pow(mval, 2) + 0.0002921682 * pow(mval, 3) - 2.06762e-6 * pow(mval, 4) + 8.469e-9 * pow(mval, 5) - 2.188427e-11 * pow(mval, 6) + 3.699776e-14 * pow(mval, 7) - 4.099077e-17 * pow(mval, 8) + 2.874804e-20 * pow(mval, 9) - 1.159732e-23 * pow(mval, 10) + 2.052602e-27 * pow(mval, 11))     |
-| BW_female_lifetime | BW_female_lifetime(mval) = lambda(mval, 3.932403 + 0.6866462 * mval - 0.01949911 * pow(mval, 2) + 0.00031311 * pow(mval, 3) - 2.466654e-6 * pow(mval, 4) + 1.113217e-8 * pow(mval, 5) - 3.131402e-11 * pow(mval, 6) + 5.693737e-14 * pow(mval, 7) - 6.706947e-17 * pow(mval, 8) + 4.947858e-20 * pow(mval, 9) - 2.079251e-23 * pow(mval, 10) + 3.800367e-27 * pow(mval, 11)) |
+| function           | definition                                                                                                                                                                                                                                                                                                                                                                                                      |
+|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BW_male_lifetime   | BW_male_lifetime(mval) = lambda(mval, piecewise(3.938425 + 0.7518199 * mval - 0.02023793 * pow(mval, 2) + 0.0002921682 * pow(mval, 3) - 2.06762e-6 * pow(mval, 4) + 8.469e-9 * pow(mval, 5) - 2.188427e-11 * pow(mval, 6) + 3.699776e-14 * pow(mval, 7) - 4.099077e-17 * pow(mval, 8) + 2.874804e-20 * pow(mval, 9) - 1.159732e-23 * pow(mval, 10) + 2.052602e-27 * pow(mval, 11), leq(mval, 79 * 12), 76))     |
+| BW_female_lifetime | BW_female_lifetime(mval) = lambda(mval, piecewise(3.932403 + 0.6866462 * mval - 0.01949911 * pow(mval, 2) + 0.00031311 * pow(mval, 3) - 2.466654e-6 * pow(mval, 4) + 1.113217e-8 * pow(mval, 5) - 3.131402e-11 * pow(mval, 6) + 5.693737e-14 * pow(mval, 7) - 6.706947e-17 * pow(mval, 8) + 4.947858e-20 * pow(mval, 9) - 2.079251e-23 * pow(mval, 10) + 3.800367e-27 * pow(mval, 11), leq(mval, 79 * 12), 68)) |
 
 ## Parameters
 
@@ -209,8 +207,6 @@
 | vb0               | volume of whole blood at birth                                                             | L             | http://purl.obolibrary.org/obo/PBPKO_00108 |
 | Delta_BWs3        | Individual body-weight multiplier reached at reference age                                 | dimensionless | *not specified*                            |
 | Delta_BW          | Age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)                   | dimensionless | *not specified*                            |
-| BW_male           | measured bodyweight for male participiant                                                  | kg            | http://purl.obolibrary.org/obo/PBPKO_00008 |
-| BW_female         | measured bodyweight for female participiant                                                | kg            | http://purl.obolibrary.org/obo/PBPKO_00008 |
 | wbw               | bodyweight for the selected sex and age                                                    | kg            | http://purl.obolibrary.org/obo/PBPKO_00008 |
 | hct_mid           | Predicted hematocrit in the age-dependent (ages 2–18 years)                                | dimensionless | *not specified*                            |
 | hct               | age-specific hematocrit fraction                                                           | dimensionless | *not specified*                            |
