@@ -342,22 +342,16 @@
           <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
-      <unitDefinition id="GM_PER_DAY">
-        <listOfUnits>
-          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
-          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="L_PER_DAY">
-        <listOfUnits>
-          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
-          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
-        </listOfUnits>
-      </unitDefinition>
       <unitDefinition id="MicroGM_PER_L">
         <listOfUnits>
           <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
           <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="GM_PER_DAY">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
         </listOfUnits>
       </unitDefinition>
       <unitDefinition id="MicroGM_PER_GM">
@@ -381,7 +375,7 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment metaid="meta_GUT_LUMENComp" id="GUT_LUMENComp" name="gut lumen compartment" spatialDimensions="3" units="L" constant="true">
+      <compartment metaid="meta_GUT_LUMENComp" id="GUT_LUMENComp" name="gut lumen compartment" spatialDimensions="3" size="1" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_GUT_LUMENComp">
@@ -433,7 +427,7 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment id="MTComp" name="Metallothionein compartment" spatialDimensions="3" units="L" constant="true"/>
+      <compartment id="MTComp" name="Metallothionein compartment" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_LiverComp" id="LiverComp" name="liver compartment" spatialDimensions="3" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -743,10 +737,35 @@
         </annotation>
       </parameter>
       <parameter id="BWRef" name="Body weight of individual at reference age" value="85" units="KiloGM" constant="true"/>
-      <parameter id="BWNominal" constant="false"/>
+      <parameter id="BWNominal" name="sex specific nominal population bodyweight" units="KiloGM" constant="false"/>
+      <parameter metaid="meta_wbw0" id="wbw0" name="bodyweight at birth" units="KiloGM" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_wbw0">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
+      <parameter metaid="meta_vb0" id="vb0" name="volume of whole blood at birth" units="L" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_vb0">
+              <bqmodel:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00108"/>
+                </rdf:Bag>
+              </bqmodel:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </parameter>
       <parameter id="Delta_BWs3" name="Individual body-weight multiplier reached at reference age" units="UNITLESS" constant="false"/>
       <parameter id="Delta_BW" name="Age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)" units="UNITLESS" constant="false"/>
-      <parameter id="Ccord" name="Measured Cd concentration in cord whole blood used to initialize birth Cd amount" value="0" units="MicroGM_PER_DAY" constant="true"/>
       <parameter metaid="meta_BW_male" id="BW_male" name="measured bodyweight for male participiant" units="KiloGM" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -1000,38 +1019,13 @@
       <parameter id="Delta_creat" name="Individual multiplicative adjustment to predicted urine creatinine output" value="1" units="UNITLESS" constant="true"/>
       <parameter id="ucr_base" name="Reference creatinine output before Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
       <parameter id="ucr" name="Age-dependent creatinine output after Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
-      <parameter id="Vurine" name="predicted urine volume" units="L_PER_DAY" constant="false"/>
+      <parameter id="Vurine" name="Average urine volume" units="L" constant="false"/>
       <parameter id="k5_active" name="sex-specific gut:intestine fraction" units="UNITLESS" constant="false"/>
       <parameter id="k19x" name="age-adjusted kidney:urine rate" units="PER_DAY" constant="false"/>
       <parameter id="k17_decline" name="age-related changes of k17" units="UNITLESS" constant="false"/>
       <parameter id="k17x" name="age-adjusted MT removal fraction to kidney" units="UNITLESS" constant="false"/>
       <parameter id="k17b" name="MT removal fraction to urine" units="UNITLESS" constant="false"/>
-      <parameter metaid="meta_wbw0" id="wbw0" name="bodyweight at birth" units="KiloGM" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_wbw0">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
-      <parameter metaid="meta_vb0" id="vb0" name="volume of whole blood at birth" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_vb0">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00108"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
+      <parameter id="Ccord" name="Measured Cd concentration in cord whole blood used to initialize birth Cd amount" value="0" units="MicroGM_PER_L" constant="true"/>
       <parameter id="Acord_total" name="initial Cd amound from measured cord whole blood" units="MicroGM" constant="false"/>
       <parameter id="uptakeTotal_Lung" name="Systemic Cd uptake flux from lung" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeTotal_GI" name="Systemic Cd uptake flux from intestine" units="MicroGM_PER_DAY" constant="false"/>
@@ -1195,6 +1189,48 @@
                   <ci> AgeRef </ci>
                   <cn type="integer"> 12 </cn>
                 </apply>
+              </apply>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="wbw0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <cn> 3.938425 </cn>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <cn> 3.932403 </cn>
+            </otherwise>
+          </piecewise>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="vb0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <piecewise>
+            <piece>
+              <apply>
+                <times/>
+                <cn> 0.077 </cn>
+                <ci> wbw0 </ci>
+              </apply>
+              <apply>
+                <eq/>
+                <ci> sex </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+            </piece>
+            <otherwise>
+              <apply>
+                <times/>
+                <cn> 0.0771 </cn>
+                <ci> wbw0 </ci>
               </apply>
             </otherwise>
           </piecewise>
@@ -2128,48 +2164,6 @@
             <cn type="integer"> 1 </cn>
             <ci> k17x </ci>
           </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="wbw0">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <cn> 3.938425 </cn>
-              <apply>
-                <eq/>
-                <ci> sex </ci>
-                <cn type="integer"> 1 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <cn> 3.932403 </cn>
-            </otherwise>
-          </piecewise>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="vb0">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <apply>
-                <times/>
-                <cn> 0.077 </cn>
-                <ci> wbw0 </ci>
-              </apply>
-              <apply>
-                <eq/>
-                <ci> sex </ci>
-                <cn type="integer"> 1 </cn>
-              </apply>
-            </piece>
-            <otherwise>
-              <apply>
-                <times/>
-                <cn> 0.0771 </cn>
-                <ci> wbw0 </ci>
-              </apply>
-            </otherwise>
-          </piecewise>
         </math>
       </assignmentRule>
       <assignmentRule variable="Acord_total">
