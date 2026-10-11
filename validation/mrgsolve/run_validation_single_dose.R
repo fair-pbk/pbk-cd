@@ -1,6 +1,6 @@
 #### SIMULATION OF INTERNAL EXPOSURE FOR CADMIUM ####
 
-library(mrgsolve)
+suppressPackageStartupMessages(library(mrgsolve))
 
 results_path <- "validation/outputs/reference/mrgsolve/"
 results_file <- "oral_single.csv"
