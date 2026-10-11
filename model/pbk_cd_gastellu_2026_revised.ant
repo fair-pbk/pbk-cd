@@ -83,7 +83,7 @@ model pbk_cd_gastellu_2026_revised()
     AgeRef = 30                         # Reference age corresponding to target body weight [year]
     sex = 2                             # [1 = male, 2 = female]
     year := time / 365 + Age            # Age during simulation [year]
-    BWRef = 85                          # Subject bodyweight at reference age [kg]
+    BWRef = 65                          # Subject bodyweight at reference age [kg]
     BWNominal := piecewise(BW_male_lifetime(AgeRef * 12), sex==1, BW_female_lifetime(AgeRef * 12)) # Nominal body weight at reference age based on nominal lifetime equation
     wbw0 := piecewise( 3.938425, sex == 1, 3.932403 )           # Bodyweight at birth [kg]
     vb0 := piecewise( 0.0770 * wbw0, sex == 1, 0.0771 * wbw0 )  # Body volume at birth [L]

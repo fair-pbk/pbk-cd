@@ -768,7 +768,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="BWRef" name="Body weight of individual at reference age" value="85" units="KiloGM" constant="true"/>
+      <parameter id="BWRef" name="Body weight of individual at reference age" value="65" units="KiloGM" constant="true"/>
       <parameter id="BWNominal" name="sex specific nominal population bodyweight" units="KiloGM" constant="false"/>
       <parameter metaid="meta_wbw0" id="wbw0" name="bodyweight at birth" units="KiloGM" constant="false">
         <annotation>
