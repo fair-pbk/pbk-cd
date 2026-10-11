@@ -167,7 +167,7 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
     Delta_BW <- Delta_BWs3
   }
 
-  # BW en kg
+  # BW in kg
   # NEW ITEM: After age 79, the equation no longer holds,
   # so we use the value at age 79.
   if (sex == 1) {
@@ -213,8 +213,7 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
   }
 
   # 2/ Hematocrite ----
-  # NEW ITEM: The if/ifelse conditional in the version provided by
-  # Thomas was incorrect. Rewritten.
+  # NEW ITEM: The if/ifelse conditional in the oroginal version was incorrect. Rewritten.
   if (year <= 2) {
     hct = 0.359;
   } else if (year < 18) {

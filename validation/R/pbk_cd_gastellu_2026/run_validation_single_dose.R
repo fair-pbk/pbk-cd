@@ -8,19 +8,25 @@ set.seed(123)
 
 library(data.table)
 library(tidyr)
-library(rxode2)
-library(dplyr)
-
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(rxode2))
 source("validation/R/pbk_cd_gastellu_2026/pbk_cd_gastellu_2026.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/helper_functions.R")
 
 model_id <- "pbk_cd_gastellu_2026"
 results_path <- "validation/outputs/reference/R/oral_single"
 
+# Simulation setup
+sex <- 1 # Male
+age_ref <- 30
+bw_ref <- 85
+Delta_BWs3 <- compute_delta_bw(age_ref, bw_ref, sex)
+
 ndays <- 40
 
 df1 <- setDT(data.frame(id=1))
-df1[, sex := 1] # Male
-df1[, Delta_BWs3 := 1]  # Close to the mean Bw trajectory
+df1[, sex := sex]
+df1[, Delta_BWs3 := Delta_BWs3]  # Close to the mean Bw trajectory
 df1[,Delta_creat := 1]    # Mean value
 df1[,k2_cig:= 0.6]        # coeff smoke -> alveola. Not used in this scenario.
 df1[,k1_dust := 0.9]      # Not used in this scenario.

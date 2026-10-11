@@ -4,18 +4,21 @@
 #-------------------------------------------------------------------------------
 
 # Load packages
-library(rxode2)
-library(dplyr)
-source("validation/R/pbk_cd_gastellu_2026_revised/default_parameters.R")
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(rxode2))
 source("validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/default_parameters.R")
+source("validation/R/pbk_cd_gastellu_2026_revised/helper_functions.R")
 
 # Write outputs
 model_id <- "pbk_cd_gastellu_2026_revised"
 results_path <- "validation/outputs/reference/R/oral_repeated_lifetime"
 
 # Simulation setup
-sex_i <- 1
-Delta_BWs3 <- 1.1
+sex <- 1
+age_ref <- 30
+bw_ref <- 85
+Delta_BWs3 <- compute_delta_bw(age_ref, bw_ref, sex)
 Delta_creat <- 1
 
 age_start <- 0*365 # years
@@ -29,7 +32,7 @@ phys_cov <- do.call(rbind, lapply(observation_times, function(t) {
   
   p <- phys(
     time = t,
-    sex = sex_i,
+    sex = sex,
     Delta_BWs3 = Delta_BWs3,
     Delta_creat = Delta_creat,
     k5_h = unname(theta["k5_h"]),
@@ -58,7 +61,7 @@ phys_cov <- do.call(rbind, lapply(observation_times, function(t) {
 # Initial physiology at birth
 p0 <- phys(
   time = 0,
-  sex = sex_i,
+  sex = sex,
   Delta_BWs3 = Delta_BWs3,
   Delta_creat = Delta_creat,
   k5_h = unname(theta["k5_h"]),
