@@ -21,9 +21,11 @@ sex <- 1 # Male
 age_ref <- 30
 bw_ref <- 85
 Delta_BWs3 <- compute_delta_bw(age_ref, bw_ref, sex)
+age_start <- 30 # age at start of simulation in 
+age_start_days <- 30*365 # age at start of simulation in days
+bw_start <- compute_bw(age_start, sex)
 
 ndays <- 40
-age_start <- 30*365 # days
 
 df1 <- setDT(data.frame(id=1))
 df1[, sex := sex]
@@ -57,10 +59,10 @@ df1[,k20 := 0.1]
 # Create daily entries
 df1 <- df1[rep(1, ndays+1), ]  # repeat for ndays
 df1[, day := 0:ndays]
-df1[, age_piv_jour := age_start + day]
+df1[, age_piv_jour := age_start_days + day]
 
-# Food exposure (ug/d) - daily dose
-df1[, DIET_ing := 100]
+# Food exposure (ug/kg bw/day) - Divide by bw to get simulate with 100 ug/d
+df1[,DIET_ing := 100/bw_start]
 
 # PBK input: Parameters table
 params_all <- copy(df1)[
@@ -92,11 +94,11 @@ event_res[, next_piv := NULL]
 setnames(event_res, old = c("day", "SR_influx_name", "SR_influx_val"), 
          new = c("time", "cmt", "amt"))
 event_res <- event_res[amt != 0]
-event_res$time <- event_res$time + age_start
+event_res$time <- event_res$time + age_start_days
 setorder(event_res, id, time)
 
 # Observed times
-time_val <- seq(age_start,age_start+ndays,1)
+time_val <- seq(age_start_days,age_start_days+ndays,1)
 time_obl <- seq(0,40000,length.out=250)
 time_vect <- unique(c(time_val,time_obl))
 ts_vector <- time_vect[order(time_vect)]

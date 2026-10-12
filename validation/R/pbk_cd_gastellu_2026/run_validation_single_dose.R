@@ -21,12 +21,14 @@ sex <- 1 # Male
 age_ref <- 30
 bw_ref <- 85
 Delta_BWs3 <- compute_delta_bw(age_ref, bw_ref, sex)
+age_start <- 30 # age at start of simulation in 
+bw_start <- compute_bw(age_start, sex)
 
 ndays <- 40
 
 df1 <- setDT(data.frame(id=1))
-df1[, sex := sex]
-df1[, Delta_BWs3 := Delta_BWs3]  # Close to the mean Bw trajectory
+df1[,sex := sex]
+df1[,Delta_BWs3 := Delta_BWs3]  # Close to the mean Bw trajectory
 df1[,Delta_creat := 1]    # Mean value
 df1[,k2_cig:= 0.6]        # coeff smoke -> alveola. Not used in this scenario.
 df1[,k1_dust := 0.9]      # Not used in this scenario.
@@ -62,11 +64,11 @@ df1 %>%
   dplyr::mutate(age_piv = 2) %>%
   as.data.table() %>%
   uncount_dt("age_piv") -> df1
-age_piv_jour <- c(1,30*365)
+age_piv_jour <- c(1,age_start*365)
 df1 <- df1[, age_piv_jour:= floor(rep(age_piv_jour,.N / 2))]
 
-# Food exposure (ug/kg bw/d)
-df1[,DIET_ing := fifelse(age_piv_jour ==1,0,1000)]
+# Food exposure (ug/kg bw/day) - Divide by bw to get simulate with 1000 ug/d
+df1[,DIET_ing := fifelse(age_piv_jour == 1,0,1000/bw_start)]
 
 # PBK input: Parameters table
 params_all <- copy(df1)[

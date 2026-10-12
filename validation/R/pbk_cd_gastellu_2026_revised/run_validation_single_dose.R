@@ -116,7 +116,7 @@ phys_cov$time <- observation_times-simulation_start
 event_res <- ev_bolus_single %>%
   bind_rows(ev_observed) %>%
   left_join(phys_cov, by = c("id", "time")) %>%
-  mutate(amt=1000*wbw_f) %>%
+  mutate(amt=1000) %>%
   arrange(id, time, desc(evid))
 
 # Solve

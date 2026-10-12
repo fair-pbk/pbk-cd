@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# Single dose scenario : simulation of 40 days for single adult age 30 with
-# default parameters and single dose of 1 mg at time 0.
+# Repeated dose scenario: simulation for 40 days for single adult of age 30 with
+# default parameters and daily oral dose of 100 ug day.
 #-------------------------------------------------------------------------------
 
 # Load packages
@@ -116,7 +116,7 @@ phys_cov$time <- observation_times-simulation_start
 event_res <- ev_repeated %>%
   bind_rows(ev_observed) %>%
   left_join(phys_cov, by = c("id", "time")) %>%
-  mutate(amt=100*wbw_f) %>%
+  mutate(amt=100) %>%
   arrange(id, time, desc(evid))
 
 # Solve
