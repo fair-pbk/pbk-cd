@@ -84,6 +84,18 @@ theta <- c(
   f_inh_available = 1, # Fraction of inhaled Cd available for the modeled respiratory deposition/absorption pathway (-)
   kinh_release = 1,    # First-order release rate constant for cigarette Cd source compartment (/day)
   f_derm_available = 0.05/100, # Fraction of dermally applied/available Cd transferred to plasma (-)
-  kderm_release = 1    # First-order release rate constant from dermal exposure source compartments (/day)
+  kderm_release = 1,    # First-order release rate constant from dermal exposure source compartments (/day)
+  
+  # ==========================================================
+  # Initial concentration settings for blood
+  # ==========================================================
+  Ccord = 0.3,       # measurement of cord blood concentration in whole blood (µg/L)
+  fRBC0 = 0.95,      # fraction of initial Cd in red blood cells (-)
+  
+  # ==========================================================
+  # Helpers
+  # ==========================================================
+  UPTAKE_MT_smooth_fraction = 0.01, # Relative width of the smooth transition between proportional and capacity-limited MT uptake, expressed as a fraction of k8 (-)
+  rho_body = 1            # to convert between volumes and organ masses (kg/L)
 )
 

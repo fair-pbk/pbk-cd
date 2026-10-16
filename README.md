@@ -2,33 +2,76 @@
 
 This repository contains a revised, FAIR reimplementation of the cadmium PBK model developed by [Gastellu et al. (2026)](https://doi.org/10.1016/j.fct.2024.115111), which was itself based on the model originally developed by [Kjellström and Nordberg (1978)](https://doi.org/10.1016/0013-9351(78)90160-3).
 
-Compared with the model from Gastellu et al., the present implementation includes two distinct types of changes. The first concerns model revisions, involving changes to the model formulation itself. The second concerns the FAIR reimplementation, involving changes required to encode the model in Antimony/SBML in accordance with the [FAIR PBK standard](https://doi.org/10.1016/j.comtox.2026.100426). The resulting SBML (FAIR) representation of the model is provided in [pbk_cd_gastellu_2026_revised.sbml](model/pbk_cd_gastellu_2026_revised.sbml).
+Compared with the model from Gastellu et al., the present implementation includes two distinct types of changes. The first concerns model revisions, involving changes to the model formulation itself. The second concerns the FAIR reimplementation, involving changes required to encode the model in Antimony/SBML in accordance with the [FAIR PBK standard](https://doi.org/10.1016/j.comtox.2026.100426). The resulting SBML (FAIR) representation of the model is provided in [pbk_cd_gastellu_2026_revised.sbml](model/pbk_cd_gastellu_2026_revised.sbml). A diagram of the model compartments and species is shown below.
+
+![Model diagram of the EuroMix PBK model](docs/pbk_cd_gastellu_2026_revised.report.svg)
 
 
 ## Model revision
 
 Key changes in the revised model are:
 
-- **GI compartments:** whereas the original model uses one gut state, the revised model distinguishes gut lumen from intestinal tissue.
-- **Added absorption rate constant:** explicit gut processing through a first-order absorption rate constant was added to fix an inconsistency in the units.
-- **Systemic uptake calculation:** the revised model calculates total systemic uptake algebraically from lung and intestinal transfer.
-- **Uptake-pool state:** unlike the original model, which has a dynamic uptake pool, the revised model does not carry that intermediate pool as a state; its flux is calculated algebraically instead.
-- **Uptake partitioning:** the revised model sends systemic uptake to metallothionein (MT) or plasma using the `k7` fraction and `k8` maximum-flux limit whereas the original partitions the dynamic uptake pool between its MT and plasma outflows.
-- **Physiology aggregation:** the original calculates total body weight from a set of detailed organ and tissue volumes. The revised physiology retains volumes used directly by the Cd model and assigns the remainder to `OTHER` so that the organ-volume total closes to body weight.
-- **Age range guard:** The revised implementation guards selected age-dependent equations at their upper age ranges.
+- **Simplification of tissue volumes and body-weight calculations:** Instead of explicitly calculating volumes for numerous organs and tissues, the revised model retains the principal compartments (blood, kidney, liver, lungs, intestine) and calculates the remaining tissue volume as the difference from total body weight. This also changes how `wbw_f` is determined.
+- **Addition of age range guard:** The revised implementation guards selected age-dependent equations at their upper age ranges.
+- **Restructuring of gastrointestinal absorption:** The original single `GUT` compartment is replaced by two sequential compartments (`GUT` and `INTESTINE`) according to Kjellström and Nordberg (1978) and Pouillot et al. (2022). The revised equations explicitly distinguish gastrointestinal input, transit, absorption, and add the nonabsorbed fraction eliminated in feces.
+- **Removal of the intermediate systemic uptake compartment:** The original dynamic `UPTAKE1` compartment is replaced by the algebraic variable `TOTAL_UPTAKE`, calculated directly from pulmonary and intestinal absorption. Cadmium uptake is subsequently divided into metallothionein-associated uptake (`UPTAKE_MT`) and plasma uptake (`UPTAKE_PLASMA`), retaining the saturable allocation mechanism.
+- **Replace hard cap in calculation of metallothionein-associated uptake by smooth approximation:** The hard cap of `min(k7 * TOTAL_UPTAKE, k8)` for metallothionein-associated uptake (`UPTAKE_MT`) was replaced with a smooth approximation around `k8` to improve numerical stability. It is close to, but not mathematically identical to, the piecewise cap used in R.
+- **Revision of metallothionein-associated kinetics:** A new rate constant, `k_MT_out`, is introduced to explicitly scale cadmium transfer from the metallothionein compartment to the kidney and urinary elimination pathways, thereby achieving unit consistency. `K_MT_out` was set as 1, so that it does not influence the simulation.
+- **Addition of cadmium redistribution from the kidney to the plasma:** The revised plasma equation includes `+ k18 * KIDNEY`, representing transfer from the kidney back to the circulating compartment. In the original model, this term was absent from the plasma equation, despite being included as a kidney loss.
+- **Revised treatment of prenatal cadmium exposure:** The original time-dependent `CORD_quant` exposure input is removed. Prenatal exposure is instead intended to be represented by initial cadmium amounts in blood compartments at birth, using birth-specific blood and plasma volumes.
+- **Revised calculation of blood cadmium concentrations:** The revised model distinguishes total blood-associated cadmium amount (`BLOOD`) from blood cadmium concentration (`BLOOD_burden`), avoiding the previous use of `BLOOD` as a concentration.
+- **Improved representation of elimination pathways and mass balance:** The revised model explicitly includes gastrointestinal elimination of nonabsorbed cadmium, cumulative fecal and urinary excretion, and a new cumulative exhalation compartment (`EXH`). It also distinguishes cadmium retained in the body (`total`) from cumulative eliminated cadmium (`Excreted`).
+- **Removal of source–route-specific tracking from the revised implementation:** Source-specific contributions cannot be directly extracted from the revised model without additional calculations or simulations.
 
-## Model implementation
+## Revised R model implementation
 
-The file [pbk_cd_gastellu_2026_revised.ant](model/pbk_cd_gastellu_2026_revised.ant) contains the Antimony implementation of the model. Conversion to the annotated SBML file is done through the script [create_sbml.py](scripts/create_sbml.py). This script first converts the Antimony model implementation to SBML and then annotates this SBML file using the annotations specified in the [pbk_cd_gastellu_2026_revised.annotations.csv](model/pbk_cd_gastellu_2026_revised.annotations.csv) file. A diagram of the model compartments and species is shown below.
+The file [pbk_cd_gastellu_2026_revised.R](validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R) contains the revised R implementation. Changes specific to the revised R implementation are:
 
-![Model diagram of the EuroMix PBK model](docs/pbk_cd_gastellu_2026_revised.report.svg)
+- **Separation of physiological calculations from the PBK model:** Age- and sex-dependent physiological equations have been moved into a separate `phys()` R function. This simplifies the PBK ODE system and facilitates independent updates of physiological parameters.
+- **Revised implementation of time-dependent exposure:** Separate release-rate constants have been introduced for ingestion (`king_release`), inhalation (`kinh_release`), and dermal exposure (`kderm_release`). This allows different temporal patterns of exposure delivery.
+- **Introduction of route-specific availability factors:** The revised model introduces `f_ing_available`, `f_inh_available`, and `f_derm_available` to capture the fraction of exposure available via each route.
+
+## SBML/Antimony model implementation
+
+The file [pbk_cd_gastellu_2026_revised.ant](model/pbk_cd_gastellu_2026_revised.ant) contains the Antimony implementation of the model. Conversion to the annotated SBML file is done through the script [create_sbml.py](scripts/create_sbml.py). This script first converts the Antimony model implementation to SBML and then annotates this SBML file using the annotations specified in the [pbk_cd_gastellu_2026_revised.annotations.csv](model/pbk_cd_gastellu_2026_revised.annotations.csv) file.
 
 The following changes were made to the Antimony/SBML reimplementation for compliance with the FAIR PBK standard:
 
-- The Antimony model replaces the hard `min(k7 * TOTAL_UPTAKE, k8)` cap with a smooth approximation around `k8` to improve numerical stability. It is close to, but not mathematically identical to, the piecewise cap used in R.
-- The Antimony model apportions the capped uptake back to lung- and GI-derived fluxes so those flows can be represented separately in its reaction network. Their sum defines the same total uptake pathway, subject to the smoothed cap.
-- Cord-blood initialization is represented as an initial amount in the RBC species, calculated from `Ccord` and the birth blood volume. The R revised implementation does not express this initialization in the same way.
-- In compliance with the standard, dosing is excluded from the Antimony/SBML model. Accordingly, exposure sources and their associated reactions are not represented in the reimplementation.
+- **Explicit density parameter:** For consistency of units, an additional density parameter `rho_body` is included for translating mass to volume.
+- **Exclusion of exposure/dosing parameters:** In compliance with the standard, dosing is excluded from the Antimony/SBML model. Accordingly, exposure sources and their associated reactions are not represented in the reimplementation.
+
+## Implementation comparison
+
+This table summarizes the changes from the Gastellu et al. model to the revised PARC R model, and notes how those changes are represented in the SBML implementation. It is a structural comparison; entries marked as different or partial should not be taken to imply that the implementations are numerically equivalent.
+
+| No. | Component | Original model (Gastellu et al.) | Revised R implementation | R-model rationale or notes | SBML representation | R–SBML differences |
+|---:|---|---|---|---|---|---|
+| 1 | Model organization | Physiology and ODEs are combined in `rxode2()`. | Physiology is in a separate `phys()` function; ODEs remain in `rxode2()`. | Improves readability. | Yes; different structure. | R separates `phys()`; SBML embeds physiology as assignment rules. |
+| 2 | Model organization | Parameters are defined in the same R script as the ODEs. | Parameters are held in a separate list from the ODEs. | Improves readability and makes parameter values easier to adjust. | Yes. | — |
+| 3 | Annotation | — | Parameter names were modified and descriptions added. | Improves readability and makes parameters easier to follow. | PBKO annotations. | — |
+| 4 | Physiological compartments | Detailed tissue and organ calculations. | Major organs plus residual `vother`. | Omits volume calculations for compartments not represented in the PBK model. | Yes. | Both simplify tissues; compare definitions before assuming the calculations are identical. |
+| 5 | Body weight | `wbw_f` is calculated from the sum of individual tissue volumes. | The notes describe `wbw_f` as equal to `wbw` using residual `vother`. | The source notes also say `wbw_f` was removed from the revised model; confirm the variable definition and formula. | Yes. | Both are described as using residual `vother` and `wbw_f`; verify that the formulas are equivalent. |
+| 6 | Exposure release kinetics | Exposure compartments decay at `1/day`. | Uses `king_release`, `kinh_release`, and `kderm_release`. | Added for unit consistency. These parameters are all set to 1, so they do not affect the outcome. | No. | External exposure factors are excluded from the SBML PBK model. |
+| 7 | Exposure availability | No explicit route-specific availability fractions. | Uses `f_ing_available`, `f_inh_available`, and `f_derm_available`. | Added to make route contributions adjustable. The ingestion and inhalation fractions are set to 1; the dermal fraction can be varied. | No. | External exposure factors are excluded from the SBML PBK model. |
+| 8 | GI structure | One `GUT` compartment. | Sequential `GUT` and `INTESTINE` compartments. | Follows Kjellström and Nordberg (1978) and Pouillot et al. (2022). | Yes. | — |
+| 9 | GI absorption | `k5` multiplies GI input before `GUT`. | `k5` multiplies transfer from `GUT` to `INTESTINE`. | Follows Kjellström and Nordberg (1978) and Pouillot et al. (2022). | Yes. | — |
+| 10 | Unabsorbed fraction | No explicit `(1-k5)` fecal flux. | Adds `(1-k5) * kabs * GUT` to `FECES`. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | Yes. | — |
+| 11 | Systemic uptake | Dynamic `UPTAKE1` compartment. | Algebraic `TOTAL_UPTAKE` flux. | — | Yes; different structure. | SBML represents uptake through reactions. |
+| 12 | Uptake allocation | `UPTAKE2` and `UPTAKE3` are based on `UPTAKE1`. | `UPTAKE_MT` and `UPTAKE_PLASMA` are based on `TOTAL_UPTAKE`. | Uses a smooth-function translation. | Yes. | — |
+| 13 | Metallothionein transfer | `k17x * META` and `k17b * META`. | `k_MT_out * k17x * META` and `k_MT_out * k17b * META`. | Added `k_MT_out` for unit consistency. | Yes. | — |
+| 14 | Kidney to plasma | `-k18 * KIDNEY` in kidney, with no corresponding plasma input. | Adds `+k18 * KIDNEY` to plasma. | Corrects a missing plasma input. | Yes. | — |
+| 15 | Dermal absorption | Fixed 0.5% contribution. | `f_derm_available * kderm_release * exposure`. | The 0.5% contribution can be adjusted externally through `f_derm_available`. | No. | External exposure factors are excluded from the SBML PBK model. |
+| 16 | Prenatal exposure | Decaying `CORD_quant` state and blood inputs. | Removes the `CORD_quant` ODE; intended to use initial conditions. | Initial cord-blood concentration can be used to calculate initial amounts in plasma and RBCs. | Yes. | — |
+| 17 | Blood cadmium | `BLOOD` is concentration divided by `vb`. | `BLOOD` is amount; `BLOOD_burden` is concentration. | Corrects the calculation of blood amount and concentration, which is important for mass balance and validation. | Yes. | — |
+| 18 | Fecal elimination | `k11 * PLASMA + k15 * LIVER`. | Adds `(1-k5) * kabs * GUT`. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | Yes. | — |
+| 19 | Urinary elimination | `k17b * META + k19x * KIDNEY`. | `k_MT_out * k17b * META + k19x * KIDNEY`. | Added `k_MT_out` for unit consistency. | Yes. | — |
+| 20 | Exhalation | No cumulative `EXH` compartment. | `EXH` tracks unretained inhaled cadmium. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | No. | `EXH` depends on external exposure factors and is therefore excluded from the PBK model. |
+| 21 | Body burden | `wb` and total use different definitions. | Total sums retained compartments, including `INTESTINE`. | Updated to reflect the compartments in the revised model. | Yes. | R defines total explicitly as an algebraic output; SBML retains the compartments, but definitions may differ. |
+| 22 | Cumulative excretion | `FECES` and `URINE`. | `Excreted = FECES + URINE + EXH`. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | Partial. | SBML includes `FECES` and `URINE`, but not `EXH`, because external exposure is handled separately. R `Excreted` includes all three. |
+| 23 | Source-route attribution | Separate PBK2 source-route model. | Revised file contains combined `pbk_cd` only. | Route tracking could be added once the revised model is agreed upon. | No; route tracking is absent. | Neither revised implementation retains the original PBK2 source-resolved states. |
+| 24 | Sex-specific GI parameter | Sex-dependent `k5` in the original physiology. | `k5` is selected through `k5_h` or `k5_f` in `phys()`. | — | Yes. | — |
+
+**SBML representation key:** “Yes” means represented in the SBML model; “No” means omitted; “Partial” means only part of the feature is represented. “PBKO annotations” refers to the annotation noted for the parameter changes.
 
 ## Validation
 

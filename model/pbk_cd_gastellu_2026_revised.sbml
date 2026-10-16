@@ -374,9 +374,9 @@
           <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
-      <unitDefinition id="MicroGM_PER_L">
+      <unitDefinition id="KiloGM_PER_L">
         <listOfUnits>
-          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+          <unit kind="gram" exponent="1" scale="3" multiplier="1"/>
           <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
@@ -384,6 +384,12 @@
         <listOfUnits>
           <unit kind="gram" exponent="1" scale="0" multiplier="1"/>
           <unit kind="second" exponent="-1" scale="0" multiplier="86400"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MicroGM_PER_L">
+        <listOfUnits>
+          <unit kind="gram" exponent="1" scale="-6" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
       <unitDefinition id="MicroGM_PER_GM">
@@ -581,7 +587,7 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species metaid="meta_PLASMA" id="PLASMA" name="amount in plasma" compartment="PlasmaComp" initialAmount="0" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
+      <species metaid="meta_PLASMA" id="PLASMA" name="amount in plasma" compartment="PlasmaComp" substanceUnits="MicroGM" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_PLASMA">
@@ -768,7 +774,8 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="BWRef" name="Body weight of individual at reference age" value="65" units="KiloGM" constant="true"/>
+      <parameter id="BWRef" name="Body weight of individual at reference age" value="85" units="KiloGM" constant="true"/>
+      <parameter id="rho_body" value="1" units="KiloGM_PER_L" constant="true"/>
       <parameter id="BWNominal" name="sex specific nominal population bodyweight" units="KiloGM" constant="false"/>
       <parameter metaid="meta_wbw0" id="wbw0" name="bodyweight at birth" units="KiloGM" constant="false">
         <annotation>
@@ -1009,19 +1016,6 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_wbw_f" id="wbw_f" name="Caculated body weight from organ volumes" units="L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_wbw_f">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00008"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
       <parameter id="Delta_creat" name="Individual multiplicative adjustment to predicted urine creatinine output" value="1" units="UNITLESS" constant="true"/>
       <parameter id="ucr_base" name="Reference creatinine output before Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
       <parameter id="ucr" name="Age-dependent creatinine output after Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
@@ -1031,11 +1025,15 @@
       <parameter id="k17_decline" name="age-related changes of k17" units="UNITLESS" constant="false"/>
       <parameter id="k17x" name="age-adjusted MT removal fraction to kidney" units="UNITLESS" constant="false"/>
       <parameter id="k17b" name="MT removal fraction to urine" units="UNITLESS" constant="false"/>
-      <parameter id="Ccord" name="Measured Cd concentration in cord whole blood used to initialize birth Cd amount" value="0" units="MicroGM_PER_L" constant="true"/>
+      <parameter id="Ccord" name="Measured Cd concentration in cord whole blood used to initialize birth Cd amount" value="0.3" units="MicroGM_PER_L" constant="true"/>
+      <parameter id="fRBC" value="0.95" units="UNITLESS" constant="true"/>
       <parameter id="Acord_total" name="initial Cd amound from measured cord whole blood" units="MicroGM" constant="false"/>
+      <parameter id="ARBC0" units="MicroGM" constant="false"/>
+      <parameter id="APLASMA0" units="MicroGM" constant="false"/>
       <parameter id="uptakeTotal_Lung" name="Systemic Cd uptake flux from lung" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeTotal_GI" name="Systemic Cd uptake flux from intestine" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="TOTAL_UPTAKE" name="Sum of lung and GI systemic uptake fluxes" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="UPTAKE_MT_smooth_fraction" name="Smoothing parameter for transition between proportional and capacity-limited MT uptake" value="0.01" units="UNITLESS" constant="true"/>
       <parameter id="UPTAKE_MT" name="Remaining systemic Cd uptake flux to MT" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="UPTAKE_PLASMA" name="Remaining systemic Cd uptake flux to plasma" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeMT_Lung" name="Lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
@@ -1055,19 +1053,8 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_BLOOD_burden" id="BLOOD_burden" name="concentration in whole blood" units="MicroGM_PER_L" constant="false">
-        <annotation>
-          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_BLOOD_burden">
-              <bqmodel:is>
-                <rdf:Bag>
-                  <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00301"/>
-                </rdf:Bag>
-              </bqmodel:is>
-            </rdf:Description>
-          </rdf:RDF>
-        </annotation>
-      </parameter>
+      <parameter id="CBLOOD" units="MicroGM_PER_L" constant="false"/>
+      <parameter id="CKIDNEY" units="MicroGM_PER_L" constant="false"/>
       <parameter metaid="meta_ur" id="ur" name="urinary clearance rate" units="MicroGM_PER_DAY" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -1107,11 +1094,18 @@
           </rdf:RDF>
         </annotation>
       </parameter>
+      <parameter id="total_internal" units="MicroGM" constant="false"/>
+      <parameter id="Excreted" units="MicroGM" constant="false"/>
     </listOfParameters>
     <listOfInitialAssignments>
+      <initialAssignment symbol="PLASMA">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> APLASMA0 </ci>
+        </math>
+      </initialAssignment>
       <initialAssignment symbol="RBC">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> Acord_total </ci>
+          <ci> ARBC0 </ci>
         </math>
       </initialAssignment>
       <initialAssignment symbol="LungComp">
@@ -1904,7 +1898,11 @@
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
-            <ci> wbw </ci>
+            <apply>
+              <divide/>
+              <ci> wbw </ci>
+              <ci> rho_body </ci>
+            </apply>
             <apply>
               <plus/>
               <ci> vk </ci>
@@ -1913,19 +1911,6 @@
               <ci> vintestine </ci>
               <ci> vlungs </ci>
             </apply>
-          </apply>
-        </math>
-      </assignmentRule>
-      <assignmentRule variable="wbw_f">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <ci> vk </ci>
-            <ci> vb </ci>
-            <ci> vl </ci>
-            <ci> vintestine </ci>
-            <ci> vlungs </ci>
-            <ci> vother </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -2017,7 +2002,7 @@
           <apply>
             <times/>
             <cn> 0.0294 </cn>
-            <ci> wbw_f </ci>
+            <ci> wbw </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -2135,6 +2120,32 @@
           </apply>
         </math>
       </assignmentRule>
+      <assignmentRule variable="ARBC0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> fRBC </ci>
+            <ci> Acord_total </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="APLASMA0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> fRBC </ci>
+              </apply>
+              <ci> Acord_total </ci>
+            </apply>
+            <ci> k20 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
       <assignmentRule variable="uptakeTotal_Lung">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
@@ -2200,7 +2211,7 @@
                     </apply>
                     <apply>
                       <times/>
-                      <cn> 0.01 </cn>
+                      <ci> UPTAKE_MT_smooth_fraction </ci>
                       <ci> k8 </ci>
                     </apply>
                   </apply>
@@ -2304,12 +2315,21 @@
           </apply>
         </math>
       </assignmentRule>
-      <assignmentRule variable="BLOOD_burden">
+      <assignmentRule variable="CBLOOD">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <divide/>
             <ci> BLOOD </ci>
             <ci> vb </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="CKIDNEY">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> KIDNEY </ci>
+            <ci> vk </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -2346,6 +2366,31 @@
             <divide/>
             <ci> ur </ci>
             <ci> ucr </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="total_internal">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> GUT_LUMEN </ci>
+            <ci> INTESTINE_TISSUE </ci>
+            <ci> LUNG </ci>
+            <ci> RBC </ci>
+            <ci> META </ci>
+            <ci> LIVER </ci>
+            <ci> KIDNEY </ci>
+            <ci> OTHER </ci>
+            <ci> PLASMA </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="Excreted">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> FECES </ci>
+            <ci> URINE </ci>
           </apply>
         </math>
       </assignmentRule>

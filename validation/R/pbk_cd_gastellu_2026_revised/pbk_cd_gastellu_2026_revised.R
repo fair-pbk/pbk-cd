@@ -1,7 +1,7 @@
 # 1. Without source-route tracking
 pbk_cd <- rxode2({
 
-  # ODE ----
+  # ODEs ----
 
   # Exposure source compartments
   d/dt(AIR_inhal_ing) = - kinh_release * AIR_inhal_ing; # Exposure by inhalation (µg/L)
@@ -15,8 +15,6 @@ pbk_cd <- rxode2({
   d/dt(AIR_derm) = - kderm_release * AIR_derm; # NEW ITEM
   d/dt(DUST_derm) = - kderm_release * DUST_derm; # NEW ITEM
   d/dt(COSM_derm) = - kderm_release * COSM_derm; # NEW ITEM
-  # Added CORD_quant explicitly as initial amount
-  #d/dt(CORD_quant) = - CORD_quant; # NEW ITEM
 
   # Respiratory tract
   d/dt(LUNG) = f_inh_available * k2_dust * AIR_inhal_ing * VInhalation +
@@ -34,29 +32,20 @@ pbk_cd <- rxode2({
     k4 * LUNG;
 
   # NEW V3: added kabs for unity consistency; kabs = 1 1/day
-  d/dt(GUT) = GI_input - kabs * GUT; # GI-tract
+  d/dt(GUT_LUMEN) = GI_input - kabs * GUT_LUMEN; # GI-tract
 
   # NEW
-  d/dt(INTESTINE) = k5 * kabs * GUT - k6 * INTESTINE; # NEW V3: added kabs for unity consistency; kabs = 1 1/day
+  d/dt(INTESTINE_TISSUE) = k5 * kabs * GUT_LUMEN - k6 * INTESTINE_TISSUE; # NEW V3: added kabs for unity consistency; kabs = 1 1/day
 
   # Total systemic input
-  TOTAL_UPTAKE = k3 * LUNG + k6 * INTESTINE; # NEW V3; in µg/day
+  TOTAL_UPTAKE = k3 * LUNG + k6 * INTESTINE_TISSUE; # NEW V3; in µg/day
 
-  UPTAKE_MT = k8;
-  if ((k7*TOTAL_UPTAKE) <= k8) {
-    # UPTAKE_MT flux to metallothionein has a maximum = k8; in µg/day
-    UPTAKE_MT = k7 * TOTAL_UPTAKE;
-  }
+  # Smooth metallothionein uptake (µg/day) , UPTAKE_MT flux to metallothionein has a maximum = k8
+  UPTAKE_MT_raw = k7 * TOTAL_UPTAKE;
+
+  UPTAKE_MT = UPTAKE_MT_raw + (k8 - UPTAKE_MT_raw) / (1 + exp((k8 - UPTAKE_MT_raw) / (UPTAKE_MT_smooth_fraction * k8)));
 
   UPTAKE_PLASMA = TOTAL_UPTAKE - UPTAKE_MT; # UPTAKE_Plasma goes to plasma pool (b1)
-
-  # CHANGED: Simplified -> Taken out and replaced by total_uptake
-  # d/dt(Total_UPTAKE) =  k3*LUNG + k6*INTESTINE - Total_UPTAKE; # total uptake pool
-
-  # NEW ITEM: DERMAL absorption.
-  # NEW ITEM: Exposure at birth. This can likely be implemented differently,
-  # depending on whether it is viewed as an initial condition or an exposure event.
-  # Added +k18*KIDNEY
 
   #Plasma
   d/dt(PLASMA) = UPTAKE_PLASMA +
@@ -71,10 +60,6 @@ pbk_cd <- rxode2({
     f_derm_available * kderm_release * DUST_derm +
     f_derm_available * kderm_release * COSM_derm;
 
-  # NEW ITEM: Exposure at birth. This can likely be implemented differently,
-  # depending on whether it is viewed as an initial condition or an exposure event.
-  # Changed: Exposure at birth now modeled as initial status
-
   # Red Blood Cells
   d/dt(RBC) = PLASMA * kx -
     k16 * RBC;
@@ -86,10 +71,10 @@ pbk_cd <- rxode2({
     k_MT_out * k17x * META -  # NEW added k_MT_out for unit consistency
     k_MT_out * k17b * META;   # NEW added k_MT_out for unit consistency
 
-  # total blood amount
+  # Total blood amount
   # Changed - erased /vb and added blood burden
   BLOOD = (RBC + k20 * (PLASMA + META));
-  BLOOD_burden = (RBC + k20 * (PLASMA + META))/vb;
+  CBLOOD = (RBC + k20 * (PLASMA + META))/vb;
 
   # Liver
   d/dt(LIVER) = k12 * PLASMA -
@@ -100,31 +85,23 @@ pbk_cd <- rxode2({
     k18 *KIDNEY -
     k19x * KIDNEY;
 
-  kidney_burden = (KIDNEY)/vk;
+  Ckidney = (KIDNEY)/vk;
 
   # Other tissues
   d/dt(OTHER) = k9 * PLASMA -
     k10 * OTHER;
 
-  #wb = BLOOD + LIVER + KIDNEY + OTHER + LUNG + GUT;            # body burden is actually total
-
   # Cumulative Feces - Changed
-  d/dt(FECES) = (1-k5)*kabs*GUT +     # NEW: added kabs for unit consistency
+  d/dt(FECES) = (1-k5)*kabs*GUT_LUMEN +     # NEW: added kabs for unit consistency
     k11*PLASMA +
     k15*LIVER;
-
-  # Daily feces output
-  # d/dt(FECES) = (1-k5)*GUT + k11*PLASMA + k15*LIVER - FECES;
 
   # Cumulative Urine - Changed, added k_MT_out for unit consistency
   d/dt(URINE) = k_MT_out * k17b * META +
     KIDNEY * k19x;
 
-  # daily urine excretion
-  # d/dt(URINE) = META * k17b + KIDNEY * k19x - URINE;
-
   # Urinary Cd excretion rate
-  ur = k_MT_out * k17b * META + KIDNEY * k19x;                               # NEW added k_MT_out for unit consistency
+  ur = k_MT_out * k17b * META + KIDNEY * k19x;   # NEW added k_MT_out for unit consistency
   Conc_urine_cd = ur / Vurine;
   ucdcr = ur/ucr;
 
@@ -132,11 +109,8 @@ pbk_cd <- rxode2({
   d/dt(EXH) = (1 - k1_dust - k2_dust) * f_inh_available * AIR_inhal_ing * VInhalation +
     (1 - k1_cig  - k2_cig)  * f_inh_available * kinh_release * CIG_inhal_ing;
 
-  # d/dt(EXH) =
-  #  (1 - k1_dust - k2_dust) * f_inh_available * kinh_release * AIR_inhal_ing * VInhalation + (1 - k1_cig  - k2_cig)  * f_inh_available * kinh_release * CIG_inhal_ing - EXH;    # DAILY output Exhalaltion
-
   # Total Body Burden
-  total = GUT + INTESTINE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA; #+TOTAL_UPTAKE- took out ;           # Total Body burden
+  total = GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA; #+TOTAL_UPTAKE- took out ;           # Total Body burden
 
   # Total Cd excretion
   Excreted = FECES + URINE + EXH;
@@ -223,7 +197,6 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
   }
 
   # 3/ Blood ----
-  # NEW ITEM: Check your equation in SBML; there might be a division error.
   if (sex == 1) {
     if (year < 1) {
       vb <- (-0.027 * year + 0.077) * wbw
@@ -349,15 +322,15 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
 
   # 12/ Total bodyweight and rest
   # 12/ Rest of body / other tissues ----
-  vother <- wbw - (vk + vb + vl + vintestine + vlungs)
+  vother <- (wbw / rho_body) - (vk + vb + vl + vintestine + vlungs)
   if (vother < 0) {
     stop("vother is negative. Check organ volume equations.")
   }
 
-  wbw_f =  vk + vb + vl  + vintestine + vlungs + vother;
+  wbw_check =  (vk + vb + vl  + vintestine + vlungs + vother) / rho_body; # in kg
 
   # 13/ spot urine Cd creatinine normalized (ug Cd/g Cr)
-  Vurine = 0.0294 * wbw_f;
+  Vurine = 0.0294 * wbw;
 
   # 14/ initial volumes for blood
   # hct0 is now used
