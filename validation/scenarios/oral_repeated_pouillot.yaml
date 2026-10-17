@@ -1,5 +1,5 @@
-id: Test
-label: Test
+id: oral_repeated_pouillot
+label: Oral repeated (Pouillot)
 model_instances:
   - id: PBK_Cd
     label: SBML
@@ -9,18 +9,21 @@ model_instances:
       VBlood: 'vb'
       BW: 'wbw'
       AGut: 'GUT_LUMEN'
-      ALung: 'LUNG'
       APlasma: 'PLASMA'
       ARBC: 'RBC'
       AMetallothionein: 'META'
+      CPlasma: '[PLASMA]'
+      CBlood: '(RBC + k20 * (PLASMA + META)) / vb'
       ALiver: 'LIVER'
+      CLiver: '[LIVER]'
       AKidney: 'KIDNEY'
-      AOthers: 'OTHER'
+      CKidney: '[KIDNEY]'
+      UrineCR: '(k_MT_out * k17b * META + k19x * KIDNEY) / ucr'
       AUrine: 'URINE'
       AFeces: 'FECES'
 scenarios:
   - id: oral_repeated_pouillot
-    label: Oral repeated dosing (pouillot)
+    label: Oral repeated dosing (Pouillot)
     time_unit: DAY
     amount_unit: MICROGRAMS
     duration: 29200
@@ -32,12 +35,11 @@ scenarios:
         adjustment: BW
         time: 0
         interval: 1
-        until: 18250
     parameters:
       Age: 0
       sex: 1
-      # AgeRef: 30
-      # BWRef: 85
+      AgeRef: 30
+      BWRef: 85
     outputs:
       - id: BW
         label: BW
@@ -45,30 +47,33 @@ scenarios:
       - id: AGut
         label: Amount in gut
         output: GUT_LUMEN
-      - id: ALung
-        label: Amount in lung
-        output: LUNG
       - id: APlasma
         label: Amount in plasma
         output: PLASMA
-      - id: VBlood
-        label: Blood volume
-        output: vb
       - id: ARBC
         label: Amount in RBC
         output: RBC
       - id: AMetallothionein
         label: Amount in metallothionein
         output: META
+      - id: CBlood
+        label: Concentration in blood
+        output: CBlood
       - id: ALiver
         label: Amount in liver
         output: LIVER
+#      - id: CLiver
+#        label: Concentration in liver
+#        output: CLIVER
       - id: AKidney
         label: Amount in kidney
         output: KIDNEY
-      - id: AOthers
-        label: Amount in rest
-        output: OTHER
+      - id: CKidney
+        label: Concentration in kidney
+        output: CKidney
+      - id: UrineCR
+        label: Creatinine adjusted urine
+        output: UrineCR
       - id: AUrine
         label: Amount in urine
         output: URINE
@@ -82,33 +87,33 @@ scenarios:
         series_type: TIMELINE
         time_unit: DAY
         mappings:
-          BW: wbw_f
+          BW: wbw
           AGut: GUT
-          ALung: LUNG
           APlasma: PLASMA
           ARBC: RBC
           AMetallothionein: META
           ALiver: LIVER
           AKidney: KIDNEY
-          AOthers: OTHER
+          #CBlood: **NOT AVAILABLE**
+          CKidney: kidney_burden
+          UrineCR: ucdcr
           AFeces: FECES
           AUrine: URINE
-          VBlood: vb
       - id: R_revised
         label: R_revised
         file_path: validation/outputs/reference/R/oral_repeated_pouillot/pbk_cd_gastellu_2026_revised.csv
         series_type: TIMELINE
         time_unit: DAY
         mappings:
-          BW: wbw_f
-          AGut: GUT
-          ALung: LUNG
+          BW: wbw
+          AGut: GUT_LUMEN
           APlasma: PLASMA
           ARBC: RBC
           AMetallothionein: META
+          CBlood: CBLOOD
           ALiver: LIVER
           AKidney: KIDNEY
-          AOthers: OTHER
+          CKidney: Ckidney
+          UrineCR: ucdcr
           AFeces: FECES
           AUrine: URINE
-          VBlood: vb

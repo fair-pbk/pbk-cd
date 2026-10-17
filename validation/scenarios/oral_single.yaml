@@ -1,0 +1,119 @@
+id: oral_single
+label: Oral single
+model_instances:
+  - id: PBK_Cd
+    label: SBML
+    model_path: ./model/pbk_cd_gastellu_2026_revised.sbml
+    param_file: './model/pbk_cd_gastellu_2026_revised.params.csv'
+    target_mappings:
+      VBlood: 'vb'
+      BW: 'wbw'
+      AGut: 'GUT_LUMEN'
+      APlasma: 'PLASMA'
+      ARBC: 'RBC'
+      AMetallothionein: 'META'
+      CPlasma: '[PLASMA]'
+      CBlood: '(RBC + k20 * (PLASMA + META)) / vb'
+      ALiver: 'LIVER'
+      CLiver: '[LIVER]'
+      AKidney: 'KIDNEY'
+      CKidney: '[KIDNEY]'
+      UrineCR: '(k_MT_out * k17b * META + k19x * KIDNEY) / ucr'
+      #BWCheck: '(vk + vb + vl + vintestine + vlungs + vother) * rho_body'
+      #TotalIntake: 'GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA'
+      AUrine: 'URINE'
+      AFeces: 'FECES'
+scenarios:
+  - id: oral_single
+    label: Oral single dose
+    time_unit: DAY
+    amount_unit: MICROGRAMS
+    duration: 40
+    evaluation_resolution: 24
+    dosing_events:
+      - type: single_bolus
+        target: AGut
+        amount: 1000
+        time: 0
+    parameters:
+      Age: 30
+      sex: 1
+      AgeRef: 30
+      BWRef: 85
+    outputs:
+      - id: BW
+        label: BW
+        output: wbw
+      - id: AGut
+        label: Amount in gut
+        output: GUT_LUMEN
+      - id: APlasma
+        label: Amount in plasma
+        output: PLASMA
+      - id: ARBC
+        label: Amount in RBC
+        output: RBC
+      - id: AMetallothionein
+        label: Amount in metallothionein
+        output: META
+      - id: CBlood
+        label: Concentration in blood
+        output: CBlood
+      - id: ALiver
+        label: Amount in liver
+        output: LIVER
+#      - id: CLiver
+#        label: Concentration in liver
+#        output: CLIVER
+      - id: AKidney
+        label: Amount in kidney
+        output: KIDNEY
+      - id: CKidney
+        label: Concentration in kidney
+        output: CKidney
+      - id: UrineCR
+        label: Creatinine adjusted urine
+        output: UrineCR
+      - id: AUrine
+        label: Amount in urine
+        output: URINE
+      - id: AFeces
+        label: Amount in feces
+        output: FECES
+    reference_data:
+      - id: R_orig
+        label: R_orig
+        file_path: validation/outputs/reference/R/oral_single/pbk_cd_gastellu_2026.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw
+          AGut: GUT
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          ALiver: LIVER
+          AKidney: KIDNEY
+          #CBlood: **NOT AVAILABLE**
+          CKidney: kidney_burden
+          UrineCR: ucdcr
+          AFeces: FECES
+          AUrine: URINE
+      - id: R_revised
+        label: R_revised
+        file_path: validation/outputs/reference/R/oral_single/pbk_cd_gastellu_2026_revised.csv
+        series_type: TIMELINE
+        time_unit: DAY
+        mappings:
+          BW: wbw
+          AGut: GUT_LUMEN
+          APlasma: PLASMA
+          ARBC: RBC
+          AMetallothionein: META
+          CBlood: CBLOOD
+          ALiver: LIVER
+          AKidney: KIDNEY
+          CKidney: Ckidney
+          UrineCR: ucdcr
+          AFeces: FECES
+          AUrine: URINE
