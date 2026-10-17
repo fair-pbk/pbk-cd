@@ -23,7 +23,7 @@ pbk_cd <- rxode2({
 
   # GI Input
   GI_input =
-    f_ing_available * king_release * DIET_ing * wbw_f +
+    f_ing_available * king_release * DIET_ing * wbw +
     f_ing_available * king_release * SOIL_ing +
     f_ing_available * king_release * COSM_ing +
     f_ing_available * king_release * DUST_ing +
@@ -120,7 +120,7 @@ pbk_cd <- rxode2({
 
 # Changes in compartment volumes / time-varying inputs
 phys <- function(time, sex, Delta_BWs3, Delta_creat,
-                 k5_h, k5_f, k17, k19, k21) {
+                 k5_h, k5_f, k17, k19, k21, rho_body) {
 
   year <- time / 365
 
@@ -348,7 +348,6 @@ phys <- function(time, sex, Delta_BWs3, Delta_creat,
   return(list(
     year = year,
     wbw = wbw,
-    wbw_f = wbw_f,
     wbw0 = wbw0,
     vb = vb,
     vp = vp,

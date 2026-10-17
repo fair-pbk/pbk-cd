@@ -37,13 +37,14 @@ phys_cov <- do.call(rbind, lapply(observation_times, function(t) {
     k5_f = unname(theta["k5_f"]),
     k17  = unname(theta["k17"]),
     k19  = unname(theta["k19"]),
-    k21  = unname(theta["k21"])
+    k21  = unname(theta["k21"]),
+    rho_body = unname(theta["rho_body"])
   )
   
   data.frame(
     id = 1,
     time = t,
-    wbw_f = p$wbw_f,
+    wbw = p$wbw,
     vb = p$vb,
     vk = p$vk,
     VInhalation = p$VInhalation,
@@ -66,7 +67,8 @@ p0 <- phys(
   k5_f = unname(theta["k5_f"]),
   k17  = unname(theta["k17"]),
   k19  = unname(theta["k19"]),
-  k21  = unname(theta["k21"])
+  k21  = unname(theta["k21"]),
+  rho_body = unname(theta["rho_body"])
 )
 
 # Initial states
@@ -99,7 +101,7 @@ ev_bolus_single <- data.frame(
   id = c(1),
   time = 0,
   evid = c(1),
-  cmt = c("GUT")
+  cmt = c("GUT_LUMEN")
 )
 
 # Add observation rows before joining physiology so rxSolve receives a plain
