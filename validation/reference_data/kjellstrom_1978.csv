@@ -1,0 +1,15 @@
+source;id;dose;dose_unit;concentration;concentration_unit;organ;pathway;expo_start;expo_end;age;age_unit
+Kjellström et al. 1978;1;101.282051282051;µg/d;61.2765957446809;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;1;202.564102564103;µg/d;102.127659574468;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;1;301.282051282051;µg/d;141.702127659575;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;1;405.128205128205;µg/d;183.829787234043;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;1;503.846153846154;µg/d;223.404255319149;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;1;605.128205128205;µg/d;264.255319148936;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;1;702.564102564103;µg/d;301.276595744681;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;2;100;µg/d;76.5957446808512;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;2;200;µg/d;141.702127659575;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;2;300;µg/d;194.042553191489;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;2;400;µg/d;245.106382978724;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;2;501.282051282051;µg/d;296.170212765958;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;2;600;µg/d;345.957446808511;µg/g ;kidney cortex;food;birth;40;45;year
+Kjellström et al. 1978;2;700;µg/d;398.297872340426;µg/g ;kidney cortex;food;birth;40;45;year

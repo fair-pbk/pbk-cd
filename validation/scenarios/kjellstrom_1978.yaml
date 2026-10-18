@@ -1,0 +1,434 @@
+id: kjellstrom_1978
+label: Kjellstrom 1978
+model_instances:
+- id: PBK_Cd
+  label: SBML
+  model_path: ./model/pbk_cd_gastellu_2026_revised.sbml
+  param_file: ./model/pbk_cd_gastellu_2026_revised.params.csv
+  target_mappings:
+    VBlood: vb
+    BW: wbw
+    AGut: GUT_LUMEN
+    CKidney: KIDNEY / vk / 1000
+    UrineCR: (k_MT_out * k17b * META + k19x * KIDNEY) / ucr
+scenarios:
+- id: kjellstrom_1978_1_101ug
+  label: Kjellstrom 1978 - set 1, 101 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 101.282051282051
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_1_101ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_1_203ug
+  label: Kjellstrom 1978 - set 1, 203 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 202.564102564103
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_1_203ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_1_301ug
+  label: Kjellstrom 1978 - set 1, 301 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 301.282051282051
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_1_301ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_1_405ug
+  label: Kjellstrom 1978 - set 1, 405 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 405.128205128205
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_1_405ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_1_504ug
+  label: Kjellstrom 1978 - set 1, 504 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 503.846153846154
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_1_504ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_1_605ug
+  label: Kjellstrom 1978 - set 1, 605 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 605.128205128205
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_1_605ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_1_703ug
+  label: Kjellstrom 1978 - set 1, 703 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 702.564102564103
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_1_703ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_2_100ug
+  label: Kjellstrom 1978 - set 2, 100 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 100.0
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_2_100ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_2_200ug
+  label: Kjellstrom 1978 - set 2, 200 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 200.0
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_2_200ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_2_300ug
+  label: Kjellstrom 1978 - set 2, 300 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 300.0
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_2_300ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_2_400ug
+  label: Kjellstrom 1978 - set 2, 400 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 400.0
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_2_400ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_2_501ug
+  label: Kjellstrom 1978 - set 2, 501 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 501.282051282051
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_2_501ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_2_600ug
+  label: Kjellstrom 1978 - set 2, 600 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 600.0
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_2_600ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney
+- id: kjellstrom_1978_2_700ug
+  label: Kjellstrom 1978 - set 2, 700 ug/day
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 16790
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 700.0
+    time: 0
+    interval: 1
+    until: 14600
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: CKidney
+    label: Concentration in kidney
+    output: CKidney
+  reference_data:
+  - id: kjellstrom_1978
+    label: Kjellstrom 1978
+    file_path: validation/reference_data/processed/kjellstrom_1978_2_700ug.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      CKidney: CKidney

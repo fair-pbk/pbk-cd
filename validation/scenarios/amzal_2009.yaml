@@ -1,0 +1,45 @@
+id: amzal_2009
+label: Amzal 2009
+model_instances:
+- id: PBK_Cd
+  label: SBML
+  model_path: ./model/pbk_cd_gastellu_2026_revised.sbml
+  param_file: ./model/pbk_cd_gastellu_2026_revised.params.csv
+  target_mappings:
+    VBlood: vb
+    BW: wbw
+    AGut: GUT_LUMEN
+    CKidney: KIDNEY / vk / 1000
+    UrineCR: (k_MT_out * k17b * META + k19x * KIDNEY) / ucr
+scenarios:
+- id: amzal_2009
+  label: Amzal 2009 - urinary cadmium
+  time_unit: DAY
+  amount_unit: MICROGRAMS
+  duration: 27375
+  evaluation_resolution: 1
+  dosing_events:
+  - type: repeated_bolus
+    target: AGut
+    amount: 0.3
+    time: 0
+    interval: 1
+    adjustment: BW
+    until: 25550
+  parameters:
+    Age: 0
+    sex: 1
+    AgeRef: 30
+    BWRef: 85
+  outputs:
+  - id: UrineCR
+    label: Creatinine adjusted urine
+    output: UrineCR
+  reference_data:
+  - id: amzal_2009
+    label: Amzal 2009
+    file_path: validation/reference_data/processed/amzal_2009_urine.csv
+    series_type: CHECKPOINTS
+    time_unit: DAY
+    mappings:
+      UrineCR: UrineCR
