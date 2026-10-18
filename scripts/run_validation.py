@@ -63,12 +63,14 @@ def run_validation(configs, force_recompute, skip_r):
             logger = logger
         )
 
+        num_outputs = max(len(scenario.outputs) for scenario in config.scenarios)
+
         # Run simulations
         plot_simulation_results(
             config = config,
             out_path = out_path,
-            combine_outputs = True,
-            ncols_combined = 3
+            combine_outputs = num_outputs > 1,
+            ncols_combined = min(3, num_outputs)
         )
 
 def run_r_validation_scenarios(
