@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
-  <model metaid="PBK_Cd_Human_Cui2026" id="PBK_Cd_Human_Cui2026" substanceUnits="MicroGM" timeUnits="DAY" volumeUnits="L">
+  <model metaid="pbk_cd_cui_2026" id="pbk_cd_cui_2026" substanceUnits="MicroGM" timeUnits="DAY" volumeUnits="L">
     <notes>
       <body xmlns="http://www.w3.org/1999/xhtml">
         <p>Cd PBK (Cui et al, 2026): Notes: Some changes in parameters needs to be set active when modeling factory dust and women </p>
@@ -8,7 +8,7 @@
     </notes>
     <annotation>
       <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-        <rdf:Description rdf:about="#PBK_Cd_Human_Cui2026">
+        <rdf:Description rdf:about="#pbk_cd_cui_2026">
           <bqbiol:isDescribedBy>
             <rdf:Bag>
               <rdf:li rdf:resource="https://www.sciencedirect.com/science/article/pii/S016041202600108X?via%3Dihub#s0190"/>

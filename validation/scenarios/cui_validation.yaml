@@ -1,46 +1,35 @@
 id: cui_validation
 label: cui_validation
 model_instances:
-  - id: Cd_non_lifetime_low
-    label: Cd_non_lifetime_low
-    model_path: ./models/Cd_non_lifetime/Cd_non_lifetime.sbml
-    param_file: ./models/Cd_non_lifetime/Cd_non_lifetime_low.params.csv
+  - id: pbk_cd_gastellu_2026_revised
+    label: Gastellu (2026)
+    model_path: ./model/pbk_cd_gastellu_2026_revised.sbml
+    param_file: './model/pbk_cd_gastellu_2026_revised.params.csv'
     target_mappings:
-      CPlasma: '[APlasma]'
-      CLiver: '[ALiver]'
-      CKidney: '[AKidney]'
-  - id: Cd_non_lifetime_high
-    label: Cd_non_lifetime_high
-    model_path: ./models/Cd_non_lifetime/Cd_non_lifetime.sbml
-    param_file: ./models/Cd_non_lifetime/Cd_non_lifetime_high.params.csv
-    target_mappings:
-      CPlasma: '[APlasma]'
-      CLiver: '[ALiver]'
-      CKidney: '[AKidney]'
-  - id: Cd_lifetime_BW_Gastellu
-    label: Cd_lifetime_BW_Gastellu
-    model_path: ./models/Cd_lifetime_BW_Gastellu/Cd_lifetime_BW_Gastellu.sbml
-    param_file: ./models/Cd_lifetime_BW_Gastellu/Cd_lifetime_BW_Gastellu.params.csv
-    target_mappings:
-      CPlasma: '[APlasma]'
-      CLiver: '[ALiver]'
-      CKidney: '[AKidney]'
-  - id: Cd_lifetime_Gastellu
-    label: Cd_lifetime_Gastellu
-    model_path: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.sbml
-    param_file: ./models/Cd_lifetime_Gastellu/Cd_lifetime_Gastellu.params.csv
-    target_mappings:
-      CPlasma: '[APlasma]'
-      CLiver: '[ALiver]'
-      CKidney: '[AKidney]'
-  - id: Cd_Cui_2026
-    label: Cd_Cui_2026
-    model_path: ./models/Cd_Cui_2026/Cd_Cui_2026.sbml
-    param_file: ./models/Cd_Cui_2026/Cd_Cui_2026.params.csv
+      VBlood: 'vb'
+      BW: 'wbw'
+      AGut: 'GUT_LUMEN'
+      APlasma: 'PLASMA'
+      ARBC: 'RBC'
+      AMetallothionein: 'META'
+      CPlasma: '[PLASMA]'
+      CBlood: '(RBC + k20 * (PLASMA + META)) / vb'
+      ALiver: 'LIVER'
+      CLiver: '[LIVER]'
+      AKidney: 'KIDNEY'
+      CKidney: '[KIDNEY]'
+      UrineCR: '(k_MT_out * k17b * META + k19x * KIDNEY) / ucr'
+      AUrine: 'URINE'
+      AFeces: 'FECES'
+  - id: pbk_cd_cui_2026
+    label: Cui (2026)
+    model_path: ./model/pbk_cd_cui_2026/pbk_cd_cui_2026.sbml
+    param_file: ./model/pbk_cd_cui_2026/pbk_cd_cui_2026.params.csv
     target_mappings:
       AGut: 'AGILumen'
       ALiver: 'ALiverT_Free'
-      CPlasma: '[ARBT_Free]'
+      APlasma: 'ARBB_PP'
+      CPlasma: '[ARBB_PP]'
       CLiver: '[ALiverT_Free]'
       CKidney: '[AKidneyT_Free]'
       Age: 'year'
@@ -73,6 +62,12 @@ scenarios:
       - id: AGut
         label: AGut
         output: AGut
+      - id: APlasma
+        label: APlasma
+        output: APlasma
+      - id: CPlasma
+        label: CPlasma
+        output: CPlasma
       - id: ALiver
         label: ALiver
         output: ALiver
