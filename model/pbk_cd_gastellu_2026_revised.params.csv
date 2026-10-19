@@ -22,7 +22,7 @@ pbk_cd_gastellu_2026_revised_default,k18,1e-05,/d,kinetic constant rate kidney -
 pbk_cd_gastellu_2026_revised_default,k19,0.00014,/d,urine elimination rate constant,
 pbk_cd_gastellu_2026_revised_default,k21,1.1e-06,/y,age-dependent increase in kidney-to-urine elimination after age 30,
 pbk_cd_gastellu_2026_revised_default,k20,0.1,dimensionless,fraction of PLASMA + META Cd amounts to calculated whole-blood Cd,
-pbk_cd_gastellu_2026_revised_default,Age,30.0,y,age of the individual at start of simulation,
+pbk_cd_gastellu_2026_revised_default,AgeInit,30.0,y,age of the individual at start of simulation,
 pbk_cd_gastellu_2026_revised_default,AgeRef,30.0,y,reference age used for scaling of nominal body weight to reference body weight,
 pbk_cd_gastellu_2026_revised_default,sex,2.0,dimensionless,sex discrimination,
 pbk_cd_gastellu_2026_revised_default,BWRef,85.0,kg,body weight of individual at reference age,

@@ -31,7 +31,7 @@ scenarios:
         amount: 1000
         time: 0
     parameters:
-      Age: 30
+      AgeInit: 30
       AgeRef: 30
       BWRef: 85
     outputs:
@@ -102,7 +102,7 @@ scenarios:
         time: 0
         interval: 1
     parameters:
-      Age: 30
+      AgeInit: 30
       AgeRef: 30
       BWRef: 85
     outputs:
@@ -173,7 +173,7 @@ scenarios:
         time: 0
         interval: 1
     parameters:
-      Age: 0
+      AgeInit: 0
       AgeRef: 30
       BWRef: 85
     outputs:

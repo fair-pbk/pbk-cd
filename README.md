@@ -38,6 +38,7 @@ The file [pbk_cd_gastellu_2026_revised.ant](model/pbk_cd_gastellu_2026_revised.a
 The following changes were made to the Antimony/SBML reimplementation for compliance with the FAIR PBK standard:
 
 - **Explicit density parameter:** For consistency of units, an additional density parameter `rho_body` is included for translating mass to volume.
+- **Explicit age at simulation start:** `AgeInit` specifies the individual's age at the start of a simulation in years. Current age (`Age`) is calculated as `AgeInit + time / 365`, with simulation time in days, and is used throughout the model's age-dependent physiology and kinetics.
 - **Exclusion of exposure/dosing parameters:** In compliance with the standard, dosing is excluded from the Antimony/SBML model. Accordingly, exposure sources and their associated reactions are not represented in the reimplementation.
 - **Removal of prenatal initialization:** The cord-blood initialization parameters and calculations have been removed. `PLASMA` and `RBC` are initialized to zero.
 - **Reduction of derived outputs:** The Antimony model retains `BLOOD` (amount), `CBLOOD` (whole-blood concentration), and `ucdcr` (urinary concentration expressed in creatinine), but does not define derived outputs for the kidney burden, concentration in urine, total body burden and total amount excreted. These outputs can be calculated during post-processing from the existing model variables. Keeping them outside the core model helps to maintain simplicity and computational efficiency during simulations.

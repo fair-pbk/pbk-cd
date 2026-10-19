@@ -758,13 +758,13 @@
       <parameter id="k19" name="urine elimination rate constant" value="0.00014" units="PER_DAY" constant="true"/>
       <parameter id="k21" name="age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" units="PER_YR" constant="true"/>
       <parameter id="k20" name="fraction of PLASMA + META Cd amounts to calculated whole-blood Cd" value="0.1" units="UNITLESS" constant="true"/>
-      <parameter id="Age" name="age of the individual at start of simulation" value="30" units="YR" constant="true"/>
+      <parameter id="AgeInit" name="age of the individual at start of simulation" value="30" units="YR" constant="true"/>
       <parameter id="AgeRef" name="reference age used for scaling of nominal body weight to reference body weight" value="30" units="YR" constant="true"/>
       <parameter id="sex" name="sex discrimination" value="2" units="UNITLESS" constant="true"/>
-      <parameter metaid="meta_year" id="year" name="age in years" units="YR" constant="false">
+      <parameter metaid="meta_Age" id="Age" name="age during simulation" units="YR" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_year">
+            <rdf:Description rdf:about="#meta_Age">
               <bqmodel:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://purl.obolibrary.org/obo/PBPKO_00521"/>
@@ -1036,7 +1036,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_ucdcr" id="ucdcr" name="Urinary concentration normalized to creatinine (ug/g creatine)" units="MicroGM_PER_GM" constant="false">
+      <parameter metaid="meta_ucdcr" id="ucdcr" name="urinary concentration normalized to creatinine (ug/g creatine)" units="MicroGM_PER_GM" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_ucdcr">
@@ -1093,7 +1093,7 @@
       </initialAssignment>
     </listOfInitialAssignments>
     <listOfRules>
-      <assignmentRule variable="year">
+      <assignmentRule variable="Age">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <plus/>
@@ -1102,7 +1102,7 @@
               <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
               <cn type="integer"> 365 </cn>
             </apply>
-            <ci> Age </ci>
+            <ci> AgeInit </ci>
           </apply>
         </math>
       </assignmentRule>
@@ -1162,7 +1162,7 @@
                       <ci> Delta_BWs3 </ci>
                       <cn type="integer"> 1 </cn>
                     </apply>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                     <cn type="integer"> 365 </cn>
                   </apply>
                   <cn type="integer"> 1095 </cn>
@@ -1172,7 +1172,7 @@
                 <leq/>
                 <apply>
                   <times/>
-                  <ci> year </ci>
+                  <ci> Age </ci>
                   <cn type="integer"> 365 </cn>
                 </apply>
                 <cn type="integer"> 1095 </cn>
@@ -1195,7 +1195,7 @@
                   <ci> BW_male_lifetime </ci>
                   <apply>
                     <times/>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                     <cn type="integer"> 12 </cn>
                   </apply>
                 </apply>
@@ -1210,7 +1210,7 @@
                   <ci> BW_female_lifetime </ci>
                   <apply>
                     <times/>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                     <cn type="integer"> 12 </cn>
                   </apply>
                 </apply>
@@ -1230,7 +1230,7 @@
                 <cn type="e-notation"> 1.12815 <sep/> -6 </cn>
                 <apply>
                   <power/>
-                  <ci> year </ci>
+                  <ci> Age </ci>
                   <cn type="integer"> 3 </cn>
                 </apply>
               </apply>
@@ -1239,7 +1239,7 @@
                 <cn> 0.000172362 </cn>
                 <apply>
                   <power/>
-                  <ci> year </ci>
+                  <ci> Age </ci>
                   <cn type="integer"> 2 </cn>
                 </apply>
               </apply>
@@ -1247,7 +1247,7 @@
             <apply>
               <times/>
               <cn> 0.00815264 </cn>
-              <ci> year </ci>
+              <ci> Age </ci>
             </apply>
             <cn> 0.327363 </cn>
           </apply>
@@ -1260,7 +1260,7 @@
               <cn> 0.359 </cn>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 2 </cn>
               </apply>
             </piece>
@@ -1268,7 +1268,7 @@
               <ci> hct_mid </ci>
               <apply>
                 <lt/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 18 </cn>
               </apply>
             </piece>
@@ -1289,7 +1289,7 @@
                   <apply>
                     <times/>
                     <cn> -0.027 </cn>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                   </apply>
                   <cn> 0.077 </cn>
                 </apply>
@@ -1297,7 +1297,7 @@
               </apply>
               <apply>
                 <lt/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 1 </cn>
               </apply>
             </piece>
@@ -1317,7 +1317,7 @@
                         <apply>
                           <times/>
                           <cn> -0.683 </cn>
-                          <ci> year </ci>
+                          <ci> Age </ci>
                         </apply>
                         <cn> 0.946 </cn>
                       </apply>
@@ -1341,7 +1341,7 @@
                   <apply>
                     <times/>
                     <cn> -0.0273 </cn>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                   </apply>
                   <cn> 0.0771 </cn>
                 </apply>
@@ -1349,7 +1349,7 @@
               </apply>
               <apply>
                 <lt/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 1 </cn>
               </apply>
             </piece>
@@ -1365,7 +1365,7 @@
                       <cn type="e-notation"> 3.28 <sep/> -5 </cn>
                       <apply>
                         <power/>
-                        <ci> year </ci>
+                        <ci> Age </ci>
                         <cn type="integer"> 3 </cn>
                       </apply>
                     </apply>
@@ -1374,7 +1374,7 @@
                       <cn> 0.00121 </cn>
                       <apply>
                         <power/>
-                        <ci> year </ci>
+                        <ci> Age </ci>
                         <cn type="integer"> 2 </cn>
                       </apply>
                     </apply>
@@ -1382,7 +1382,7 @@
                   <apply>
                     <times/>
                     <cn> 0.0124 </cn>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                   </apply>
                   <cn> 0.0386 </cn>
                 </apply>
@@ -1390,7 +1390,7 @@
               </apply>
               <apply>
                 <lt/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn> 14.019723 </cn>
               </apply>
             </piece>
@@ -1464,7 +1464,7 @@
                       <apply>
                         <times/>
                         <cn> -0.206 </cn>
-                        <ci> year </ci>
+                        <ci> Age </ci>
                       </apply>
                     </apply>
                   </apply>
@@ -1473,7 +1473,7 @@
               </apply>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 79 </cn>
               </apply>
             </piece>
@@ -1512,7 +1512,7 @@
                       <apply>
                         <times/>
                         <cn> -0.221 </cn>
-                        <ci> year </ci>
+                        <ci> Age </ci>
                       </apply>
                     </apply>
                   </apply>
@@ -1521,7 +1521,7 @@
               </apply>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 79 </cn>
               </apply>
             </piece>
@@ -1594,14 +1594,14 @@
                     <cn type="e-notation"> -8.2562 <sep/> -5 </cn>
                     <apply>
                       <power/>
-                      <ci> year </ci>
+                      <ci> Age </ci>
                       <cn type="integer"> 2 </cn>
                     </apply>
                   </apply>
                   <apply>
                     <times/>
                     <cn> 0.0013523 </cn>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                   </apply>
                   <cn> 0.01293 </cn>
                 </apply>
@@ -1609,7 +1609,7 @@
               </apply>
               <apply>
                 <lt/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 16 </cn>
               </apply>
             </piece>
@@ -1636,14 +1636,14 @@
                     <cn type="e-notation"> -7.421 <sep/> -5 </cn>
                     <apply>
                       <power/>
-                      <ci> year </ci>
+                      <ci> Age </ci>
                       <cn type="integer"> 2 </cn>
                     </apply>
                   </apply>
                   <apply>
                     <times/>
                     <cn> 0.001276 </cn>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                   </apply>
                   <cn> 0.01298 </cn>
                 </apply>
@@ -1651,7 +1651,7 @@
               </apply>
               <apply>
                 <lt/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn> 14.453301 </cn>
               </apply>
             </piece>
@@ -1703,7 +1703,7 @@
                       <apply>
                         <times/>
                         <cn> -0.218 </cn>
-                        <ci> year </ci>
+                        <ci> Age </ci>
                       </apply>
                     </apply>
                   </apply>
@@ -1712,7 +1712,7 @@
               </apply>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 79 </cn>
               </apply>
             </piece>
@@ -1751,7 +1751,7 @@
                       <apply>
                         <times/>
                         <cn> -0.122 </cn>
-                        <ci> year </ci>
+                        <ci> Age </ci>
                       </apply>
                     </apply>
                   </apply>
@@ -1760,7 +1760,7 @@
               </apply>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 79 </cn>
               </apply>
             </piece>
@@ -1829,14 +1829,14 @@
                   <apply>
                     <times/>
                     <cn> 0.02098 </cn>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                   </apply>
                   <apply>
                     <times/>
                     <cn> 0.009104 </cn>
                     <apply>
                       <power/>
-                      <ci> year </ci>
+                      <ci> Age </ci>
                       <cn type="integer"> 2 </cn>
                     </apply>
                   </apply>
@@ -1846,7 +1846,7 @@
                   <cn> 0.000455 </cn>
                   <apply>
                     <power/>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                     <cn type="integer"> 3 </cn>
                   </apply>
                 </apply>
@@ -1856,7 +1856,7 @@
                 <cn type="e-notation"> 7.578 <sep/> -6 </cn>
                 <apply>
                   <power/>
-                  <ci> year </ci>
+                  <ci> Age </ci>
                   <cn type="integer"> 4 </cn>
                 </apply>
               </apply>
@@ -1866,7 +1866,7 @@
               <cn type="e-notation"> 4.232 <sep/> -8 </cn>
               <apply>
                 <power/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 5 </cn>
               </apply>
             </apply>
@@ -1884,7 +1884,7 @@
               </apply>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 70 </cn>
               </apply>
             </piece>
@@ -1931,7 +1931,7 @@
               <ci> k19 </ci>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 30 </cn>
               </apply>
             </piece>
@@ -1944,7 +1944,7 @@
                   <ci> k21 </ci>
                   <apply>
                     <minus/>
-                    <ci> year </ci>
+                    <ci> Age </ci>
                     <cn type="integer"> 30 </cn>
                   </apply>
                 </apply>
@@ -1969,7 +1969,7 @@
                 </apply>
                 <apply>
                   <minus/>
-                  <ci> year </ci>
+                  <ci> Age </ci>
                   <cn type="integer"> 30 </cn>
                 </apply>
               </apply>
@@ -1985,7 +1985,7 @@
               <ci> k17 </ci>
               <apply>
                 <leq/>
-                <ci> year </ci>
+                <ci> Age </ci>
                 <cn type="integer"> 30 </cn>
               </apply>
             </piece>

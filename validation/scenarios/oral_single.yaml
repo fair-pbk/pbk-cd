@@ -36,7 +36,7 @@ scenarios:
         amount: 1000
         time: 0
     parameters:
-      Age: 30
+      AgeInit: 30
       sex: 1
       AgeRef: 30
       BWRef: 85

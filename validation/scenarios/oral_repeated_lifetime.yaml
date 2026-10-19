@@ -36,7 +36,7 @@ scenarios:
         time: 0
         interval: 1
     parameters:
-      Age: 0
+      AgeInit: 0
       sex: 1
       AgeRef: 30
       BWRef: 85

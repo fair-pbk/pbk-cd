@@ -16,7 +16,7 @@ The `reference_scenarios.yaml` file lists the R and mrgsolve reference scripts a
 
 ### R validation (`R.yaml`)
 
-The R validation scenarios compare the SBML model with both the original and revised R implementations. All individuals are female (`sex = 2`); `BW` denotes the model-calculated body weight.
+The R validation scenarios compare the SBML model with both the original and revised R implementations. All individuals are male (`sex = 1`); `BW` denotes the model-calculated body weight.
 
 | Scenario | Duration | Dosing | Individual |
 |---|---:|---|---|

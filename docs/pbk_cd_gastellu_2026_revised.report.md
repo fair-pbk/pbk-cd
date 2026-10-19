@@ -97,52 +97,52 @@
 
 ## Assignment rules
 
-| variable          | assignment                                                                                                                                                                  |
-|:------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| year              | time / 365 + Age                                                                                                                                                            |
-| BWNominal         | piecewise(BW_male_lifetime(AgeRef * 12), eq(sex, 1), BW_female_lifetime(AgeRef * 12))                                                                                       |
-| Delta_BWs3        | BWRef / BWNominal                                                                                                                                                           |
-| Delta_BW          | piecewise(1 + (Delta_BWs3 - 1) * year * 365 / 1095, leq(year * 365, 1095), Delta_BWs3)                                                                                      |
-| wbw               | Delta_BW * piecewise(BW_male_lifetime(year * 12), eq(sex, 1), BW_female_lifetime(year * 12))                                                                                |
-| hct_mid           | 1.12815e-6 * pow(year, 3) - 0.000172362 * pow(year, 2) + 0.00815264 * year + 0.327363                                                                                       |
-| hct               | piecewise(0.359, leq(year, 2), hct_mid, lt(year, 18), 0.4248446)                                                                                                            |
-| vb_male           | piecewise((-0.027 * year + 0.077) * wbw, lt(year, 1), 0.0761 / (1 + exp(-0.683 * year + 0.946)) * wbw)                                                                      |
-| vb_female         | piecewise((-0.0273 * year + 0.0771) * wbw, lt(year, 1), (3.28e-5 * pow(year, 3) - 0.00121 * pow(year, 2) + 0.0124 * year + 0.0386) * wbw, lt(year, 14.019723), 0.065 * wbw) |
-| vb                | piecewise(vb_male, eq(sex, 1), vb_female)                                                                                                                                   |
-| vp                | (1 - hct) * vb                                                                                                                                                              |
-| vrbc              | hct * vb                                                                                                                                                                    |
-| vk_male           | piecewise((0.0042 + (0.00767 - 0.0042) * exp(-0.206 * year)) * wbw, leq(year, 79), (0.0042 + 2.969074e-10) * wbw)                                                           |
-| vk_female         | piecewise((0.0046 + (0.00709 - 0.0046) * exp(-0.221 * year)) * wbw, leq(year, 79), (0.0046 + 6.514063e-11) * wbw)                                                           |
-| vk                | piecewise(vk_male, eq(sex, 1), vk_female)                                                                                                                                   |
-| vlungs            | piecewise(0.0068 * wbw, eq(sex, 1), 0.007 * wbw)                                                                                                                            |
-| vint_male         | piecewise((-8.2562e-5 * pow(year, 2) + 0.0013523 * year + 0.01293) * wbw, lt(year, 16), 0.014 * wbw)                                                                        |
-| vint_female       | piecewise((-7.421e-5 * pow(year, 2) + 0.001276 * year + 0.01298) * wbw, lt(year, 14.453301), 0.016 * wbw)                                                                   |
-| vintestine        | piecewise(vint_male, eq(sex, 1), vint_female)                                                                                                                               |
-| vl_male           | piecewise((0.0247 + (0.0409 - 0.0247) * exp(-0.218 * year)) * wbw, leq(year, 79), (0.0247 + 5.371498e-10) * wbw)                                                            |
-| vl_female         | piecewise((0.0233 + (0.038 - 0.0233) * exp(-0.122 * year)) * wbw, leq(year, 79), (0.0233 + 9.58489e-7) * wbw)                                                               |
-| vl                | piecewise(vl_male, eq(sex, 1), vl_female)                                                                                                                                   |
-| vother            | wbw / rho_body - (vk + vb + vl + vintestine + vlungs)                                                                                                                       |
-| ucr_base          | 0.032 + 0.02098 * year + 0.009104 * pow(year, 2) - 0.000455 * pow(year, 3) + 7.578e-6 * pow(year, 4) - 4.232e-8 * pow(year, 5)                                              |
-| ucr               | piecewise(ucr_base * Delta_creat, leq(year, 70), 0.865756 * Delta_creat)                                                                                                    |
-| Vurine            | 0.0294 * wbw                                                                                                                                                                |
-| k5                | piecewise(k5_h, eq(sex, 1), k5_f)                                                                                                                                           |
-| k19x              | piecewise(k19, leq(year, 30), k19 + k21 * (year - 30))                                                                                                                      |
-| k17_decline       | k17 - k17 / 3 * (year - 30) / 50                                                                                                                                            |
-| k17x              | piecewise(k17, leq(year, 30), 0, lt(k17_decline, 0), k17_decline)                                                                                                           |
-| k17b              | 1 - k17x                                                                                                                                                                    |
-| uptakeTotal_Lung  | k3 * LUNG                                                                                                                                                                   |
-| uptakeTotal_GI    | k6 * INTESTINE_TISSUE                                                                                                                                                       |
-| TOTAL_UPTAKE      | uptakeTotal_Lung + uptakeTotal_GI                                                                                                                                           |
-| UPTAKE_MT         | k7 * TOTAL_UPTAKE + (k8 - k7 * TOTAL_UPTAKE) / (1 + exp((k8 - k7 * TOTAL_UPTAKE) / (UPTAKE_MT_smooth_fraction * k8)))                                                       |
-| UPTAKE_PLASMA     | TOTAL_UPTAKE - UPTAKE_MT                                                                                                                                                    |
-| uptakeMT_Lung     | piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_Lung / TOTAL_UPTAKE)                                                                                             |
-| uptakeMT_GI       | piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_GI / TOTAL_UPTAKE)                                                                                               |
-| uptakePlasma_Lung | uptakeTotal_Lung - uptakeMT_Lung                                                                                                                                            |
-| uptakePlasma_GI   | uptakeTotal_GI - uptakeMT_GI                                                                                                                                                |
-| BLOOD             | RBC + k20 * (PLASMA + META)                                                                                                                                                 |
-| CBLOOD            | BLOOD / vb                                                                                                                                                                  |
-| ur                | k_MT_out * k17b * META + k19x * KIDNEY                                                                                                                                      |
-| ucdcr             | ur / ucr                                                                                                                                                                    |
+| variable          | assignment                                                                                                                                                            |
+|:------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Age               | time / 365 + AgeInit                                                                                                                                                  |
+| BWNominal         | piecewise(BW_male_lifetime(AgeRef * 12), eq(sex, 1), BW_female_lifetime(AgeRef * 12))                                                                                 |
+| Delta_BWs3        | BWRef / BWNominal                                                                                                                                                     |
+| Delta_BW          | piecewise(1 + (Delta_BWs3 - 1) * Age * 365 / 1095, leq(Age * 365, 1095), Delta_BWs3)                                                                                  |
+| wbw               | Delta_BW * piecewise(BW_male_lifetime(Age * 12), eq(sex, 1), BW_female_lifetime(Age * 12))                                                                            |
+| hct_mid           | 1.12815e-6 * pow(Age, 3) - 0.000172362 * pow(Age, 2) + 0.00815264 * Age + 0.327363                                                                                    |
+| hct               | piecewise(0.359, leq(Age, 2), hct_mid, lt(Age, 18), 0.4248446)                                                                                                        |
+| vb_male           | piecewise((-0.027 * Age + 0.077) * wbw, lt(Age, 1), 0.0761 / (1 + exp(-0.683 * Age + 0.946)) * wbw)                                                                   |
+| vb_female         | piecewise((-0.0273 * Age + 0.0771) * wbw, lt(Age, 1), (3.28e-5 * pow(Age, 3) - 0.00121 * pow(Age, 2) + 0.0124 * Age + 0.0386) * wbw, lt(Age, 14.019723), 0.065 * wbw) |
+| vb                | piecewise(vb_male, eq(sex, 1), vb_female)                                                                                                                             |
+| vp                | (1 - hct) * vb                                                                                                                                                        |
+| vrbc              | hct * vb                                                                                                                                                              |
+| vk_male           | piecewise((0.0042 + (0.00767 - 0.0042) * exp(-0.206 * Age)) * wbw, leq(Age, 79), (0.0042 + 2.969074e-10) * wbw)                                                       |
+| vk_female         | piecewise((0.0046 + (0.00709 - 0.0046) * exp(-0.221 * Age)) * wbw, leq(Age, 79), (0.0046 + 6.514063e-11) * wbw)                                                       |
+| vk                | piecewise(vk_male, eq(sex, 1), vk_female)                                                                                                                             |
+| vlungs            | piecewise(0.0068 * wbw, eq(sex, 1), 0.007 * wbw)                                                                                                                      |
+| vint_male         | piecewise((-8.2562e-5 * pow(Age, 2) + 0.0013523 * Age + 0.01293) * wbw, lt(Age, 16), 0.014 * wbw)                                                                     |
+| vint_female       | piecewise((-7.421e-5 * pow(Age, 2) + 0.001276 * Age + 0.01298) * wbw, lt(Age, 14.453301), 0.016 * wbw)                                                                |
+| vintestine        | piecewise(vint_male, eq(sex, 1), vint_female)                                                                                                                         |
+| vl_male           | piecewise((0.0247 + (0.0409 - 0.0247) * exp(-0.218 * Age)) * wbw, leq(Age, 79), (0.0247 + 5.371498e-10) * wbw)                                                        |
+| vl_female         | piecewise((0.0233 + (0.038 - 0.0233) * exp(-0.122 * Age)) * wbw, leq(Age, 79), (0.0233 + 9.58489e-7) * wbw)                                                           |
+| vl                | piecewise(vl_male, eq(sex, 1), vl_female)                                                                                                                             |
+| vother            | wbw / rho_body - (vk + vb + vl + vintestine + vlungs)                                                                                                                 |
+| ucr_base          | 0.032 + 0.02098 * Age + 0.009104 * pow(Age, 2) - 0.000455 * pow(Age, 3) + 7.578e-6 * pow(Age, 4) - 4.232e-8 * pow(Age, 5)                                             |
+| ucr               | piecewise(ucr_base * Delta_creat, leq(Age, 70), 0.865756 * Delta_creat)                                                                                               |
+| Vurine            | 0.0294 * wbw                                                                                                                                                          |
+| k5                | piecewise(k5_h, eq(sex, 1), k5_f)                                                                                                                                     |
+| k19x              | piecewise(k19, leq(Age, 30), k19 + k21 * (Age - 30))                                                                                                                  |
+| k17_decline       | k17 - k17 / 3 * (Age - 30) / 50                                                                                                                                       |
+| k17x              | piecewise(k17, leq(Age, 30), 0, lt(k17_decline, 0), k17_decline)                                                                                                      |
+| k17b              | 1 - k17x                                                                                                                                                              |
+| uptakeTotal_Lung  | k3 * LUNG                                                                                                                                                             |
+| uptakeTotal_GI    | k6 * INTESTINE_TISSUE                                                                                                                                                 |
+| TOTAL_UPTAKE      | uptakeTotal_Lung + uptakeTotal_GI                                                                                                                                     |
+| UPTAKE_MT         | k7 * TOTAL_UPTAKE + (k8 - k7 * TOTAL_UPTAKE) / (1 + exp((k8 - k7 * TOTAL_UPTAKE) / (UPTAKE_MT_smooth_fraction * k8)))                                                 |
+| UPTAKE_PLASMA     | TOTAL_UPTAKE - UPTAKE_MT                                                                                                                                              |
+| uptakeMT_Lung     | piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_Lung / TOTAL_UPTAKE)                                                                                       |
+| uptakeMT_GI       | piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_GI / TOTAL_UPTAKE)                                                                                         |
+| uptakePlasma_Lung | uptakeTotal_Lung - uptakeMT_Lung                                                                                                                                      |
+| uptakePlasma_GI   | uptakeTotal_GI - uptakeMT_GI                                                                                                                                          |
+| BLOOD             | RBC + k20 * (PLASMA + META)                                                                                                                                           |
+| CBLOOD            | BLOOD / vb                                                                                                                                                            |
+| ur                | k_MT_out * k17b * META + k19x * KIDNEY                                                                                                                                |
+| ucdcr             | ur / ucr                                                                                                                                                              |
 
 ## Initial assignments
 
@@ -191,10 +191,10 @@
 | k19                       | urine elimination rate constant                                                            | /d            | *not specified*                            |
 | k21                       | age-dependent increase in kidney-to-urine elimination after age 30                         | /y            | *not specified*                            |
 | k20                       | fraction of PLASMA + META Cd amounts to calculated whole-blood Cd                          | dimensionless | *not specified*                            |
-| Age                       | age of the individual at start of simulation                                               | y             | *not specified*                            |
+| AgeInit                   | age of the individual at start of simulation                                               | y             | *not specified*                            |
 | AgeRef                    | reference age used for scaling of nominal body weight to reference body weight             | y             | *not specified*                            |
 | sex                       | sex discrimination                                                                         | dimensionless | *not specified*                            |
-| year                      | age in years                                                                               | y             | http://purl.obolibrary.org/obo/PBPKO_00521 |
+| Age                       | age during simulation                                                                      | y             | http://purl.obolibrary.org/obo/PBPKO_00521 |
 | BWRef                     | body weight of individual at reference age                                                 | kg            | *not specified*                            |
 | rho_body                  | body density                                                                               | kg/L          | *not specified*                            |
 | BWNominal                 | sex specific nominal population bodyweight                                                 | kg            | *not specified*                            |
@@ -241,5 +241,5 @@
 | BLOOD                     | amount in whole blood                                                                      | ug            | http://purl.obolibrary.org/obo/PBPKO_00623 |
 | CBLOOD                    | concentration in whole blood                                                               | ug/L          | *not specified*                            |
 | ur                        | urinary clearance rate                                                                     | ug/d          | http://purl.obolibrary.org/obo/PBPKO_00232 |
-| ucdcr                     | Urinary concentration normalized to creatinine (ug/g creatine)                             | ug/g          | http://purl.obolibrary.org/obo/PBPKO_00302 |
+| ucdcr                     | urinary concentration normalized to creatinine (ug/g creatine)                             | ug/g          | http://purl.obolibrary.org/obo/PBPKO_00302 |
 
