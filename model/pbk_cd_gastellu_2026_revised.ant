@@ -141,17 +141,17 @@ model pbk_cd_gastellu_2026_revised()
     # COMPARTMENTS
     # ============================================================
 
-    compartment LungComp = vlungs;
+    compartment LungComp := vlungs;
     compartment GutLumenComp = 1;
-    compartment IntestineTissueComp = vintestine;
-    compartment PlasmaComp = vp;
-    compartment RBCComp = vrbc;
+    compartment IntestineTissueComp := vintestine;
+    compartment PlasmaComp := vp;
+    compartment RBCComp := vrbc;
     compartment MTComp = 1;
-    compartment LiverComp = vl;
-    compartment KidneyComp = vk;
-    compartment OtherComp = vother;
+    compartment LiverComp := vl;
+    compartment KidneyComp := vk;
+    compartment OtherComp := vother;
     compartment FecesComp = 1;
-    compartment UrineComp = Vurine;
+    compartment UrineComp := Vurine;
 
     # ============================================================
     # SPECIES
