@@ -465,7 +465,7 @@
           </rdf:RDF>
         </annotation>
       </compartment>
-      <compartment id="MTComp" name="Metallothionein compartment" spatialDimensions="3" size="1" units="L" constant="true"/>
+      <compartment id="MTComp" name="metallothionein compartment" spatialDimensions="3" size="1" units="L" constant="true"/>
       <compartment metaid="meta_LiverComp" id="LiverComp" name="liver compartment" spatialDimensions="3" units="L" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -723,9 +723,9 @@
       </species>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="k3" name="First-order transfer rate constant from lung to total systemic uptake" value="0.05" units="PER_DAY" constant="true"/>
-      <parameter id="k4" name="First-order transfer rate constant from lung to GI" value="0.005" units="PER_DAY" constant="true"/>
-      <parameter metaid="meta_kabs" id="kabs" name="First-order absorption rate constant" value="1" units="PER_DAY" constant="true">
+      <parameter id="k3" name="first-order transfer rate constant from lung to total systemic uptake" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="k4" name="first-order transfer rate constant from lung to GI" value="0.005" units="PER_DAY" constant="true"/>
+      <parameter metaid="meta_kabs" id="kabs" name="first-order absorption rate constant" value="1" units="PER_DAY" constant="true">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_kabs">
@@ -738,30 +738,30 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="k5_h" name="Fraction of absorbed Cd in gut transferred to intestine in males" value="0.05" units="UNITLESS" constant="true"/>
-      <parameter id="k5_f" name="Fraction of absorbed Cd in gut transferred to intestine in females" value="0.1" units="UNITLESS" constant="true"/>
-      <parameter id="k6" name="First-order transfer rate constant from intestine to total systemic uptake" value="0.05" units="PER_DAY" constant="true"/>
-      <parameter id="k7" name="Fraction of total systemic Cd uptake to the metallothionein" value="0.25" units="UNITLESS" constant="true"/>
-      <parameter id="k8" name="Maximum Cd flux into the metallothionein" value="1" units="MicroGM_PER_DAY" constant="true"/>
-      <parameter id="k_MT_out" name="First-order turnover rate constant for MT-bound Cd (added explicitly for unit consistency)" value="1" units="PER_DAY" constant="true"/>
-      <parameter id="k9" name="kinetic constant rate PLASMA -&gt; OTHER tissues" value="0.44" units="PER_DAY" constant="true"/>
-      <parameter id="k10" name="kinetic constant rate OTHER tissues -&gt; PLASMA" value="0.00014" units="PER_DAY" constant="true"/>
-      <parameter id="k11" name="kinetic constant rate PLASMA -&gt; feces" value="0.27" units="PER_DAY" constant="true"/>
-      <parameter id="k12" name="kinetic constant rate PLASMA -&gt; liver" value="0.25" units="PER_DAY" constant="true"/>
-      <parameter id="k13" name="kinetic constant rate liver -&gt; PLASMA" value="3e-05" units="PER_DAY" constant="true"/>
+      <parameter id="k5_h" name="fraction of absorbed Cd in gut transferred to intestine in males" value="0.05" units="UNITLESS" constant="true"/>
+      <parameter id="k5_f" name="fraction of absorbed Cd in gut transferred to intestine in females" value="0.1" units="UNITLESS" constant="true"/>
+      <parameter id="k6" name="first-order transfer rate constant from intestine to total systemic uptake" value="0.05" units="PER_DAY" constant="true"/>
+      <parameter id="k7" name="fraction of total systemic Cd uptake to the metallothionein" value="0.25" units="UNITLESS" constant="true"/>
+      <parameter id="k8" name="maximum Cd flux into the metallothionein" value="1" units="MicroGM_PER_DAY" constant="true"/>
+      <parameter id="k_MT_out" name="first-order turnover rate constant for MT-bound Cd" value="1" units="PER_DAY" constant="true"/>
+      <parameter id="k9" name="kinetic constant rate plasma -&gt; other tissues" value="0.44" units="PER_DAY" constant="true"/>
+      <parameter id="k10" name="kinetic constant rate other tissues -&gt; plasma" value="0.00014" units="PER_DAY" constant="true"/>
+      <parameter id="k11" name="kinetic constant rate plasma -&gt; feces" value="0.27" units="PER_DAY" constant="true"/>
+      <parameter id="k12" name="kinetic constant rate plasma -&gt; liver" value="0.25" units="PER_DAY" constant="true"/>
+      <parameter id="k13" name="kinetic constant rate liver -&gt; plasma" value="3e-05" units="PER_DAY" constant="true"/>
       <parameter id="k14" name="kinetic constant rate liver -&gt; MT pool" value="0.00016" units="PER_DAY" constant="true"/>
       <parameter id="k15" name="kinetic constant rate liver -&gt; feces" value="5e-05" units="PER_DAY" constant="true"/>
-      <parameter id="kx" name="kinetic constant rate PLASMA -&gt; RBC" value="0.04" units="PER_DAY" constant="true"/>
+      <parameter id="kx" name="kinetic constant rate plasma -&gt; RBC" value="0.04" units="PER_DAY" constant="true"/>
       <parameter id="k16" name="kinetic constant rate RBC-&gt; MT pool" value="0.012" units="PER_DAY" constant="true"/>
-      <parameter id="k17" name="Fraction of MT-bound Cd removal to KIDNEY; remainder goes directly to urine." value="0.95" units="UNITLESS" constant="true"/>
-      <parameter id="k18" name="kinetic constant rate KIDNEY -&gt; PLASMA" value="1e-05" units="PER_DAY" constant="true"/>
+      <parameter id="k17" name="fraction of MT-bound Cd removal to kidney" value="0.95" units="UNITLESS" constant="true"/>
+      <parameter id="k18" name="kinetic constant rate kidney -&gt; plasma" value="1e-05" units="PER_DAY" constant="true"/>
       <parameter id="k19" name="urine elimination rate constant" value="0.00014" units="PER_DAY" constant="true"/>
-      <parameter id="k21" name="Age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" units="PER_YR" constant="true"/>
-      <parameter id="k20" name="Fraction of PLASMA + META Cd amounts to calculated whole-blood Cd" value="0.1" units="UNITLESS" constant="true"/>
-      <parameter id="Age" name="Age of the individual at start of simulation" value="30" units="YR" constant="true"/>
-      <parameter id="AgeRef" name="Reference age used for scaling of nominal body weight to reference body weight" value="30" units="YR" constant="true"/>
+      <parameter id="k21" name="age-dependent increase in kidney-to-urine elimination after age 30" value="1.1e-06" units="PER_YR" constant="true"/>
+      <parameter id="k20" name="fraction of PLASMA + META Cd amounts to calculated whole-blood Cd" value="0.1" units="UNITLESS" constant="true"/>
+      <parameter id="Age" name="age of the individual at start of simulation" value="30" units="YR" constant="true"/>
+      <parameter id="AgeRef" name="reference age used for scaling of nominal body weight to reference body weight" value="30" units="YR" constant="true"/>
       <parameter id="sex" name="sex discrimination" value="2" units="UNITLESS" constant="true"/>
-      <parameter metaid="meta_year" id="year" name="Age in years" units="YR" constant="false">
+      <parameter metaid="meta_year" id="year" name="age in years" units="YR" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_year">
@@ -774,12 +774,12 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="BWRef" name="Body weight of individual at reference age" value="85" units="KiloGM" constant="true"/>
-      <parameter id="rho_body" value="1" units="KiloGM_PER_L" constant="true"/>
+      <parameter id="BWRef" name="body weight of individual at reference age" value="85" units="KiloGM" constant="true"/>
+      <parameter id="rho_body" name="body density" value="1" units="KiloGM_PER_L" constant="true"/>
       <parameter id="BWNominal" name="sex specific nominal population bodyweight" units="KiloGM" constant="false"/>
-      <parameter id="Delta_BWs3" name="Individual body-weight multiplier reached at reference age" units="UNITLESS" constant="false"/>
-      <parameter id="Delta_BW" name="Age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)" units="UNITLESS" constant="false"/>
-      <parameter metaid="meta_wbw" id="wbw" name="bodyweight for the selected sex and age" units="KiloGM" constant="false">
+      <parameter id="Delta_BWs3" name="individual body-weight multiplier" units="UNITLESS" constant="false"/>
+      <parameter id="Delta_BW" name="age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)" units="UNITLESS" constant="false"/>
+      <parameter metaid="meta_wbw" id="wbw" name="bodyweight during simulation" units="KiloGM" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_wbw">
@@ -792,9 +792,9 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="hct_mid" name="Predicted hematocrit in the age-dependent (ages 2–18 years)" units="UNITLESS" constant="false"/>
+      <parameter id="hct_mid" name="predicted hematocrit in the age-dependent (ages 2-18 years)" units="UNITLESS" constant="false"/>
       <parameter id="hct" name="age-specific hematocrit fraction" units="UNITLESS" constant="false"/>
-      <parameter metaid="meta_vb_male" id="vb_male" name="Male whole-blood volume or mass calculated from body weight" units="L" constant="false">
+      <parameter metaid="meta_vb_male" id="vb_male" name="male whole-blood volume or mass calculated from body weight" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_vb_male">
@@ -807,7 +807,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_vb_female" id="vb_female" name="Female whole-blood volume or mass calculated from body weight" units="L" constant="false">
+      <parameter metaid="meta_vb_female" id="vb_female" name="female whole-blood volume or mass calculated from body weight" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_vb_female">
@@ -847,7 +847,7 @@
         </annotation>
       </parameter>
       <parameter id="vrbc" name="volume of red blood cells" units="L" constant="false"/>
-      <parameter metaid="meta_vk_male" id="vk_male" name="Male kidney volume" units="L" constant="false">
+      <parameter metaid="meta_vk_male" id="vk_male" name="male kidney volume" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_vk_male">
@@ -860,7 +860,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter metaid="meta_vk_female" id="vk_female" name="Female kidney volume" units="L" constant="false">
+      <parameter metaid="meta_vk_female" id="vk_female" name="female kidney volume" units="L" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_vk_female">
@@ -990,24 +990,24 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="Delta_creat" name="Individual multiplicative adjustment to predicted urine creatinine output" value="1" units="UNITLESS" constant="true"/>
-      <parameter id="ucr_base" name="Reference creatinine output before Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
-      <parameter id="ucr" name="Age-dependent creatinine output after Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
-      <parameter id="Vurine" name="Average urine volume" units="L" constant="false"/>
+      <parameter id="Delta_creat" name="individual multiplicative adjustment to predicted urine creatinine output" value="1" units="UNITLESS" constant="true"/>
+      <parameter id="ucr_base" name="reference creatinine output before Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
+      <parameter id="ucr" name="age-dependent creatinine output after Delta_creat adjustment" units="GM_PER_DAY" constant="false"/>
+      <parameter id="Vurine" name="average urine volume" units="L" constant="false"/>
       <parameter id="k5" name="sex-specific gut:intestine fraction" units="UNITLESS" constant="false"/>
       <parameter id="k19x" name="age-adjusted kidney:urine rate" units="PER_DAY" constant="false"/>
       <parameter id="k17_decline" name="age-related changes of k17" units="UNITLESS" constant="false"/>
       <parameter id="k17x" name="age-adjusted MT removal fraction to kidney" units="UNITLESS" constant="false"/>
       <parameter id="k17b" name="MT removal fraction to urine" units="UNITLESS" constant="false"/>
-      <parameter id="uptakeTotal_Lung" name="Systemic Cd uptake flux from lung" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="uptakeTotal_GI" name="Systemic Cd uptake flux from intestine" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="TOTAL_UPTAKE" name="Sum of lung and GI systemic uptake fluxes" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="UPTAKE_MT_smooth_fraction" name="Smoothing parameter for transition between proportional and capacity-limited MT uptake" value="0.01" units="UNITLESS" constant="true"/>
-      <parameter id="UPTAKE_MT" name="Remaining systemic Cd uptake flux to MT" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="UPTAKE_PLASMA" name="Remaining systemic Cd uptake flux to plasma" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="uptakeMT_Lung" name="Lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakeTotal_Lung" name="systemic Cd uptake flux from lung" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakeTotal_GI" name="systemic Cd uptake flux from intestine" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="TOTAL_UPTAKE" name="sum of lung and GI systemic uptake fluxes" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="UPTAKE_MT_smooth_fraction" name="smoothing parameter for transition between proportional and capacity-limited MT uptake" value="0.01" units="UNITLESS" constant="true"/>
+      <parameter id="UPTAKE_MT" name="remaining systemic Cd uptake flux to MT" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="UPTAKE_PLASMA" name="remaining systemic Cd uptake flux to plasma" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakeMT_Lung" name="lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakeMT_GI" name="GI contribution to MT uptake flux, allocated in proportion to GI share of total uptake" units="MicroGM_PER_DAY" constant="false"/>
-      <parameter id="uptakePlasma_Lung" name="Lung contribution to plasma uptake flux" units="MicroGM_PER_DAY" constant="false"/>
+      <parameter id="uptakePlasma_Lung" name="lung contribution to plasma uptake flux" units="MicroGM_PER_DAY" constant="false"/>
       <parameter id="uptakePlasma_GI" name="GI contribution to plasma uptake flux" units="MicroGM_PER_DAY" constant="false"/>
       <parameter metaid="meta_BLOOD" id="BLOOD" name="amount in whole blood" units="MicroGM" constant="false">
         <annotation>
@@ -1022,7 +1022,7 @@
           </rdf:RDF>
         </annotation>
       </parameter>
-      <parameter id="CBLOOD" units="MicroGM_PER_L" constant="false"/>
+      <parameter id="CBLOOD" name="concentration in whole blood" units="MicroGM_PER_L" constant="false"/>
       <parameter metaid="meta_ur" id="ur" name="urinary clearance rate" units="MicroGM_PER_DAY" constant="false">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
