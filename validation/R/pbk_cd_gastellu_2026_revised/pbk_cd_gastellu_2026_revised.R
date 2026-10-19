@@ -38,17 +38,17 @@ pbk_cd <- rxode2({
   d/dt(INTESTINE_TISSUE) = k5 * kabs * GUT_LUMEN - k6 * INTESTINE_TISSUE; # NEW V3: added kabs for unity consistency; kabs = 1 1/day
 
   # Total systemic input
-  TOTAL_UPTAKE = k3 * LUNG + k6 * INTESTINE_TISSUE; # NEW V3; in µg/day
+  uptakeTotal = k3 * LUNG + k6 * INTESTINE_TISSUE; # NEW V3; in µg/day
 
-  # Smooth metallothionein uptake (µg/day) , UPTAKE_MT flux to metallothionein has a maximum = k8
-  UPTAKE_MT_raw = k7 * TOTAL_UPTAKE;
+  # Smooth metallothionein uptake (µg/day) , uptakeMT flux to metallothionein has a maximum = k8
+  uptakeMT_raw = k7 * uptakeTotal;
 
-  UPTAKE_MT = UPTAKE_MT_raw + (k8 - UPTAKE_MT_raw) / (1 + exp((k8 - UPTAKE_MT_raw) / (UPTAKE_MT_smooth_fraction * k8)));
+  uptakeMT = uptakeMT_raw + (k8 - uptakeMT_raw) / (1 + exp((k8 - uptakeMT_raw) / (uptakeMT_smoothing_fraction * k8)));
 
-  UPTAKE_PLASMA = TOTAL_UPTAKE - UPTAKE_MT; # UPTAKE_Plasma goes to plasma pool (b1)
+  uptakePlasma = uptakeTotal - uptakeMT; # uptakePlasma goes to plasma pool (b1)
 
   #Plasma
-  d/dt(PLASMA) = UPTAKE_PLASMA +
+  d/dt(PLASMA) = uptakePlasma +
     k10 * OTHER +
     k13 * LIVER +
     k18 * KIDNEY -
@@ -65,7 +65,7 @@ pbk_cd <- rxode2({
     k16 * RBC;
 
   # Metallothionein
-  d/dt(META) = UPTAKE_MT +
+  d/dt(META) = uptakeMT +
     k14 * LIVER +
     k16 * RBC -
     k_MT_out * k17x * META -  # NEW added k_MT_out for unit consistency
@@ -110,7 +110,7 @@ pbk_cd <- rxode2({
     (1 - k1_cig  - k2_cig)  * f_inh_available * kinh_release * CIG_inhal_ing;
 
   # Total Body Burden
-  total = GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA; #+TOTAL_UPTAKE- took out ;           # Total Body burden
+  total = GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA; #+uptakeTotal- took out ;           # Total Body burden
 
   # Total Cd excretion
   Excreted = FECES + URINE + EXH;

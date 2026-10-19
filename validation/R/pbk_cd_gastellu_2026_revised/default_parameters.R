@@ -95,7 +95,7 @@ theta <- c(
   # ==========================================================
   # Helpers
   # ==========================================================
-  UPTAKE_MT_smooth_fraction = 0.01, # Relative width of the smooth transition between proportional and capacity-limited MT uptake, expressed as a fraction of k8 (-)
+  uptakeMT_smoothing_fraction = 0.01, # Relative width of the smooth transition between proportional and capacity-limited MT uptake, expressed as a fraction of k8 (-)
   rho_body = 1            # to convert between volumes and organ masses (kg/L)
 )
 

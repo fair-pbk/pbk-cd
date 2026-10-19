@@ -11,24 +11,24 @@
 <g id="clust1" class="cluster">
 <title>cluster_LungComp</title>
 <g id="a_clust1"><a xlink:href="#compartment-LungComp" xlink:title="LungComp">
-<path fill="lightblue" stroke="black" d="M110.16,-343C110.16,-343 245.92,-343 245.92,-343 251.92,-343 257.92,-349 257.92,-355 257.92,-355 257.92,-406.75 257.92,-406.75 257.92,-412.75 251.92,-418.75 245.92,-418.75 245.92,-418.75 110.16,-418.75 110.16,-418.75 104.16,-418.75 98.16,-412.75 98.16,-406.75 98.16,-406.75 98.16,-355 98.16,-355 98.16,-349 104.16,-343 110.16,-343"/>
-<text xml:space="preserve" text-anchor="middle" x="178.04" y="-401.45" font-family="Arial" font-size="14.00">LungComp</text>
+<path fill="lightblue" stroke="black" d="M231.42,-343C231.42,-343 367.18,-343 367.18,-343 373.18,-343 379.18,-349 379.18,-355 379.18,-355 379.18,-406.75 379.18,-406.75 379.18,-412.75 373.18,-418.75 367.18,-418.75 367.18,-418.75 231.42,-418.75 231.42,-418.75 225.42,-418.75 219.42,-412.75 219.42,-406.75 219.42,-406.75 219.42,-355 219.42,-355 219.42,-349 225.42,-343 231.42,-343"/>
+<text xml:space="preserve" text-anchor="middle" x="299.3" y="-401.45" font-family="Arial" font-size="14.00">LungComp</text>
 </a>
 </g>
 </g>
 <g id="clust2" class="cluster">
-<title>cluster_GUT_LUMENComp</title>
-<g id="a_clust2"><a xlink:href="#compartment-GUT_LUMENComp" xlink:title="GUT_LUMENComp">
-<path fill="lightblue" stroke="black" d="M65.89,-259.25C65.89,-259.25 307.51,-259.25 307.51,-259.25 313.51,-259.25 319.51,-265.25 319.51,-271.25 319.51,-271.25 319.51,-323 319.51,-323 319.51,-329 313.51,-335 307.51,-335 307.51,-335 65.89,-335 65.89,-335 59.89,-335 53.89,-329 53.89,-323 53.89,-323 53.89,-271.25 53.89,-271.25 53.89,-265.25 59.89,-259.25 65.89,-259.25"/>
-<text xml:space="preserve" text-anchor="middle" x="186.7" y="-317.7" font-family="Arial" font-size="14.00">GUT_LUMENComp</text>
+<title>cluster_GutLumenComp</title>
+<g id="a_clust2"><a xlink:href="#compartment-GutLumenComp" xlink:title="GutLumenComp">
+<path fill="lightblue" stroke="black" d="M196.78,-259.25C196.78,-259.25 397.98,-259.25 397.98,-259.25 403.98,-259.25 409.98,-265.25 409.98,-271.25 409.98,-271.25 409.98,-323 409.98,-323 409.98,-329 403.98,-335 397.98,-335 397.98,-335 196.78,-335 196.78,-335 190.78,-335 184.78,-329 184.78,-323 184.78,-323 184.78,-271.25 184.78,-271.25 184.78,-265.25 190.78,-259.25 196.78,-259.25"/>
+<text xml:space="preserve" text-anchor="middle" x="297.38" y="-317.7" font-family="Arial" font-size="14.00">GutLumenComp</text>
 </a>
 </g>
 </g>
 <g id="clust3" class="cluster">
-<title>cluster_INTESTINE_TISSUEComp</title>
-<g id="a_clust3"><a xlink:href="#compartment-INTESTINE_TISSUEComp" xlink:title="INTESTINE_TISSUEComp">
-<path fill="lightblue" stroke="black" d="M300.72,-175.5C300.72,-175.5 623.18,-175.5 623.18,-175.5 629.18,-175.5 635.18,-181.5 635.18,-187.5 635.18,-187.5 635.18,-239.25 635.18,-239.25 635.18,-245.25 629.18,-251.25 623.18,-251.25 623.18,-251.25 300.72,-251.25 300.72,-251.25 294.72,-251.25 288.72,-245.25 288.72,-239.25 288.72,-239.25 288.72,-187.5 288.72,-187.5 288.72,-181.5 294.72,-175.5 300.72,-175.5"/>
-<text xml:space="preserve" text-anchor="middle" x="461.95" y="-233.95" font-family="Arial" font-size="14.00">INTESTINE_TISSUEComp</text>
+<title>cluster_IntestineTissueComp</title>
+<g id="a_clust3"><a xlink:href="#compartment-IntestineTissueComp" xlink:title="IntestineTissueComp">
+<path fill="lightblue" stroke="black" d="M300.72,-175.5C300.72,-175.5 580.83,-175.5 580.83,-175.5 586.83,-175.5 592.83,-181.5 592.83,-187.5 592.83,-187.5 592.83,-239.25 592.83,-239.25 592.83,-245.25 586.83,-251.25 580.83,-251.25 580.83,-251.25 300.72,-251.25 300.72,-251.25 294.72,-251.25 288.72,-245.25 288.72,-239.25 288.72,-239.25 288.72,-187.5 288.72,-187.5 288.72,-181.5 294.72,-175.5 300.72,-175.5"/>
+<text xml:space="preserve" text-anchor="middle" x="440.77" y="-233.95" font-family="Arial" font-size="14.00">IntestineTissueComp</text>
 </a>
 </g>
 </g>
@@ -100,8 +100,8 @@
 <g id="node1" class="node">
 <title>LUNG</title>
 <g id="a_node1"><a xlink:href="#species-LUNG" xlink:title="LUNG">
-<path fill="gold" stroke="black" d="M192.15,-387C192.15,-387 161.9,-387 161.9,-387 155.9,-387 149.9,-381 149.9,-375 149.9,-375 149.9,-363 149.9,-363 149.9,-357 155.9,-351 161.9,-351 161.9,-351 192.15,-351 192.15,-351 198.15,-351 204.15,-357 204.15,-363 204.15,-363 204.15,-375 204.15,-375 204.15,-381 198.15,-387 192.15,-387"/>
-<text xml:space="preserve" text-anchor="middle" x="177.02" y="-363.57" font-family="Arial" font-size="14.00">LUNG</text>
+<path fill="gold" stroke="black" d="M313.15,-387C313.15,-387 282.9,-387 282.9,-387 276.9,-387 270.9,-381 270.9,-375 270.9,-375 270.9,-363 270.9,-363 270.9,-357 276.9,-351 282.9,-351 282.9,-351 313.15,-351 313.15,-351 319.15,-351 325.15,-357 325.15,-363 325.15,-363 325.15,-375 325.15,-375 325.15,-381 319.15,-387 313.15,-387"/>
+<text xml:space="preserve" text-anchor="middle" x="298.02" y="-363.57" font-family="Arial" font-size="14.00">LUNG</text>
 </a>
 </g>
 </g>
@@ -109,16 +109,16 @@
 <g id="node2" class="node">
 <title>GUT_LUMEN</title>
 <g id="a_node2"><a xlink:href="#species-GUT_LUMEN" xlink:title="GUT_LUMEN">
-<path fill="gold" stroke="black" d="M215.4,-303C215.4,-303 138.65,-303 138.65,-303 132.65,-303 126.65,-297 126.65,-291 126.65,-291 126.65,-279 126.65,-279 126.65,-273 132.65,-267 138.65,-267 138.65,-267 215.4,-267 215.4,-267 221.4,-267 227.4,-273 227.4,-279 227.4,-279 227.4,-291 227.4,-291 227.4,-297 221.4,-303 215.4,-303"/>
-<text xml:space="preserve" text-anchor="middle" x="177.02" y="-279.57" font-family="Arial" font-size="14.00">GUT_LUMEN</text>
+<path fill="gold" stroke="black" d="M336.4,-303C336.4,-303 259.65,-303 259.65,-303 253.65,-303 247.65,-297 247.65,-291 247.65,-291 247.65,-279 247.65,-279 247.65,-273 253.65,-267 259.65,-267 259.65,-267 336.4,-267 336.4,-267 342.4,-267 348.4,-273 348.4,-279 348.4,-279 348.4,-291 348.4,-291 348.4,-297 342.4,-303 336.4,-303"/>
+<text xml:space="preserve" text-anchor="middle" x="298.02" y="-279.57" font-family="Arial" font-size="14.00">GUT_LUMEN</text>
 </a>
 </g>
 </g>
 <!-- LUNG&#45;&gt;GUT_LUMEN -->
 <g id="edge1" class="edge">
 <title>LUNG&#45;&gt;GUT_LUMEN</title>
-<path fill="none" stroke="black" d="M177.02,-350.61C177.02,-340.17 177.02,-326.64 177.02,-314.66"/>
-<polygon fill="black" stroke="black" points="180.52,-314.88 177.02,-304.88 173.52,-314.88 180.52,-314.88"/>
+<path fill="none" stroke="black" d="M298.02,-350.61C298.02,-340.17 298.02,-326.64 298.02,-314.66"/>
+<polygon fill="black" stroke="black" points="301.52,-314.88 298.02,-304.88 294.52,-314.88 301.52,-314.88"/>
 </g>
 <!-- PLASMA -->
 <g id="node4" class="node">
@@ -132,8 +132,8 @@
 <!-- LUNG&#45;&gt;PLASMA -->
 <g id="edge2" class="edge">
 <title>LUNG&#45;&gt;PLASMA</title>
-<path fill="none" stroke="black" d="M149.43,-364.7C115.83,-360.05 62.07,-350.36 50.02,-334.75 29.45,-308.1 39.53,-290.99 50.02,-259 64.29,-215.5 73.9,-202.79 111.02,-176 149.49,-148.24 202.17,-133.53 239.85,-126.07"/>
-<polygon fill="black" stroke="black" points="240.35,-129.53 249.54,-124.25 239.06,-122.65 240.35,-129.53"/>
+<path fill="none" stroke="black" d="M270.6,-364.85C245.61,-360.95 208.52,-352.51 181.02,-334.75 140.49,-308.57 127.58,-297.08 111.02,-251.75 99.47,-220.13 91.22,-203.23 111.02,-176 140.14,-135.96 198.01,-123.47 239.44,-119.87"/>
+<polygon fill="black" stroke="black" points="239.68,-123.37 249.41,-119.17 239.19,-116.38 239.68,-123.37"/>
 </g>
 <!-- META -->
 <g id="node6" class="node">
@@ -147,8 +147,8 @@
 <!-- LUNG&#45;&gt;META -->
 <g id="edge3" class="edge">
 <title>LUNG&#45;&gt;META</title>
-<path fill="none" stroke="black" d="M204.6,-365.43C295.76,-356.3 584.72,-322.15 639.02,-251.75 659.58,-225.09 661.75,-200.84 639.02,-176 625.01,-160.69 565.77,-174.13 546.02,-167.75 528.48,-162.08 510.69,-152.13 496.18,-142.68"/>
-<polygon fill="black" stroke="black" points="498.21,-139.83 487.96,-137.13 494.29,-145.63 498.21,-139.83"/>
+<path fill="none" stroke="black" d="M325.56,-367.21C387.38,-363.76 536.53,-345.61 597.02,-251.75 615.26,-223.45 618.84,-201.64 597.02,-176 582.14,-158.52 567.6,-175.59 546.02,-167.75 528.95,-161.55 511.45,-151.71 497.03,-142.49"/>
+<polygon fill="black" stroke="black" points="499.12,-139.68 488.84,-137.1 495.26,-145.52 499.12,-139.68"/>
 </g>
 <!-- INTESTINE_TISSUE -->
 <g id="node3" class="node">
@@ -162,8 +162,8 @@
 <!-- GUT_LUMEN&#45;&gt;INTESTINE_TISSUE -->
 <g id="edge4" class="edge">
 <title>GUT_LUMEN&#45;&gt;INTESTINE_TISSUE</title>
-<path fill="none" stroke="black" d="M227.61,-268.48C268.97,-255.79 327.82,-237.73 373.25,-223.8"/>
-<polygon fill="black" stroke="black" points="374.21,-227.16 382.74,-220.88 372.16,-220.47 374.21,-227.16"/>
+<path fill="none" stroke="black" d="M328.7,-266.62C349.72,-254.72 377.81,-238.8 400.64,-225.87"/>
+<polygon fill="black" stroke="black" points="402.1,-229.07 409.08,-221.09 398.65,-222.98 402.1,-229.07"/>
 </g>
 <!-- FECES -->
 <g id="node10" class="node">
@@ -177,8 +177,8 @@
 <!-- GUT_LUMEN&#45;&gt;FECES -->
 <g id="edge5" class="edge">
 <title>GUT_LUMEN&#45;&gt;FECES</title>
-<path fill="none" stroke="black" d="M126.36,-267.01C120.28,-262.94 114.87,-257.92 111.02,-251.75 74.51,-193.27 91.79,-107.48 104.57,-63.43"/>
-<polygon fill="black" stroke="black" points="107.92,-64.45 107.49,-53.86 101.23,-62.4 107.92,-64.45"/>
+<path fill="none" stroke="black" d="M247.4,-282.38C198.1,-279.61 128.16,-272.1 111.02,-251.75 66.08,-198.4 87.79,-108.67 103.2,-63.21"/>
+<polygon fill="black" stroke="black" points="106.48,-64.42 106.52,-53.83 99.88,-62.09 106.48,-64.42"/>
 </g>
 <!-- INTESTINE_TISSUE&#45;&gt;PLASMA -->
 <g id="edge6" class="edge">

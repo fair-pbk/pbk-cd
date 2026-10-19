@@ -21,12 +21,12 @@ digraph {
 			shape=box,
 			style="filled,rounded"];
 	}
-	subgraph cluster_GUT_LUMENComp {
+	subgraph cluster_GutLumenComp {
 		graph [color=black,
 			fillcolor=lightblue,
 			fontname=Arial,
-			href="#compartment-GUT_LUMENComp",
-			label="GUT_LUMENComp
+			href="#compartment-GutLumenComp",
+			label="GutLumenComp
 [PBPKO:00478]",
 			shape=box,
 			style="filled,rounded"
@@ -39,12 +39,12 @@ digraph {
 			shape=box,
 			style="filled,rounded"];
 	}
-	subgraph cluster_INTESTINE_TISSUEComp {
+	subgraph cluster_IntestineTissueComp {
 		graph [color=black,
 			fillcolor=lightblue,
 			fontname=Arial,
-			href="#compartment-INTESTINE_TISSUEComp",
-			label="INTESTINE_TISSUEComp
+			href="#compartment-IntestineTissueComp",
+			label="IntestineTissueComp
 [-]",
 			shape=box,
 			style="filled,rounded"

@@ -24,19 +24,19 @@
 
 ## Compartments
 
-| id                   | name                          | unit   | model qualifier                            |
-|:---------------------|:------------------------------|:-------|:-------------------------------------------|
-| LungComp             | lung compartment              | L      | http://purl.obolibrary.org/obo/PBPKO_00559 |
-| GUT_LUMENComp        | gut lumen compartment         | L      | http://purl.obolibrary.org/obo/PBPKO_00478 |
-| INTESTINE_TISSUEComp | intestinal tissue compartment | L      | *not specified*                            |
-| PlasmaComp           | plasma compartment            | L      | http://purl.obolibrary.org/obo/PBPKO_00488 |
-| RBCComp              | red blood cell compartment    | L      | http://purl.obolibrary.org/obo/PBPKO_00634 |
-| MTComp               | metallothionein compartment   | L      | *not specified*                            |
-| LiverComp            | liver compartment             | L      | http://purl.obolibrary.org/obo/PBPKO_00558 |
-| KidneyComp           | kidney compartment            | L      | http://purl.obolibrary.org/obo/PBPKO_00557 |
-| OtherComp            | rest of body compartment      | L      | http://purl.obolibrary.org/obo/PBPKO_00450 |
-| FecesComp            | feces compartment             | L      | http://purl.obolibrary.org/obo/PBPKO_00555 |
-| UrineComp            | urine compartment             | L      | http://purl.obolibrary.org/obo/PBPKO_00556 |
+| id                  | name                          | unit   | model qualifier                            |
+|:--------------------|:------------------------------|:-------|:-------------------------------------------|
+| LungComp            | lung compartment              | L      | http://purl.obolibrary.org/obo/PBPKO_00559 |
+| GutLumenComp        | gut lumen compartment         | L      | http://purl.obolibrary.org/obo/PBPKO_00478 |
+| IntestineTissueComp | intestinal tissue compartment | L      | *not specified*                            |
+| PlasmaComp          | plasma compartment            | L      | http://purl.obolibrary.org/obo/PBPKO_00488 |
+| RBCComp             | red blood cell compartment    | L      | http://purl.obolibrary.org/obo/PBPKO_00634 |
+| MTComp              | metallothionein compartment   | L      | *not specified*                            |
+| LiverComp           | liver compartment             | L      | http://purl.obolibrary.org/obo/PBPKO_00558 |
+| KidneyComp          | kidney compartment            | L      | http://purl.obolibrary.org/obo/PBPKO_00557 |
+| OtherComp           | rest of body compartment      | L      | http://purl.obolibrary.org/obo/PBPKO_00450 |
+| FecesComp           | feces compartment             | L      | http://purl.obolibrary.org/obo/PBPKO_00555 |
+| UrineComp           | urine compartment             | L      | http://purl.obolibrary.org/obo/PBPKO_00556 |
 
 ## Species
 
@@ -132,11 +132,11 @@
 | k17b              | 1 - k17x                                                                                                                                                              |
 | uptakeTotal_Lung  | k3 * LUNG                                                                                                                                                             |
 | uptakeTotal_GI    | k6 * INTESTINE_TISSUE                                                                                                                                                 |
-| TOTAL_UPTAKE      | uptakeTotal_Lung + uptakeTotal_GI                                                                                                                                     |
-| UPTAKE_MT         | k7 * TOTAL_UPTAKE + (k8 - k7 * TOTAL_UPTAKE) / (1 + exp((k8 - k7 * TOTAL_UPTAKE) / (UPTAKE_MT_smooth_fraction * k8)))                                                 |
-| UPTAKE_PLASMA     | TOTAL_UPTAKE - UPTAKE_MT                                                                                                                                              |
-| uptakeMT_Lung     | piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_Lung / TOTAL_UPTAKE)                                                                                       |
-| uptakeMT_GI       | piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_GI / TOTAL_UPTAKE)                                                                                         |
+| uptakeTotal       | uptakeTotal_Lung + uptakeTotal_GI                                                                                                                                     |
+| uptakeMT          | k7 * uptakeTotal + (k8 - k7 * uptakeTotal) / (1 + exp((k8 - k7 * uptakeTotal) / (uptakeMT_smoothing_fraction * k8)))                                                  |
+| uptakePlasma      | uptakeTotal - uptakeMT                                                                                                                                                |
+| uptakeMT_Lung     | piecewise(0, leq(uptakeTotal, 0), uptakeMT * uptakeTotal_Lung / uptakeTotal)                                                                                          |
+| uptakeMT_GI       | piecewise(0, leq(uptakeTotal, 0), uptakeMT * uptakeTotal_GI / uptakeTotal)                                                                                            |
 | uptakePlasma_Lung | uptakeTotal_Lung - uptakeMT_Lung                                                                                                                                      |
 | uptakePlasma_GI   | uptakeTotal_GI - uptakeMT_GI                                                                                                                                          |
 | BLOOD             | RBC + k20 * (PLASMA + META)                                                                                                                                           |
@@ -146,16 +146,16 @@
 
 ## Initial assignments
 
-| variable             | assignment   |
-|:---------------------|:-------------|
-| LungComp             | vlungs       |
-| INTESTINE_TISSUEComp | vintestine   |
-| PlasmaComp           | vp           |
-| RBCComp              | vrbc         |
-| LiverComp            | vl           |
-| KidneyComp           | vk           |
-| OtherComp            | vother       |
-| UrineComp            | Vurine       |
+| variable            | assignment   |
+|:--------------------|:-------------|
+| LungComp            | vlungs       |
+| IntestineTissueComp | vintestine   |
+| PlasmaComp          | vp           |
+| RBCComp             | vrbc         |
+| LiverComp           | vl           |
+| KidneyComp          | vk           |
+| OtherComp           | vother       |
+| UrineComp           | Vurine       |
 
 ## Function definitions
 
@@ -166,80 +166,80 @@
 
 ## Parameters
 
-| id                        | name                                                                                       | unit          | model qualifier                            |
-|:--------------------------|:-------------------------------------------------------------------------------------------|:--------------|:-------------------------------------------|
-| k3                        | first-order transfer rate constant from lung to total systemic uptake                      | /d            | *not specified*                            |
-| k4                        | first-order transfer rate constant from lung to GI                                         | /d            | *not specified*                            |
-| kabs                      | first-order absorption rate constant                                                       | /d            | *not specified*                            |
-| k5_h                      | fraction of absorbed Cd in gut transferred to intestine in males                           | dimensionless | *not specified*                            |
-| k5_f                      | fraction of absorbed Cd in gut transferred to intestine in females                         | dimensionless | *not specified*                            |
-| k6                        | first-order transfer rate constant from intestine to total systemic uptake                 | /d            | *not specified*                            |
-| k7                        | fraction of total systemic Cd uptake to the metallothionein                                | dimensionless | *not specified*                            |
-| k8                        | maximum Cd flux into the metallothionein                                                   | ug/d          | *not specified*                            |
-| k_MT_out                  | first-order turnover rate constant for MT-bound Cd                                         | /d            | *not specified*                            |
-| k9                        | kinetic constant rate plasma -> other tissues                                              | /d            | *not specified*                            |
-| k10                       | kinetic constant rate other tissues -> plasma                                              | /d            | *not specified*                            |
-| k11                       | kinetic constant rate plasma -> feces                                                      | /d            | *not specified*                            |
-| k12                       | kinetic constant rate plasma -> liver                                                      | /d            | *not specified*                            |
-| k13                       | kinetic constant rate liver -> plasma                                                      | /d            | *not specified*                            |
-| k14                       | kinetic constant rate liver -> MT pool                                                     | /d            | *not specified*                            |
-| k15                       | kinetic constant rate liver -> feces                                                       | /d            | *not specified*                            |
-| kx                        | kinetic constant rate plasma -> RBC                                                        | /d            | *not specified*                            |
-| k16                       | kinetic constant rate RBC-> MT pool                                                        | /d            | *not specified*                            |
-| k17                       | fraction of MT-bound Cd removal to kidney                                                  | dimensionless | *not specified*                            |
-| k18                       | kinetic constant rate kidney -> plasma                                                     | /d            | *not specified*                            |
-| k19                       | urine elimination rate constant                                                            | /d            | *not specified*                            |
-| k21                       | age-dependent increase in kidney-to-urine elimination after age 30                         | /y            | *not specified*                            |
-| k20                       | fraction of PLASMA + META Cd amounts to calculated whole-blood Cd                          | dimensionless | *not specified*                            |
-| AgeInit                   | age of the individual at start of simulation                                               | y             | *not specified*                            |
-| AgeRef                    | reference age used for scaling of nominal body weight to reference body weight             | y             | *not specified*                            |
-| sex                       | sex discrimination                                                                         | dimensionless | *not specified*                            |
-| Age                       | age during simulation                                                                      | y             | http://purl.obolibrary.org/obo/PBPKO_00521 |
-| BWRef                     | body weight of individual at reference age                                                 | kg            | *not specified*                            |
-| rho_body                  | body density                                                                               | kg/L          | *not specified*                            |
-| BWNominal                 | sex specific nominal population bodyweight                                                 | kg            | *not specified*                            |
-| Delta_BWs3                | individual body-weight multiplier                                                          | dimensionless | *not specified*                            |
-| Delta_BW                  | age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)                   | dimensionless | *not specified*                            |
-| wbw                       | bodyweight during simulation                                                               | kg            | http://purl.obolibrary.org/obo/PBPKO_00008 |
-| hct_mid                   | predicted hematocrit in the age-dependent (ages 2-18 years)                                | dimensionless | *not specified*                            |
-| hct                       | age-specific hematocrit fraction                                                           | dimensionless | *not specified*                            |
-| vb_male                   | male whole-blood volume or mass calculated from body weight                                | L             | http://purl.obolibrary.org/obo/PBPKO_00108 |
-| vb_female                 | female whole-blood volume or mass calculated from body weight                              | L             | http://purl.obolibrary.org/obo/PBPKO_00108 |
-| vb                        | whole blood volume                                                                         | L             | http://purl.obolibrary.org/obo/PBPKO_00108 |
-| vp                        | volume of plasma                                                                           | L             | http://purl.obolibrary.org/obo/PBPKO_00103 |
-| vrbc                      | volume of red blood cells                                                                  | L             | *not specified*                            |
-| vk_male                   | male kidney volume                                                                         | L             | http://purl.obolibrary.org/obo/PBPKO_00079 |
-| vk_female                 | female kidney volume                                                                       | L             | http://purl.obolibrary.org/obo/PBPKO_00079 |
-| vk                        | volume of kidney                                                                           | L             | http://purl.obolibrary.org/obo/PBPKO_00079 |
-| vlungs                    | volume of lung                                                                             | L             | http://purl.obolibrary.org/obo/PBPKO_00097 |
-| vint_male                 | volume of male intestine                                                                   | L             | http://purl.obolibrary.org/obo/PBPKO_00069 |
-| vint_female               | volume of female intestine                                                                 | L             | http://purl.obolibrary.org/obo/PBPKO_00069 |
-| vintestine                | volume of intestine                                                                        | L             | http://purl.obolibrary.org/obo/PBPKO_00069 |
-| vl_male                   | volume of male liver                                                                       | L             | http://purl.obolibrary.org/obo/PBPKO_00077 |
-| vl_female                 | volume of female liver                                                                     | L             | http://purl.obolibrary.org/obo/PBPKO_00077 |
-| vl                        | volume of liver                                                                            | L             | http://purl.obolibrary.org/obo/PBPKO_00077 |
-| vother                    | volume of rest body                                                                        | L             | http://purl.obolibrary.org/obo/PBPKO_00105 |
-| Delta_creat               | individual multiplicative adjustment to predicted urine creatinine output                  | dimensionless | *not specified*                            |
-| ucr_base                  | reference creatinine output before Delta_creat adjustment                                  | g/d           | *not specified*                            |
-| ucr                       | age-dependent creatinine output after Delta_creat adjustment                               | g/d           | *not specified*                            |
-| Vurine                    | average urine volume                                                                       | L             | *not specified*                            |
-| k5                        | sex-specific gut:intestine fraction                                                        | dimensionless | *not specified*                            |
-| k19x                      | age-adjusted kidney:urine rate                                                             | /d            | *not specified*                            |
-| k17_decline               | age-related changes of k17                                                                 | dimensionless | *not specified*                            |
-| k17x                      | age-adjusted MT removal fraction to kidney                                                 | dimensionless | *not specified*                            |
-| k17b                      | MT removal fraction to urine                                                               | dimensionless | *not specified*                            |
-| uptakeTotal_Lung          | systemic Cd uptake flux from lung                                                          | ug/d          | *not specified*                            |
-| uptakeTotal_GI            | systemic Cd uptake flux from intestine                                                     | ug/d          | *not specified*                            |
-| TOTAL_UPTAKE              | sum of lung and GI systemic uptake fluxes                                                  | ug/d          | *not specified*                            |
-| UPTAKE_MT_smooth_fraction | smoothing parameter for transition between proportional and capacity-limited MT uptake     | dimensionless | *not specified*                            |
-| UPTAKE_MT                 | remaining systemic Cd uptake flux to MT                                                    | ug/d          | *not specified*                            |
-| UPTAKE_PLASMA             | remaining systemic Cd uptake flux to plasma                                                | ug/d          | *not specified*                            |
-| uptakeMT_Lung             | lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake | ug/d          | *not specified*                            |
-| uptakeMT_GI               | GI contribution to MT uptake flux, allocated in proportion to GI share of total uptake     | ug/d          | *not specified*                            |
-| uptakePlasma_Lung         | lung contribution to plasma uptake flux                                                    | ug/d          | *not specified*                            |
-| uptakePlasma_GI           | GI contribution to plasma uptake flux                                                      | ug/d          | *not specified*                            |
-| BLOOD                     | amount in whole blood                                                                      | ug            | http://purl.obolibrary.org/obo/PBPKO_00623 |
-| CBLOOD                    | concentration in whole blood                                                               | ug/L          | *not specified*                            |
-| ur                        | urinary clearance rate                                                                     | ug/d          | http://purl.obolibrary.org/obo/PBPKO_00232 |
-| ucdcr                     | urinary concentration normalized to creatinine (ug/g creatine)                             | ug/g          | http://purl.obolibrary.org/obo/PBPKO_00302 |
+| id                          | name                                                                                       | unit          | model qualifier                            |
+|:----------------------------|:-------------------------------------------------------------------------------------------|:--------------|:-------------------------------------------|
+| k3                          | first-order transfer rate constant from lung to total systemic uptake                      | /d            | *not specified*                            |
+| k4                          | first-order transfer rate constant from lung to GI                                         | /d            | *not specified*                            |
+| kabs                        | first-order absorption rate constant                                                       | /d            | *not specified*                            |
+| k5_h                        | fraction of absorbed Cd in gut transferred to intestine in males                           | dimensionless | *not specified*                            |
+| k5_f                        | fraction of absorbed Cd in gut transferred to intestine in females                         | dimensionless | *not specified*                            |
+| k6                          | first-order transfer rate constant from intestine to total systemic uptake                 | /d            | *not specified*                            |
+| k7                          | fraction of total systemic Cd uptake to the metallothionein                                | dimensionless | *not specified*                            |
+| k8                          | maximum Cd flux into the metallothionein                                                   | ug/d          | *not specified*                            |
+| k_MT_out                    | first-order turnover rate constant for MT-bound Cd                                         | /d            | *not specified*                            |
+| k9                          | kinetic constant rate plasma -> other tissues                                              | /d            | *not specified*                            |
+| k10                         | kinetic constant rate other tissues -> plasma                                              | /d            | *not specified*                            |
+| k11                         | kinetic constant rate plasma -> feces                                                      | /d            | *not specified*                            |
+| k12                         | kinetic constant rate plasma -> liver                                                      | /d            | *not specified*                            |
+| k13                         | kinetic constant rate liver -> plasma                                                      | /d            | *not specified*                            |
+| k14                         | kinetic constant rate liver -> MT pool                                                     | /d            | *not specified*                            |
+| k15                         | kinetic constant rate liver -> feces                                                       | /d            | *not specified*                            |
+| kx                          | kinetic constant rate plasma -> RBC                                                        | /d            | *not specified*                            |
+| k16                         | kinetic constant rate RBC-> MT pool                                                        | /d            | *not specified*                            |
+| k17                         | fraction of MT-bound Cd removal to kidney                                                  | dimensionless | *not specified*                            |
+| k18                         | kinetic constant rate kidney -> plasma                                                     | /d            | *not specified*                            |
+| k19                         | urine elimination rate constant                                                            | /d            | *not specified*                            |
+| k21                         | age-dependent increase in kidney-to-urine elimination after age 30                         | /y            | *not specified*                            |
+| k20                         | fraction of PLASMA + META Cd amounts to calculated whole-blood Cd                          | dimensionless | *not specified*                            |
+| AgeInit                     | age of the individual at start of simulation                                               | y             | *not specified*                            |
+| AgeRef                      | reference age used for scaling of nominal body weight to reference body weight             | y             | *not specified*                            |
+| sex                         | sex discrimination                                                                         | dimensionless | *not specified*                            |
+| Age                         | age during simulation                                                                      | y             | http://purl.obolibrary.org/obo/PBPKO_00521 |
+| BWRef                       | body weight of individual at reference age                                                 | kg            | *not specified*                            |
+| rho_body                    | body density                                                                               | kg/L          | *not specified*                            |
+| BWNominal                   | sex specific nominal population bodyweight                                                 | kg            | *not specified*                            |
+| Delta_BWs3                  | individual body-weight multiplier                                                          | dimensionless | *not specified*                            |
+| Delta_BW                    | age-dependent body-weight multiplier (1 at birth; Delta_BWs3 from age 3)                   | dimensionless | *not specified*                            |
+| wbw                         | bodyweight during simulation                                                               | kg            | http://purl.obolibrary.org/obo/PBPKO_00008 |
+| hct_mid                     | predicted hematocrit in the age-dependent (ages 2-18 years)                                | dimensionless | *not specified*                            |
+| hct                         | age-specific hematocrit fraction                                                           | dimensionless | *not specified*                            |
+| vb_male                     | male whole-blood volume or mass calculated from body weight                                | L             | http://purl.obolibrary.org/obo/PBPKO_00108 |
+| vb_female                   | female whole-blood volume or mass calculated from body weight                              | L             | http://purl.obolibrary.org/obo/PBPKO_00108 |
+| vb                          | whole blood volume                                                                         | L             | http://purl.obolibrary.org/obo/PBPKO_00108 |
+| vp                          | volume of plasma                                                                           | L             | http://purl.obolibrary.org/obo/PBPKO_00103 |
+| vrbc                        | volume of red blood cells                                                                  | L             | *not specified*                            |
+| vk_male                     | male kidney volume                                                                         | L             | http://purl.obolibrary.org/obo/PBPKO_00079 |
+| vk_female                   | female kidney volume                                                                       | L             | http://purl.obolibrary.org/obo/PBPKO_00079 |
+| vk                          | volume of kidney                                                                           | L             | http://purl.obolibrary.org/obo/PBPKO_00079 |
+| vlungs                      | volume of lung                                                                             | L             | http://purl.obolibrary.org/obo/PBPKO_00097 |
+| vint_male                   | volume of male intestine                                                                   | L             | http://purl.obolibrary.org/obo/PBPKO_00069 |
+| vint_female                 | volume of female intestine                                                                 | L             | http://purl.obolibrary.org/obo/PBPKO_00069 |
+| vintestine                  | volume of intestine                                                                        | L             | http://purl.obolibrary.org/obo/PBPKO_00069 |
+| vl_male                     | volume of male liver                                                                       | L             | http://purl.obolibrary.org/obo/PBPKO_00077 |
+| vl_female                   | volume of female liver                                                                     | L             | http://purl.obolibrary.org/obo/PBPKO_00077 |
+| vl                          | volume of liver                                                                            | L             | http://purl.obolibrary.org/obo/PBPKO_00077 |
+| vother                      | volume of rest body                                                                        | L             | http://purl.obolibrary.org/obo/PBPKO_00105 |
+| Delta_creat                 | individual multiplicative adjustment to predicted urine creatinine output                  | dimensionless | *not specified*                            |
+| ucr_base                    | reference creatinine output before Delta_creat adjustment                                  | g/d           | *not specified*                            |
+| ucr                         | age-dependent creatinine output after Delta_creat adjustment                               | g/d           | *not specified*                            |
+| Vurine                      | average urine volume                                                                       | L             | *not specified*                            |
+| k5                          | sex-specific gut:intestine fraction                                                        | dimensionless | *not specified*                            |
+| k19x                        | age-adjusted kidney:urine rate                                                             | /d            | *not specified*                            |
+| k17_decline                 | age-related changes of k17                                                                 | dimensionless | *not specified*                            |
+| k17x                        | age-adjusted MT removal fraction to kidney                                                 | dimensionless | *not specified*                            |
+| k17b                        | MT removal fraction to urine                                                               | dimensionless | *not specified*                            |
+| uptakeTotal_Lung            | systemic Cd uptake flux from lung                                                          | ug/d          | *not specified*                            |
+| uptakeTotal_GI              | systemic Cd uptake flux from intestine                                                     | ug/d          | *not specified*                            |
+| uptakeTotal                 | sum of lung and GI systemic uptake fluxes                                                  | ug/d          | *not specified*                            |
+| uptakeMT_smoothing_fraction | smoothing parameter for transition between proportional and capacity-limited MT uptake     | dimensionless | *not specified*                            |
+| uptakeMT                    | remaining systemic Cd uptake flux to MT                                                    | ug/d          | *not specified*                            |
+| uptakePlasma                | remaining systemic Cd uptake flux to plasma                                                | ug/d          | *not specified*                            |
+| uptakeMT_Lung               | lung contribution to MT uptake flux, allocated in proportion to lung share of total uptake | ug/d          | *not specified*                            |
+| uptakeMT_GI                 | GI contribution to MT uptake flux, allocated in proportion to GI share of total uptake     | ug/d          | *not specified*                            |
+| uptakePlasma_Lung           | lung contribution to plasma uptake flux                                                    | ug/d          | *not specified*                            |
+| uptakePlasma_GI             | GI contribution to plasma uptake flux                                                      | ug/d          | *not specified*                            |
+| BLOOD                       | amount in whole blood                                                                      | ug            | http://purl.obolibrary.org/obo/PBPKO_00623 |
+| CBLOOD                      | concentration in whole blood                                                               | ug/L          | *not specified*                            |
+| ur                          | urinary clearance rate                                                                     | ug/d          | http://purl.obolibrary.org/obo/PBPKO_00232 |
+| ucdcr                       | urinary concentration normalized to creatinine (ug/g creatine)                             | ug/g          | http://purl.obolibrary.org/obo/PBPKO_00302 |
 

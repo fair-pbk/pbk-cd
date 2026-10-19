@@ -142,8 +142,8 @@ model pbk_cd_gastellu_2026_revised()
     # ============================================================
 
     compartment LungComp = vlungs;
-    compartment GUT_LUMENComp = 1;
-    compartment INTESTINE_TISSUEComp = vintestine;
+    compartment GutLumenComp = 1;
+    compartment IntestineTissueComp = vintestine;
     compartment PlasmaComp = vp;
     compartment RBCComp = vrbc;
     compartment MTComp = 1;
@@ -159,8 +159,8 @@ model pbk_cd_gastellu_2026_revised()
 
     # Internal Cd states
     substanceOnly species LUNG in LungComp = 0
-    substanceOnly species GUT_LUMEN in GUT_LUMENComp = 0
-    substanceOnly species INTESTINE_TISSUE in INTESTINE_TISSUEComp = 0
+    substanceOnly species GUT_LUMEN in GutLumenComp = 0
+    substanceOnly species INTESTINE_TISSUE in IntestineTissueComp = 0
 
     substanceOnly species PLASMA in PlasmaComp = 0
     substanceOnly species RBC in RBCComp = 0
@@ -180,20 +180,20 @@ model pbk_cd_gastellu_2026_revised()
 
     uptakeTotal_Lung := k3 * LUNG
     uptakeTotal_GI := k6 * INTESTINE_TISSUE
-    TOTAL_UPTAKE := uptakeTotal_Lung + uptakeTotal_GI
+    uptakeTotal := uptakeTotal_Lung + uptakeTotal_GI
 
     # Total flux to MT
-    # Original hard cap: UPTAKE_MT = min(k7 * TOTAL_UPTAKE, k8)
+    # Original hard cap: uptakeMT = min(k7 * uptakeTotal, k8)
     # Replaced the discontinuous piecewise function with a smooth approximation
     # to improve numerical stability when the uptake flux crosses the cap.
-    # Below the cap this approaches k7 * TOTAL_UPTAKE; above it, k8.
-    UPTAKE_MT_smooth_fraction = 0.01            # Smoothing scale controlling the width of the transition around k8 [-]
-    UPTAKE_MT := k7 * TOTAL_UPTAKE + (k8 - k7 * TOTAL_UPTAKE) / (1 + exp((k8 - k7 * TOTAL_UPTAKE) / (UPTAKE_MT_smooth_fraction * k8)))
-    UPTAKE_PLASMA := TOTAL_UPTAKE - UPTAKE_MT
+    # Below the cap this approaches k7 * uptakeTotal; above it, k8.
+    uptakeMT_smoothing_fraction = 0.01            # Smoothing scale controlling the width of the transition around k8 [-]
+    uptakeMT := k7 * uptakeTotal + (k8 - k7 * uptakeTotal) / (1 + exp((k8 - k7 * uptakeTotal) / (uptakeMT_smoothing_fraction * k8)))
+    uptakePlasma := uptakeTotal - uptakeMT
 
     # Distribute the total MT flux between lung and intestinal uptake
-    uptakeMT_Lung := piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_Lung / TOTAL_UPTAKE)
-    uptakeMT_GI := piecewise(0, leq(TOTAL_UPTAKE, 0), UPTAKE_MT * uptakeTotal_GI / TOTAL_UPTAKE)
+    uptakeMT_Lung := piecewise(0, leq(uptakeTotal, 0), uptakeMT * uptakeTotal_Lung / uptakeTotal)
+    uptakeMT_GI := piecewise(0, leq(uptakeTotal, 0), uptakeMT * uptakeTotal_GI / uptakeTotal)
 
     # Remaining source-specific uptake goes to plasma
     uptakePlasma_Lung := uptakeTotal_Lung - uptakeMT_Lung
