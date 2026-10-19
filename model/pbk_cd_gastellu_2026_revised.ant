@@ -86,8 +86,6 @@ model pbk_cd_gastellu_2026_revised()
     BWRef = 85                          # Subject bodyweight at reference age [kg]
     rho_body = 1                        # Density of 1 kg/L
     BWNominal := piecewise(BW_male_lifetime(AgeRef * 12), sex==1, BW_female_lifetime(AgeRef * 12)) # Nominal body weight at reference age based on nominal lifetime equation
-    wbw0 := piecewise( 3.938425, sex == 1, 3.932403 )           # Bodyweight at birth [kg]
-    vb0 := piecewise( 0.0770 * wbw0, sex == 1, 0.0771 * wbw0 )  # Body volume at birth [L]
     Delta_BWs3 := BWRef / BWNominal     # Scaling factor to scale nominal body weight to reference (=target) weight.
     Delta_BW := piecewise(1 + (Delta_BWs3 - 1) * (year * 365) / 1095, (year * 365) <= 1095, Delta_BWs3)
 
@@ -149,7 +147,7 @@ model pbk_cd_gastellu_2026_revised()
     # Creatinine
     Delta_creat = 1                     # [-]
     ucr_base := 0.032 + 2.098e-2 * year + 9.104e-3 * year^2 - 4.550e-4 * year^3 + 7.578e-6 * year^4 - 4.232e-8 * year^5
-    ucr := piecewise( ucr_base * Delta_creat, year <= 70, 0.865756 * Delta_creat )
+    ucr := piecewise(ucr_base * Delta_creat, year <= 70, 0.865756 * Delta_creat)
 
     # Urine volume
     Vurine := 0.0294 * wbw
@@ -164,17 +162,6 @@ model pbk_cd_gastellu_2026_revised()
     k17_decline := k17 - (k17 / 3) * (year - 30) / 50
     k17x := piecewise( k17, year <= 30, 0, k17_decline < 0, k17_decline )
     k17b := 1 - k17x
-
-    # ============================================================
-    # CORD-BLOOD INITIALIZATION
-    # ============================================================
-
-    # Measured whole-cord-blood Cd concentration
-    Ccord = 0.3                                 # [ug/L]
-    fRBC = 0.95                                 # fraction of Cd initial in red blood cells
-    Acord_total := Ccord * vb0                  # [µg]
-    ARBC0 := fRBC * Acord_total                 # [µg]
-    APLASMA0 := ((1-fRBC) * Acord_total)/k20    # [µg]
 
     # ============================================================
     # COMPARTMENTS
@@ -248,8 +235,8 @@ model pbk_cd_gastellu_2026_revised()
     GUT_LUMEN = 0
     INTESTINE_TISSUE = 0
 
-    PLASMA = APLASMA0
-    RBC = ARBC0
+    PLASMA = 0
+    RBC = 0
     META = 0
 
     LIVER = 0
@@ -379,16 +366,9 @@ model pbk_cd_gastellu_2026_revised()
     # ============================================================
 
     BLOOD := RBC + k20 * (PLASMA + META)
-    CBLOOD := BLOOD / vb					# whole blood concentration in µg/L
-
-    CKIDNEY := KIDNEY / vk					# Kidney concentration in µg/L
+    CBLOOD := BLOOD / vb					      # whole blood concentration in µg/L
 
     ur := k_MT_out * k17b * META + k19x * KIDNEY  # Urinary Cd excretion rate in µg/day
-    Conc_urine_cd := ur / Vurine                  # Urinary Cd concentration in µg/L
     ucdcr := ur / ucr                             # Cd/creatinine in µg/g creatinine
-
-    total_internal := GUT_LUMEN + INTESTINE_TISSUE + LUNG + RBC + META + LIVER + KIDNEY + OTHER + PLASMA # in µg
-
-    Excreted := FECES + URINE       # + EXH
 
 end

@@ -18,9 +18,9 @@ Key changes in the revised model are:
 - **Replace hard cap in calculation of metallothionein-associated uptake by smooth approximation:** The hard cap of `min(k7 * TOTAL_UPTAKE, k8)` for metallothionein-associated uptake (`UPTAKE_MT`) was replaced with a smooth approximation around `k8` to improve numerical stability. It is close to, but not mathematically identical to, the piecewise cap used in R.
 - **Revision of metallothionein-associated kinetics:** A new rate constant, `k_MT_out`, is introduced to explicitly scale cadmium transfer from the metallothionein compartment to the kidney and urinary elimination pathways, thereby achieving unit consistency. `K_MT_out` was set as 1, so that it does not influence the simulation.
 - **Addition of cadmium redistribution from the kidney to the plasma:** The revised plasma equation includes `+ k18 * KIDNEY`, representing transfer from the kidney back to the circulating compartment. In the original model, this term was absent from the plasma equation, despite being included as a kidney loss.
-- **Revised treatment of prenatal cadmium exposure:** The original time-dependent `CORD_quant` exposure input is removed. Prenatal exposure is instead intended to be represented by initial cadmium amounts in blood compartments at birth, using birth-specific blood and plasma volumes.
-- **Revised calculation of blood cadmium concentrations:** The revised model distinguishes total blood-associated cadmium amount (`BLOOD`) from blood cadmium concentration (`BLOOD_burden`), avoiding the previous use of `BLOOD` as a concentration.
-- **Improved representation of elimination pathways and mass balance:** The revised model explicitly includes gastrointestinal elimination of nonabsorbed cadmium, cumulative fecal and urinary excretion, and a new cumulative exhalation compartment (`EXH`). It also distinguishes cadmium retained in the body (`total`) from cumulative eliminated cadmium (`Excreted`).
+- **Revised treatment of prenatal cadmium exposure:** The original time-dependent `CORD_quant` exposure input is removed. The current Antimony model does not set a prenatal cadmium burden: `PLASMA` and `RBC` both start at zero. Prenatal burden would need to be supplied separately through initial conditions.
+- **Revised calculation of blood cadmium concentrations:** The revised model distinguishes total blood-associated cadmium amount (`BLOOD`) from blood cadmium concentration (`BLOOD_burden` in the R implementation and `CBLOOD` in Antimony), avoiding the previous use of `BLOOD` as a concentration.
+- **Improved representation of elimination pathways and mass balance:** The revised model explicitly includes gastrointestinal elimination of nonabsorbed cadmium and cumulative fecal and urinary excretion. The revised R implementation also includes a cumulative exhalation compartment (`EXH`) and distinguishes cadmium retained in the body (`total`) from cumulative eliminated cadmium (`Excreted`); these aggregate outputs are not included in the current Antimony model.
 - **Removal of source–route-specific tracking from the revised implementation:** Source-specific contributions cannot be directly extracted from the revised model without additional calculations or simulations.
 
 ## Revised R model implementation
@@ -39,6 +39,8 @@ The following changes were made to the Antimony/SBML reimplementation for compli
 
 - **Explicit density parameter:** For consistency of units, an additional density parameter `rho_body` is included for translating mass to volume.
 - **Exclusion of exposure/dosing parameters:** In compliance with the standard, dosing is excluded from the Antimony/SBML model. Accordingly, exposure sources and their associated reactions are not represented in the reimplementation.
+- **Removal of prenatal initialization:** The cord-blood initialization parameters and calculations have been removed. `PLASMA` and `RBC` are initialized to zero.
+- **Reduction of derived outputs:** The Antimony model retains `BLOOD` (amount), `CBLOOD` (whole-blood concentration), and `ucdcr` (urinary concentration expressed in creatinine), but does not define derived outputs for the kidney burden, concentration in urine, total body burden and total amount excreted. These outputs can be calculated during post-processing from the existing model variables. Keeping them outside the core model helps to maintain simplicity and computational efficiency during simulations.
 
 ## Implementation comparison
 
@@ -48,7 +50,7 @@ This table summarizes the changes from the Gastellu et al. model to the revised 
 |---:|---|---|---|---|---|---|
 | 1 | Model organization | Physiology and ODEs are combined in `rxode2()`. | Physiology is in a separate `phys()` function; ODEs remain in `rxode2()`. | Improves readability. | Yes; different structure. | R separates `phys()`; SBML embeds physiology as assignment rules. |
 | 2 | Model organization | Parameters are defined in the same R script as the ODEs. | Parameters are held in a separate list from the ODEs. | Improves readability and makes parameter values easier to adjust. | Yes. | — |
-| 3 | Annotation | — | Parameter names were modified and descriptions added. | Improves readability and makes parameters easier to follow. | PBKO annotations. | — |
+| 3 | Annotation | — | Parameter names were modified and descriptions added. | Improves readability and makes parameters easier to follow. | According to FAIR PBK standard. | — |
 | 4 | Physiological compartments | Detailed tissue and organ calculations. | Major organs plus residual `vother`. | Omits volume calculations for compartments not represented in the PBK model. | Yes. | Both simplify tissues; compare definitions before assuming the calculations are identical. |
 | 5 | Body weight | `wbw_f` is calculated from the sum of individual tissue volumes. | The notes describe `wbw_f` as equal to `wbw` using residual `vother`. | The source notes also say `wbw_f` was removed from the revised model; confirm the variable definition and formula. | Yes. | Both are described as using residual `vother` and `wbw_f`; verify that the formulas are equivalent. |
 | 6 | Exposure release kinetics | Exposure compartments decay at `1/day`. | Uses `king_release`, `kinh_release`, and `kderm_release`. | Added for unit consistency. These parameters are all set to 1, so they do not affect the outcome. | No. | External exposure factors are excluded from the SBML PBK model. |
@@ -61,33 +63,21 @@ This table summarizes the changes from the Gastellu et al. model to the revised 
 | 13 | Metallothionein transfer | `k17x * META` and `k17b * META`. | `k_MT_out * k17x * META` and `k_MT_out * k17b * META`. | Added `k_MT_out` for unit consistency. | Yes. | — |
 | 14 | Kidney to plasma | `-k18 * KIDNEY` in kidney, with no corresponding plasma input. | Adds `+k18 * KIDNEY` to plasma. | Corrects a missing plasma input. | Yes. | — |
 | 15 | Dermal absorption | Fixed 0.5% contribution. | `f_derm_available * kderm_release * exposure`. | The 0.5% contribution can be adjusted externally through `f_derm_available`. | No. | External exposure factors are excluded from the SBML PBK model. |
-| 16 | Prenatal exposure | Decaying `CORD_quant` state and blood inputs. | Removes the `CORD_quant` ODE; intended to use initial conditions. | Initial cord-blood concentration can be used to calculate initial amounts in plasma and RBCs. | Yes. | — |
-| 17 | Blood cadmium | `BLOOD` is concentration divided by `vb`. | `BLOOD` is amount; `BLOOD_burden` is concentration. | Corrects the calculation of blood amount and concentration, which is important for mass balance and validation. | Yes. | — |
+| 16 | Prenatal exposure | Decaying `CORD_quant` state and blood inputs. | Removes the `CORD_quant` ODE; intended to use initial conditions. | Initial cord-blood concentration can be used to calculate initial amounts in plasma and RBCs. | No prenatal initialization; `PLASMA` and `RBC` start at zero. | The Antimony model does not initialize a prenatal burden. |
+| 17 | Blood cadmium | `BLOOD` is concentration divided by `vb`. | `BLOOD` is amount; `BLOOD_burden` is concentration. | Corrects the calculation of blood amount and concentration, which is important for mass balance and validation. | Yes: `BLOOD` is amount and `CBLOOD` is concentration. | Antimony names the concentration `CBLOOD` rather than `BLOOD_burden`. |
 | 18 | Fecal elimination | `k11 * PLASMA + k15 * LIVER`. | Adds `(1-k5) * kabs * GUT`. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | Yes. | — |
 | 19 | Urinary elimination | `k17b * META + k19x * KIDNEY`. | `k_MT_out * k17b * META + k19x * KIDNEY`. | Added `k_MT_out` for unit consistency. | Yes. | — |
 | 20 | Exhalation | No cumulative `EXH` compartment. | `EXH` tracks unretained inhaled cadmium. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | No. | `EXH` depends on external exposure factors and is therefore excluded from the PBK model. |
-| 21 | Body burden | `wb` and total use different definitions. | Total sums retained compartments, including `INTESTINE`. | Updated to reflect the compartments in the revised model. | Yes. | R defines total explicitly as an algebraic output; SBML retains the compartments, but definitions may differ. |
-| 22 | Cumulative excretion | `FECES` and `URINE`. | `Excreted = FECES + URINE + EXH`. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | Partial. | SBML includes `FECES` and `URINE`, but not `EXH`, because external exposure is handled separately. R `Excreted` includes all three. |
+| 21 | Body burden | `wb` and total use different definitions. | Total sums retained compartments, including `INTESTINE`. | Updated to reflect the compartments in the revised model. | No aggregate body-burden output; compartment amounts remain available. | The revised R model defines total explicitly; Antimony does not define `total_internal` or an equivalent aggregate. |
+| 22 | Cumulative excretion | `FECES` and `URINE`. | `Excreted = FECES + URINE + EXH`. | Supports accurate mass-balance calculations, following Pouillot et al. (2022). | Partial: includes `FECES` and `URINE` states. | Antimony has no `EXH` compartment or `Excreted` aggregate; the revised R `Excreted` includes all three. |
 | 23 | Source-route attribution | Separate PBK2 source-route model. | Revised file contains combined `pbk_cd` only. | Route tracking could be added once the revised model is agreed upon. | No; route tracking is absent. | Neither revised implementation retains the original PBK2 source-resolved states. |
 | 24 | Sex-specific GI parameter | Sex-dependent `k5` in the original physiology. | `k5` is selected through `k5_h` or `k5_f` in `phys()`. | — | Yes. | — |
 
-**SBML representation key:** “Yes” means represented in the SBML model; “No” means omitted; “Partial” means only part of the feature is represented. “PBKO annotations” refers to the annotation noted for the parameter changes.
+**SBML representation key:** "Yes" means represented in the SBML model; "No" means omitted; "Partial" means only part of the feature is represented.
 
 ## Validation
 
 The SBML implementation is validated against an R implementation of the original model ([pbk_cd_gastellu_2026.R](validation/R/pbk_cd_gastellu_2026/pbk_cd_gastellu_2026.R)) and an R implementation of the revised model ([pbk_cd_gastellu_2026_revised.R](validation/R/pbk_cd_gastellu_2026_revised/pbk_cd_gastellu_2026_revised.R)). The validation scenarios include a single-dose, repeated-dose, and two lifetime-dosing scenarios. Scenario definitions, reference scripts, run instructions, and output details are documented in the [validation README](validation/README.md).
-
-## Open issues
-
-The model is currently still under development. The following issues still need to be addressed:
-
-- Decide on use of `k5` as parameter or to compute from `k5_f` and `k5_f`.
-- Include smooth approximation of hard cap in UPTAKE_MT also in R implementation of revised model.
-- Resolve unit inconsistency in assignment of `vother`. The mass unit of `wbw` is kg, which is consistent with the the volume unit of `vother`. An explicit density parameter/conversion should resolve this.
-- Unit inconsistency in calculation of `Conc_urine_cd`. Consider removal of this variable altogether, as is can be derived after simulation.
-- Consider computing `ucdcr` from `URINE` instead of `ur`.
-- Consider removal of uring concentration per creatinine from model as it can also be computed from the outputs after simulation.
-- Consider removal of calculation of initial whole-cord-blood concentration(`Acord_total`) and initialisation of `RBC`.
 
 ## Running the scipts
 
